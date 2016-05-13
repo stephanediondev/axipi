@@ -1,0 +1,16 @@
+services:
+    core.controller:
+        class: CoreBundle\Controller\DefaultController
+        arguments:
+            - "@core.manager"
+            - "@templating"
+
+    core.manager:
+        class: CoreBundle\Manager\CoreManager
+        public: false
+
+    core.object.repository:
+        class: CoreBundle\Repository\CoreRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments: [ 'CoreBundle:Object' ]

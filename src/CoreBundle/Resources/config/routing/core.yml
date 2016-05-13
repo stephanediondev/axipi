@@ -1,0 +1,6 @@
+core_index:
+    path:  /{action}/{id}
+    defaults:
+        _controller: "core.controller:dispatchAction"
+        action: "index"
+        id: null

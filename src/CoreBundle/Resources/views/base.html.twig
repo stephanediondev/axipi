@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{% block title %}Welcome!{% endblock %}</title>
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{{ asset('mdl/material.min.css') }}">
+{% endblock %}
+{% block meta %}
+{% endblock %}
+</head>
+<body>
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer">
+    <main class="mdl-layout__content mdl-color--grey-100">
+        <div class="mdl-grid">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </main>
+</div>
+
+{% block script %}
+<script type="text/javascript" src="{{ asset('mdl/material.min.js') }}"></script>
+{% endblock %}
+
+</body>
+</html>
