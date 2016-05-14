@@ -3,7 +3,7 @@
 <head>
 <title>{% block title %}Welcome!{% endblock %}</title>
 {% block style %}
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/material-design-lite/material.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('vendor/material-design-lite/material.min.css') }}">
 {% endblock %}
 {% block meta %}
 {% endblock %}
@@ -20,7 +20,8 @@
 </div>
 
 {% block script %}
-<script type="text/javascript" src="{{ asset('assets/vendor/material-design-lite/material.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/material-design-lite/material.min.js') }}"></script>
 {% endblock %}
 
 </body>
