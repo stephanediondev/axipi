@@ -7,11 +7,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Templating\EngineInterface;
 
 use Project29k\BackendBundle\Manager\TypeManager;
-use Project29k\CoreBundle\Shared\RenderShared;
+use Project29k\CoreBundle\DependencyInjection\RenderTrait;
 
 class TypeController
 {
-    use RenderShared;
+    use RenderTrait;
 
     protected $typeManager;
 
@@ -50,32 +50,32 @@ class TypeController
 
     public function indexAction(Request $request)
     {
-        return $this->render('CoreBundle:default:index.html.twig', [
+        return $this->renderExtended('BackendBundle::home.html.twig', [
         ]);
     }
 
     public function createAction(Request $request)
     {
-        return $this->render('CoreBundle:default:index.html.twig', [
+        return $this->renderExtended('BackendBundle::home.html.twig', [
         ]);
     }
 
     public function readAction(Request $request, $issue)
     {
-        return $this->render('CoreBundle:default:index.html.twig', [
+        return $this->renderExtended('BackendBundle::home.html.twig', [
         ]);
     }
 
     public function updateAction(Request $request, $issue)
     {
         echo $issue;
-        return $this->render('CoreBundle:default:index.html.twig', [
+        return $this->renderExtended('BackendBundle::home.html.twig', [
         ]);
     }
 
     public function deleteAction(Request $request, $issue)
     {
-        return $this->render('CoreBundle:default:index.html.twig', [
+        return $this->renderExtended('BackendBundle::home.html.twig', [
         ]);
     }
 }
