@@ -27,3 +27,10 @@ services:
         class: Project29k\CoreBundle\Controller\ContentController
         calls:
             - [ "setEngineInterface", [ "@templating" ] ]
+
+    core.twig.extension:
+        class: Project29k\CoreBundle\Twig\Extension\CoreExtension
+        calls:
+          - [ "setEntityManager", [ "@doctrine.orm.entity_manager"] ]
+        tags:
+            -  { name: twig.extension }

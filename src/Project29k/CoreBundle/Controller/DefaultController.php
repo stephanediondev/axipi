@@ -37,7 +37,7 @@ class DefaultController
         $subRequest = $request->duplicate(
             $request->query->all(),
             null,
-            ['_controller' => 'aqf_contact.contact_controller:showAction', 'object' => $object]
+            ['_controller' => 'xxx:showAction', 'object' => $object]
         );
 
         return $this->httpKernel->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
