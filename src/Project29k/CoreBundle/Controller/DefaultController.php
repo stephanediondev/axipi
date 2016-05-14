@@ -28,7 +28,7 @@ class DefaultController
         $object = new Object();
         $object->setTitle($slug);
 
-        $response = $this->forwardExtented('backend.home_controller:indexAction', ['object' => $object]);
+        $response = $this->forwardExtented('core.content_controller:indexAction', ['object' => $object]);
 
         // ... further modify the response or return it directly
 

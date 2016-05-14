@@ -1,0 +1,9 @@
+{
+  "name": "1content",
+  "private": true,
+  "dependencies": {
+    "jquery": "*",
+    "bootstrap": "*",
+    "material-design-lite": "*"
+  }
+}

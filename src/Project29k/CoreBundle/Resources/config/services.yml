@@ -22,3 +22,8 @@ services:
         factory_service: doctrine.orm.entity_manager
         factory_method: getRepository
         arguments: [ 'CoreBundle:Object' ]
+
+    core.content_controller:
+        class: Project29k\CoreBundle\Controller\ContentController
+        calls:
+            - [ "setEngineInterface", [ "@templating" ] ]
