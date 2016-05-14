@@ -1,16 +1,17 @@
 {% extends 'CoreBundle::base.html.twig' %}
 
 {% block body %}
-<div class="jumbotron">
-    <h1>content controller</h1>
-    <p>slug {{ object.title }}</p>
-</div>
+    <div class="jumbotron">
+        <h1>content controller</h1>
+        <p>slug {{ object.title }}</p>
+        <p>{{ 'test1.test2'|trans({}, 'core') }}</p>
+    </div>
 {% endblock %}
 
 {% block style %}
-{{ parent() }}
+    {{ parent() }}
 {% endblock %}
 
 {% block script %}
-{{ parent() }}
+    {{ parent() }}
 {% endblock %}

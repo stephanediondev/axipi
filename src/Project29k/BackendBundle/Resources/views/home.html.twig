@@ -1,13 +1,20 @@
 {% extends 'BackendBundle::base.html.twig' %}
 
 {% block body %}
-backend home
+    <div class="mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">backend home</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+            {{ 'test1.test2'|trans({}, 'backend') }}
+        </div>
+    </div>
 {% endblock %}
 
 {% block style %}
-{{ parent() }}
+    {{ parent() }}
 {% endblock %}
 
 {% block script %}
-{{ parent() }}
+    {{ parent() }}
 {% endblock %}
