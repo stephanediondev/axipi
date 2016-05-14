@@ -28,7 +28,9 @@ class DefaultController
         $object = new Object();
         $object->setTitle($slug);
 
-        $response = $this->forwardExtented('core.content_controller:indexAction', ['object' => $object]);
+        //$object->setDescriptionSeo( $this->forwardExtented('core.content_controller:widgetAction', ['object' => $object]) );
+
+        $response = $this->forwardExtented('core.content_controller:pageAction', ['object' => $object]);
 
         // ... further modify the response or return it directly
 

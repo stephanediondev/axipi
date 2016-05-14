@@ -1,9 +1,11 @@
 {
-  "name": "1content",
-  "private": true,
-  "dependencies": {
-    "jquery": "*",
-    "bootstrap": "*",
-    "material-design-lite": "*"
-  }
+    "name": "1content",
+    "private": true,
+    "dependencies": {
+        "jquery": "*",
+        "bootstrap": "*",
+        "FortAwesome/Font-Awesome": "*",
+        "material-design-lite": "*",
+        "tinymce-dist": "*"
+    }
 }

@@ -56,7 +56,7 @@ trait RenderTrait
      *
      * @return Response
      */
-    public function renderExtended($template, $parameters = [], $httpCode = 200)
+    public function contentExtended($template, $parameters = [])
     {
         if ($parameters instanceof \IteratorAggregate) {
             $parameters = $parameters->getIterator();
@@ -67,7 +67,20 @@ trait RenderTrait
         }
 
         $content = $this->engineInterface->render($template, $parameters);
-        //$content = '';print_r($parameters);
+
+        return $content;
+    }
+
+    /**
+     * @param string             $template
+     * @param \Traversable|Array $parameters
+     * @param int                $httpCode
+     *
+     * @return Response
+     */
+    public function renderExtended($template, $parameters = [], $httpCode = 200)
+    {
+        $content = $this->contentExtended($template, $parameters);
 
         $response = new Response($content, $httpCode);
 
