@@ -1,4 +1,4 @@
-CoreBundle\Entity\Country:
+Project29k\CoreBundle\Entity\Country:
     type: entity
     table: country
     id:
@@ -8,18 +8,22 @@ CoreBundle\Entity\Country:
             options:
                 unsigned: true
             id: true
-        alpha2:
+            generator:
+                strategy: IDENTITY
+    fields:
+        code:
             type: string
             nullable: false
             length: 2
             options:
                 fixed: true
-            id: true
-        alpha3:
+        title:
             type: string
             nullable: false
-            length: 3
+            length: 255
             options:
-                fixed: true
-            id: true
+                fixed: false
+        datecreated:
+            type: datetime
+            nullable: false
     lifecycleCallbacks: {  }

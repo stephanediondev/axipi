@@ -1,4 +1,4 @@
-CoreBundle\Entity\ProgramUser:
+Project29k\CoreBundle\Entity\ProgramUser:
     type: entity
     table: program_user
     indexes:

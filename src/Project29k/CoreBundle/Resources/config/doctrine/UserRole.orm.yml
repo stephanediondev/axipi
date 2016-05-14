@@ -1,4 +1,4 @@
-CoreBundle\Entity\UserRole:
+Project29k\CoreBundle\Entity\UserRole:
     type: entity
     table: user_role
     indexes:

@@ -1,56 +1,68 @@
-CoreBundle\Entity\Relation:
+Project29k\CoreBundle\Entity\Relation:
     type: entity
     table: relation
-    uniqueConstraints:
-        obj_id_rel_target:
+    indexes:
+        target:
             columns:
-                - obj_id
-                - rel_target
+                - target
+        IDX_62894749232D562B:
+            columns:
+                - object_id
+    uniqueConstraints:
+        object_id_target:
+            columns:
+                - object_id
+                - target
     id:
-        relId:
+        id:
             type: integer
             nullable: false
             options:
                 unsigned: true
             id: true
-            column: rel_id
             generator:
                 strategy: IDENTITY
     fields:
-        objId:
-            type: integer
-            nullable: false
-            options:
-                unsigned: true
-            column: obj_id
-        relTarget:
-            type: integer
-            nullable: false
-            options:
-                unsigned: true
-            column: rel_target
-        relTitle:
+        title:
             type: string
             nullable: true
             length: 255
             options:
                 fixed: false
-            column: rel_title
-        relActive:
+        isActive:
             type: boolean
             nullable: false
             options:
                 default: '0'
-            column: rel_active
-        relOrdering:
+            column: is_active
+        ordering:
             type: integer
             nullable: false
             options:
                 unsigned: false
                 default: '0'
-            column: rel_ordering
-        relDatecreated:
+        datecreated:
             type: datetime
             nullable: false
-            column: rel_datecreated
+    manyToOne:
+        object:
+            targetEntity: Object
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                object_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        target:
+            targetEntity: Object
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                target:
+                    referencedColumnName: id
+            orphanRemoval: false
     lifecycleCallbacks: {  }

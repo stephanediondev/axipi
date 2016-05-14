@@ -1,4 +1,4 @@
-CoreBundle\Entity\Role:
+Project29k\CoreBundle\Entity\Role:
     type: entity
     table: role
     uniqueConstraints:

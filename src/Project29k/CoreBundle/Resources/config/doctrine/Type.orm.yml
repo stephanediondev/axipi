@@ -1,6 +1,10 @@
-CoreBundle\Entity\Type:
+Project29k\CoreBundle\Entity\Type:
     type: entity
     table: type
+    indexes:
+        IDX_8CDE5729BCF5E72D:
+            columns:
+                - categorie_id
     uniqueConstraints:
         categorie_id_code:
             columns:
@@ -16,18 +20,19 @@ CoreBundle\Entity\Type:
             generator:
                 strategy: IDENTITY
     fields:
-        categorieId:
-            type: integer
-            nullable: false
-            options:
-                unsigned: true
-            column: categorie_id
         zoneId:
             type: integer
             nullable: true
             options:
                 unsigned: true
             column: zone_id
+        controllerAlias:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+            column: controller_alias
         code:
             type: string
             nullable: false
@@ -72,4 +77,15 @@ CoreBundle\Entity\Type:
         datecreated:
             type: datetime
             nullable: false
+    manyToOne:
+        categorie:
+            targetEntity: Categorie
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                categorie_id:
+                    referencedColumnName: id
+            orphanRemoval: false
     lifecycleCallbacks: {  }

@@ -1,4 +1,4 @@
-CoreBundle\Entity\Permission:
+Project29k\CoreBundle\Entity\Permission:
     type: entity
     table: permission
     uniqueConstraints:

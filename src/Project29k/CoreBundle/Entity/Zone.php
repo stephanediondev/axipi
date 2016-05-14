@@ -1,6 +1,6 @@
 <?php
 
-namespace CoreBundle\Entity;
+namespace Project29k\CoreBundle\Entity;
 
 /**
  * Zone

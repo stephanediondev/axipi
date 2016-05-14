@@ -4,7 +4,8 @@ services:
         arguments:
             - "@core.manager"
         calls:
-            - [ "setEngineInterface", [ "@templating" ] ]
+            - [ "setHttpKernel", [ "@http_kernel" ] ]
+            - [ "setRequestStack", [ "@request_stack" ] ]
 
     core.manager.abstract:
         class: Project29k\CoreBundle\Manager\AbstractManager

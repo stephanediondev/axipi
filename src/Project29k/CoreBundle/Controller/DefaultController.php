@@ -4,10 +4,12 @@ namespace Project29k\CoreBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Templating\EngineInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Project29k\CoreBundle\Manager\CoreManager;
 use Project29k\CoreBundle\Shared\RenderShared;
+
+use Project29k\CoreBundle\Entity\Object;
 
 class DefaultController
 {
@@ -21,61 +23,29 @@ class DefaultController
         $this->coreManager = $coreManager;
     }
 
-    public function dispatchAction(Request $request, $action, $id)
+    public function indexAction(Request $request, $slug)
     {
-        /*if (null !== $id) {
-            $issue = $this->issueManager->findIssueById($id, $action);
-            $parameters->set('issue', $issue);
-            $parameters->set('jwtNotes', Notes::getToken($this->getUser()));
-        } else {
-            $issue = null;
-        }*/
-        $issue = 8749;
+        $object = new Object();
+        $object->setTitle($slug);
 
-        switch ($action) {
-            case 'index':
-                return $this->indexAction($request);
-            case 'create':
-                return $this->createAction($request);
-            case 'read':
-                return $this->readAction($request, $issue);
-            case 'update':
-                return $this->updateAction($request, $issue);
-            case 'delete':
-                return $this->deleteAction($request, $issue);
-        }
+        $response = $this->forwardExtented('backend.home_controller:indexAction', ['object' => $object]);
+
+        // ... further modify the response or return it directly
+
+        return $response;
+
+        $subRequest = $request->duplicate(
+            $request->query->all(),
+            null,
+            ['_controller' => 'aqf_contact.contact_controller:showAction', 'object' => $object]
+        );
+
+        return $this->httpKernel->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
+
+        return $this->renderExtended('CoreBundle:default:index.html.twig', [
+            'object' => $object
+        ]);
 
         throw new NotFoundHttpException();
-    }
-
-    public function indexAction(Request $request)
-    {
-        return $this->render('CoreBundle:default:index.html.twig', [
-        ]);
-    }
-
-    public function createAction(Request $request)
-    {
-        return $this->render('CoreBundle:default:index.html.twig', [
-        ]);
-    }
-
-    public function readAction(Request $request, $issue)
-    {
-        return $this->render('CoreBundle:default:index.html.twig', [
-        ]);
-    }
-
-    public function updateAction(Request $request, $issue)
-    {
-        echo $issue;
-        return $this->render('CoreBundle:default:index.html.twig', [
-        ]);
-    }
-
-    public function deleteAction(Request $request, $issue)
-    {
-        return $this->render('CoreBundle:default:index.html.twig', [
-        ]);
     }
 }

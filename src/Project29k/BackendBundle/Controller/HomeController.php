@@ -8,8 +8,8 @@ class HomeController
 {
     use RenderShared;
 
-    public function indexAction()
+    public function indexAction($object)
     {
-        return $this->render('BackendBundle::home.html.twig');
+        return $this->renderExtended('BackendBundle::home.html.twig', ['object' => $object]);
     }
 }

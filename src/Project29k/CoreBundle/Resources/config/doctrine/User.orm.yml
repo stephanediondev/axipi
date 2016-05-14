@@ -1,4 +1,4 @@
-CoreBundle\Entity\User:
+Project29k\CoreBundle\Entity\User:
     type: entity
     table: user
     id:
@@ -35,11 +35,12 @@ CoreBundle\Entity\User:
             length: 255
             options:
                 fixed: false
-        authorized:
+        isAuthorized:
             type: boolean
             nullable: false
             options:
                 default: '0'
+            column: is_authorized
         datecreated:
             type: datetime
             nullable: false

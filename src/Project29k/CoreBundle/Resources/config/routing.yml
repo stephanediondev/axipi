@@ -1,6 +1,12 @@
-core_index:
-    path:  /{action}/{id}
+front_slash:
+    path:  /
     defaults:
-        _controller: "core.controller:dispatchAction"
-        action: "index"
-        id: null
+        _controller: "core.controller:indexAction"
+        slug: ""
+
+front_catch_all:
+    path:  /{slug}
+    defaults:
+        _controller: "core.controller:indexAction"
+    requirements:
+        slug: ".+"

@@ -1,4 +1,4 @@
-CoreBundle\Entity\Block:
+Project29k\CoreBundle\Entity\Block:
     type: entity
     table: block
     indexes:

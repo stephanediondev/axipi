@@ -1,4 +1,4 @@
-CoreBundle\Entity\Attribute:
+Project29k\CoreBundle\Entity\Attribute:
     type: entity
     table: attribute
     indexes:
@@ -26,26 +26,30 @@ CoreBundle\Entity\Attribute:
             length: 30
             options:
                 fixed: false
-        upload:
+        isUpload:
             type: boolean
             nullable: false
             options:
                 default: '0'
-        rich:
+            column: is_upload
+        isRich:
             type: boolean
             nullable: false
             options:
                 default: '0'
-        required:
+            column: is_rich
+        isRequired:
             type: boolean
             nullable: false
             options:
                 default: '0'
-        search:
+            column: is_required
+        isSearch:
             type: boolean
             nullable: false
             options:
                 default: '0'
+            column: is_search
         ordering:
             type: integer
             nullable: false

@@ -1,4 +1,4 @@
-CoreBundle\Entity\Zone:
+Project29k\CoreBundle\Entity\Zone:
     type: entity
     table: zone
     uniqueConstraints:
@@ -21,11 +21,12 @@ CoreBundle\Entity\Zone:
             length: 30
             options:
                 fixed: false
-        active:
+        isActive:
             type: boolean
             nullable: false
             options:
                 default: '0'
+            column: is_active
         datecreated:
             type: datetime
             nullable: false

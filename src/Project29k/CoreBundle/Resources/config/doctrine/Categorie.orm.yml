@@ -1,4 +1,4 @@
-CoreBundle\Entity\Categorie:
+Project29k\CoreBundle\Entity\Categorie:
     type: entity
     table: categorie
     uniqueConstraints:
