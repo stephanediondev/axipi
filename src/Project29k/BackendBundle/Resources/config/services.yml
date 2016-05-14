@@ -3,3 +3,15 @@ services:
         class: Project29k\BackendBundle\Controller\HomeController
         calls:
             - [ "setEngineInterface", [ "@templating" ] ]
+
+    backend.type_controller:
+        class: Project29k\BackendBundle\Controller\TypeController
+        arguments:
+            - "@type.manager"
+        calls:
+            - [ "setEngineInterface", [ "@templating" ] ]
+
+    type.manager:
+        parent: "core.manager.abstract"
+        class: Project29k\BackendBundle\Manager\TypeManager
+        public: false

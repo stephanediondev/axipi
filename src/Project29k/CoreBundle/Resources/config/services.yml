@@ -6,6 +6,12 @@ services:
         calls:
             - [ "setEngineInterface", [ "@templating" ] ]
 
+    core.manager.abstract:
+        class: Project29k\CoreBundle\Manager\AbstractManager
+        abstract: true
+        calls:
+            - [ "setEntityManager", [ "@doctrine.orm.entity_manager" ] ]
+
     core.manager:
         class: Project29k\CoreBundle\Manager\CoreManager
         public: false

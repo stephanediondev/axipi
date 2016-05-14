@@ -2,3 +2,10 @@ backend_homepage:
     path:  /
     defaults:
         _controller: "backend.home_controller:indexAction"
+
+backend_type:
+    path:  /type/{action}/{id}
+    defaults:
+        _controller: "backend.type_controller:dispatchAction"
+        action: "index"
+        id: null
