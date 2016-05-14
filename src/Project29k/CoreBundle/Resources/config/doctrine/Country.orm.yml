@@ -1,0 +1,25 @@
+CoreBundle\Entity\Country:
+    type: entity
+    table: country
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+        alpha2:
+            type: string
+            nullable: false
+            length: 2
+            options:
+                fixed: true
+            id: true
+        alpha3:
+            type: string
+            nullable: false
+            length: 3
+            options:
+                fixed: true
+            id: true
+    lifecycleCallbacks: {  }

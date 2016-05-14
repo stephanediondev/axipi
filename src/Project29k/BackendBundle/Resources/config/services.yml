@@ -1,0 +1,5 @@
+services:
+    backend.home_controller:
+        class: Project29k\BackendBundle\Controller\HomeController
+        calls:
+            - [ "setEngineInterface", [ "@templating" ] ]

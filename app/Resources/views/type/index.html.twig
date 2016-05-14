@@ -1,0 +1,57 @@
+{% extends 'CoreBundle::base.html.twig' %}
+
+{% block body %}
+    <h1>Type list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Categorieid</th>
+                <th>Zoneid</th>
+                <th>Code</th>
+                <th>Parent</th>
+                <th>Icon</th>
+                <th>Unique</th>
+                <th>Search</th>
+                <th>Sitemap</th>
+                <th>Active</th>
+                <th>Datecreated</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type in types %}
+            <tr>
+                <td><a href="{{ path('type_show', { 'id': type.id }) }}">{{ type.id }}</a></td>
+                <td>{{ type.categorieId }}</td>
+                <td>{{ type.zoneId }}</td>
+                <td>{{ type.code }}</td>
+                <td>{{ type.parent }}</td>
+                <td>{{ type.icon }}</td>
+                <td>{% if type.unique %}Yes{% else %}No{% endif %}</td>
+                <td>{% if type.search %}Yes{% else %}No{% endif %}</td>
+                <td>{% if type.sitemap %}Yes{% else %}No{% endif %}</td>
+                <td>{% if type.active %}Yes{% else %}No{% endif %}</td>
+                <td>{% if type.datecreated %}{{ type.datecreated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('type_show', { 'id': type.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('type_edit', { 'id': type.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('type_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

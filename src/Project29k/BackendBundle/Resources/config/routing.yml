@@ -1,0 +1,4 @@
+backend_homepage:
+    path:  /
+    defaults:
+        _controller: "backend.home_controller:indexAction"

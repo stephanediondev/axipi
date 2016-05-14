@@ -1,0 +1,68 @@
+{% extends 'CoreBundle::base.html.twig' %}
+
+{% block body %}
+    <h1>Type</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ type.id }}</td>
+            </tr>
+            <tr>
+                <th>Categorieid</th>
+                <td>{{ type.categorieId }}</td>
+            </tr>
+            <tr>
+                <th>Zoneid</th>
+                <td>{{ type.zoneId }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ type.code }}</td>
+            </tr>
+            <tr>
+                <th>Parent</th>
+                <td>{{ type.parent }}</td>
+            </tr>
+            <tr>
+                <th>Icon</th>
+                <td>{{ type.icon }}</td>
+            </tr>
+            <tr>
+                <th>Unique</th>
+                <td>{% if type.unique %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Search</th>
+                <td>{% if type.search %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Sitemap</th>
+                <td>{% if type.sitemap %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{% if type.active %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Datecreated</th>
+                <td>{% if type.datecreated %}{{ type.datecreated|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('type_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('type_edit', { 'id': type.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,17 @@
+services:
+    core.controller:
+        class: Project29k\CoreBundle\Controller\DefaultController
+        arguments:
+            - "@core.manager"
+        calls:
+            - [ "setEngineInterface", [ "@templating" ] ]
+
+    core.manager:
+        class: Project29k\CoreBundle\Manager\CoreManager
+        public: false
+
+    core.object.repository:
+        class: Project29k\CoreBundle\Repository\CoreRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments: [ 'CoreBundle:Object' ]

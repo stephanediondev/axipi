@@ -1,0 +1,55 @@
+CoreBundle\Entity\Block:
+    type: entity
+    table: block
+    indexes:
+        IDX_831B9722C54C8C93:
+            columns:
+                - type_id
+    uniqueConstraints:
+        type_id_code:
+            columns:
+                - type_id
+                - code
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        code:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        icon:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        ordering:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        datecreated:
+            type: datetime
+            nullable: false
+    manyToOne:
+        type:
+            targetEntity: Type
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                type_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,50 @@
+CoreBundle\Entity\ProgramUser:
+    type: entity
+    table: program_user
+    indexes:
+        program_id:
+            columns:
+                - program_id
+        user_id:
+            columns:
+                - user_id
+    uniqueConstraints:
+        program_id_user_id:
+            columns:
+                - program_id
+                - user_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        datecreated:
+            type: datetime
+            nullable: false
+    manyToOne:
+        program:
+            targetEntity: Program
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                program_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        user:
+            targetEntity: User
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                user_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
