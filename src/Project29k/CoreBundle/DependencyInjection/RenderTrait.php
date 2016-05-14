@@ -1,5 +1,5 @@
 <?php
-namespace Project29k\CoreBundle\Shared;
+namespace Project29k\CoreBundle\DependencyInjection;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-trait RenderShared
+trait RenderTrait
 {
     /**
      * @var EngineInterface

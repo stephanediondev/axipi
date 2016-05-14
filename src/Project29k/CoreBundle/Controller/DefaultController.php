@@ -7,13 +7,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Project29k\CoreBundle\Manager\CoreManager;
-use Project29k\CoreBundle\Shared\RenderShared;
+use Project29k\CoreBundle\DependencyInjection\RenderTrait;
 
 use Project29k\CoreBundle\Entity\Object;
 
 class DefaultController
 {
-    use RenderShared;
+    use RenderTrait;
 
     protected $coreManager;
 

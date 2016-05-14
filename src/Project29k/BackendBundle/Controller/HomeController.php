@@ -2,11 +2,11 @@
 
 namespace Project29k\BackendBundle\Controller;
 
-use Project29k\CoreBundle\Shared\RenderShared;
+use Project29k\CoreBundle\DependencyInjection\RenderTrait;
 
 class HomeController
 {
-    use RenderShared;
+    use RenderTrait;
 
     public function indexAction()
     {
