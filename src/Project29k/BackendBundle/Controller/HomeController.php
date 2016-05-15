@@ -10,6 +10,6 @@ class HomeController
 
     public function indexAction()
     {
-        return $this->renderExtended('BackendBundle::home.html.twig');
+        return $this->renderExtended('BackendBundle::home.html.twig', ['objects'=> [['index' => 1], ['index' => 2], ['index' => 3], ['index' => 4]]]);
     }
 }

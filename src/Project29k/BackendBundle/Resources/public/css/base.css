@@ -271,11 +271,11 @@ pre{border:1px dashed #252732;padding:5px;}
 header nav{background-color:#444755;border-bottom:3px solid #252732;margin:0px 0px 0px 0px;padding:5px 0px 5px 5px;margin-bottom:5px;position:relative;}
 header nav ul{margin:0px;padding:0px;}
 
-.block{background-color:#f6f8fa;border-radius:3px 3px 3px 3px;clear:both;line-height:1.4;padding:0px 10px 0px 10px;margin:0px 5px 10px 5px;.text-align:justify;}
+.block{background-color:#f6f8fa;border-radius:3px 3px 3px 3px;clear:both;line-height:1.4;margin:0px 5px 10px 5px;overflow:hidden;padding:0px 10px 5px 10px;text-align:justify;}
 .block h2{font-size:14px;font-weight:bold;margin:5px 0px;}
 .block h2 span{margin-right:10px;}
 .block h2 a:link, .block h2 a:visited{text-decoration:none;}
-.block.title{background-color:#FFFFFF;border-bottom:1px solid #dddddd;border-radius:0px;margin-top:15px;padding-bottom:2px;}
+.block.title{background-color:#FFFFFF;border-bottom:1px solid #dddddd;border-radius:0px;margin-top:15px;}
 .block.title a:link, .block.title a:visited{}
 .block.title h2{float:left;font-size:16px;text-align:left;}
 .block.title h3{clear:left;float:left;margin:0px 0px 5px 0px;text-align:left;}

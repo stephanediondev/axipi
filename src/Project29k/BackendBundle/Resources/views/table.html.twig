@@ -1,0 +1,29 @@
+<div class="filters">
+{% block table_actions %}{% endblock %}
+</div>
+
+<table class="table table-striped table-condensed table-hover small">
+<thead>
+{% if table_actions %}
+    <th><input type="checkbox"></th>
+{% endif %}
+{% block table_head %}{% endblock %}
+{% if row_actions %}
+    <th>&nbsp;</th>
+{% endif %}
+</thead>
+
+<tbody>
+{% for object in objects %}
+    <tr>
+        {% if table_actions %}
+            <td><input type="checkbox" name="works-works-{{ object.index }}" value="{{ object.index }}"</td>
+        {% endif %}
+        {% block table_row %}{% endblock %}
+        {% if row_actions %}
+            <th>{% block table_row_actions %}{% endblock %}</th>
+        {% endif %}
+    </tr>
+{% endfor %}
+</tbody>
+</table>
