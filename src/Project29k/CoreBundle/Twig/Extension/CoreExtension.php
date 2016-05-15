@@ -9,9 +9,9 @@ use Project29k\CoreBundle\Entity\Object;
 
 class CoreExtension extends \Twig_Extension
 {
-    protected $em;
-
     protected $container;
+
+    protected $em;
 
     public function setContainer(ContainerInterface $container)
     {
@@ -49,6 +49,5 @@ class CoreExtension extends \Twig_Extension
         $widget->setTitle($code);
 
         return $this->container->get('core.content_widget')->get($widget, $page);
-        return 'widgets: '.$code;
     }
 }

@@ -3,14 +3,58 @@
 <head>
 <title>{% block title %}Welcome!{% endblock %}</title>
 {% block style %}
+<link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('vendor/material-design-lite/material.min.css') }}">
 {% endblock %}
 {% block meta %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% endblock %}
 </head>
 <body>
 
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <div class="mdl-layout-spacer">
+            </div>
+
+            <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#"><i class="fa fa-home" aria-hidden="true"></i></a>
+
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn_display">
+                <i class="fa fa-globe" aria-hidden="true"></i>
+            </button>
+            <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn_display">
+                <li class="mdl-menu__item"><a class="items_display" href="expand" title="2">us/en</a></li>
+                <li class="mdl-menu__item"><a class="items_display" href="collapse" title="1">fr/fr</a></li>
+            </ul>
+
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn_done">
+                <i class="fa fa-shield" aria-hidden="true"></i>
+            </button>
+            <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn_done">
+                <li class="mdl-menu__item"><a class="items_read" href="https://readerself.com/demo/items/read/all">Users</a></li>
+                <li class="mdl-menu__item"><a class="items_read" href="https://readerself.com/demo/items/read/two-weeks">Info</a></li>
+            </ul>
+
+            <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#"><i class="fa fa-user" aria-hidden="true"></i></a>
+            <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+        </div>
+    </header>
+
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Title</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href=""><i class="fa fa-file-text-o" aria-hidden="true"></i> Pages</a>
+            <a class="mdl-navigation__link" href=""><i class="fa fa-leaf" aria-hidden="true"></i> Widgets</a>
+            <a class="mdl-navigation__link" href=""><i class="fa fa-picture-o" aria-hidden="true"></i> Medias</a>
+            <a class="mdl-navigation__link" href=""><i class="fa fa-hdd-o" aria-hidden="true"></i> Cache</a>
+            <a class="mdl-navigation__link" href=""><i class="fa fa-search" aria-hidden="true"></i> Elastic Search</a>
+            <a class="mdl-navigation__link" href=""><i class="fa fa-globe" aria-hidden="true"></i> Programs</a>
+            <a class="mdl-navigation__link" href=""><i class="fa fa-cubes" aria-hidden="true"></i> Types</a>
+        </nav>
+    </div>
+
     <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid">
             {% block body %}
