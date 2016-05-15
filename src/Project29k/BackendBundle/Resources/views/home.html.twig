@@ -1,29 +1,105 @@
 {% extends 'BackendBundle::base.html.twig' %}
 
 {% block body %}
-    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--2-col">
-        <div class="mdl-card__title mdl-card--expand">
-            <i class="fa fa-camera-retro fa-5x"></i>
-        </div>
-        <div class="mdl-card__supporting-text">
-            {{ 'test1.test2'|trans({}, 'backend') }}
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">View Updates</a>
-        </div>
+<div class="container-fluid">
+	<div class="row block title">
+        <h2>
+        <span><i class="fa fa-sign-in"></i>Login</span>
+        </h2>
+    </div>
+    
+    <div class="row block">
+        <form action="#" method="post" accept-charset="utf-8">
+            <div class="col-lg-3">
+                <p>
+                <label for="mbr_login">Email *</label>		<input type="text" name="mbr_login" value="" id="mbr_login" class="inputtext required" />
+                </p>
+                <p>
+                <label for="mbr_password">Password *</label>		<input type="password" name="mbr_password" value="" id="mbr_password" class="inputpassword required" />
+                </p>
+                <p>
+                <span class="label">&nbsp;</span>
+                <input type="submit" name="submit" value="Submit" class="inputsubmit" />
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row block title">
+        <h2>
+            <span><i class="fa fa-picture-o"></i>{{ 'test1.test2'|trans({}, 'backend') }} (1-100/2864)</span>
+        </h2>
+        <ul>
+            <li><a href="#"><i class="fa fa-ban"></i>Reset</a></li>
+            <li><a title="Màj + f" class="toggle toggle_search" href="#search_works_works"><i class="fa fa-search"></i>Rechercher</a></li>
+            <li><a href="#"><i class="fa fa-plus"></i>Ajouter</a></li>
+            <li><a href="#"><i class="fa fa-bar-chart-o"></i>Statistiques</a></li>
+            <li><a href="#"><i class="fa fa-camera"></i>Medias</a></li>
+        </ul>
     </div>
 
-    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--2-col">
-        <div class="mdl-card__title mdl-card--expand">
-            <h2 class="mdl-card__title-text">backend home</h2>
-        </div>
-        <div class="mdl-card__supporting-text">
-            {{ 'test1.test2'|trans({}, 'backend') }}
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">View Updates</a>
-        </div>
+    <div class="row block">
+		<table class="table table-striped table-condensed table-hover small">
+		<thead>
+		<tr>
+		<th class=""><a href="#">ID</a></th>
+        <th class="sort_asc"><a href="#"><i class="fa fa-sort-alpha-desc"></i>Nom</a></th>
+        <th class=""><a href="#">Prénom</a></th>
+        <th class=""><a href="#">Expositions B&amp;C</a></th>
+        <th class=""><a href="#">Catégories</a></th>
+        <th class=""><a href="#">Sur le site ?</a></th>
+        <th class=""><a href="#">E-mail</a></th>
+        <th class=""><a href="#">Téléphone</a></th>
+        <th class=""><a href="#">Adresse</a></th>
+        <th>&nbsp;</th>
+		</tr>
+		</thead>
+				<tbody>
+				<tr>
+						<td><a href="#">21336</a></td>
+			<td><a href="#">xxx</a></td>
+			<td>xxx</td>
+			<td><a href="#">12-1</a>, <a href="#">13-3</a></td>
+			<td>xxx</td>
+			<td>Oui</td>
+			<td><a href="mailto:xxx">xxxx</a></td>
+			<td>xxx</td>
+			<td>xxx</td>
+			<th>
+			<a href="#"><i class="fa fa-wrench"></i>Modifier</a></th>
+		</tr>
+				<tr>
+						<td><a href="#">21336</a></td>
+			<td><a href="#">xxx</a></td>
+			<td>xxx</td>
+			<td><a href="#">12-1</a>, <a href="#">13-3</a></td>
+			<td>xxx</td>
+			<td>Oui</td>
+			<td><a href="mailto:xxx">xxxx</a></td>
+			<td>xxx</td>
+			<td>xxx</td>
+			<th>
+			<a href="#"><i class="fa fa-wrench"></i>Modifier</a></th>
+		</tr>
+				<tr>
+						<td><a href="#">21336</a></td>
+			<td><a href="#">xxx</a></td>
+			<td>xxx</td>
+			<td><a href="#">12-1</a>, <a href="#">13-3</a></td>
+			<td>xxx</td>
+			<td>Oui</td>
+			<td><a href="mailto:xxx">xxxx</a></td>
+			<td>xxx</td>
+			<td>xxx</td>
+			<th>
+			<a href="#"><i class="fa fa-wrench"></i>Modifier</a></th>
+		</tr>
+        </tbody>
+        </table>
     </div>
+</div>
 {% endblock %}
 
 {% block style %}

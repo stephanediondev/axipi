@@ -3,9 +3,9 @@
 <head>
 <title>{% block title %}Welcome!{% endblock %}</title>
 {% block style %}
-<link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('vendor/material-design-lite/material.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/backend/css/base.css') }}">
 {% endblock %}
 {% block meta %}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,59 +13,46 @@
 </head>
 <body>
 
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer">
-    <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
-            <div class="mdl-layout-spacer">
-            </div>
+<nav class="navbar navbar-default small" role="navigation">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+	</div>
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+							<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/"><i class="fa fa-home"></i>Accueil</a></li>
+				<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/individuals"><i class="fa fa-users"></i>Individus</a></li>				<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/companies"><i class="fa fa-building-o"></i>Sociétés</a></li>				<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/artists"><i class="fa fa-briefcase"></i>Artistes</a></li>				<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/clients"><i class="fa fa-bank"></i>Clients</a></li>								<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/references"><i class="fa fa-bookmark"></i>Références</a></li>				<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/works"><i class="fa fa-picture-o"></i>Oeuvres</a></li>				<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/movements"><i class="fa fa-truck"></i>Mouvements</a></li>				<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/invoices"><i class="fa fa-archive"></i>Factures</a></li>				<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/expenses"><i class="fa fa-eur"></i>Frais</a></li>				<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/selections"><i class="fa fa-shopping-cart"></i>Sélections</a></li>				<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/sync"><i class="fa fa-cloud-upload"></i>Sync</a></li>				<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/categories"><i class="fa fa-folder"></i>Catégories</a></li>				<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/texts"><i class="fa fa-file-text-o"></i>Textes sur le site</a></li>										<li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shield"></i>Admin <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/members"><i class="fa fa-group"></i>Membres</a></li>
+													<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/_connections"><i class="fa fa-sign-in"></i>Connexions</a></li>
+							<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/roles"><i class="fa fa-magic"></i>Roles</a></li>
+							<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/_configuration"><i class="fa fa-gears"></i>Configuration</a></li>
+							<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/_database"><i class="fa fa-hdd-o"></i>Database</a></li>
+							<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/_folders"><i class="fa fa-folder-open"></i>Folders</a></li>
+							<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/_info"><i class="fa fa-info-circle"></i>Info</a></li>
+							<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/_migration"><i class="fa fa-plane"></i>Migration</a></li>
+											</ul>
+				</li>
+					</ul>
+		<ul class="nav navbar-nav pull-right">
+							<li><strong>0.1711</strong></li>
+										<li><a target="_blank" href="http://192.168.0.99/artmanagement/modules/main/pages/login.php"><i class="fa fa-plug"></i>v1</a></li>
+			<li><a target="_blank" href="http://localhost/projects/artmanagement/artmanagement/online"><i class="fa fa-rocket"></i>Site web</a></li>
+							<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/tickets"><i class="fa fa-life-ring"></i>Tickets (59)</a></li>				<li><a href="http://localhost/projects/artmanagement/artmanagement/fr/logout"><i class="fa fa-sign-out"></i>Déconnexion (admin)</a></li>
+					</ul>
+	</div>
+</nav>
 
-            <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#"><i class="fa fa-home" aria-hidden="true"></i></a>
-
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn_display">
-                <i class="fa fa-globe" aria-hidden="true"></i>
-            </button>
-            <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn_display">
-                <li class="mdl-menu__item"><a class="items_display" href="expand" title="2">us/en</a></li>
-                <li class="mdl-menu__item"><a class="items_display" href="collapse" title="1">fr/fr</a></li>
-            </ul>
-
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn_done">
-                <i class="fa fa-shield" aria-hidden="true"></i>
-            </button>
-            <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn_done">
-                <li class="mdl-menu__item"><a class="items_read" href="https://readerself.com/demo/items/read/all">Users</a></li>
-                <li class="mdl-menu__item"><a class="items_read" href="https://readerself.com/demo/items/read/two-weeks">Info</a></li>
-            </ul>
-
-            <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#"><i class="fa fa-user" aria-hidden="true"></i></a>
-            <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
-        </div>
-    </header>
-
-    <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Title</span>
-        <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href=""><i class="fa fa-file-text-o" aria-hidden="true"></i> Pages</a>
-            <a class="mdl-navigation__link" href=""><i class="fa fa-leaf" aria-hidden="true"></i> Widgets</a>
-            <a class="mdl-navigation__link" href=""><i class="fa fa-picture-o" aria-hidden="true"></i> Medias</a>
-            <a class="mdl-navigation__link" href=""><i class="fa fa-hdd-o" aria-hidden="true"></i> Cache</a>
-            <a class="mdl-navigation__link" href=""><i class="fa fa-search" aria-hidden="true"></i> Elastic Search</a>
-            <a class="mdl-navigation__link" href=""><i class="fa fa-globe" aria-hidden="true"></i> Programs</a>
-            <a class="mdl-navigation__link" href=""><i class="fa fa-cubes" aria-hidden="true"></i> Types</a>
-        </nav>
-    </div>
-
-    <main class="mdl-layout__content mdl-color--grey-100">
-        <div class="mdl-grid">
-            {% block body %}
-            {% endblock %}
-        </div>
-    </main>
-</div>
+{% block body %}
+{% endblock %}
 
 {% block script %}
 <script type="text/javascript" src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('vendor/material-design-lite/material.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 {% endblock %}
 
 </body>

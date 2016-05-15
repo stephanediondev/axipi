@@ -5,7 +5,6 @@
         "jquery": "*",
         "bootstrap": "*",
         "FortAwesome/Font-Awesome": "*",
-        "material-design-lite": "*",
         "tinymce-dist": "*"
     }
 }
