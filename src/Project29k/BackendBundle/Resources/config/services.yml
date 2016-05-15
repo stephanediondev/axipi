@@ -3,7 +3,6 @@ services:
         class: Project29k\BackendBundle\Controller\HomeController
         arguments:
             - "@form.factory"
-            - "@type.form.type"
         calls:
             - [ "setEngineInterface", [ "@templating" ] ]
 
@@ -18,13 +17,3 @@ services:
         parent: "core.manager.abstract"
         class: Project29k\BackendBundle\Manager\TypeManager
         public: false
-
-    type.form.type:
-        class: Project29k\BackendBundle\Form\Type\TypeType
-        tags:
-            - { name: "form.type", alias: "%type.form.type%" }
-
-    type.form.handler:
-        class: Project29k\BackendBundle\Form\Handler\TypeHandler
-        tags:
-            - { name: "form.handler", alias: "%type.form.type%" }

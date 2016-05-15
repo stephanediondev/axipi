@@ -306,7 +306,7 @@ table.index_table .container_percent, .data_table table .container_percent{width
 .thumb{background-color:#F6F8FA;border:1px solid #E7E7E7;border-radius:3px;display:inline;float:left;height:185px;margin:5px 4px 5px 4px;overflow:hidden;position:relative;text-align:center;vertical-align:top;width:170px;}
 .thumb_large{background-color:#F6F8FA;border:1px solid #E7E7E7;border-radius:3px;height:185px;margin:5px 0px 5px 0px;overflow:hidden;padding-left:5px;position:relative;text-align:left;vertical-align:top;}
 .thumb_large img{margin:0px 5px;}
-.thumb .inputcheckbox{position:absolute;top:0px;right:0px;}
+.thumb input[type=checkbox]{position:absolute;top:0px;right:0px;}
 .index_table td img, .thumb img{max-height:150px;max-width:200px;}
 .thumb:hover{background-color:#E7E7E7;border:1px solid #AEB2B7;}
 .thumb .display{padding:2px 2px 1px 2px;}
@@ -323,16 +323,16 @@ optgroup{border-top:1px solid #AEB2B7;font-weight:bold;padding:2px 0px 5px 2px;}
 optgroup:first-child{border-top:none;}
 option{padding-right:5px;}
 optgroup option{margin-left:5px;}
-.textarea, .inputtext, .inputpassword, .inputsubmit, button{border:1px solid #cccccc;border-radius:4px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;padding:3px 6px;}
-.inputtext:focus, .inputpassword:focus, textarea:focus{background-color:#E7E7E7;}
-.inputcheckbox, .inputradio{background-color:transparent;}
-.inputradio{vertical-align:middle;}
-.inputtext, .inputpassword, .textarea{padding:3px 6px;}
-a.inputsubmit, .inputsubmit, button{background-color:#444755;color:#AEB2B7;cursor:pointer;padding:4px 4px;text-decoration:none;}
-.inputtext, .inputpassword{width:100%;}
-.inputtext.numeric{width:60px;}
-.inputtext.date{width:80px;}
-.inputtext.time{width:80px;}
+.textarea, input[type=text], input[type=password], input[type=submit], button{border:1px solid #cccccc;border-radius:4px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;padding:3px 6px;}
+input[type=text]:focus, input[type=password]:focus, textarea:focus{background-color:#E7E7E7;}
+input[type=checkbox], input[type=radio]{background-color:transparent;}
+input[type=radio]{vertical-align:middle;}
+input[type=text], input[type=password], textarea{padding:3px 6px;}
+input[type=submit], button{background-color:#444755;color:#AEB2B7;cursor:pointer;padding:4px 4px;text-decoration:none;}
+input[type=text], input[type=password]{width:100%;}
+input[type=text].numeric{width:60px;}
+input[type=text].date{width:80px;}
+input[type=text].time{width:80px;}
 option[selected]{font-weight:bold;}
 .textarea{height:100px;min-height:100px;resize:vertical;width:100%;}
 .textarea.wysiwyg{height:450px;min-height:450px;resize:vertical;width:100%;}
@@ -343,8 +343,8 @@ label a:link, label a:visited{cursor:pointer;}
 .filters div{float:left;height:25px;margin:5px 10px 5px 0px;overflow:hidden;position:relative;white-space:nowrap;}
 .filters label{display:inline;padding-right:5px;vertical-align:middle;}
 .filters .select{width:100px;}
-.filters .inputtext{padding:1px 2px;width:100px;}
-.filters .inputsubmit, button{padding:1px 4px;}
+.filters input[type=text]{padding:1px 2px;width:100px;}
+.filters input[type=submit], .filters button{padding:1px 4px;}
 input:-webkit-autofill{-webkit-box-shadow:0px 0px 0px 1000px #FFFFFF inset;}
 button{border-radius:3px;}
 
@@ -384,7 +384,7 @@ nav .fa, .block.title li .fa, thead th .fa, tbody th .fa, .paging strong .fa, .p
 .role{margin:10px;}
 .role label{width:auto;}
 .role p{clear:both;}
-.role p .inputcheckbox{float:left;margin-right:5px;}
+.role p input[type=checkbox]{float:left;margin-right:5px;}
 .role p label{float:left;}
 
 .fc-ltr .fc-event-hori.fc-event{border:none!important;background-color:transparent!important;padding:3px 2px 2px 2px;}
