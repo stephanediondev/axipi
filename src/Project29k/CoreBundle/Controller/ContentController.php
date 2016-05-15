@@ -8,13 +8,8 @@ class ContentController
 {
     use RenderTrait;
 
-    public function pageAction($object)
+    public function indexAction($object)
     {
-        return $this->renderExtended('CoreBundle:default:content.html.twig', ['object' => $object]);
-    }
-
-    public function widgetAction($object)
-    {
-        return $this->contentExtended('CoreBundle:default:content.html.twig', ['object' => $object]);
+        return $this->renderExtended('CoreBundle::content.html.twig', ['object' => $object]);
     }
 }

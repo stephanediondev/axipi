@@ -4,7 +4,6 @@ namespace Project29k\CoreBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Project29k\CoreBundle\Manager\CoreManager;
 use Project29k\CoreBundle\DependencyInjection\RenderTrait;
@@ -17,20 +16,12 @@ class DefaultController
 
     protected $coreManager;
 
-    public function __construct(
-        CoreManager $coreManager
-    ) {
-        $this->coreManager = $coreManager;
-    }
-
     public function indexAction(Request $request, $slug)
     {
         $object = new Object();
         $object->setTitle($slug);
 
-        //$object->setDescriptionSeo( $this->forwardExtented('core.content_controller:widgetAction', ['object' => $object]) );
-
-        $response = $this->forwardExtented('core.content_controller:pageAction', ['object' => $object]);
+        $response = $this->forwardExtented('core.content_controller:indexAction', ['object' => $object]);
 
         // ... further modify the response or return it directly
 

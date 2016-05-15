@@ -2,44 +2,39 @@
 
 namespace Project29k\CoreBundle\Twig\Extension;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+
+use Project29k\CoreBundle\Entity\Object;
 
 class CoreExtension extends \Twig_Extension
 {
-    /**
-     * @var EntityManagerInterface
-     */
     protected $em;
 
-    /**
-     * @param EntityManagerInterface $em
-     */
+    protected $container;
+
+    public function setContainer(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
     public function setEntityManager(EntityManagerInterface $em)
     {
         $this->em = $em;
     }
 
-    /**
-     * @return string
-     */
     public function getName()
     {
         return 'core.twig.extension';
     }
 
-    /**
-     * @return array
-     */
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('getWidgets', [$this, 'getWidgets']),
+            new \Twig_SimpleFunction('getWidgets', [$this, 'getWidgets'], array('is_safe' => array('html'))),
         ];
     }
 
-    /**
-     * @return array
-     */
     public function getFilters()
     {
         return [
@@ -48,6 +43,10 @@ class CoreExtension extends \Twig_Extension
 
     public function getWidgets($code)
     {
+        $object = new Object();
+        $object->setTitle($code);
+
+        return $this->container->get('core.content_widget')->indexAction($object);
         return 'widgets: '.$code;
     }
 }
