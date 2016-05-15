@@ -23,7 +23,11 @@ class HomeController
 
     public function indexAction(Request $request)
     {
-        $form = $this->formFactory->create('Project29k\BackendBundle\Form\Type\TypeType', new Type(), ['new_option' => 'OO']);
+        $type = new Type();
+        $type->setIcon('leaf');
+        $type->setUnique(true);
+
+        $form = $this->formFactory->create('Project29k\BackendBundle\Form\Type\TypeType', $type, ['new_option' => 'OO']);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
