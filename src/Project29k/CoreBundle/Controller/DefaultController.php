@@ -16,28 +16,22 @@ class DefaultController
 
     protected $coreManager;
 
+    public function __construct(
+        CoreManager $coreManager
+    ) {
+        $this->coreManager = $coreManager;
+    }
+
     public function indexAction(Request $request, $slug)
     {
-        $object = new Object();
-        $object->setTitle($slug);
+        $page = new Object();
+        $page->setTitle($slug);
 
-        $response = $this->forwardExtented('core.content_controller:indexAction', ['object' => $object]);
+        $this->coreManager->setPage($page);
 
-        // ... further modify the response or return it directly
+        $response = $this->forwardExtented('core.content_controller:get', ['page' => $page]);
 
         return $response;
-
-        $subRequest = $request->duplicate(
-            $request->query->all(),
-            null,
-            ['_controller' => 'xxx:showAction', 'object' => $object]
-        );
-
-        return $this->httpKernel->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
-
-        return $this->renderExtended('CoreBundle:default:index.html.twig', [
-            'object' => $object
-        ]);
 
         throw new NotFoundHttpException();
     }

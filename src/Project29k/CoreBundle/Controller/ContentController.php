@@ -8,8 +8,8 @@ class ContentController
 {
     use RenderTrait;
 
-    public function indexAction($object)
+    public function get($page)
     {
-        return $this->renderExtended('CoreBundle::content.html.twig', ['object' => $object]);
+        return $this->renderExtended('CoreBundle::content.html.twig', ['page' => $page]);
     }
 }

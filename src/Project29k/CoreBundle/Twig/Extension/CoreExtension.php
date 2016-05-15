@@ -43,10 +43,12 @@ class CoreExtension extends \Twig_Extension
 
     public function getWidgets($code)
     {
-        $object = new Object();
-        $object->setTitle($code);
+        $page = $this->container->get('core.manager')->getPage();
 
-        return $this->container->get('core.content_widget')->indexAction($object);
+        $widget = new Object();
+        $widget->setTitle($code);
+
+        return $this->container->get('core.content_widget')->get($widget, $page);
         return 'widgets: '.$code;
     }
 }

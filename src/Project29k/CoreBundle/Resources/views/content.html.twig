@@ -1,9 +1,11 @@
 {% extends 'CoreBundle::base.html.twig' %}
 
+{% block title %}{{ page.title }}{% endblock %}
+
 {% block body %}
     <div class="jumbotron">
         <h1>content controller</h1>
-        <p>slug {{ object.title }}</p>
+        <p>slug {{ page.title }}</p>
         <p>{{ 'test1.test2'|trans({}, 'core') }}</p>
     </div>
 {% endblock %}

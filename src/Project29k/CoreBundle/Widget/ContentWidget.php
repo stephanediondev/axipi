@@ -8,8 +8,8 @@ class ContentWidget
 {
     use RenderTrait;
 
-    public function indexAction($object)
+    public function get($widget, $page)
     {
-        return $this->contentExtended('CoreBundle:Widget:content.html.twig', ['object' => $object]);
+        return $this->contentExtended('CoreBundle:Widget:content.html.twig', ['widget' => $widget, 'page' => $page]);
     }
 }
