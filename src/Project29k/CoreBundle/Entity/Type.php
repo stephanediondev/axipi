@@ -7,6 +7,9 @@ namespace Project29k\CoreBundle\Entity;
  */
 class Type
 {
+    protected $controllerAlias;
+    protected $categorie;
+
     /**
      * @var integer
      */

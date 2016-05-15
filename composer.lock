@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cf5ebd67b7104c4685d0bb4d6bce6f3a",
-    "content-hash": "bc981085d5145fc00f3562bed407a221",
+    "hash": "3d3d0c19551cd84f0e165aa9e0d21045",
+    "content-hash": "98ee4ca24722342f20b4462d4a88cd00",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -774,6 +774,54 @@
             "time": "2016-01-05 21:34:58"
         },
         {
+            "name": "gos/form-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GeniusesOfSymfony/FormBundle.git",
+                "reference": "a38a83be4afb104d65e91c7c7e27ba98d720d6ea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GeniusesOfSymfony/FormBundle/zipball/a38a83be4afb104d65e91c7c7e27ba98d720d6ea",
+                "reference": "a38a83be4afb104d65e91c7c7e27ba98d720d6ea",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "sensio/framework-extra-bundle": "~3.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Gos\\Bundle\\FormBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Johann Saunier",
+                    "email": "johann_27@hotmail.fr"
+                }
+            ],
+            "description": "Form bundle",
+            "keywords": [
+                "Form Type",
+                "Form handler",
+                "form",
+                "handler"
+            ],
+            "time": "2014-12-26 18:03:31"
+        },
+        {
             "name": "incenteev/composer-parameter-handler",
             "version": "v2.1.2",
             "source": {
@@ -1221,6 +1269,68 @@
                 "distribution"
             ],
             "time": "2016-04-25 20:50:31"
+        },
+        {
+            "name": "sensio/framework-extra-bundle",
+            "version": "v3.0.16",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
+                "reference": "507a15f56fa7699f6cc8c2c7de4080b19ce22546"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/507a15f56fa7699f6cc8c2c7de4080b19ce22546",
+                "reference": "507a15f56fa7699f6cc8c2c7de4080b19ce22546",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": "~2.2",
+                "symfony/dependency-injection": "~2.3|~3.0",
+                "symfony/framework-bundle": "~2.3|~3.0"
+            },
+            "require-dev": {
+                "symfony/browser-kit": "~2.3|~3.0",
+                "symfony/dom-crawler": "~2.3|~3.0",
+                "symfony/expression-language": "~2.4|~3.0",
+                "symfony/finder": "~2.3|~3.0",
+                "symfony/phpunit-bridge": "~2.7|~3.0",
+                "symfony/security-bundle": "~2.4|~3.0",
+                "symfony/twig-bundle": "~2.3|~3.0",
+                "twig/twig": "~1.11|~2.0"
+            },
+            "suggest": {
+                "symfony/expression-language": "",
+                "symfony/psr-http-message-bridge": "To use the PSR-7 converters",
+                "symfony/security-bundle": ""
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sensio\\Bundle\\FrameworkExtraBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "This bundle provides a way to configure your controllers with annotations",
+            "keywords": [
+                "annotations",
+                "controllers"
+            ],
+            "time": "2016-03-25 17:08:27"
         },
         {
             "name": "sensiolabs/security-checker",
@@ -2023,7 +2133,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "gos/form-bundle": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

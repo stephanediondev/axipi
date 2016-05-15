@@ -1,6 +1,6 @@
 <?php
 
-namespace Project29k\CoreBundle\Form;
+namespace Project29k\BackendBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -8,10 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TypeType extends AbstractType
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -24,7 +20,6 @@ class TypeType extends AbstractType
             ->add('search')
             ->add('sitemap')
             ->add('active')
-            ->add('datecreated')
         ;
     }
     
@@ -34,7 +29,7 @@ class TypeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CoreBundle\Entity\Type'
+            'data_class' => 'Project29k\CoreBundle\Entity\Type'
         ));
     }
 }
