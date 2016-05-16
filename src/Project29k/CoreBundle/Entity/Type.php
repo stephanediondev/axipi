@@ -8,12 +8,11 @@ namespace Project29k\CoreBundle\Entity;
 class Type
 {
     protected $controllerAlias;
-    protected $category;
 
     /**
      * @var integer
      */
-    private $categoryId;
+    private $category;
 
     /**
      * @var integer
@@ -67,27 +66,27 @@ class Type
 
 
     /**
-     * Set categoryId
+     * Set category
      *
-     * @param integer $categoryId
+     * @param integer $category
      *
      * @return Type
      */
-    public function setCategoryId($categoryId)
+    public function setCategory($category)
     {
-        $this->categoryId = $categoryId;
+        $this->category = $category;
 
         return $this;
     }
 
     /**
-     * Get categoryId
+     * Get category
      *
      * @return integer
      */
-    public function getCategoryId()
+    public function getCategory()
     {
-        return $this->categoryId;
+        return $this->category;
     }
 
     /**

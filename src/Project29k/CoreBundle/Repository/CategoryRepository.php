@@ -72,33 +72,21 @@ class CategoryRepository extends EntityRepository {
  	public function getCategories() {
 		$choices = array();
 		$em = $this->getEntityManager();
-		$connection = $em->getConnection();
-		$statement = $connection->prepare('SELECT * FROM category');
-		$statement->execute();
-		$organizations = $statement->fetchAll();
-		$choices = array('' => '-');
-		foreach($organizations as $org) {
-			$choices[$org['id']] = $org['id'];
-		}
-		return $choices;
+
+		$query = $em->createQueryBuilder();
+		$query->addSelect('cat');
+		$query->from('CoreBundle:Category', 'cat');
+
+		return $query->getQuery()->getResult();
 	}
  	public function getStatusesChoices() {
 		$choices = array();
 		$em = $this->getEntityManager();
-		$connection = $em->getConnection();
-		$statement = $connection->prepare('SELECT * FROM statuses');
-		$statement->execute();
-		$statuses = $statement->fetchAll();
-		$choices = array('empty' => array('' => '-'));
-		foreach($statuses as $stu) {
-			$letter = $stu['stu_isclosed'];
-			//$letter = $container->get('translator')->trans('Symfony is great');
-			if(!array_key_exists($letter, $choices)) {
-				$choices[$letter] = array();
-			}
-			
-			$choices[$letter][$stu['stu_id']] = $stu['stu_name'];
-		}
-		return $choices;
+
+		$query = $em->createQueryBuilder();
+		//$query->addSelect('stu.stuIsclosed', 'prj.prjName', 'prj.prjId', 'prj.orgId', 'prj.prjDateStart', 'prj.prjDateDue', 'prj.prjStatus', 'prj.prjPriority', 'org.orgName', 'stu.stuName');
+		$query->from('Project29kCoreBundle:Category', 'cat');
+
+		return $query->getQuery()->getResult();
 	}
 }

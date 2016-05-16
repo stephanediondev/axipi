@@ -59,8 +59,7 @@ class TypeController
     {
         $type = new Type();
         $type->setIcon('leaf');
-        $type->setUnique(true);
-        $type->setcategoryId(1);
+        $type->setIsSitemap(true);
 
         $form = $this->formFactory->create('Project29k\BackendBundle\Form\Type\TypeType', $type, ['categories' => $this->typeManager->getCategories(), 'new_option' => 'OO']);
         $form->handleRequest($request);

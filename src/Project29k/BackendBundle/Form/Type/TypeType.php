@@ -5,20 +5,27 @@ namespace Project29k\BackendBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Project29k\CoreBundle\Entity\Type;
-use Project29k\CoreBundle\Entity\Categorie;
+use Project29k\CoreBundle\Entity\Category;
 
 class TypeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        //print_r($options);
+        print_r($options['categories']);
 
         $builder
-            ->add('categoryId', ChoiceType::class, ['choices' => $options['categories']])
+            ->add('category', EntityType::class,
+                [
+                    'class' => Category::class,
+                    'choices' => $options['categories'],
+                    'choice_label' => function ($category) {
+                        return $category->getCode();
+                    }
+                ])
             ->add('zoneId')
             ->add('controllerAlias')
             ->add('code')
@@ -26,7 +33,7 @@ class TypeType extends AbstractType
             ->add('icon')
             ->add('unique')
             ->add('search')
-            ->add('sitemap')
+            ->add('isSitemap')
             ->add('active')
             ->add('save', SubmitType::class)
         ;

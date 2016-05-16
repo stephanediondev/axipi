@@ -7,7 +7,7 @@ class TypeManager extends AbstractManager
 {
     public function getCategories()
     {
-		return $this->em->getRepository('CoreBundle:Category')->getCategories([]);
+        return $this->em->getRepository('CoreBundle:Category')->getCategories([]);
     }
 
     public function persist($data)
@@ -16,6 +16,7 @@ class TypeManager extends AbstractManager
         if($data->getDatecreated() == null) {
             $data->setDatecreated(new \Datetime());
         }
+
         $this->em->persist($data);
         $this->em->flush();
     }
