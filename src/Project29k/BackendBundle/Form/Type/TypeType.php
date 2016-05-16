@@ -15,8 +15,6 @@ class TypeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        print_r($options['categories']);
-
         $builder
             ->add('category', EntityType::class,
                 [

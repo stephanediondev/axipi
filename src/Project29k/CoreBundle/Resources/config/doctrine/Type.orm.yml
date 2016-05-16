@@ -1,4 +1,5 @@
 Project29k\CoreBundle\Entity\Type:
+    repositoryClass: Project29k\CoreBundle\Repository\TypeRepository
     type: entity
     table: type
     indexes:

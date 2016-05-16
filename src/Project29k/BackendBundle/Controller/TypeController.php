@@ -31,7 +31,6 @@ class TypeController
         } else {
             $issue = null;
         }*/
-        $issue = 8749;
 
         switch ($action) {
             case 'index':
@@ -39,11 +38,11 @@ class TypeController
             case 'create':
                 return $this->createAction($request);
             case 'read':
-                return $this->readAction($request, $issue);
+                return $this->readAction($request, $id);
             case 'update':
-                return $this->updateAction($request, $issue);
+                return $this->updateAction($request, $id);
             case 'delete':
-                return $this->deleteAction($request, $issue);
+                return $this->deleteAction($request, $id);
         }
 
         throw new NotFoundHttpException();
@@ -82,14 +81,27 @@ class TypeController
         ]);
     }
 
-    public function updateAction(Request $request, $issue)
+    public function updateAction(Request $request, $id)
     {
-        echo $issue;
-        return $this->renderExtended('BackendBundle:Type:update.html.twig', [
-        ]);
+        $type = $this->typeManager->getById($id);
+
+        $form = $this->formFactory->create('Project29k\BackendBundle\Form\Type\TypeType', $type, ['categories' => $this->typeManager->getCategories(), 'new_option' => 'OO']);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                $this->typeManager->persist($form->getData());
+            }
+        }
+
+        $parameters = [];
+        $parameters['form'] = $form->createView();
+        $parameters['type'] = $type;
+
+        return $this->renderExtended('BackendBundle:Type:update.html.twig', $parameters);
     }
 
-    public function deleteAction(Request $request, $issue)
+    public function deleteAction(Request $request, $id)
     {
         return $this->renderExtended('BackendBundle:Type:delete.html.twig', [
         ]);

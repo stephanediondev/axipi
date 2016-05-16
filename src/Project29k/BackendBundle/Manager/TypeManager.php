@@ -5,14 +5,18 @@ use Project29k\CoreBundle\Manager\AbstractManager;
 
 class TypeManager extends AbstractManager
 {
+    public function getById($id)
+    {
+        return $this->em->getRepository('CoreBundle:Type')->findOne($id);
+    }
+
     public function getCategories()
     {
-        return $this->em->getRepository('CoreBundle:Category')->getCategories([]);
+        return $this->em->getRepository('CoreBundle:Category')->getCategories();
     }
 
     public function persist($data)
     {
-        print_r($data);
         if($data->getDatecreated() == null) {
             $data->setDatecreated(new \Datetime());
         }
