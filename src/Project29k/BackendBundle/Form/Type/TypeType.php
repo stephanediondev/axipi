@@ -5,7 +5,11 @@ namespace Project29k\BackendBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+use Project29k\CoreBundle\Entity\Type;
+use Project29k\CoreBundle\Entity\Categorie;
 
 class TypeType extends AbstractType
 {
@@ -14,8 +18,9 @@ class TypeType extends AbstractType
         //print_r($options);
 
         $builder
-            ->add('categorieId')
+            ->add('categoryId', ChoiceType::class, ['choices' => $options['categories']])
             ->add('zoneId')
+            ->add('controllerAlias')
             ->add('code')
             ->add('parent')
             ->add('icon')
@@ -34,6 +39,7 @@ class TypeType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Project29k\CoreBundle\Entity\Type',
+            'categories' => [],
             'new_option' => false,
         ));
     }

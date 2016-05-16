@@ -4,11 +4,11 @@ Project29k\CoreBundle\Entity\Type:
     indexes:
         IDX_8CDE5729BCF5E72D:
             columns:
-                - categorie_id
+                - category_id
     uniqueConstraints:
-        categorie_id_code:
+        category_id_code:
             columns:
-                - categorie_id
+                - category_id
                 - code
     id:
         id:
@@ -78,14 +78,14 @@ Project29k\CoreBundle\Entity\Type:
             type: datetime
             nullable: false
     manyToOne:
-        categorie:
-            targetEntity: Categorie
+        category:
+            targetEntity: Category
             cascade: {  }
             fetch: LAZY
             mappedBy: null
             inversedBy: null
             joinColumns:
-                categorie_id:
+                category_id:
                     referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }

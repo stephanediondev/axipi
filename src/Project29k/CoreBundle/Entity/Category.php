@@ -3,9 +3,9 @@
 namespace Project29k\CoreBundle\Entity;
 
 /**
- * Categorie
+ * Category
  */
-class Categorie
+class Category
 {
     /**
      * @var string
@@ -38,7 +38,7 @@ class Categorie
      *
      * @param string $code
      *
-     * @return Categorie
+     * @return Category
      */
     public function setCode($code)
     {
@@ -62,7 +62,7 @@ class Categorie
      *
      * @param string $icon
      *
-     * @return Categorie
+     * @return Category
      */
     public function setIcon($icon)
     {
@@ -86,7 +86,7 @@ class Categorie
      *
      * @param integer $ordering
      *
-     * @return Categorie
+     * @return Category
      */
     public function setOrdering($ordering)
     {
@@ -110,7 +110,7 @@ class Categorie
      *
      * @param \DateTime $datecreated
      *
-     * @return Categorie
+     * @return Category
      */
     public function setDatecreated($datecreated)
     {

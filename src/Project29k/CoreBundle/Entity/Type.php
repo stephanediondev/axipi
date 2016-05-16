@@ -8,12 +8,12 @@ namespace Project29k\CoreBundle\Entity;
 class Type
 {
     protected $controllerAlias;
-    protected $categorie;
+    protected $category;
 
     /**
      * @var integer
      */
-    private $categorieId;
+    private $categoryId;
 
     /**
      * @var integer
@@ -67,27 +67,27 @@ class Type
 
 
     /**
-     * Set categorieId
+     * Set categoryId
      *
-     * @param integer $categorieId
+     * @param integer $categoryId
      *
      * @return Type
      */
-    public function setCategorieId($categorieId)
+    public function setCategoryId($categoryId)
     {
-        $this->categorieId = $categorieId;
+        $this->categoryId = $categoryId;
 
         return $this;
     }
 
     /**
-     * Get categorieId
+     * Get categoryId
      *
      * @return integer
      */
-    public function getCategorieId()
+    public function getCategoryId()
     {
-        return $this->categorieId;
+        return $this->categoryId;
     }
 
     /**
@@ -136,6 +136,30 @@ class Type
     public function getCode()
     {
         return $this->code;
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     *
+     * @return Type
+     */
+    public function setControllerAlias($controllerAlias)
+    {
+        $this->controllerAlias = $controllerAlias;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getControllerAlias()
+    {
+        return $this->controllerAlias;
     }
 
     /**

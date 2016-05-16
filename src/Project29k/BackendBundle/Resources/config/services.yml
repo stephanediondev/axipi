@@ -1,8 +1,6 @@
 services:
     backend.home_controller:
         class: Project29k\BackendBundle\Controller\HomeController
-        arguments:
-            - "@form.factory"
         calls:
             - [ "setEngineInterface", [ "@templating" ] ]
 
@@ -12,6 +10,7 @@ services:
             - "@type.manager"
         calls:
             - [ "setEngineInterface", [ "@templating" ] ]
+            - [ "setFormFactory", [ "@form.factory" ] ]
 
     type.manager:
         parent: "core.manager.abstract"

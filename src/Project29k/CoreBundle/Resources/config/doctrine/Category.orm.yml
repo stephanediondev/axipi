@@ -1,6 +1,7 @@
-Project29k\CoreBundle\Entity\Categorie:
+Project29k\CoreBundle\Entity\Category:
+    repositoryClass: Project29k\CoreBundle\Repository\CategoryRepository
     type: entity
-    table: categorie
+    table: category
     uniqueConstraints:
         code:
             columns:

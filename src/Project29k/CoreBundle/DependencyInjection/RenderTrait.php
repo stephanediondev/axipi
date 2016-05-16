@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 
 trait RenderTrait
 {
@@ -23,6 +25,11 @@ trait RenderTrait
      * @var RequestStack
      */
     private $requestStack;
+
+    /**
+     * @var FormFactory
+     */
+    private $formFactory;
 
     /**
      * @param EngineInterface $engineInterface
@@ -47,6 +54,14 @@ trait RenderTrait
     {
         $this->requestStack = $requestStack;
         $this->request = $requestStack->getCurrentRequest();
+    }
+
+    /**
+     * @param FormFactoryInterface $formFactory
+     */
+    public function setFormFactory(FormFactoryInterface $formFactory)
+    {
+        $this->formFactory = $formFactory;
     }
 
     /**
