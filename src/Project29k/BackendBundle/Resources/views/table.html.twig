@@ -1,6 +1,8 @@
-<div class="filters">
-{% block table_actions %}{% endblock %}
-</div>
+{% if table_actions %}
+    <div class="filters">
+    {% block table_actions %}{% endblock %}
+    </div>
+{% endif %}
 
 <table class="table table-striped table-condensed table-hover small">
 <thead>

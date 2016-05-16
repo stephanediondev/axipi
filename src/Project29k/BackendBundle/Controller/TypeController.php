@@ -50,8 +50,11 @@ class TypeController
 
     public function indexAction(Request $request)
     {
-        return $this->renderExtended('BackendBundle:Type:index.html.twig', [
-        ]);
+
+        $parameters = [];
+        $parameters['objects'] = $this->typeManager->getIndex();
+
+        return $this->renderExtended('BackendBundle:Type:index.html.twig', $parameters);
     }
 
     public function createAction(Request $request)
@@ -60,7 +63,7 @@ class TypeController
         $type->setIcon('leaf');
         $type->setIsSitemap(true);
 
-        $form = $this->formFactory->create('Project29k\BackendBundle\Form\Type\TypeType', $type, ['categories' => $this->typeManager->getCategories(), 'new_option' => 'OO']);
+        $form = $this->formFactory->create('Project29k\BackendBundle\Form\Type\TypeType', new Type(), ['categories' => $this->typeManager->getCategories(), 'new_option' => 'OO']);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
@@ -75,10 +78,14 @@ class TypeController
         return $this->renderExtended('BackendBundle:Type:create.html.twig', $parameters);
     }
 
-    public function readAction(Request $request, $issue)
+    public function readAction(Request $request, $id)
     {
-        return $this->renderExtended('BackendBundle:Type:read.html.twig', [
-        ]);
+        $type = $this->typeManager->getById($id);
+
+        $parameters = [];
+        $parameters['type'] = $type;
+
+        return $this->renderExtended('BackendBundle:Type:read.html.twig', $parameters);
     }
 
     public function updateAction(Request $request, $id)

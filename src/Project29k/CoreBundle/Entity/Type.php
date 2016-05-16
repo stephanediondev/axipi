@@ -351,7 +351,7 @@ class Type
     /**
      * @var boolean
      */
-    private $isSitemap = '0';
+    private $isSitemap = false;
 
     /**
      * @var boolean

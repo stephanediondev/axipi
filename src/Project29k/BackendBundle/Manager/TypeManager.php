@@ -10,6 +10,11 @@ class TypeManager extends AbstractManager
         return $this->em->getRepository('CoreBundle:Type')->findOne($id);
     }
 
+    public function getIndex()
+    {
+        return $this->em->getRepository('CoreBundle:Type')->getIndex();
+    }
+
     public function getCategories()
     {
         return $this->em->getRepository('CoreBundle:Category')->getCategories();

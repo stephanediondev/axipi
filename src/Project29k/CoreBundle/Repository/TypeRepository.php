@@ -16,6 +16,16 @@ class TypeRepository extends EntityRepository {
 
         return $query->getQuery()->getSingleResult();
     }
+    public function getIndex() {
+        $choices = array();
+        $em = $this->getEntityManager();
+
+        $query = $em->createQueryBuilder();
+        $query->addSelect('typ');
+        $query->from('CoreBundle:Type', 'typ');
+
+        return $query->getQuery()->getResult();
+    }
     public function getCategories() {
         $choices = array();
         $em = $this->getEntityManager();
