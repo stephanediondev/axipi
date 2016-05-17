@@ -24,7 +24,7 @@ class TypeRepository extends EntityRepository {
         $query->addSelect('typ');
         $query->from('CoreBundle:Type', 'typ');
 
-        return $query->getQuery()->getResult();
+        return $query->getQuery();
     }
     public function getCategories() {
         $choices = array();
