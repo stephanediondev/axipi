@@ -1,18 +1,16 @@
 <?php
-
 namespace Project29k\CoreBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use Project29k\CoreBundle\Controller\AbstractController;
 use Project29k\CoreBundle\Manager\CoreManager;
-use Project29k\CoreBundle\DependencyInjection\RenderTrait;
 
 use Project29k\CoreBundle\Entity\Object;
 
-class DefaultController
+class DefaultController extends AbstractController
 {
-    use RenderTrait;
 
     protected $coreManager;
 
@@ -29,7 +27,7 @@ class DefaultController
 
         $this->coreManager->setPage($page);
 
-        $response = $this->forwardExtented('core.content_controller:get', ['page' => $page]);
+        $response = $this->forward('content.controller:getPage', ['page' => $page]);
 
         return $response;
 

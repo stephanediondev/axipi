@@ -2,11 +2,6 @@
 
 {% block body %}
 <div class="container-fluid">
-    <div class="alert alert-success" role="alert">...</div>
-    <div class="alert alert-info" role="alert">...</div>
-    <div class="alert alert-warning" role="alert">...</div>
-    <div class="alert alert-danger" role="alert">...</div>
-
     <ul class="nav nav-tabs" role="tablist">
         <li><a href="#members"><i class="fa fa-group"></i>Membres</a></li>
         <li class="active"><a href="#_connections"><i class="fa fa-sign-in"></i>Connexions</a></li>
@@ -99,46 +94,6 @@
                     </div>
                 </div>
                 </form>
-            </div>
-
-            <div class="block">
-                {% embed 'BackendBundle::table.html.twig' with {'table_actions': true, 'row_actions': true} %}
-                    {% block table_actions %}
-                        <div>
-                            <button name="submit" type="button" data-href="#select" data-id="works-works" class="inputsubmit submitcheckbox"><i class="fa fa-shopping-cart"></i>Sélectionner</button>
-                        </div>
-                        <div>
-                            <button name="submit" type="button" data-href="#merge" data-id="works-works" class="inputsubmit submitcheckbox"><i class="fa fa-chain"></i>Fusionner</button>
-                        </div>
-                    {% endblock %}
-
-                    {% block table_head %}
-                        <th class=""><a href="#">ID</a></th>
-                        <th class="sort_asc"><a href="#"><i class="fa fa-sort-alpha-desc"></i>Nom</a></th>
-                        <th class=""><a href="#">Prénom</a></th>
-                        <th class=""><a href="#">Catégories</a></th>
-                        <th class=""><a href="#">Sur le site ?</a></th>
-                        <th class=""><a href="#">E-mail</a></th>
-                        <th class=""><a href="#">Téléphone</a></th>
-                        <th class=""><a href="#">Adresse</a></th>
-                    {% endblock %}
-
-                    {% block table_row %}
-                        <td><a href="#">{{ object.index }}</a></td>
-                        <td><a href="#">xxx</a></td>
-                        <td>xxx</td>
-                        <td>xxx</td>
-                        <td>Oui</td>
-                        <td><a href="mailto:xxx">xxxx</a></td>
-                        <td>xxx</td>
-                        <td>xxx</td>
-                    {% endblock %}
-
-                    {% block table_row_actions %}
-                        <a href="#"><i class="fa fa-wrench"></i>Update</a>
-                        <a href="#"><i class="fa fa-trash"></i>Delete</a>
-                    {% endblock %}
-                {% endembed %}
             </div>
         </div>
     </div>

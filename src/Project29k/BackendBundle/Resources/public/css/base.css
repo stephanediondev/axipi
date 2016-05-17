@@ -7,11 +7,7 @@ a:link i, a:visited i {
 	margin-right: 5px;
 	text-decoration: none;
 }
-.alert {
-	margin-bottom: 10px;
-	padding: 5px;
-}
-.alert i, h4 i {
+h4 i {
 	margin-right: 5px;
 }
 .dropdown-menu a:link i, .dropdown-menu a:visited i, a.btn:link i, a.btn:visited i, nav a:link i, nav a:visited i, .panel-heading h4 i, .panel-heading h4 visited i {
@@ -365,9 +361,11 @@ nav .fa, .block.title li .fa, thead th .fa, tbody th .fa, .paging strong .fa, .p
 .show-tablet{display:none !important;}
 
 .paging{clear:both;margin:3px 0px 3px 0px;overflow:hidden;padding:5px 0px 5px 0px;}
-.paging strong, .paging a:link, .paging a:visited{border:1px solid #AEB2B7;float:left;margin:2px 5px 2px 0px;padding:2px 4px 2px 5px;text-decoration:none;}
-.paging a.active:link, .paging a.active:visited, .paging strong{background-color:#444755;color:#FFFFFF;font-weight:normal;text-decoration:none;}
-.paging a:hover{background-color:#E7E7E7;}
+.paging span{border:1px solid #AEB2B7;float:left;margin:2px 5px 2px 0px;padding:2px 4px 2px 5px;}
+.paging span a:link, .paging span a:visited{text-decoration:none;}
+.paging span:hover{background-color:#E7E7E7;}
+.paging span.current{background-color:#444755;color:#FFFFFF;font-weight:normal;}
+.paging span.current:hover{background-color:#444755;}
 .paging a.key_next:link, .paging a.key_next:visited{float:right;margin-right:0px;}
 
 .flex {
@@ -456,13 +454,6 @@ p.option {
 	margin: 10px 10px 10px 10px;
 }
 
-.alert {
-	max-height: 500px;
-	overflow: auto;
-}
-.alert p {
-	margin: 5px;
-}
 #thumbover {
 	position: absolute;
 }

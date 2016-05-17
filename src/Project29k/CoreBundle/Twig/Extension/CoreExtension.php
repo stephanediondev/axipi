@@ -48,6 +48,6 @@ class CoreExtension extends \Twig_Extension
         $widget = new Object();
         $widget->setTitle($code);
 
-        return $this->container->get('core.content_widget')->get($widget, $page);
+        return $this->container->get('content.widget')->getWidget($widget, $page);
     }
 }

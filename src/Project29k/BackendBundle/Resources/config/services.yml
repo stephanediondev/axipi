@@ -1,16 +1,13 @@
 services:
     backend.home_controller:
+        parent: "core.controller.abstract"
         class: Project29k\BackendBundle\Controller\HomeController
-        calls:
-            - [ "setEngineInterface", [ "@templating" ] ]
 
     backend.type_controller:
+        parent: "core.controller.abstract"
         class: Project29k\BackendBundle\Controller\TypeController
         arguments:
             - "@type.manager"
-        calls:
-            - [ "setEngineInterface", [ "@templating" ] ]
-            - [ "setFormFactory", [ "@form.factory" ] ]
 
     type.manager:
         parent: "core.manager.abstract"
