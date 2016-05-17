@@ -110,7 +110,21 @@ class TypeController
 
     public function deleteAction(Request $request, $id)
     {
-        return $this->renderExtended('BackendBundle:Type:delete.html.twig', [
-        ]);
+        $type = $this->typeManager->getById($id);
+
+        $form = $this->formFactory->create('Project29k\BackendBundle\Form\Type\DeleteType', null, []);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                $this->typeManager->remove($type);
+            }
+        }
+
+        $parameters = [];
+        $parameters['form'] = $form->createView();
+        $parameters['type'] = $type;
+
+        return $this->renderExtended('BackendBundle:Type:delete.html.twig', $parameters);
     }
 }

@@ -30,6 +30,12 @@ class TypeManager extends AbstractManager
         $this->em->flush();
     }
 
+    public function remove($type)
+    {
+        $this->em->remove($type);
+        $this->em->flush();
+    }
+
     public function getEntityName()
     {
         return Type::class;
