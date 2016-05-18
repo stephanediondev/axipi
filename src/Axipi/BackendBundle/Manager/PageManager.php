@@ -16,6 +16,11 @@ class PageManager extends AbstractManager
         return $this->em->getRepository('AxipiCoreBundle:Page')->getIndex();
     }
 
+    public function getComponent($id)
+    {
+        return $this->em->getRepository('AxipiCoreBundle:Component')->findOne($id);
+    }
+
     public function getPrograms()
     {
         return $this->em->getRepository('AxipiCoreBundle:Page')->getPrograms();

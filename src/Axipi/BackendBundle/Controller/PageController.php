@@ -26,13 +26,21 @@ class PageController extends AbstractController
     {
         $parameters = new ParameterBag();
 
-        if(null !== $id) {
+        if($action == 'create' && null !== $id) {
+            $component = $this->pageManager->getComponent($id);
+            if($component) {
+                $parameters->set('component', $component);
+            } else {
+                $this->addFlash('danger', 'not found');
+                return $this->redirectToRoute('backend_page', []);
+            }
+        } else if(null !== $id) {
             $page = $this->pageManager->getById($id);
             if($page) {
                 $parameters->set('page', $page);
             } else {
                 $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('backend_component', []);
+                return $this->redirectToRoute('backend_page', []);
             }
         }
 
@@ -40,7 +48,7 @@ class PageController extends AbstractController
             case 'index':
                 return $this->indexAction($request, $parameters);
             case 'create':
-                return $this->createAction($request, $parameters);
+                return $this->createAction($request, $parameters, $id);
             case 'read':
                 return $this->readAction($request, $parameters, $id);
             case 'update':
@@ -64,13 +72,17 @@ class PageController extends AbstractController
         );
 
         $parameters->set('objects', $pagination);
+        $parameters->set('components', $this->pageManager->getComponents());
 
         return $this->render('AxipiBackendBundle:Page:index.html.twig', $parameters->all());
     }
 
-    public function createAction(Request $request, ParameterBag $parameters)
+    public function createAction(Request $request, ParameterBag $parameters, $id)
     {
-        $form = $this->createForm(PageType::class, new Page(), ['programs' => $this->pageManager->getPrograms(), 'components' => $this->pageManager->getComponents()]);
+        $page = new Page();
+        $page->setComponent($parameters->get('component'));
+
+        $form = $this->createForm(PageType::class, $page, ['programs' => $this->pageManager->getPrograms(), 'components' => $this->pageManager->getComponents()]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
