@@ -43,9 +43,8 @@ class TypeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Project29k\CoreBundle\Entity\Type',
+            'data_class' => Type::class,
             'categories' => [],
-            'new_option' => false,
         ));
     }
 }

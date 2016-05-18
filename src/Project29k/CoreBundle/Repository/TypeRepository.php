@@ -14,8 +14,9 @@ class TypeRepository extends EntityRepository {
         $query->where('typ.id = :id');
         $query->setParameter(':id', $id);
 
-        return $query->getQuery()->getSingleResult();
+        return $query->getQuery()->getOneOrNullResult();
     }
+
     public function getIndex() {
         $choices = array();
         $em = $this->getEntityManager();
@@ -26,6 +27,7 @@ class TypeRepository extends EntityRepository {
 
         return $query->getQuery();
     }
+
     public function getCategories() {
         $choices = array();
         $em = $this->getEntityManager();

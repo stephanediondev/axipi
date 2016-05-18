@@ -4,18 +4,17 @@ namespace Project29k\BackendBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Templating\EngineInterface;
+use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Project29k\CoreBundle\Controller\AbstractController;
 
 use Project29k\BackendBundle\Manager\TypeManager;
-use Project29k\CoreBundle\DependencyInjection\RenderTrait;
+use Project29k\BackendBundle\Form\Type\DeleteType;
+use Project29k\BackendBundle\Form\Type\TypeType;
 use Project29k\CoreBundle\Entity\Type;
 
 class TypeController extends AbstractController
 {
-    //use RenderTrait;
-
     protected $typeManager;
 
     public function __construct(
@@ -26,56 +25,53 @@ class TypeController extends AbstractController
 
     public function dispatchAction(Request $request, $action, $id)
     {
-        print_r($this->getUser());
+        $parameters = new ParameterBag();
 
-        /*if (null !== $id) {
-            $issue = $this->issueManager->findIssueById($id, $action);
-            $parameters->set('issue', $issue);
-            $parameters->set('jwtNotes', Notes::getToken($this->getUser()));
-        } else {
-            $issue = null;
-        }*/
+        if(null !== $id) {
+            $type = $this->typeManager->getById($id);
+            if($type) {
+                $parameters->set('type', $type);
+            } else {
+                $this->addFlash('danger', 'not found');
+                return $this->redirectToRoute('backend_type', []);
+            }
+        }
 
         switch ($action) {
             case 'index':
-                return $this->indexAction($request);
+                return $this->indexAction($request, $parameters);
             case 'create':
-                return $this->createAction($request);
+                return $this->createAction($request, $parameters);
             case 'read':
-                return $this->readAction($request, $id);
+                return $this->readAction($request, $parameters, $id);
             case 'update':
-                return $this->updateAction($request, $id);
+                return $this->updateAction($request, $parameters, $id);
             case 'delete':
-                return $this->deleteAction($request, $id);
+                return $this->deleteAction($request, $parameters, $id);
         }
 
-        throw new NotFoundHttpException();
+        $this->addFlash('danger', 'not found');
+        return $this->redirectToRoute('backend_type', []);
     }
 
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, ParameterBag $parameters)
     {
-
-        $parameters = [];
-        $parameters['objects'] = $this->typeManager->getIndex();
-
         $paginator  = $this->get('knp_paginator');
+        $paginator->setDefaultPaginatorOptions(['pageParameterName' => 'types']);
         $pagination = $paginator->paginate(
-            $this->typeManager->getIndex(), /* query NOT result */
-            $request->query->getInt('page', 1)/*page number*/,
-            20/*limit per page*/
+            $this->typeManager->getIndex(),
+            $request->query->getInt('page', 1),
+            20
         );
-        $parameters['objects'] = $pagination;
 
-        return $this->render('BackendBundle:Type:index.html.twig', $parameters);
+        $parameters->set('objects', $pagination);
+
+        return $this->render('BackendBundle:Type:index.html.twig', $parameters->all());
     }
 
-    public function createAction(Request $request)
+    public function createAction(Request $request, ParameterBag $parameters)
     {
-        $type = new Type();
-        $type->setIcon('leaf');
-        $type->setIsSitemap(true);
-
-        $form = $this->createForm('Project29k\BackendBundle\Form\Type\TypeType', new Type(), ['categories' => $this->typeManager->getCategories(), 'new_option' => 'OO']);
+        $form = $this->createForm(TypeType::class, new Type(), ['categories' => $this->typeManager->getCategories()]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
@@ -86,27 +82,19 @@ class TypeController extends AbstractController
             }
         }
 
-        $parameters = [];
-        $parameters['form'] = $form->createView();
+        $parameters->set('form', $form->createView());
 
-        return $this->render('BackendBundle:Type:create.html.twig', $parameters);
+        return $this->render('BackendBundle:Type:create.html.twig', $parameters->all());
     }
 
-    public function readAction(Request $request, $id)
+    public function readAction(Request $request, ParameterBag $parameters, $id)
     {
-        $type = $this->typeManager->getById($id);
-
-        $parameters = [];
-        $parameters['type'] = $type;
-
-        return $this->render('BackendBundle:Type:read.html.twig', $parameters);
+        return $this->render('BackendBundle:Type:read.html.twig', $parameters->all());
     }
 
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
-        $type = $this->typeManager->getById($id);
-
-        $form = $this->createForm('Project29k\BackendBundle\Form\Type\TypeType', $type, ['categories' => $this->typeManager->getCategories(), 'new_option' => 'OO']);
+        $form = $this->createForm(TypeType::class, $parameters->get('type'), ['categories' => $this->typeManager->getCategories()]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
@@ -117,32 +105,26 @@ class TypeController extends AbstractController
             }
         }
 
-        $parameters = [];
-        $parameters['form'] = $form->createView();
-        $parameters['type'] = $type;
+        $parameters->set('form', $form->createView());
 
-        return $this->render('BackendBundle:Type:update.html.twig', $parameters);
+        return $this->render('BackendBundle:Type:update.html.twig', $parameters->all());
     }
 
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request, ParameterBag $parameters, $id)
     {
-        $type = $this->typeManager->getById($id);
-
-        $form = $this->createForm('Project29k\BackendBundle\Form\Type\DeleteType', null, []);
+        $form = $this->createForm(DeleteType::class, null, []);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->typeManager->remove($type);
+                $this->typeManager->remove($parameters->get('type'));
                 $this->addFlash('success', 'deleted');
                 return $this->redirectToRoute('backend_type', []);
             }
         }
 
-        $parameters = [];
-        $parameters['form'] = $form->createView();
-        $parameters['type'] = $type;
+        $parameters->set('form', $form->createView());
 
-        return $this->render('BackendBundle:Type:delete.html.twig', $parameters);
+        return $this->render('BackendBundle:Type:delete.html.twig', $parameters->all());
     }
 }

@@ -53,10 +53,7 @@
 <div class="container-fluid">
     {% for type, flashes in app.session.flashbag.all() %}
         {% for flash in flashes %}
-            <div class="alert alert-{{ type }} alert-dismissible fade in" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="alert alert-{{ type }}" role="alert">
                 <p>{{ flash }}</p>
             </div>
         {% endfor %}
