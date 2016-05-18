@@ -24,6 +24,7 @@ services:
             - [ "setEntityManager", [ "@doctrine.orm.entity_manager" ] ]
 
     core.manager:
+        parent: "core.manager.abstract"
         class: Axipi\CoreBundle\Manager\CoreManager
 
     core.twig.extension:

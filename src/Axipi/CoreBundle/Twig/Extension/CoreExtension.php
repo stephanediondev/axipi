@@ -43,14 +43,16 @@ class CoreExtension extends \Twig_Extension
 
     public function getWidgets($code)
     {
+        $content = '';
         $page = $this->container->get('core.manager')->getPage();
 
-        $widget = new Widget();
-        $widget->setTitle($code);
+        $widgets = $this->em->getRepository('AxipiCoreBundle:Page')->getWidgets($code);
 
-        $service = 'content.widget';
-        if($this->container->has($service)) {
-            return $this->container->get('content.widget')->getWidget($widget, $page);
+        foreach($widgets as $widget) {
+            if($this->container->has($widget->getComponent()->getService())) {
+                $content .= $this->container->get($widget->getComponent()->getService())->getWidget($widget, $page);
+            }
         }
+        return $content;
     }
 }

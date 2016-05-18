@@ -20,12 +20,12 @@ class Component
     /**
      * @var string
      */
-    private $controllerAlias;
+    private $service;
 
     /**
      * @var string
      */
-    private $code;
+    private $title;
 
     /**
      * @var integer
@@ -103,51 +103,51 @@ class Component
     }
 
     /**
-     * Set controllerAlias
+     * Set service
      *
-     * @param string $controllerAlias
+     * @param string $service
      *
      * @return Component
      */
-    public function setControllerAlias($controllerAlias)
+    public function setService($service)
     {
-        $this->controllerAlias = $controllerAlias;
+        $this->service = $service;
 
         return $this;
     }
 
     /**
-     * Get controllerAlias
+     * Get service
      *
      * @return string
      */
-    public function getControllerAlias()
+    public function getService()
     {
-        return $this->controllerAlias;
+        return $this->service;
     }
 
     /**
-     * Set code
+     * Set title
      *
-     * @param string $code
+     * @param string $title
      *
      * @return Component
      */
-    public function setCode($code)
+    public function setTitle($title)
     {
-        $this->code = $code;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get code
+     * Get title
      *
      * @return string
      */
-    public function getCode()
+    public function getTitle()
     {
-        return $this->code;
+        return $this->title;
     }
 
     /**

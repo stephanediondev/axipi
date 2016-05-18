@@ -3,9 +3,9 @@ Axipi\CoreBundle\Entity\Component:
     type: entity
     table: component
     uniqueConstraints:
-        categorie_id_code:
+        service:
             columns:
-                - code
+                - service
     id:
         id:
             type: integer
@@ -22,17 +22,16 @@ Axipi\CoreBundle\Entity\Component:
             options:
                 unsigned: true
             column: zone_id
-        controllerAlias:
+        service:
             type: string
             nullable: false
             length: 255
             options:
                 fixed: false
-            column: controller_alias
-        code:
+        title:
             type: string
             nullable: false
-            length: 30
+            length: 255
             options:
                 fixed: false
         parent:

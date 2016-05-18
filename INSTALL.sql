@@ -2,6 +2,10 @@ SET FOREIGN_KEY_CHECKS=0;
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
+--
+-- Database: `mudiwa`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -53,8 +57,8 @@ DROP TABLE IF EXISTS `component`;
 CREATE TABLE IF NOT EXISTS `component` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `zone_id` int(10) unsigned DEFAULT NULL,
-  `controller_alias` varchar(255) NOT NULL,
-  `code` varchar(30) NOT NULL,
+  `service` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
   `parent` int(10) unsigned DEFAULT NULL,
   `icon` varchar(255) DEFAULT NULL,
   `is_unique` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -64,8 +68,8 @@ CREATE TABLE IF NOT EXISTS `component` (
   `date_created` datetime NOT NULL,
   `date_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `categorie_id_code` (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  UNIQUE KEY `service` (`service`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -98,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `language` (
   `date_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -128,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `page` (
   UNIQUE KEY `program_id_slug` (`program_id`,`slug`),
   KEY `component_id` (`component_id`),
   KEY `parent` (`parent`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -168,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `program` (
   UNIQUE KEY `language_id_country_id` (`language_id`,`country_id`),
   KEY `language_id` (`language_id`),
   KEY `country_id` (`country_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -304,7 +308,7 @@ CREATE TABLE IF NOT EXISTS `widget` (
   UNIQUE KEY `program_id_code` (`program_id`,`code`),
   KEY `component_id` (`component_id`),
   KEY `zone_id` (`zone_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -343,7 +347,7 @@ CREATE TABLE IF NOT EXISTS `zone` (
   `date_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
 -- Constraints for dumped tables

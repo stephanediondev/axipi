@@ -1,10 +1,10 @@
 <?php
-
 namespace Axipi\CoreBundle\Manager;
 
-class CoreManager
-{
+use Axipi\CoreBundle\Manager\AbstractManager;
 
+class CoreManager extends AbstractManager
+{
     protected $program;
 
     protected $page;
@@ -27,5 +27,10 @@ class CoreManager
     public function getPage()
     {
         return $this->page;
+    }
+
+    public function getBySlug($slug)
+    {
+        return $this->em->getRepository('AxipiCoreBundle:Page')->findOneSlug($slug);
     }
 }

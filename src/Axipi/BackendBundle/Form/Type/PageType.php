@@ -30,7 +30,7 @@ class PageType extends AbstractType
                 'class' => Component::class,
                 'choices' => $options['components'],
                 'choice_label' => function ($component) {
-                    return $component->getCode();
+                    return $component->getService();
                 }
             ])
             ->add('code')

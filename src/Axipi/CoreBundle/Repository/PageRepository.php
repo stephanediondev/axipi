@@ -9,7 +9,7 @@ class PageRepository extends EntityRepository {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
-        $query->addSelect('typ');//, 'cat'
+        $query->addSelect('typ');
         $query->from('AxipiCoreBundle:Page', 'typ');
         $query->where('typ.id = :id');
         $query->setParameter(':id', $id);
@@ -21,9 +21,10 @@ class PageRepository extends EntityRepository {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
-        $query->addSelect('typ');//, 'cat'
-        $query->from('AxipiCoreBundle:Page', 'typ');
-        $query->where('typ.slug = :slug');
+        $query->addSelect('pge', 'cmp');
+        $query->from('AxipiCoreBundle:Page', 'pge');
+        $query->leftJoin('pge.component', 'cmp');
+        $query->where('pge.slug = :slug');
         $query->setParameter(':slug', $slug);
 
         return $query->getQuery()->getOneOrNullResult();
@@ -57,6 +58,19 @@ class PageRepository extends EntityRepository {
         $query = $em->createQueryBuilder();
         $query->addSelect('cat');
         $query->from('AxipiCoreBundle:Component', 'cat');
+
+        return $query->getQuery()->getResult();
+    }
+
+    public function getWidgets($code) {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQueryBuilder();
+        $query->addSelect('wdg', 'cmp');
+        $query->from('AxipiCoreBundle:Widget', 'wdg');
+        $query->leftJoin('wdg.component', 'cmp');
+        $query->where('wdg.code = :code');
+        $query->setParameter(':code', $code);
 
         return $query->getQuery()->getResult();
     }

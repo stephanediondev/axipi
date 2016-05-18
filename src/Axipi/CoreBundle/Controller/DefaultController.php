@@ -29,14 +29,15 @@ class DefaultController extends AbstractController
 
         $this->coreManager->setProgram($program);
 
-        $page = new Page();
-        $page->setTitle($slug);
+        $page = $this->coreManager->getBySlug($slug);
+        if(!$page) {
+            $page = $this->coreManager->getBySlug('error404');
+        }
 
         $this->coreManager->setPage($page);
 
-        $service = 'content.controller';
-        if($this->has($service)) {
-            $response = $this->forward($service.':getPage', ['page' => $page, 'program' => $program]);
+        if($this->has($page->getComponent()->getService())) {
+            $response = $this->forward($page->getComponent()->getService().':getPage', ['page' => $page, 'program' => $program]);
             return $response;
         } else {
             throw new NotFoundHttpException();
