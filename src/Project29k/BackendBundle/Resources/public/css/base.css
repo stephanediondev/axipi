@@ -324,7 +324,7 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus{background-co
 input[type=checkbox], input[type=radio]{background-color:transparent;}
 input[type=radio]{vertical-align:middle;}
 input[type=text], input[type=password], textarea{padding:3px 6px;}
-input[type=submit], button{background-color:#444755;color:#AEB2B7;cursor:pointer;padding:4px 4px;text-decoration:none;}
+input[type=submit], button{background-color:#444755;border:1px solid #444755;color:#FFFFFF;cursor:pointer;padding:3px 4px;text-decoration:none;}
 input[type=text], input[type=password]{width:100%;}
 input[type=text].numeric{width:60px;}
 input[type=text].date{width:80px;}
