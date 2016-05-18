@@ -9,8 +9,9 @@ class TypeRepository extends EntityRepository {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
-        $query->addSelect('typ');
+        $query->addSelect('typ', 'cat');
         $query->from('CoreBundle:Type', 'typ');
+        $query->leftJoin('typ.category', 'cat');
         $query->where('typ.id = :id');
         $query->setParameter(':id', $id);
 
@@ -22,8 +23,9 @@ class TypeRepository extends EntityRepository {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
-        $query->addSelect('typ');
+        $query->addSelect('typ', 'cat');
         $query->from('CoreBundle:Type', 'typ');
+        $query->leftJoin('typ.category', 'cat');
 
         return $query->getQuery();
     }
