@@ -1,0 +1,8 @@
+services:
+    content.controller:
+        parent: "core.controller.abstract"
+        class: Axipi\ContentBundle\Controller\ContentController
+
+    content.widget:
+        parent: "core.controller.abstract"
+        class: Axipi\ContentBundle\Widget\ContentWidget

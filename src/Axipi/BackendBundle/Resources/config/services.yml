@@ -1,0 +1,26 @@
+services:
+    backend.home_controller:
+        parent: "core.controller.abstract"
+        class: Axipi\BackendBundle\Controller\HomeController
+
+    backend.component_controller:
+        parent: "core.controller.abstract"
+        class: Axipi\BackendBundle\Controller\ComponentController
+        arguments:
+            - "@component.manager"
+
+    component.manager:
+        parent: "core.manager.abstract"
+        class: Axipi\BackendBundle\Manager\ComponentManager
+        public: false
+
+    backend.page_controller:
+        parent: "core.controller.abstract"
+        class: Axipi\BackendBundle\Controller\PageController
+        arguments:
+            - "@page.manager"
+
+    page.manager:
+        parent: "core.manager.abstract"
+        class: Axipi\BackendBundle\Manager\PageManager
+        public: false

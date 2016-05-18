@@ -1,8 +1,8 @@
 BackendBundle:
-    resource: "@BackendBundle/Resources/config/routing.yml"
+    resource: "@AxipiBackendBundle/Resources/config/routing.yml"
     prefix:   /backend
 
 CoreBundle:
-    resource: "@CoreBundle/Resources/config/routing.yml"
+    resource: "@AxipiCoreBundle/Resources/config/routing.yml"
     prefix: "/"
 

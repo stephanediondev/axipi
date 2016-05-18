@@ -1,0 +1,60 @@
+Axipi\CoreBundle\Entity\Block:
+    type: entity
+    table: block
+    indexes:
+        IDX_831B9722E2ABAFFF:
+            columns:
+                - component_id
+    uniqueConstraints:
+        component_id_code:
+            columns:
+                - component_id
+                - code
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        code:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        icon:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        ordering:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        dateCreated:
+            type: datetime
+            nullable: false
+            column: date_created
+        dateModified:
+            type: datetime
+            nullable: true
+            column: date_modified
+    manyToOne:
+        component:
+            targetEntity: Component
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                component_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

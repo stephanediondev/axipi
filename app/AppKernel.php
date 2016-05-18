@@ -17,9 +17,9 @@ class AppKernel extends Kernel
 
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
 
-            new Project29k\CoreBundle\CoreBundle(),
-            new Project29k\BackendBundle\BackendBundle(),
-            new Project29k\ContentBundle\ContentBundle(),
+            new Axipi\CoreBundle\AxipiCoreBundle(),
+            new Axipi\BackendBundle\AxipiBackendBundle(),
+            new Axipi\ContentBundle\AxipiContentBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

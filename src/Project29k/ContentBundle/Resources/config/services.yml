@@ -1,8 +1,0 @@
-services:
-    content.controller:
-        parent: "core.controller.abstract"
-        class: Project29k\ContentBundle\Controller\ContentController
-
-    content.widget:
-        parent: "core.controller.abstract"
-        class: Project29k\ContentBundle\Widget\ContentWidget

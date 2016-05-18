@@ -1,0 +1,12 @@
+frontend_slash:
+    path:  /
+    defaults:
+        _controller: "core.controller:indexAction"
+        slug: ""
+
+frontend_catch_all:
+    path:  /{slug}
+    defaults:
+        _controller: "core.controller:indexAction"
+    requirements:
+        slug: ".+"

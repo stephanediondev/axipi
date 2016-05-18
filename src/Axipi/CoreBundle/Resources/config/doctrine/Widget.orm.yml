@@ -1,0 +1,98 @@
+Axipi\CoreBundle\Entity\Widget:
+    type: entity
+    table: widget
+    indexes:
+        component_id:
+            columns:
+                - component_id
+        zone_id:
+            columns:
+                - zone_id
+        IDX_85F91ED03EB8070A:
+            columns:
+                - program_id
+    uniqueConstraints:
+        program_id_code:
+            columns:
+                - program_id
+                - code
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        title:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        code:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        isActive:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: is_active
+        ordering:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        attributes:
+            type: text
+            nullable: true
+            length: null
+            options:
+                fixed: false
+        dateCreated:
+            type: datetime
+            nullable: false
+            column: date_created
+        dateModified:
+            type: datetime
+            nullable: true
+            column: date_modified
+    manyToOne:
+        program:
+            targetEntity: Program
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                program_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        component:
+            targetEntity: Component
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                component_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        zone:
+            targetEntity: Zone
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                zone_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

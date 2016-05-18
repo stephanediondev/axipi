@@ -1,0 +1,18 @@
+backend_homepage:
+    path:  /
+    defaults:
+        _controller: "backend.home_controller:indexAction"
+
+backend_component:
+    path:  /component/{action}/{id}
+    defaults:
+        _controller: "backend.component_controller:dispatchAction"
+        action: "index"
+        id: null
+
+backend_page:
+    path:  /page/{action}/{id}
+    defaults:
+        _controller: "backend.page_controller:dispatchAction"
+        action: "index"
+        id: null

@@ -1,0 +1,81 @@
+Axipi\CoreBundle\Entity\Component:
+    repositoryClass: Axipi\CoreBundle\Repository\ComponentRepository
+    type: entity
+    table: component
+    uniqueConstraints:
+        categorie_id_code:
+            columns:
+                - code
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        zoneId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+            column: zone_id
+        controllerAlias:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+            column: controller_alias
+        code:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        parent:
+            type: integer
+            nullable: true
+            options:
+                unsigned: true
+        icon:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        isUnique:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: is_unique
+        isSearch:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: is_search
+        isSitemap:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: is_sitemap
+        isActive:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: is_active
+        dateCreated:
+            type: datetime
+            nullable: false
+            column: date_created
+        dateModified:
+            type: datetime
+            nullable: true
+            column: date_modified
+    lifecycleCallbacks: {  }

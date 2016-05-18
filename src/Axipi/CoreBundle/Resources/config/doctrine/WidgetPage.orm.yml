@@ -1,0 +1,73 @@
+Axipi\CoreBundle\Entity\WidgetPage:
+    type: entity
+    table: widget_page
+    indexes:
+        widget_id:
+            columns:
+                - widget_id
+        page_id:
+            columns:
+                - page_id
+    uniqueConstraints:
+        widget_id_page_id:
+            columns:
+                - widget_id
+                - page_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        title:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        isActive:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: is_active
+        ordering:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        dateCreated:
+            type: datetime
+            nullable: false
+            column: date_created
+        dateModified:
+            type: datetime
+            nullable: true
+            column: date_modified
+    manyToOne:
+        page:
+            targetEntity: Page
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                page_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        widget:
+            targetEntity: Widget
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                widget_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

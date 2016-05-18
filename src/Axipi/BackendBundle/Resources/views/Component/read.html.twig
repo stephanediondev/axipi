@@ -1,0 +1,38 @@
+{% extends 'AxipiBackendBundle::base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            {% embed 'AxipiBackendBundle::block_title.html.twig' %}
+                {% block block_title %}
+                    <span><i class="fa fa-cube"></i>Type {{ component.id }}</span>
+                {% endblock %}
+                {% block block_title_actions %}
+                    <li><a href="{{ path('backend_component', {action: 'update', 'id': component.id}) }}"><i class="fa fa-wrench"></i>Update</a></li>
+                    <li><a href="{{ path('backend_component', {action: 'delete', 'id': component.id}) }}"><i class="fa fa-trash"></i>Delete</a></li>
+                {% endblock %}
+            {% endembed %}
+
+            <div class="block">
+                <div class="row">
+                    <div class="col-lg-4">
+                        {{ component.code }}
+                    </div>
+                    <div class="col-lg-4">
+                        {{ component.isSitemap }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+{% endblock %}

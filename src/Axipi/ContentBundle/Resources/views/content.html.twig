@@ -1,0 +1,19 @@
+{% extends 'AxipiCoreBundle::base.html.twig' %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+        <h1>content controller</h1>
+        <p>slug {{ page.title }}</p>
+        <p>{{ 'test1.test2'|trans({}, 'core') }}</p>
+    </div>
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+{% endblock %}

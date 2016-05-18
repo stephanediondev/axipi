@@ -1,0 +1,57 @@
+{% extends 'AxipiBackendBundle::base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            {% embed 'AxipiBackendBundle::block_title.html.twig' %}
+                {% block block_title %}
+                    <span><i class="fa fa-sign-in"></i>Types ({{ objects.getTotalItemCount }})</span>
+                {% endblock %}
+                {% block block_title_actions %}
+                    <li><a href="{{ path('backend_component', {action: 'create'}) }}"><i class="fa fa-plus"></i>Create</a></li>
+                {% endblock %}
+            {% endembed %}
+
+            <div class="block">
+                {% embed 'AxipiBackendBundle::table.html.twig' with {'table_actions': false, 'row_actions': true} %}
+                    {% block table_actions %}
+                        <div>
+                            <button name="submit" type="button" data-href="#select" data-id="works-works" class="inputsubmit submitcheckbox"><i class="fa fa-shopping-cart"></i>Sélectionner</button>
+                        </div>
+                        <div>
+                            <button name="submit" type="button" data-href="#merge" data-id="works-works" class="inputsubmit submitcheckbox"><i class="fa fa-chain"></i>Fusionner</button>
+                        </div>
+                    {% endblock %}
+
+                    {% block table_head %}
+                        <th class=""><a href="#">ID</a></th>
+                        <th class=""><a href="#">Code</a></th>
+                        <th class=""><a href="#">Date created</a></th>
+                    {% endblock %}
+
+                    {% block table_row %}
+                        <td><a href="{{ path('backend_component', {action: 'read', 'id': object.id}) }}">{{ object.id }}</a></td>
+                        <td><a href="{{ path('backend_component', {action: 'read', 'id': object.id}) }}">{{ object.code }}</a></td>
+                        <td>{{ object.dateCreated|date }}</td>
+                    {% endblock %}
+
+                    {% block table_row_actions %}
+                        <a href="{{ path('backend_component', {action: 'update', 'id': object.id}) }}"><i class="fa fa-wrench"></i>Update</a>
+                        <a href="{{ path('backend_component', {action: 'delete', 'id': object.id}) }}"><i class="fa fa-trash"></i>Delete</a>
+                    {% endblock %}
+                {% endembed %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+{% endblock %}
