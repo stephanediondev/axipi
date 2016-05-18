@@ -319,7 +319,7 @@ optgroup{border-top:1px solid #AEB2B7;font-weight:bold;padding:2px 0px 5px 2px;}
 optgroup:first-child{border-top:none;}
 option{padding-right:5px;}
 optgroup option{margin-left:5px;}
-.textarea, input[type=text], input[type=password], input[type=submit], button{border:1px solid #cccccc;border-radius:4px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;padding:3px 6px;}
+textarea, input[type=text], input[type=password], input[type=submit], button{border:1px solid #cccccc;border-radius:4px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;padding:3px 6px;}
 input[type=text]:focus, input[type=password]:focus, textarea:focus{background-color:#E7E7E7;}
 input[type=checkbox], input[type=radio]{background-color:transparent;}
 input[type=radio]{vertical-align:middle;}
@@ -330,19 +330,11 @@ input[type=text].numeric{width:60px;}
 input[type=text].date{width:80px;}
 input[type=text].time{width:80px;}
 option[selected]{font-weight:bold;}
-.textarea{height:100px;min-height:100px;resize:vertical;width:100%;}
-.textarea.wysiwyg{height:450px;min-height:450px;resize:vertical;width:100%;}
+textarea{height:100px;min-height:100px;resize:vertical;width:100%;}
+textarea.wysiwyg{height:450px;min-height:450px;resize:vertical;width:100%;}
 label, .label{color:inherit;cursor:text;display:block;font-size:inherit;font-weight:bold;margin-bottom:2px;padding:0px 0px 0px 0px;position:relative;text-align:left;vertical-align:top;width:auto;}
-label.block, .label.block{display:block;padding-top:5px;vertical-align:baseline;width:auto;}
 label a:link, label a:visited{cursor:pointer;}
-.filters{border-bottom:1px solid #E7E7E7;clear:both;margin:0px 0px 5px 0px;overflow:hidden;}
-.filters div{float:left;height:25px;margin:5px 10px 5px 0px;overflow:hidden;position:relative;white-space:nowrap;}
-.filters label{display:inline;padding-right:5px;vertical-align:middle;}
-.filters .select{width:100px;}
-.filters input[type=text]{padding:1px 2px;width:100px;}
-.filters input[type=submit], .filters button{padding:1px 4px;}
 input:-webkit-autofill{-webkit-box-shadow:0px 0px 0px 1000px #FFFFFF inset;}
-button{border-radius:3px;}
 
 tbody th span, tbody th a:link, tbody th a:visited, .block.title ul a:link, .block.title ul a:visited, nav ul a:link, nav ul a:visited{border:none;border-radius:3px;color:#AEB2B7;font-weight:normal;margin:0px;padding:3px 3px 3px 3px;position:relative;text-decoration:none;vertical-align:top;}
 tbody th span, tbody th a:link, tbody th a:visited, .block.title ul a:link, .block.title ul a:visited{background-color:#444755;}
@@ -356,9 +348,6 @@ tbody td.date{white-space:nowrap;}
 .fa-right{margin-left:4px;margin-right:0px}
 nav .fa, .block.title li .fa, thead th .fa, tbody th .fa, .paging strong .fa, .paging a.active:link .fa, .paging a.active:visited .fa, button .fa{color:#FFFFFF;}
 .block.title li{font-size:12px;}
-
-.show-phone{display:none !important;}
-.show-tablet{display:none !important;}
 
 .paging{clear:both;margin:3px 0px 3px 0px;overflow:hidden;padding:5px 0px 5px 0px;}
 .paging span{border:1px solid #AEB2B7;float:left;margin:2px 5px 2px 0px;padding:2px 4px 2px 5px;}
@@ -377,92 +366,6 @@ nav .fa, .block.title li .fa, thead th .fa, tbody th .fa, .paging strong .fa, .p
     justify-content: flex-start;
     overflow: hidden;
     width: 100%;
-}
-
-.role{margin:10px;}
-.role label{width:auto;}
-.role p{clear:both;}
-.role p input[type=checkbox]{float:left;margin-right:5px;}
-.role p label{float:left;}
-
-.fc-ltr .fc-event-hori.fc-event{border:none!important;background-color:transparent!important;padding:3px 2px 2px 2px;}
-.fc-ltr .fc-event-hori.fc-event-start{border-radius:3px 0px 0px 3px;}
-.fc-ltr .fc-event-hori.fc-event-end{border-radius:0px 3px 3px 0px;}
-.fc-ltr .fc-event-hori.fc-event-start.fc-event-end{border-radius:3px 3px 3px 3px;}
-.fc-state-highlight{background-color:#fcf8e3!important;}
-
-.actions p {
-	text-align: left;
-}
-.actions label {
-	display: block;
-	font-weight: normal;
-	float: left;
-	width: 80%;
-}
-.actions .action {
-	display: block;
-	float: left;
-	margin-right: 5px;
-	width: 5%;
-}
-.actions .done label span {
-	text-decoration: line-through;
-}
-#sidebar .block.title:first-child{margin-top:0px;}
-
-.convert_currency_result {
-	margin-left: 5px;
-}
-
-p.option {
-	display: none;
-}
-
-.count {
-	border: 1px solid #CCCCCC;
-	cursor: pointer;
-	float: left;
-	height: 75px;
-	margin: 10px;
-	position: relative;
-	text-align: center;
-}
-
-.count h2 {
-	font-size: 24px;
-	margin: 5px 10px 10px 10px;
-}
-.count h3 {
-	font-size: 12px;
-	margin: 10px 10px 0px 10px;
-}
-.count a:link, .count a:visited {
-	text-decoration: none;
-}
-
-.history_block {
-	border: 1px solid #CCCCCC;
-	cursor: pointer;
-	float: left;
-	height: 80px;
-	margin: 10px;
-	position: relative;
-	text-align: center;
-}
-.history_block p {
-	margin: 10px 10px 10px 10px;
-}
-
-#thumbover {
-	position: absolute;
-}
-.old_log {
-	text-decoration: line-through;
-}
-.old_log .slice_link {
-	margin-left: 5px;
-	text-decoration: none!important;
 }
 
 @media(max-width:800px){
