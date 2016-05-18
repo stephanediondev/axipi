@@ -3,6 +3,7 @@ namespace Project29k\CoreBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use Project29k\CoreBundle\Controller\AbstractController;
 use Project29k\CoreBundle\Manager\CoreManager;
@@ -27,10 +28,12 @@ class DefaultController extends AbstractController
 
         $this->coreManager->setPage($page);
 
-        $response = $this->forward('content.controller:getPage', ['page' => $page]);
-
-        return $response;
-
-        throw new NotFoundHttpException();
+        $service = 'content.controller';
+        if($this->has($service)) {
+            $response = $this->forward($service.':getPage', ['page' => $page]);
+            return $response;
+        } else {
+            throw new NotFoundHttpException();
+        }
     }
 }

@@ -48,6 +48,9 @@ class CoreExtension extends \Twig_Extension
         $widget = new Object();
         $widget->setTitle($code);
 
-        return $this->container->get('content.widget')->getWidget($widget, $page);
+        $service = 'content.widget';
+        if($this->container->has($service)) {
+            return $this->container->get('content.widget')->getWidget($widget, $page);
+        }
     }
 }
