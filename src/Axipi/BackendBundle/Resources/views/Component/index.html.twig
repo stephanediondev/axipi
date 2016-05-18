@@ -26,13 +26,15 @@
 
                     {% block table_head %}
                         <th class=""><a href="#">ID</a></th>
-                        <th class=""><a href="#">Code</a></th>
+                        <th class=""><a href="#">Service</a></th>
+                        <th class=""><a href="#">Title</a></th>
                         <th class=""><a href="#">Date created</a></th>
                     {% endblock %}
 
                     {% block table_row %}
                         <td><a href="{{ path('backend_component', {action: 'read', 'id': object.id}) }}">{{ object.id }}</a></td>
-                        <td><a href="{{ path('backend_component', {action: 'read', 'id': object.id}) }}">{{ object.code }}</a></td>
+                        <td><a href="{{ path('backend_component', {action: 'read', 'id': object.id}) }}">{{ object.service }}</a></td>
+                        <td>{{ object.title }}</td>
                         <td>{{ object.dateCreated|date }}</td>
                     {% endblock %}
 

@@ -26,7 +26,6 @@ class ComponentType extends AbstractType
         $builder
             ->add('zoneId')
             ->add('service')
-            ->add('code')
             ->add('parent')
             ->add('icon')
             ->add('isUnique')

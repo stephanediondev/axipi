@@ -34,8 +34,9 @@ class PageRepository extends EntityRepository {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
-        $query->addSelect('typ');
-        $query->from('AxipiCoreBundle:Page', 'typ');
+        $query->addSelect('pge', 'cmp');
+        $query->from('AxipiCoreBundle:Page', 'pge');
+        $query->leftJoin('pge.component', 'cmp');
 
         return $query->getQuery();
     }
