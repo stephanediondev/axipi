@@ -10,20 +10,12 @@ security:
                 property: email
 
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-
-            security: false
-
         backend_login:
             pattern: ^/backend/login$
-
             anonymous:  ~
 
         backend:
             pattern:   ^/backend
-
             form_login:
                 username_parameter: email
                 password_parameter: password
@@ -31,10 +23,9 @@ security:
                 check_path: axipi_backend_login_check
                 use_referer: true
                 csrf_token_generator: security.csrf.token_manager
-
             logout:
                 path: axipi_backend_logout
-                target: axipi_backend_home
+                target: axipi_backend_login
 
     encoders:
         Axipi\CoreBundle\Entity\User:
