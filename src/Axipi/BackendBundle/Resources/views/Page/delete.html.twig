@@ -9,7 +9,7 @@
                     <span><i class="fa fa-cube"></i>Type {{ page.id }}</span>
                 {% endblock %}
                 {% block block_title_actions %}
-                    <li><a href="{{ path('backend_page', {action: 'update', 'id': page.id}) }}"><i class="fa fa-wrench"></i>Update</a></li>
+                    <li><a href="{{ path('axipi_backend_page', {action: 'update', 'id': page.id}) }}"><i class="fa fa-wrench"></i>Update</a></li>
                 {% endblock %}
             {% endembed %}
 

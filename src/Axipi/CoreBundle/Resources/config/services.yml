@@ -1,33 +1,33 @@
 services:
-    core.widget.abstract:
+    axipi_core_widget_abstract:
         class: Axipi\CoreBundle\Widget\AbstractWidget
         abstract: true
         calls:
             - [ "setContainer", [ "@service_container" ] ]
 
-    core.controller.abstract:
+    axipi_core_controller_abstract:
         class: Axipi\CoreBundle\Controller\AbstractController
         abstract: true
         calls:
             - [ "setContainer", [ "@service_container" ] ]
 
-    core.controller:
-        parent: "core.controller.abstract"
+    axipi_core_controller_default:
         class: Axipi\CoreBundle\Controller\DefaultController
+        parent: "axipi_core_controller_abstract"
         arguments:
-            - "@core.manager"
+            - "@axipi_core_manager_core"
 
-    core.manager.abstract:
+    axipi_core_manager_abstract:
         class: Axipi\CoreBundle\Manager\AbstractManager
         abstract: true
         calls:
             - [ "setEntityManager", [ "@doctrine.orm.entity_manager" ] ]
 
-    core.manager:
-        parent: "core.manager.abstract"
+    axipi_core_manager_core:
         class: Axipi\CoreBundle\Manager\CoreManager
+        parent: "axipi_core_manager_abstract"
 
-    core.twig.extension:
+    axipi_core_twig_extension_core:
         class: Axipi\CoreBundle\Twig\Extension\CoreExtension
         calls:
           - [ "setContainer", [ "@service_container" ] ]

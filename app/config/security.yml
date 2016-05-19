@@ -4,21 +4,38 @@ security:
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory: ~
+        default_provider:
+            entity:
+                class: AxipiCoreBundle:User
+                property: email
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
+
             security: false
 
-        main:
-            anonymous: ~
-            # activate different ways to authenticate
+        backend_login:
+            pattern: ^/backend/login$
 
-            # http_basic: ~
-            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+            anonymous:  ~
 
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+        backend:
+            pattern:   ^/backend
+
+            form_login:
+                username_parameter: email
+                password_parameter: password
+                login_path: axipi_backend_login
+                check_path: axipi_backend_login_check
+                use_referer: true
+                csrf_token_generator: security.csrf.token_manager
+
+            logout:
+                path: axipi_backend_logout
+                target: axipi_backend_home
+
+    encoders:
+        Axipi\CoreBundle\Entity\User:
+            algorithm: bcrypt

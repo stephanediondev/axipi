@@ -1,26 +1,30 @@
 services:
-    backend.home_controller:
-        parent: "core.controller.abstract"
+    axipi_backend_controller_login:
+        class: Axipi\BackendBundle\Controller\LoginController
+        parent: "axipi_core_controller_abstract"
+
+    axipi_backend_controller_home:
         class: Axipi\BackendBundle\Controller\HomeController
+        parent: "axipi_core_controller_abstract"
 
-    backend.component_controller:
-        parent: "core.controller.abstract"
+    axipi_backend_controller_component:
         class: Axipi\BackendBundle\Controller\ComponentController
+        parent: "axipi_core_controller_abstract"
         arguments:
-            - "@component.manager"
+            - "@axipi_backend_manager_component"
 
-    component.manager:
-        parent: "core.manager.abstract"
+    axipi_backend_manager_component:
         class: Axipi\BackendBundle\Manager\ComponentManager
+        parent: "axipi_core_manager_abstract"
         public: false
 
-    backend.page_controller:
-        parent: "core.controller.abstract"
+    axipi_backend_controller_page:
         class: Axipi\BackendBundle\Controller\PageController
+        parent: "axipi_core_controller_abstract"
         arguments:
-            - "@page.manager"
+            - "@axipi_backend_manager_page"
 
-    page.manager:
-        parent: "core.manager.abstract"
+    axipi_backend_manager_page:
         class: Axipi\BackendBundle\Manager\PageManager
+        parent: "axipi_core_manager_abstract"
         public: false

@@ -1,12 +1,12 @@
-frontend_slash:
+axipi_core_home:
     path:  /
     defaults:
-        _controller: "core.controller:indexAction"
+        _controller: "axipi_core_controller_default:indexAction"
         slug: ""
 
-frontend_catch_all:
+axipi_core_slug:
     path:  /{slug}
     defaults:
-        _controller: "core.controller:indexAction"
+        _controller: "axipi_core_controller_default:indexAction"
     requirements:
         slug: ".+"

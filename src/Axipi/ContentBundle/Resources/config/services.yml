@@ -1,8 +1,12 @@
 services:
-    content.controller:
-        parent: "core.controller.abstract"
+    axipi_content_controller_content:
         class: Axipi\ContentBundle\Controller\ContentController
+        parent: "axipi_core_controller_abstract"
 
-    content.widget:
-        parent: "core.controller.abstract"
+    axipi_content_controller_link:
+        class: Axipi\ContentBundle\Controller\LinkController
+        parent: "axipi_core_controller_abstract"
+
+    axipi_content_widget_content:
         class: Axipi\ContentBundle\Widget\ContentWidget
+        parent: "axipi_core_controller_abstract"

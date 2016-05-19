@@ -1,18 +1,29 @@
-backend_homepage:
+axipi_backend_login:
+    path:  /login
+    defaults:
+        _controller: "axipi_backend_controller_login:indexAction"
+
+axipi_backend_login_check:
+    path: /login_check
+
+axipi_backend_logout:
+    path: /logout
+
+axipi_backend_home:
     path:  /
     defaults:
-        _controller: "backend.home_controller:indexAction"
+        _controller: "axipi_backend_controller_home:indexAction"
 
-backend_component:
+axipi_backend_component:
     path:  /component/{action}/{id}
     defaults:
-        _controller: "backend.component_controller:dispatchAction"
+        _controller: "axipi_backend_controller_component:dispatchAction"
         action: "index"
         id: null
 
-backend_page:
+axipi_backend_page:
     path:  /page/{action}/{id}
     defaults:
-        _controller: "backend.page_controller:dispatchAction"
+        _controller: "axipi_backend_controller_page:dispatchAction"
         action: "index"
         id: null

@@ -9,8 +9,8 @@
                     <span><i class="fa fa-cube"></i>Type {{ component.id }}</span>
                 {% endblock %}
                 {% block block_title_actions %}
-                    <li><a href="{{ path('backend_component', {action: 'update', 'id': component.id}) }}"><i class="fa fa-wrench"></i>Update</a></li>
-                    <li><a href="{{ path('backend_component', {action: 'delete', 'id': component.id}) }}"><i class="fa fa-trash"></i>Delete</a></li>
+                    <li><a href="{{ path('axipi_backend_component', {action: 'update', 'id': component.id}) }}"><i class="fa fa-wrench"></i>Update</a></li>
+                    <li><a href="{{ path('axipi_backend_component', {action: 'delete', 'id': component.id}) }}"><i class="fa fa-trash"></i>Delete</a></li>
                 {% endblock %}
             {% endembed %}
 

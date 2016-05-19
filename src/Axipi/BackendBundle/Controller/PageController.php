@@ -32,7 +32,7 @@ class PageController extends AbstractController
                 $parameters->set('component', $component);
             } else {
                 $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('backend_page', []);
+                return $this->redirectToRoute('axipi_backend_page', []);
             }
         } else if(null !== $id) {
             $page = $this->pageManager->getById($id);
@@ -40,7 +40,7 @@ class PageController extends AbstractController
                 $parameters->set('page', $page);
             } else {
                 $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('backend_page', []);
+                return $this->redirectToRoute('axipi_backend_page', []);
             }
         }
 
@@ -58,7 +58,7 @@ class PageController extends AbstractController
         }
 
         $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('backend_component', []);
+        return $this->redirectToRoute('axipi_backend_component', []);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters)
@@ -89,7 +89,7 @@ class PageController extends AbstractController
             if($form->isValid()) {
                 $this->pageManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('backend_page', []);
+                return $this->redirectToRoute('axipi_backend_page', []);
             }
         }
 
@@ -112,7 +112,7 @@ class PageController extends AbstractController
             if($form->isValid()) {
                 $this->pageManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('backend_page', ['action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_page', ['action' => 'read', 'id' => $id]);
             }
         }
 
@@ -130,7 +130,7 @@ class PageController extends AbstractController
             if($form->isValid()) {
                 $this->pageManager->remove($parameters->get('component'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('backend_page', []);
+                return $this->redirectToRoute('axipi_backend_page', []);
             }
         }
 
