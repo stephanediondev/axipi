@@ -85,15 +85,16 @@ CREATE TABLE IF NOT EXISTS `component` (
 INSERT INTO `component` (`id`, `zone_id`, `service`, `title`, `parent`, `icon`, `is_unique`, `is_search`, `is_sitemap`, `is_active`, `date_created`, `date_modified`, `category`) VALUES
 (3, NULL, 'axipi_content_controller_content', 'Content', NULL, 'file-text-o', 0, 1, 1, 1, '2016-05-18 17:44:09', NULL, 'page'),
 (4, NULL, 'axipi_content_widget_content', 'Content', NULL, 'file-text-o', 0, 0, 0, 0, '2016-05-18 18:10:25', NULL, 'widget'),
-(5, NULL, 'gallery_album', 'Gallery / Album', NULL, 'picture-o', 0, 0, 0, 1, '2016-05-18 22:35:46', NULL, 'page'),
-(6, NULL, 'gallery_media', 'Gallery / Media', NULL, 'picture-o', 0, 0, 0, 1, '2016-05-18 22:36:09', NULL, 'page'),
-(7, NULL, 'google_analytics', 'Google Analytics', NULL, 'google', 0, 0, 0, 1, '2016-05-18 22:36:43', NULL, 'widget'),
+(5, NULL, 'axipi_gallery_controller_album', 'Gallery / Album', NULL, 'picture-o', 0, 0, 0, 1, '2016-05-18 22:35:46', '2016-05-20 19:00:18', 'page'),
+(6, NULL, 'axipi_gallery_controller_media', 'Gallery / Media', NULL, 'picture-o', 0, 0, 0, 1, '2016-05-18 22:36:09', '2016-05-20 19:00:24', 'page'),
+(7, NULL, 'axipi_google_widget_analytics', 'Google Analytics', NULL, 'google', 0, 0, 0, 1, '2016-05-18 22:36:43', '2016-05-20 19:00:44', 'widget'),
 (8, NULL, 'menu', 'Menu', NULL, 'bars', 0, 0, 0, 1, '2016-05-18 22:37:33', NULL, 'widget'),
 (9, NULL, 'link', 'Link', NULL, 'share-square-o', 0, 0, 0, 1, '2016-05-18 22:38:59', NULL, 'page'),
 (10, NULL, 'blog', 'Blog', NULL, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:39:45', NULL, 'page'),
 (11, NULL, 'blog_category', 'Blog / Category', NULL, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:39:51', NULL, 'page'),
 (12, NULL, 'blog_post', 'Blog / Post', NULL, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:40:24', NULL, 'page'),
-(13, NULL, 'home', 'Home', NULL, 'home', 0, 0, 0, 1, '2016-05-18 22:44:46', NULL, 'page');
+(13, NULL, 'home', 'Home', NULL, 'home', 0, 0, 0, 1, '2016-05-18 22:44:46', NULL, 'page'),
+(14, NULL, 'axipi_google_widget_searchconsole', 'Google Search Console', NULL, 'google', 0, 0, 0, 1, '2016-05-20 18:42:10', '2016-05-20 19:00:58', 'widget');
 
 -- --------------------------------------------------------
 
@@ -318,7 +319,9 @@ CREATE TABLE IF NOT EXISTS `widget` (
 --
 
 INSERT INTO `widget` (`id`, `program_id`, `component_id`, `zone_id`, `title`, `code`, `is_active`, `ordering`, `attributes`, `date_created`, `date_modified`) VALUES
-(1, 1, 4, 1, 'Footer aa', 'footer', 1, 0, NULL, '2016-05-18 21:16:37', NULL);
+(1, 1, 4, 1, 'Footer aa', 'footer', 1, 0, NULL, '2016-05-18 21:16:37', NULL),
+(2, 1, 7, 1, 'pp', 'ii', 0, 0, '{"code": "---"}', '2016-05-20 18:29:31', '2016-05-20 19:21:36'),
+(3, 1, 8, 1, 'o', 'oa', 0, 0, NULL, '2016-05-20 18:30:12', NULL);
 
 -- --------------------------------------------------------
 

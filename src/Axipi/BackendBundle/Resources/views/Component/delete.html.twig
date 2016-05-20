@@ -1,5 +1,7 @@
 {% extends 'AxipiBackendBundle::base.html.twig' %}
 
+{% block title %}{{ component.title }} - {{ 'components'|trans({}, 'axipi_backend') }}{% endblock %}
+
 {% block body %}
 <div class="container-fluid">
     <div class="row">
