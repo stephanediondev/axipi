@@ -75,6 +75,13 @@ Axipi\CoreBundle\Entity\Component:
             options:
                 default: '0'
             column: is_active
+        attributesSchema:
+            type: text
+            nullable: true
+            length: null
+            options:
+                fixed: false
+            column: attributes_schema
         dateCreated:
             type: datetime
             nullable: false

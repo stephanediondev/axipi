@@ -28,6 +28,7 @@ class ComponentType extends AbstractType
             ->add('isSearch')
             ->add('isSitemap')
             ->add('isActive')
+            ->add('attributesSchema')
             ->add('submit', SubmitType::class)
         ;
     }

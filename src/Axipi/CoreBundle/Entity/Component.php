@@ -63,6 +63,11 @@ class Component
     private $isActive = false;
 
     /**
+     * @var string
+     */
+    private $attributesSchema;
+
+    /**
      * @var \DateTime
      */
     private $dateCreated;
@@ -321,6 +326,30 @@ class Component
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Set attributesSchema
+     *
+     * @param string $attributesSchema
+     *
+     * @return Component
+     */
+    public function setAttributesSchema($attributesSchema)
+    {
+        $this->attributesSchema = $attributesSchema;
+
+        return $this;
+    }
+
+    /**
+     * Get attributesSchema
+     *
+     * @return string
+     */
+    public function getAttributesSchema()
+    {
+        return $this->attributesSchema;
     }
 
     /**

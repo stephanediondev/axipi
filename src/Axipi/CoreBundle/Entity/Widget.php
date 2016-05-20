@@ -313,13 +313,6 @@ class Widget
         return $this->zone;
     }
 
-    public function setAttribute($key, $value)
-    {
-        $attributes = json_decode($this->attributes, true);
-        $attributes[$key] = $value;
-        $this->attributes = json_encode($attributes);
-    }
-
     public function getAttribute($key)
     {
         $attributes = json_decode($this->attributes, true);

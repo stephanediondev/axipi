@@ -29,6 +29,7 @@
                     <div class="col-lg-4">
                         {{ form_row(form.isActive) }}
                         {{ form_row(form.attributes) }}
+                        <div id="editor_holder"></div>
                         {{ form_row(form.submit) }}
                     </div>
                 </div>
@@ -45,4 +46,19 @@
 
 {% block script %}
     {{ parent() }}
+    <script>
+    $('#page_attributes').hide();
+
+    var editor = new JSONEditor(document.getElementById('editor_holder'), {
+        theme: 'bootstrap3',
+        disable_collapse: true,
+        disable_edit_json: true,
+        disable_properties: true,
+        schema: {{ component.attributesSchema|raw }}
+    });
+
+    $('form[name="page"]').bind('submit', function(event) {
+        $('#page_attributes').val( JSON.stringify( editor.getValue() ) );
+    });
+    </script>
 {% endblock %}

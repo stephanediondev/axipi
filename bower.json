@@ -5,6 +5,7 @@
         "jquery": "*",
         "bootstrap": "*",
         "FortAwesome/Font-Awesome": "*",
+        "jdorn/json-editor": "*",
         "tinymce-dist": "*"
     }
 }

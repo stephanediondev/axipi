@@ -5,57 +5,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `attribute`
---
-
-DROP TABLE IF EXISTS `attribute`;
-CREATE TABLE IF NOT EXISTS `attribute` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `block_id` int(10) unsigned NOT NULL,
-  `code` varchar(30) NOT NULL,
-  `is_required` tinyint(1) NOT NULL DEFAULT '0',
-  `is_upload` tinyint(1) NOT NULL DEFAULT '0',
-  `is_rich` tinyint(1) NOT NULL DEFAULT '0',
-  `is_search` tinyint(1) NOT NULL DEFAULT '0',
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  `date_created` datetime NOT NULL,
-  `date_modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `block_id_code` (`block_id`,`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `attribute`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `block`
---
-
-DROP TABLE IF EXISTS `block`;
-CREATE TABLE IF NOT EXISTS `block` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `component_id` int(10) unsigned NOT NULL,
-  `code` varchar(30) NOT NULL,
-  `icon` varchar(255) DEFAULT NULL,
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  `date_created` datetime NOT NULL,
-  `date_modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `component_id_code` (`component_id`,`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `block`
---
-
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `component`
 --
 
@@ -74,6 +23,7 @@ CREATE TABLE IF NOT EXISTS `component` (
   `date_created` datetime NOT NULL,
   `date_modified` datetime DEFAULT NULL,
   `category` varchar(255) NOT NULL,
+  `attributes_schema` longtext,
   PRIMARY KEY (`id`),
   UNIQUE KEY `service` (`service`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -82,19 +32,19 @@ CREATE TABLE IF NOT EXISTS `component` (
 -- Dumping data for table `component`
 --
 
-INSERT INTO `component` (`id`, `zone_id`, `service`, `title`, `parent`, `icon`, `is_unique`, `is_search`, `is_sitemap`, `is_active`, `date_created`, `date_modified`, `category`) VALUES
-(3, NULL, 'axipi_content_controller_content', 'Content', NULL, 'file-text-o', 0, 1, 1, 1, '2016-05-18 17:44:09', NULL, 'page'),
-(4, NULL, 'axipi_content_widget_content', 'Content', NULL, 'file-text-o', 0, 0, 0, 0, '2016-05-18 18:10:25', NULL, 'widget'),
-(5, NULL, 'axipi_gallery_controller_album', 'Gallery / Album', NULL, 'picture-o', 0, 0, 0, 1, '2016-05-18 22:35:46', '2016-05-20 19:00:18', 'page'),
-(6, NULL, 'axipi_gallery_controller_media', 'Gallery / Media', NULL, 'picture-o', 0, 0, 0, 1, '2016-05-18 22:36:09', '2016-05-20 19:00:24', 'page'),
-(7, NULL, 'axipi_google_widget_analytics', 'Google Analytics', NULL, 'google', 0, 0, 0, 1, '2016-05-18 22:36:43', '2016-05-20 19:00:44', 'widget'),
-(8, NULL, 'menu', 'Menu', NULL, 'bars', 0, 0, 0, 1, '2016-05-18 22:37:33', NULL, 'widget'),
-(9, NULL, 'link', 'Link', NULL, 'share-square-o', 0, 0, 0, 1, '2016-05-18 22:38:59', NULL, 'page'),
-(10, NULL, 'blog', 'Blog', NULL, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:39:45', NULL, 'page'),
-(11, NULL, 'blog_category', 'Blog / Category', NULL, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:39:51', NULL, 'page'),
-(12, NULL, 'blog_post', 'Blog / Post', NULL, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:40:24', NULL, 'page'),
-(13, NULL, 'home', 'Home', NULL, 'home', 0, 0, 0, 1, '2016-05-18 22:44:46', NULL, 'page'),
-(14, NULL, 'axipi_google_widget_searchconsole', 'Google Search Console', NULL, 'google', 0, 0, 0, 1, '2016-05-20 18:42:10', '2016-05-20 19:00:58', 'widget');
+INSERT INTO `component` (`id`, `zone_id`, `service`, `title`, `parent`, `icon`, `is_unique`, `is_search`, `is_sitemap`, `is_active`, `date_created`, `date_modified`, `category`, `attributes_schema`) VALUES
+(3, NULL, 'axipi_content_controller_content', 'Content', NULL, 'file-text-o', 0, 1, 1, 1, '2016-05-18 17:44:09', NULL, 'page', NULL),
+(4, NULL, 'axipi_content_widget_content', 'Content', NULL, 'file-text-o', 0, 0, 0, 0, '2016-05-18 18:10:25', NULL, 'widget', NULL),
+(5, NULL, 'axipi_gallery_controller_album', 'Gallery / Album', NULL, 'picture-o', 0, 0, 0, 1, '2016-05-18 22:35:46', '2016-05-20 19:00:18', 'page', NULL),
+(6, NULL, 'axipi_gallery_controller_media', 'Gallery / Media', NULL, 'picture-o', 0, 0, 0, 1, '2016-05-18 22:36:09', '2016-05-20 19:00:24', 'page', NULL),
+(7, NULL, 'axipi_google_widget_analytics', 'Google Analytics', NULL, 'google', 0, 0, 0, 1, '2016-05-18 22:36:43', '2016-05-20 20:40:43', 'widget', '{\r\n            type: "object",\r\n            title: "Google Analytics",\r\n            properties: {\r\n                code: {\r\n                    type: "string"\r\n                }\r\n            }\r\n        }'),
+(8, NULL, 'menu', 'Menu', NULL, 'bars', 0, 0, 0, 1, '2016-05-18 22:37:33', NULL, 'widget', NULL),
+(9, NULL, 'axipi_content_controller_link', 'Link', NULL, 'share-square-o', 0, 0, 0, 1, '2016-05-18 22:38:59', '2016-05-20 20:46:10', 'page', '{\r\n            type: "object",\r\n            title: "Link",\r\n            properties: {\r\n                url: {\r\n                    type: "string"\r\n                }\r\n            }\r\n        }'),
+(10, NULL, 'blog', 'Blog', NULL, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:39:45', NULL, 'page', NULL),
+(11, NULL, 'blog_category', 'Blog / Category', NULL, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:39:51', NULL, 'page', NULL),
+(12, NULL, 'blog_post', 'Blog / Post', NULL, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:40:24', NULL, 'page', NULL),
+(13, NULL, 'home', 'Home', NULL, 'home', 0, 0, 0, 1, '2016-05-18 22:44:46', NULL, 'page', NULL),
+(14, NULL, 'axipi_google_widget_searchconsole', 'Google Search Console', NULL, 'google', 0, 0, 0, 1, '2016-05-20 18:42:10', '2016-05-20 20:43:24', 'widget', '{\r\n            type: "object",\r\n            title: "Google Search Console",\r\n            properties: {\r\n                code: {\r\n                    type: "string"\r\n                }\r\n            }\r\n        }');
 
 -- --------------------------------------------------------
 
@@ -181,7 +131,8 @@ CREATE TABLE IF NOT EXISTS `page` (
 INSERT INTO `page` (`id`, `program_id`, `component_id`, `title`, `code`, `parent`, `slug`, `title_seo`, `description_seo`, `meta_robots`, `is_active`, `ordering`, `attributes`, `date_created`, `date_modified`) VALUES
 (1, 1, 3, 'test', 'test', NULL, 'a/b/c/d', NULL, NULL, NULL, 1, 0, '{"test":"OO"}', '2016-05-18 18:27:14', NULL),
 (2, 1, 3, 'Error 404', 'error404', NULL, 'error404', NULL, NULL, NULL, 1, 0, NULL, '2016-05-18 21:45:27', NULL),
-(3, 1, 5, '5', '5', NULL, '5', NULL, NULL, NULL, 0, 0, NULL, '2016-05-18 20:38:09', NULL);
+(3, 1, 5, '5', '5', NULL, '5', NULL, NULL, NULL, 0, 0, NULL, '2016-05-18 20:38:09', NULL),
+(4, 1, 9, 'sdion.net', 'sdion', NULL, 'sdion', NULL, NULL, NULL, 1, 0, '{"url":"https://locatemarker.com"}', '2016-05-20 19:53:05', '2016-05-20 20:47:39');
 
 -- --------------------------------------------------------
 
@@ -320,8 +271,9 @@ CREATE TABLE IF NOT EXISTS `widget` (
 
 INSERT INTO `widget` (`id`, `program_id`, `component_id`, `zone_id`, `title`, `code`, `is_active`, `ordering`, `attributes`, `date_created`, `date_modified`) VALUES
 (1, 1, 4, 1, 'Footer aa', 'footer', 1, 0, NULL, '2016-05-18 21:16:37', NULL),
-(2, 1, 7, 1, 'pp', 'ii', 0, 0, '{"code": "---"}', '2016-05-20 18:29:31', '2016-05-20 19:21:36'),
-(3, 1, 8, 1, 'o', 'oa', 0, 0, NULL, '2016-05-20 18:30:12', NULL);
+(2, 1, 7, 1, 'pp', 'ii', 0, 0, '{"code":"aa"}', '2016-05-20 18:29:31', '2016-05-20 20:42:09'),
+(3, 1, 8, 1, 'o', 'oa', 0, 0, NULL, '2016-05-20 18:30:12', NULL),
+(4, 1, 14, 1, 'Search Console', 'searchconsole', 0, 0, '{"code":"ee"}', '2016-05-20 19:28:25', '2016-05-20 20:43:34');
 
 -- --------------------------------------------------------
 
@@ -377,18 +329,6 @@ INSERT INTO `zone` (`id`, `code`, `is_active`, `date_created`, `date_modified`) 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `attribute`
---
-ALTER TABLE `attribute`
-  ADD CONSTRAINT `FK_FA7AEFFBE9ED820C` FOREIGN KEY (`block_id`) REFERENCES `block` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `block`
---
-ALTER TABLE `block`
-  ADD CONSTRAINT `FK_831B9722E2ABAFFF` FOREIGN KEY (`component_id`) REFERENCES `component` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `page`
