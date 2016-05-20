@@ -49,6 +49,7 @@ page:
     slug: "Slug"
     isActive: "Is active?"
     parent: "Parent"
+    attributes: "Attributes"
     dateCreated: "Date created"
 widget:
     id: "ID"
@@ -59,4 +60,5 @@ widget:
     zone: "Zone"
     isActive: "Is active?"
     parent: "Parent"
+    attributes: "Attributes"
     dateCreated: "Date created"

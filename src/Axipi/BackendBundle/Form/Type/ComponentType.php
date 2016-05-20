@@ -28,14 +28,16 @@ class ComponentType extends AbstractType
             ->add('isSearch')
             ->add('isSitemap')
             ->add('isActive')
-            ->add('save', SubmitType::class)
+            ->add('submit', SubmitType::class)
         ;
     }
 
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
         foreach($view->children as $name => $child) {
-            $child->vars['label'] = 'component.' . $name;
+            if($name != 'submit') {
+                $child->vars['label'] = 'component.'.$name;
+            }
         }
     }
 

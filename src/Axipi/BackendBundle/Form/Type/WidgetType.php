@@ -49,14 +49,16 @@ class WidgetType extends AbstractType
             ->add('title')
             ->add('isActive')
             ->add('attributes')
-            ->add('save', SubmitType::class)
+            ->add('submit', SubmitType::class)
         ;
     }
 
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
         foreach($view->children as $name => $child) {
-            $child->vars['label'] = 'widget.' . $name;
+            if($name != 'submit') {
+                $child->vars['label'] = 'widget.'.$name;
+            }
         }
     }
 

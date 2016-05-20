@@ -21,7 +21,7 @@ class DeleteType extends AbstractType
                     'required' => true,
                     'mapped' => false,
                 ])
-            ->add('save', SubmitType::class)
+            ->add('submit', SubmitType::class)
         ;
     }
     

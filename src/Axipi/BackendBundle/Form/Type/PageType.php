@@ -40,14 +40,17 @@ class PageType extends AbstractType
             ->add('slug')
             ->add('title')
             ->add('isActive')
-            ->add('save', SubmitType::class)
+            ->add('attributes')
+            ->add('submit', SubmitType::class)
         ;
     }
 
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
         foreach($view->children as $name => $child) {
-            $child->vars['label'] = 'page.' . $name;
+            if($name != 'submit') {
+                $child->vars['label'] = 'page.'.$name;
+            }
         }
     }
 
