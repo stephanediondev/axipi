@@ -1,6 +1,10 @@
 Axipi\CoreBundle\Entity\User:
     type: entity
     table: user
+    uniqueConstraints:
+        username:
+            columns:
+                - username
     id:
         id:
             type: integer
@@ -11,7 +15,7 @@ Axipi\CoreBundle\Entity\User:
             generator:
                 strategy: IDENTITY
     fields:
-        email:
+        username:
             type: string
             nullable: false
             length: 255
@@ -20,7 +24,7 @@ Axipi\CoreBundle\Entity\User:
         password:
             type: string
             nullable: false
-            length: 40
+            length: 60
             options:
                 fixed: true
         firstname:
@@ -31,7 +35,7 @@ Axipi\CoreBundle\Entity\User:
                 fixed: false
         lastname:
             type: string
-            nullable: false
+            nullable: true
             length: 255
             options:
                 fixed: false
@@ -41,6 +45,12 @@ Axipi\CoreBundle\Entity\User:
             options:
                 default: '0'
             column: is_authorized
+        roles:
+            type: text
+            nullable: true
+            length: null
+            options:
+                fixed: false
         dateCreated:
             type: datetime
             nullable: false

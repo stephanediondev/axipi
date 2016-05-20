@@ -2,10 +2,6 @@ SET FOREIGN_KEY_CHECKS=0;
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
---
--- Database: `mudiwa`
---
-
 -- --------------------------------------------------------
 
 --
@@ -28,6 +24,11 @@ CREATE TABLE IF NOT EXISTS `attribute` (
   UNIQUE KEY `block_id_code` (`block_id`,`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `attribute`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +47,11 @@ CREATE TABLE IF NOT EXISTS `block` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `component_id_code` (`component_id`,`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `block`
+--
+
 
 -- --------------------------------------------------------
 
@@ -71,6 +77,23 @@ CREATE TABLE IF NOT EXISTS `component` (
   UNIQUE KEY `service` (`service`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `component`
+--
+
+INSERT INTO `component` (`id`, `zone_id`, `service`, `title`, `parent`, `icon`, `is_unique`, `is_search`, `is_sitemap`, `is_active`, `date_created`, `date_modified`) VALUES
+(3, NULL, 'axipi_content_controller_content', 'Content', NULL, 'file-text-o', 0, 0, 0, 0, '2016-05-18 17:44:09', NULL),
+(4, NULL, 'axipi_content_widget_content', 'Content', NULL, 'file-text-o', 0, 0, 0, 0, '2016-05-18 18:10:25', NULL),
+(5, NULL, 'gallery_album', 'Gallery / Album', NULL, 'picture-o	', 0, 0, 0, 1, '2016-05-18 22:35:46', NULL),
+(6, NULL, 'gallery_media', 'Gallery / Media', NULL, 'picture-o	', 0, 0, 0, 1, '2016-05-18 22:36:09', NULL),
+(7, NULL, 'google_analytics', 'Google Analytics', NULL, 'google', 0, 0, 0, 1, '2016-05-18 22:36:43', NULL),
+(8, NULL, 'menu', 'Menu', NULL, 'bars', 0, 0, 0, 1, '2016-05-18 22:37:33', NULL),
+(9, NULL, 'link', 'Link', NULL, 'share-square-o', 0, 0, 0, 1, '2016-05-18 22:38:59', NULL),
+(10, NULL, 'blog', 'Blog', NULL, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:39:45', NULL),
+(11, NULL, 'blog_category', 'Blog / Category', NULL, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:39:51', NULL),
+(12, NULL, 'blog_post', 'Blog / Post', NULL, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:40:24', NULL),
+(13, NULL, 'home', 'Home', NULL, 'home', 0, 0, 0, 1, '2016-05-18 22:44:46', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -86,6 +109,13 @@ CREATE TABLE IF NOT EXISTS `country` (
   `date_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `country`
+--
+
+INSERT INTO `country` (`id`, `code`, `title`, `date_created`, `date_modified`) VALUES
+(250, 'fr', 'France', '2016-05-18 20:24:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -103,6 +133,13 @@ CREATE TABLE IF NOT EXISTS `language` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `language`
+--
+
+INSERT INTO `language` (`id`, `code`, `title`, `date_created`, `date_modified`) VALUES
+(1, 'fr', 'Français', '2016-05-18 20:24:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -134,22 +171,14 @@ CREATE TABLE IF NOT EXISTS `page` (
   KEY `parent` (`parent`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `permission`
+-- Dumping data for table `page`
 --
 
-DROP TABLE IF EXISTS `permission`;
-CREATE TABLE IF NOT EXISTS `permission` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `code` varchar(30) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `date_created` datetime NOT NULL,
-  `date_modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `code` (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `page` (`id`, `program_id`, `component_id`, `title`, `code`, `parent`, `slug`, `title_seo`, `description_seo`, `meta_robots`, `is_active`, `ordering`, `attributes`, `date_created`, `date_modified`) VALUES
+(1, 1, 3, 'test', 'test', NULL, 'a/b/c/d', NULL, NULL, NULL, 1, 0, NULL, '2016-05-18 18:27:14', NULL),
+(2, 1, 3, 'Error 404', 'error404', NULL, 'error404', NULL, NULL, NULL, 1, 0, NULL, '2016-05-18 21:45:27', NULL),
+(3, 1, 5, '5', '5', NULL, '5', NULL, NULL, NULL, 0, 0, NULL, '2016-05-18 20:38:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -174,6 +203,13 @@ CREATE TABLE IF NOT EXISTS `program` (
   KEY `country_id` (`country_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `program`
+--
+
+INSERT INTO `program` (`id`, `language_id`, `country_id`, `description_seo`, `timezone`, `is_default`, `has_maintenance`, `date_created`, `date_modified`) VALUES
+(1, 1, 250, NULL, '', 1, 0, '2016-05-18 20:24:51', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -193,41 +229,10 @@ CREATE TABLE IF NOT EXISTS `program_user` (
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `role`
+-- Dumping data for table `program_user`
 --
 
-DROP TABLE IF EXISTS `role`;
-CREATE TABLE IF NOT EXISTS `role` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `code` varchar(30) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `date_created` datetime NOT NULL,
-  `date_modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `code` (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `role_permission`
---
-
-DROP TABLE IF EXISTS `role_permission`;
-CREATE TABLE IF NOT EXISTS `role_permission` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `role_id` int(10) unsigned NOT NULL,
-  `permission_id` int(10) unsigned NOT NULL,
-  `date_created` datetime NOT NULL,
-  `date_modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `role_id_permission_id` (`role_id`,`permission_id`),
-  KEY `role_id` (`role_id`),
-  KEY `permission_id` (`permission_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -247,6 +252,11 @@ CREATE TABLE IF NOT EXISTS `token` (
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `token`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -256,34 +266,24 @@ CREATE TABLE IF NOT EXISTS `token` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) NOT NULL,
-  `password` char(40) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` char(60) NOT NULL,
   `firstname` varchar(255) NOT NULL,
-  `lastname` varchar(255) NOT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
   `is_authorized` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `date_created` datetime NOT NULL,
-  `date_modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_role`
---
-
-DROP TABLE IF EXISTS `user_role`;
-CREATE TABLE IF NOT EXISTS `user_role` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) unsigned NOT NULL,
-  `role_id` int(10) unsigned NOT NULL,
+  `roles` longtext,
   `date_created` datetime NOT NULL,
   `date_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `user_id_role_id` (`user_id`,`role_id`),
-  KEY `user_id` (`user_id`),
-  KEY `role_id` (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`, `firstname`, `lastname`, `is_authorized`, `roles`, `date_created`, `date_modified`) VALUES
+(1, 'example@example.com', '$2y$13$5lgE1eupJw7yp1fVuAing.M7Bov4AcopfAmeXhRv3s7EljCzLJm6i', 'Example', NULL, 1, '["ROLE_ADMIN"]', '2016-05-19 22:06:18', NULL);
 
 -- --------------------------------------------------------
 
@@ -310,6 +310,13 @@ CREATE TABLE IF NOT EXISTS `widget` (
   KEY `zone_id` (`zone_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `widget`
+--
+
+INSERT INTO `widget` (`id`, `program_id`, `component_id`, `zone_id`, `title`, `code`, `is_active`, `ordering`, `attributes`, `date_created`, `date_modified`) VALUES
+(1, 1, 4, 1, 'Footer aa', 'footer', 1, 0, NULL, '2016-05-18 21:16:37', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -332,6 +339,11 @@ CREATE TABLE IF NOT EXISTS `widget_page` (
   KEY `page_id` (`page_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `widget_page`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -348,6 +360,13 @@ CREATE TABLE IF NOT EXISTS `zone` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `zone`
+--
+
+INSERT INTO `zone` (`id`, `code`, `is_active`, `date_created`, `date_modified`) VALUES
+(1, 'footer', 1, '2016-05-18 21:17:11', NULL);
 
 --
 -- Constraints for dumped tables
@@ -388,24 +407,10 @@ ALTER TABLE `program_user`
   ADD CONSTRAINT `program_user_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `role_permission`
---
-ALTER TABLE `role_permission`
-  ADD CONSTRAINT `role_permission_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `role_permission_ibfk_2` FOREIGN KEY (`permission_id`) REFERENCES `permission` (`id`) ON DELETE CASCADE;
-
---
 -- Constraints for table `token`
 --
 ALTER TABLE `token`
   ADD CONSTRAINT `token_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `user_role`
---
-ALTER TABLE `user_role`
-  ADD CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `widget`

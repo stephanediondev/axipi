@@ -1,23 +1,20 @@
-# To get started with security, check out the documentation:
-# http://symfony.com/doc/current/book/security.html
 security:
-
-    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        default_provider:
+        axipi_core_provider:
             entity:
-                class: AxipiCoreBundle:User
-                property: email
+                class: Axipi\CoreBundle\Entity\User
+                property: username
 
     firewalls:
-        backend_login:
+        axipi_backend_login:
             pattern: ^/backend/login$
             anonymous:  ~
 
-        backend:
+        axipi_backend:
             pattern:   ^/backend
+            provider: axipi_core_provider
             form_login:
-                username_parameter: email
+                username_parameter: username
                 password_parameter: password
                 login_path: axipi_backend_login
                 check_path: axipi_backend_login_check

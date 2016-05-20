@@ -23,13 +23,15 @@
                 <form action="{{ path('axipi_backend_login_check') }}" method="post">
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     <p>
-                    <label for="email">Email *</label><input type="text" name="email" value="" id="email" class="inputtext required">
+                        <label for="username" class="required">Email</label>
+                        <input type="text" id="username" name="username" required="required">
                     </p>
                     <p>
-                    <label for="password">Password *</label><input type="password" name="password" value="" id="password" class="inputpassword required">
+                        <label for="password" class="required">Password</label>
+                        <input type="password" id="password" name="password" required="required">
                     </p>
                     <p>
-                    <input type="submit" name="submit" value="Submit" class="inputsubmit">
+                        <button type="submit" id="login_submit" name="login_submit">Submit</button>
                     </p>
                 </form>
             </div>

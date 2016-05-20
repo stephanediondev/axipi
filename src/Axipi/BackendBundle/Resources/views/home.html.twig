@@ -2,16 +2,22 @@
 
 {% block body %}
 <div class="container-fluid">
-    <ul class="nav nav-tabs" role="tablist">
-        <li><a href="#members"><i class="fa fa-group"></i>Membres</a></li>
-        <li class="active"><a href="#_connections"><i class="fa fa-sign-in"></i>Connexions</a></li>
-        <li><a href="#roles"><i class="fa fa-magic"></i>Roles</a></li>
-        <li><a href="#_configuration"><i class="fa fa-gears"></i>Configuration</a></li>
-        <li><a href="#_database"><i class="fa fa-hdd-o"></i>Database</a></li>
-        <li><a href="#_folders"><i class="fa fa-folder-open"></i>Folders</a></li>
-        <li><a href="#_info"><i class="fa fa-info-circle"></i>Info</a></li>
-        <li><a href="#_migration"><i class="fa fa-plane"></i>Migration</a></li>
-    </ul>
+    <div class="row">
+        <div class="col-lg-12">
+            {% embed 'AxipiBackendBundle::block_title.html.twig' %}
+                {% block block_title %}
+                    <span><i class="fa fa-home"></i>{{ 'home'|trans({}, 'axipi_backend') }}</span>
+                {% endblock %}
+                {% block block_title_actions %}
+                {% endblock %}
+            {% endembed %}
+
+            <div class="block">
+                <div class="row" id="dynamic_home">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
@@ -21,4 +27,5 @@
 
 {% block script %}
     {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/axipibackend/js/home.js') }}"></script>
 {% endblock %}

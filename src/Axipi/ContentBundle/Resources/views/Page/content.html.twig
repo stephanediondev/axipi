@@ -7,6 +7,7 @@
         <h1>content controller</h1>
         <p>slug {{ page.title }}</p>
         <p>{{ 'test1.test2'|trans({}, 'core') }}</p>
+        <p><a href="{{ path('axipi_core_slug', {slug: 'a/b/c/d'}) }}">a/b/c/d</a></p>
     </div>
 {% endblock %}
 
