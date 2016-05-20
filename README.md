@@ -1,4 +1,8 @@
-1content
+axipi
 ======
 
-A Symfony project created on May 13, 2016, 4:59 pm.
+```
+composer install
+bin/console doctrine:fixtures:load --append --fixtures="src/Axipi/CoreBundle/DataFixtures"
+bower install
+```
