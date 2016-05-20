@@ -55,6 +55,8 @@ Axipi\CoreBundle\Entity\Block:
             inversedBy: null
             joinColumns:
                 component_id:
+                    nullable: false
                     referencedColumnName: id
+                    onDelete: "cascade"
             orphanRemoval: false
     lifecycleCallbacks: {  }

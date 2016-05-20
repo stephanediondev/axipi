@@ -40,7 +40,9 @@ Axipi\CoreBundle\Entity\ProgramUser:
             inversedBy: null
             joinColumns:
                 program_id:
+                    nullable: false
                     referencedColumnName: id
+                    onDelete: "cascade"
             orphanRemoval: false
         user:
             targetEntity: User
@@ -50,6 +52,8 @@ Axipi\CoreBundle\Entity\ProgramUser:
             inversedBy: null
             joinColumns:
                 user_id:
+                    nullable: false
                     referencedColumnName: id
+                    onDelete: "cascade"
             orphanRemoval: false
     lifecycleCallbacks: {  }

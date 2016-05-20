@@ -60,6 +60,7 @@ Axipi\CoreBundle\Entity\WidgetPage:
                 page_id:
                     nullable: false
                     referencedColumnName: id
+                    onDelete: "cascade"
             orphanRemoval: false
         widget:
             targetEntity: Widget
@@ -71,5 +72,6 @@ Axipi\CoreBundle\Entity\WidgetPage:
                 widget_id:
                     nullable: false
                     referencedColumnName: id
+                    onDelete: "cascade"
             orphanRemoval: false
     lifecycleCallbacks: {  }

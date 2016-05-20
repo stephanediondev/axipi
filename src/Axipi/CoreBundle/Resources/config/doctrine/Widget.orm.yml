@@ -75,6 +75,7 @@ Axipi\CoreBundle\Entity\Widget:
                 program_id:
                     nullable: false
                     referencedColumnName: id
+                    onDelete: "cascade"
             orphanRemoval: false
         component:
             targetEntity: Component
@@ -86,6 +87,7 @@ Axipi\CoreBundle\Entity\Widget:
                 component_id:
                     nullable: false
                     referencedColumnName: id
+                    onDelete: "cascade"
             orphanRemoval: false
         zone:
             targetEntity: Zone
@@ -96,5 +98,6 @@ Axipi\CoreBundle\Entity\Widget:
             joinColumns:
                 zone_id:
                     referencedColumnName: id
+                    onDelete: "set null"
             orphanRemoval: false
     lifecycleCallbacks: {  }

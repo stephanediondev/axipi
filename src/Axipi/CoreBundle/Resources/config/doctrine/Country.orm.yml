@@ -1,6 +1,10 @@
 Axipi\CoreBundle\Entity\Country:
     type: entity
     table: country
+    uniqueConstraints:
+        code:
+            columns:
+                - code
     id:
         id:
             type: integer
@@ -8,8 +12,6 @@ Axipi\CoreBundle\Entity\Country:
             options:
                 unsigned: true
             id: true
-            generator:
-                strategy: IDENTITY
     fields:
         code:
             type: string

@@ -106,6 +106,7 @@ Axipi\CoreBundle\Entity\Page:
             joinColumns:
                 parent:
                     referencedColumnName: id
+                    onDelete: "cascade"
             orphanRemoval: false
         component:
             targetEntity: Component
@@ -117,6 +118,7 @@ Axipi\CoreBundle\Entity\Page:
                 component_id:
                     nullable: false
                     referencedColumnName: id
+                    onDelete: "cascade"
             orphanRemoval: false
         program:
             targetEntity: Program
@@ -128,5 +130,6 @@ Axipi\CoreBundle\Entity\Page:
                 program_id:
                     nullable: false
                     referencedColumnName: id
+                    onDelete: "cascade"
             orphanRemoval: false
     lifecycleCallbacks: {  }

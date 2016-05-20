@@ -13,10 +13,10 @@ CREATE TABLE IF NOT EXISTS `attribute` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `block_id` int(10) unsigned NOT NULL,
   `code` varchar(30) NOT NULL,
-  `is_required` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_upload` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_rich` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_search` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `is_required` tinyint(1) NOT NULL DEFAULT '0',
+  `is_upload` tinyint(1) NOT NULL DEFAULT '0',
+  `is_rich` tinyint(1) NOT NULL DEFAULT '0',
+  `is_search` tinyint(1) NOT NULL DEFAULT '0',
   `ordering` int(11) NOT NULL DEFAULT '0',
   `date_created` datetime NOT NULL,
   `date_modified` datetime DEFAULT NULL,
@@ -67,10 +67,10 @@ CREATE TABLE IF NOT EXISTS `component` (
   `title` varchar(255) NOT NULL,
   `parent` int(10) unsigned DEFAULT NULL,
   `icon` varchar(255) DEFAULT NULL,
-  `is_unique` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_search` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_sitemap` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_active` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `is_unique` tinyint(1) NOT NULL DEFAULT '0',
+  `is_search` tinyint(1) NOT NULL DEFAULT '0',
+  `is_sitemap` tinyint(1) NOT NULL DEFAULT '0',
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
   `date_created` datetime NOT NULL,
   `date_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -107,7 +107,8 @@ CREATE TABLE IF NOT EXISTS `country` (
   `title` varchar(255) NOT NULL,
   `date_created` datetime NOT NULL,
   `date_modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -159,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `page` (
   `title_seo` varchar(255) DEFAULT NULL,
   `description_seo` text,
   `meta_robots` varchar(255) DEFAULT NULL,
-  `is_active` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
   `ordering` int(11) NOT NULL DEFAULT '0',
   `attributes` longtext,
   `date_created` datetime NOT NULL,
@@ -193,8 +194,8 @@ CREATE TABLE IF NOT EXISTS `program` (
   `country_id` int(10) unsigned NOT NULL,
   `description_seo` text,
   `timezone` varchar(255) NOT NULL,
-  `is_default` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `has_maintenance` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `is_default` tinyint(1) NOT NULL DEFAULT '0',
+  `has_maintenance` tinyint(1) NOT NULL DEFAULT '0',
   `date_created` datetime NOT NULL,
   `date_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -270,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` char(60) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) DEFAULT NULL,
-  `is_authorized` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `is_authorized` tinyint(1) NOT NULL DEFAULT '0',
   `roles` longtext,
   `date_created` datetime NOT NULL,
   `date_modified` datetime DEFAULT NULL,
@@ -299,7 +300,7 @@ CREATE TABLE IF NOT EXISTS `widget` (
   `zone_id` int(10) unsigned DEFAULT NULL,
   `title` varchar(255) NOT NULL,
   `code` varchar(30) NOT NULL,
-  `is_active` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
   `ordering` int(11) NOT NULL DEFAULT '0',
   `attributes` longtext,
   `date_created` datetime NOT NULL,
@@ -307,7 +308,8 @@ CREATE TABLE IF NOT EXISTS `widget` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `program_id_code` (`program_id`,`code`),
   KEY `component_id` (`component_id`),
-  KEY `zone_id` (`zone_id`)
+  KEY `zone_id` (`zone_id`),
+  KEY `program_id` (`program_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
@@ -329,7 +331,7 @@ CREATE TABLE IF NOT EXISTS `widget_page` (
   `widget_id` int(10) unsigned NOT NULL,
   `page_id` int(10) unsigned NOT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `is_active` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
   `ordering` int(11) NOT NULL DEFAULT '0',
   `date_created` datetime NOT NULL,
   `date_modified` datetime DEFAULT NULL,
@@ -354,7 +356,7 @@ DROP TABLE IF EXISTS `zone`;
 CREATE TABLE IF NOT EXISTS `zone` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(30) NOT NULL,
-  `is_active` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
   `date_created` datetime NOT NULL,
   `date_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -376,55 +378,55 @@ INSERT INTO `zone` (`id`, `code`, `is_active`, `date_created`, `date_modified`) 
 -- Constraints for table `attribute`
 --
 ALTER TABLE `attribute`
-  ADD CONSTRAINT `attribute_ibfk_1` FOREIGN KEY (`block_id`) REFERENCES `block` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_FA7AEFFBE9ED820C` FOREIGN KEY (`block_id`) REFERENCES `block` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `block`
 --
 ALTER TABLE `block`
-  ADD CONSTRAINT `block_ibfk_1` FOREIGN KEY (`component_id`) REFERENCES `component` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_831B9722E2ABAFFF` FOREIGN KEY (`component_id`) REFERENCES `component` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `page`
 --
 ALTER TABLE `page`
-  ADD CONSTRAINT `page_ibfk_2` FOREIGN KEY (`parent`) REFERENCES `page` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `page_ibfk_3` FOREIGN KEY (`component_id`) REFERENCES `component` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `page_ibfk_4` FOREIGN KEY (`program_id`) REFERENCES `program` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_140AB6203D8E604F` FOREIGN KEY (`parent`) REFERENCES `page` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_140AB6203EB8070A` FOREIGN KEY (`program_id`) REFERENCES `program` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_140AB620E2ABAFFF` FOREIGN KEY (`component_id`) REFERENCES `component` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `program`
 --
 ALTER TABLE `program`
-  ADD CONSTRAINT `program_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `program_ibfk_2` FOREIGN KEY (`language_id`) REFERENCES `language` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_92ED778482F1BAF4` FOREIGN KEY (`language_id`) REFERENCES `language` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_92ED7784F92F3E70` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `program_user`
 --
 ALTER TABLE `program_user`
-  ADD CONSTRAINT `program_user_ibfk_1` FOREIGN KEY (`program_id`) REFERENCES `program` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `program_user_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_8075834E3EB8070A` FOREIGN KEY (`program_id`) REFERENCES `program` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_8075834EA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `token`
 --
 ALTER TABLE `token`
-  ADD CONSTRAINT `token_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_5F37A13BA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `widget`
 --
 ALTER TABLE `widget`
-  ADD CONSTRAINT `widget_ibfk_1` FOREIGN KEY (`program_id`) REFERENCES `program` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `widget_ibfk_2` FOREIGN KEY (`component_id`) REFERENCES `component` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `widget_ibfk_3` FOREIGN KEY (`zone_id`) REFERENCES `zone` (`id`) ON DELETE SET NULL;
+  ADD CONSTRAINT `FK_85F91ED03EB8070A` FOREIGN KEY (`program_id`) REFERENCES `program` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_85F91ED09F2C3FAB` FOREIGN KEY (`zone_id`) REFERENCES `zone` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `FK_85F91ED0E2ABAFFF` FOREIGN KEY (`component_id`) REFERENCES `component` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `widget_page`
 --
 ALTER TABLE `widget_page`
-  ADD CONSTRAINT `widget_page_ibfk_2` FOREIGN KEY (`page_id`) REFERENCES `page` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `widget_page_ibfk_3` FOREIGN KEY (`widget_id`) REFERENCES `widget` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_8CFDBD9FC4663E4` FOREIGN KEY (`page_id`) REFERENCES `page` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_8CFDBD9FFBE885E2` FOREIGN KEY (`widget_id`) REFERENCES `widget` (`id`) ON DELETE CASCADE;
 
 SET FOREIGN_KEY_CHECKS=1;
