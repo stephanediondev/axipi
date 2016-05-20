@@ -58,6 +58,7 @@ Axipi\CoreBundle\Entity\WidgetPage:
             inversedBy: null
             joinColumns:
                 page_id:
+                    nullable: false
                     referencedColumnName: id
             orphanRemoval: false
         widget:
@@ -68,6 +69,7 @@ Axipi\CoreBundle\Entity\WidgetPage:
             inversedBy: null
             joinColumns:
                 widget_id:
+                    nullable: false
                     referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }

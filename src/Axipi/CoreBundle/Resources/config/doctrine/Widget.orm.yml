@@ -8,7 +8,7 @@ Axipi\CoreBundle\Entity\Widget:
         zone_id:
             columns:
                 - zone_id
-        IDX_85F91ED03EB8070A:
+        program_id:
             columns:
                 - program_id
     uniqueConstraints:
@@ -73,6 +73,7 @@ Axipi\CoreBundle\Entity\Widget:
             inversedBy: null
             joinColumns:
                 program_id:
+                    nullable: false
                     referencedColumnName: id
             orphanRemoval: false
         component:
@@ -83,6 +84,7 @@ Axipi\CoreBundle\Entity\Widget:
             inversedBy: null
             joinColumns:
                 component_id:
+                    nullable: false
                     referencedColumnName: id
             orphanRemoval: false
         zone:

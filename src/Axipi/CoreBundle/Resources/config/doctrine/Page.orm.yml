@@ -115,6 +115,7 @@ Axipi\CoreBundle\Entity\Page:
             inversedBy: null
             joinColumns:
                 component_id:
+                    nullable: false
                     referencedColumnName: id
             orphanRemoval: false
         program:
@@ -125,6 +126,7 @@ Axipi\CoreBundle\Entity\Page:
             inversedBy: null
             joinColumns:
                 program_id:
+                    nullable: false
                     referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }
