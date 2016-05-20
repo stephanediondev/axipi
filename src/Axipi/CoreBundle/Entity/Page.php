@@ -1,5 +1,4 @@
 <?php
-
 namespace Axipi\CoreBundle\Entity;
 
 /**
@@ -428,5 +427,21 @@ class Page
     {
         return $this->program;
     }
-}
 
+    public function setAttribute($key, $value)
+    {
+        $attributes = json_decode($this->attributes, true);
+        $attributes[$key] = $value;
+        $this->attributes = json_encode($attributes);
+    }
+
+    public function getAttribute($key, $type = null)
+    {
+        $attributes = json_decode($this->attributes, true);
+        if(isset($attributes[$key]) == 1) {
+            return $attributes[$key];
+        } else {
+            return false;
+        }
+    }
+}
