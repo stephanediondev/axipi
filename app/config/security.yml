@@ -8,7 +8,7 @@ security:
     firewalls:
         axipi_backend_login:
             pattern: ^/backend/login$
-            anonymous:  ~
+            anonymous: ~
 
         axipi_backend:
             pattern:   ^/backend
@@ -24,6 +24,9 @@ security:
             logout:
                 path: axipi_backend_logout
                 target: axipi_backend_login
+
+        axipi_frontend:
+            anonymous: ~
 
     encoders:
         Axipi\CoreBundle\Entity\User:

@@ -1,4 +1,5 @@
 Axipi\CoreBundle\Entity\Zone:
+    repositoryClass: Axipi\CoreBundle\Repository\ZoneRepository
     type: entity
     table: zone
     uniqueConstraints:

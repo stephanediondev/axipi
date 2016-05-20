@@ -12,6 +12,7 @@ class PageRepository extends EntityRepository {
         $query->from('AxipiCoreBundle:Page', 'pge');
         $query->leftJoin('pge.component', 'cmp');
         $query->where('pge.id = :id');
+
         $query->setParameter(':id', $id);
 
         return $query->getQuery()->getOneOrNullResult();
@@ -25,6 +26,7 @@ class PageRepository extends EntityRepository {
         $query->from('AxipiCoreBundle:Page', 'pge');
         $query->leftJoin('pge.component', 'cmp');
         $query->where('pge.slug = :slug');
+
         $query->setParameter(':slug', $slug);
 
         return $query->getQuery()->getOneOrNullResult();
@@ -38,6 +40,7 @@ class PageRepository extends EntityRepository {
         $query->from('AxipiCoreBundle:Page', 'pge');
         $query->leftJoin('pge.component', 'cmp');
         $query->where('cmp.category = :category');
+
         $query->setParameter(':category', 'page');
 
         return $query->getQuery();
@@ -62,7 +65,11 @@ class PageRepository extends EntityRepository {
         $query->addSelect('cmp');
         $query->from('AxipiCoreBundle:Component', 'cmp');
         $query->where('cmp.category = :category');
+        $query->andWhere('cmp.isActive = :active');
+
         $query->setParameter(':category', 'page');
+        $query->setParameter(':active', 1);
+
         $query->orderBy('cmp.title');
 
         return $query->getQuery()->getResult();

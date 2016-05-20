@@ -35,12 +35,12 @@
                     {% endblock %}
 
                     {% block table_head %}
-                        <th class=""><a href="#">ID</a></th>
-                        <th class=""><a href="#">Component</a></th>
-                        <th class=""><a href="#">Title</a></th>
-                        <th class=""><a href="#">Code</a></th>
-                        <th class=""><a href="#">Zone</a></th>
-                        <th class=""><a href="#">Date created</a></th>
+                        <th class=""><a href="#">{{ 'widget.id'|trans({}, 'axipi_backend') }}</a></th>
+                        <th class=""><a href="#">{{ 'widget.component'|trans({}, 'axipi_backend') }}</a></th>
+                        <th class=""><a href="#">{{ 'widget.title'|trans({}, 'axipi_backend') }}</a></th>
+                        <th class=""><a href="#">{{ 'widget.code'|trans({}, 'axipi_backend') }}</a></th>
+                        <th class=""><a href="#">{{ 'widget.zone'|trans({}, 'axipi_backend') }}</a></th>
+                        <th class=""><a href="#">{{ 'widget.dateCreated'|trans({}, 'axipi_backend') }}</a></th>
                     {% endblock %}
 
                     {% block table_row %}

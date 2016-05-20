@@ -4,7 +4,10 @@ namespace Axipi\BackendBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
@@ -40,13 +43,18 @@ class PageType extends AbstractType
             ->add('save', SubmitType::class)
         ;
     }
-    
-    /**
-     * @param OptionsResolver $resolver
-     */
+
+    public function finishView(FormView $view, FormInterface $form, array $options)
+    {
+        foreach($view->children as $name => $child) {
+            $child->vars['label'] = 'page.' . $name;
+        }
+    }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
+            'translation_domain' => 'axipi_backend',
             'data_class' => Page::class,
             'programs' => [],
             'components' => [],

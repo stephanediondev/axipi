@@ -1,0 +1,4 @@
+services:
+    axipi_google_widget_analytics:
+        class: Axipi\GoogleBundle\Widget\AnalyticsWidget
+        parent: "axipi_core_controller_abstract"

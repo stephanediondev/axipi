@@ -46,7 +46,7 @@ class CoreExtension extends \Twig_Extension
         $content = '';
         $page = $this->container->get('axipi_core_manager_core')->getPage();
 
-        $widgets = $this->em->getRepository('AxipiCoreBundle:Page')->getWidgets($code);
+        $widgets = $this->em->getRepository('AxipiCoreBundle:Zone')->getWidgets($code);
 
         foreach($widgets as $widget) {
             if($this->container->has($widget->getComponent()->getService())) {

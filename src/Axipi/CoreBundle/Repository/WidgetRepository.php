@@ -12,6 +12,7 @@ class WidgetRepository extends EntityRepository {
         $query->from('AxipiCoreBundle:Widget', 'pge');
         $query->leftJoin('pge.component', 'cmp');
         $query->where('pge.id = :id');
+
         $query->setParameter(':id', $id);
 
         return $query->getQuery()->getOneOrNullResult();
@@ -25,6 +26,7 @@ class WidgetRepository extends EntityRepository {
         $query->from('AxipiCoreBundle:Widget', 'pge');
         $query->leftJoin('pge.component', 'cmp');
         $query->where('cmp.category = :category');
+
         $query->setParameter(':category', 'widget');
 
         return $query->getQuery();
@@ -49,7 +51,11 @@ class WidgetRepository extends EntityRepository {
         $query->addSelect('cmp');
         $query->from('AxipiCoreBundle:Component', 'cmp');
         $query->where('cmp.category = :category');
+        $query->andWhere('cmp.isActive = :active');
+
         $query->setParameter(':category', 'widget');
+        $query->setParameter(':active', 1);
+
         $query->orderBy('cmp.title');
 
         return $query->getQuery()->getResult();

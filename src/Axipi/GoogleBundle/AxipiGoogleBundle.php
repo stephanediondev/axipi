@@ -1,9 +1,8 @@
 <?php
-
-namespace Axipi\BackendBundle;
+namespace Axipi\GoogleBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class BackendBundle extends Bundle
+class AxipiGoogleBundle extends Bundle
 {
 }

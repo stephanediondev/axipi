@@ -36,11 +36,11 @@
                     {% endblock %}
 
                     {% block table_head %}
-                        <th class=""><a href="#">ID</a></th>
-                        <th class=""><a href="#">Category</a></th>
-                        <th class=""><a href="#">Title</a></th>
-                        <th class=""><a href="#">Service</a></th>
-                        <th class=""><a href="#">Date created</a></th>
+                        <th class=""><a href="#">{{ 'component.id'|trans({}, 'axipi_backend') }}</a></th>
+                        <th class=""><a href="#">{{ 'component.category'|trans({}, 'axipi_backend') }}</a></th>
+                        <th class=""><a href="#">{{ 'component.title'|trans({}, 'axipi_backend') }}</a></th>
+                        <th class=""><a href="#">{{ 'component.service'|trans({}, 'axipi_backend') }}</a></th>
+                        <th class=""><a href="#">{{ 'component.dateCreated'|trans({}, 'axipi_backend') }}</a></th>
                     {% endblock %}
 
                     {% block table_row %}

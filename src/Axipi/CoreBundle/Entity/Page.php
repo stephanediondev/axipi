@@ -435,7 +435,7 @@ class Page
         $this->attributes = json_encode($attributes);
     }
 
-    public function getAttribute($key, $type = null)
+    public function getAttribute($key)
     {
         $attributes = json_decode($this->attributes, true);
         if(isset($attributes[$key]) == 1) {

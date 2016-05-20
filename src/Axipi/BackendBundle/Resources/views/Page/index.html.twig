@@ -35,12 +35,12 @@
                     {% endblock %}
 
                     {% block table_head %}
-                        <th class=""><a href="#">ID</a></th>
-                        <th class=""><a href="#">Component</a></th>
-                        <th class=""><a href="#">Title</a></th>
-                        <th class=""><a href="#">Code</a></th>
-                        <th class=""><a href="#">Slug</a></th>
-                        <th class=""><a href="#">Date created</a></th>
+                        <th class=""><a href="#">{{ 'page.id'|trans({}, 'axipi_backend') }}</a></th>
+                        <th class=""><a href="#">{{ 'page.component'|trans({}, 'axipi_backend') }}</a></th>
+                        <th class=""><a href="#">{{ 'page.title'|trans({}, 'axipi_backend') }}</a></th>
+                        <th class=""><a href="#">{{ 'page.code'|trans({}, 'axipi_backend') }}</a></th>
+                        <th class=""><a href="#">{{ 'page.slug'|trans({}, 'axipi_backend') }}</a></th>
+                        <th class=""><a href="#">{{ 'page.dateCreated'|trans({}, 'axipi_backend') }}</a></th>
                     {% endblock %}
 
                     {% block table_row %}
