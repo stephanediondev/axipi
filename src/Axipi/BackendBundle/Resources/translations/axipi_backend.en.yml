@@ -39,6 +39,7 @@ component:
     zoneId: "Zone"
     parent: "Parent"
     isUnique: "Is unique?"
+    attributesSchema: "Attributes schema"
     dateCreated: "Date created"
 page:
     id: "ID"
