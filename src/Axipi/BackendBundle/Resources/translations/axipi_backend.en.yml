@@ -1,2 +1,7 @@
+login: "Login"
+logout: "Logout"
 components: "Components"
+users: "Users"
 pages: "Pages"
+widgets: "Widgets"
+home: "Home"
