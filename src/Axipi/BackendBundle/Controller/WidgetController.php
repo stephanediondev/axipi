@@ -7,23 +7,23 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Controller\AbstractController;
 
-use Axipi\BackendBundle\Manager\PageManager;
+use Axipi\BackendBundle\Manager\WidgetManager;
 use Axipi\BackendBundle\Manager\ComponentManager;
 use Axipi\BackendBundle\Form\Type\DeleteType;
-use Axipi\BackendBundle\Form\Type\PageType;
-use Axipi\CoreBundle\Entity\Page;
+use Axipi\BackendBundle\Form\Type\WidgetType;
+use Axipi\CoreBundle\Entity\Widget;
 
-class PageController extends AbstractController
+class WidgetController extends AbstractController
 {
-    protected $pageManager;
+    protected $widgetManager;
 
     protected $componentManager;
 
     public function __construct(
-        PageManager $pageManager,
+        WidgetManager $widgetManager,
         ComponentManager $componentManager
     ) {
-        $this->pageManager = $pageManager;
+        $this->widgetManager = $widgetManager;
         $this->componentManager = $componentManager;
     }
 
@@ -37,15 +37,15 @@ class PageController extends AbstractController
                 $parameters->set('component', $component);
             } else {
                 $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_page', []);
+                return $this->redirectToRoute('axipi_backend_widget', []);
             }
         } else if(null !== $id) {
-            $page = $this->pageManager->getById($id);
-            if($page) {
-                $parameters->set('page', $page);
+            $widget = $this->widgetManager->getById($id);
+            if($widget) {
+                $parameters->set('widget', $widget);
             } else {
                 $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_page', []);
+                return $this->redirectToRoute('axipi_backend_widget', []);
             }
         }
 
@@ -69,61 +69,61 @@ class PageController extends AbstractController
     public function indexAction(Request $request, ParameterBag $parameters)
     {
         $paginator  = $this->get('knp_paginator');
-        $paginator->setDefaultPaginatorOptions(['pageParameterName' => 'types']);
+        $paginator->setDefaultPaginatorOptions(['widgetParameterName' => 'types']);
         $pagination = $paginator->paginate(
-            $this->pageManager->getRows(),
-            $request->query->getInt('page', 1),
+            $this->widgetManager->getRows(),
+            $request->query->getInt('widget', 1),
             20
         );
 
         $parameters->set('objects', $pagination);
-        $parameters->set('components', $this->pageManager->getComponents());
+        $parameters->set('components', $this->widgetManager->getComponents());
 
-        return $this->render('AxipiBackendBundle:Page:index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Widget:index.html.twig', $parameters->all());
     }
 
     public function createAction(Request $request, ParameterBag $parameters, $id)
     {
-        $page = new Page();
-        $page->setComponent($parameters->get('component'));
+        $widget = new Widget();
+        $widget->setComponent($parameters->get('component'));
 
-        $form = $this->createForm(PageType::class, $page, ['programs' => $this->pageManager->getPrograms(), 'components' => $this->pageManager->getComponents()]);
+        $form = $this->createForm(WidgetType::class, $widget, ['programs' => $this->widgetManager->getPrograms(), 'components' => $this->widgetManager->getComponents(), 'zones' => $this->widgetManager->getZones()]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->pageManager->persist($form->getData());
+                $this->widgetManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_page', []);
+                return $this->redirectToRoute('axipi_backend_widget', []);
             }
         }
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Page:create.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Widget:create.html.twig', $parameters->all());
     }
 
     public function readAction(Request $request, ParameterBag $parameters, $id)
     {
-        return $this->render('AxipiBackendBundle:Page:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Widget:read.html.twig', $parameters->all());
     }
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
-        $form = $this->createForm(PageType::class, $parameters->get('page'), ['programs' => $this->pageManager->getPrograms(), 'components' => $this->pageManager->getComponents()]);
+        $form = $this->createForm(WidgetType::class, $parameters->get('widget'), ['programs' => $this->widgetManager->getPrograms(), 'components' => $this->widgetManager->getComponents(), 'zones' => $this->widgetManager->getZones()]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->pageManager->persist($form->getData());
+                $this->widgetManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_page', ['action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_widget', ['action' => 'read', 'id' => $id]);
             }
         }
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Page:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Widget:update.html.twig', $parameters->all());
     }
 
     public function deleteAction(Request $request, ParameterBag $parameters, $id)
@@ -133,14 +133,14 @@ class PageController extends AbstractController
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->pageManager->remove($parameters->get('component'));
+                $this->widgetManager->remove($parameters->get('component'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_page', []);
+                return $this->redirectToRoute('axipi_backend_widget', []);
             }
         }
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Page:delete.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Widget:delete.html.twig', $parameters->all());
     }
 }

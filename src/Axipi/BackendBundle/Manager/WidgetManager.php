@@ -3,21 +3,31 @@ namespace Axipi\BackendBundle\Manager;
 
 use Axipi\CoreBundle\Manager\AbstractManager;
 
-class ComponentManager extends AbstractManager
+class WidgetManager extends AbstractManager
 {
     public function getById($id)
     {
-        return $this->em->getRepository('AxipiCoreBundle:Component')->getById($id);
+        return $this->em->getRepository('AxipiCoreBundle:Widget')->getById($id);
     }
 
     public function getRows()
     {
-        return $this->em->getRepository('AxipiCoreBundle:Component')->getRows();
+        return $this->em->getRepository('AxipiCoreBundle:Widget')->getRows();
     }
 
-    public function getCategories()
+    public function getPrograms()
     {
-        return ['page', 'widget'];
+        return $this->em->getRepository('AxipiCoreBundle:Widget')->getPrograms();
+    }
+
+    public function getComponents()
+    {
+        return $this->em->getRepository('AxipiCoreBundle:Widget')->getComponents();
+    }
+
+    public function getZones()
+    {
+        return $this->em->getRepository('AxipiCoreBundle:Widget')->getZones();
     }
 
     public function persist($data)
@@ -39,6 +49,6 @@ class ComponentManager extends AbstractManager
 
     public function getEntityName()
     {
-        return Type::class;
+        return Widget::class;
     }
 }

@@ -25,7 +25,7 @@ class Widget
     /**
      * @var boolean
      */
-    private $isActive = '0';
+    private $isActive = false;
 
     /**
      * @var integer

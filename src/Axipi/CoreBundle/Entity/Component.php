@@ -20,6 +20,11 @@ class Component
     /**
      * @var string
      */
+    private $category;
+
+    /**
+     * @var string
+     */
     private $service;
 
     /**
@@ -100,6 +105,30 @@ class Component
     public function getZoneId()
     {
         return $this->zoneId;
+    }
+
+    /**
+     * Set category
+     *
+     * @param string $category
+     *
+     * @return Category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return string
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 
     /**

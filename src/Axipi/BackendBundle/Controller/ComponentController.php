@@ -26,7 +26,9 @@ class ComponentController extends AbstractController
     {
         $parameters = new ParameterBag();
 
-        if(null !== $id) {
+        if($action == 'create' && null !== $id) {
+            $parameters->set('category', $id);
+        } else if(null !== $id) {
             $component = $this->componentManager->getById($id);
             if($component) {
                 $parameters->set('component', $component);
@@ -40,7 +42,7 @@ class ComponentController extends AbstractController
             case 'index':
                 return $this->indexAction($request, $parameters);
             case 'create':
-                return $this->createAction($request, $parameters);
+                return $this->createAction($request, $parameters, $id);
             case 'read':
                 return $this->readAction($request, $parameters, $id);
             case 'update':
@@ -58,7 +60,7 @@ class ComponentController extends AbstractController
         $paginator  = $this->get('knp_paginator');
         $paginator->setDefaultPaginatorOptions(['pageParameterName' => 'types']);
         $pagination = $paginator->paginate(
-            $this->componentManager->getIndex(),
+            $this->componentManager->getRows(),
             $request->query->getInt('page', 1),
             20
         );
@@ -68,9 +70,12 @@ class ComponentController extends AbstractController
         return $this->render('AxipiBackendBundle:Component:index.html.twig', $parameters->all());
     }
 
-    public function createAction(Request $request, ParameterBag $parameters)
+    public function createAction(Request $request, ParameterBag $parameters, $id)
     {
-        $form = $this->createForm(ComponentType::class, new Component(), []);
+        $component = new Component();
+        $component->setCategory($parameters->get('category'));
+
+        $form = $this->createForm(ComponentType::class, $component, []);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {

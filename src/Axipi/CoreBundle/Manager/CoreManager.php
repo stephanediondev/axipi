@@ -31,6 +31,6 @@ class CoreManager extends AbstractManager
 
     public function getBySlug($slug)
     {
-        return $this->em->getRepository('AxipiCoreBundle:Page')->findOneSlug($slug);
+        return $this->em->getRepository('AxipiCoreBundle:Page')->getBySlug($slug);
     }
 }

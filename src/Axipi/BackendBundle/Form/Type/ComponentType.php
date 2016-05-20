@@ -24,8 +24,10 @@ class ComponentType extends AbstractType
             ])*/
 
         $builder
+            ->add('category')
             ->add('zoneId')
             ->add('service')
+            ->add('title')
             ->add('parent')
             ->add('icon')
             ->add('isUnique')

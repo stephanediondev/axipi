@@ -16,6 +16,12 @@ Axipi\CoreBundle\Entity\Component:
             generator:
                 strategy: IDENTITY
     fields:
+        category:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
         zoneId:
             type: integer
             nullable: true

@@ -10,9 +10,10 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Axipi\CoreBundle\Entity\Program;
 use Axipi\CoreBundle\Entity\Component;
-use Axipi\CoreBundle\Entity\Page;
+use Axipi\CoreBundle\Entity\Zone;
+use Axipi\CoreBundle\Entity\Widget;
 
-class PageType extends AbstractType
+class WidgetType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -33,8 +34,15 @@ class PageType extends AbstractType
                     return $component->getTitle();
                 }
             ])
+            ->add('zone', EntityType::class,
+            [
+                'class' => Zone::class,
+                'choices' => $options['zones'],
+                'choice_label' => function ($zone) {
+                    return $zone->getCode();
+                }
+            ])
             ->add('code')
-            ->add('slug')
             ->add('title')
             ->add('isActive')
             ->add('save', SubmitType::class)
@@ -47,9 +55,10 @@ class PageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Page::class,
+            'data_class' => Widget::class,
             'programs' => [],
             'components' => [],
+            'zones' => [],
         ));
     }
 }

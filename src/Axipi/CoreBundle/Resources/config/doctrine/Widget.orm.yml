@@ -1,4 +1,5 @@
 Axipi\CoreBundle\Entity\Widget:
+    repositoryClass: Axipi\CoreBundle\Repository\WidgetRepository
     type: entity
     table: widget
     indexes:

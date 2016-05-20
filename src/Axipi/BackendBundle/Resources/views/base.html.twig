@@ -1,3 +1,4 @@
+{% import 'AxipiBackendBundle::macro.html.twig' as macro %}
 {% if form is defined %}{% form_theme form 'AxipiBackendBundle::form.html.twig' %}{% endif %}
 <!DOCTYPE html>
 <html>
@@ -26,19 +27,19 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <li><a href="{{ path('axipi_backend_page', {action: 'index'}) }}"><i class="fa fa-file-text-o"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></li>
-                <li><a href="#"><i class="fa fa-leaf"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></li>
+                <li><a href="{{ path('axipi_backend_page', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></li>
+                <li><a href="{{ path('axipi_backend_widget', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></li>
                 {% if is_granted('ROLE_ADMIN') %}
-                    <li><a href="{{ path('axipi_backend_component', {action: 'index'}) }}"><i class="fa fa-cubes"></i>{{ 'components'|trans({}, 'axipi_backend') }}</a></li>
-                    <li><a href="#"><i class="fa fa-group"></i>{{ 'users'|trans({}, 'axipi_backend') }}</a></li>
+                    <li><a href="{{ path('axipi_backend_component', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.component'|trans({}, 'axipi_backend') }}"></i>{{ 'components'|trans({}, 'axipi_backend') }}</a></li>
+                    <li><a href="#"><i class="fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ 'users'|trans({}, 'axipi_backend') }}</a></li>
                 {% endif %}
             {% endif %}
         </ul>
         <ul class="nav navbar-nav pull-right">
-            <li><a target="_blank" href="{{ path('axipi_core_home', {}) }}"><i class="fa fa-rocket"></i>Frontend</a></li>
+            <li><a target="_blank" href="{{ path('axipi_core_home', {}) }}"><i class="fa fa-{{ 'icons.frontend'|trans({}, 'axipi_backend') }}"></i>Frontend</a></li>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <li><a href="#"><i class="fa fa-user"></i>{{ app.user.firstname }}{% if app.user.lastname %} {{ app.user.lastname }}{% endif %}</a></li>
-                <li><a href="{{ logout_path('axipi_backend') }}"><i class="fa fa-sign-out"></i>{{ 'logout'|trans({}, 'axipi_backend') }}</a></li>
+                <li><a href="#"><i class="fa fa-{{ 'icons.profile'|trans({}, 'axipi_backend') }}"></i>{{ app.user.firstname }}{% if app.user.lastname %} {{ app.user.lastname }}{% endif %}</a></li>
+                <li><a href="{{ logout_path('axipi_backend') }}"><i class="fa fa-{{ 'icons.logout'|trans({}, 'axipi_backend') }}"></i>{{ 'logout'|trans({}, 'axipi_backend') }}</a></li>
             {% endif %}
         </ul>
     </div>

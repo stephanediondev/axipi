@@ -12,10 +12,10 @@
 
             {% embed 'AxipiBackendBundle::block_title.html.twig' %}
                 {% block block_title %}
-                    <span><i class="fa fa-sign-in"></i>{{ 'login'|trans({}, 'axipi_backend') }}</span>
+                    <span><i class="fa fa-{{ 'icons.login'|trans({}, 'axipi_backend') }}"></i>{{ 'login'|trans({}, 'axipi_backend') }}</span>
                 {% endblock %}
                 {% block block_title_actions %}
-                    <li><a href="#"><i class="fa fa-key"></i>{{ 'forgot_password'|trans({}, 'axipi_backend') }}</a></li>
+                    <li><a href="#"><i class="fa fa-{{ 'icons.forgot_password'|trans({}, 'axipi_backend') }}"></i>{{ 'forgot_password'|trans({}, 'axipi_backend') }}</a></li>
                 {% endblock %}
             {% endembed %}
 
@@ -23,15 +23,15 @@
                 <form action="{{ path('axipi_backend_login_check') }}" method="post">
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     <p>
-                        <label for="username" class="required">Email</label>
+                        <label for="username" class="required">{{ 'user.username'|trans({}, 'axipi_backend') }}</label>
                         <input type="text" id="username" name="username" required="required">
                     </p>
                     <p>
-                        <label for="password" class="required">Password</label>
+                        <label for="password" class="required">{{ 'user.password'|trans({}, 'axipi_backend') }}</label>
                         <input type="password" id="password" name="password" required="required">
                     </p>
                     <p>
-                        <button type="submit" id="login_submit" name="login_submit">Submit</button>
+                        <button type="submit" id="login_submit" name="login_submit">{{ 'actions.submit'|trans({}, 'axipi_backend') }}</button>
                     </p>
                 </form>
             </div>
