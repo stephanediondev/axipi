@@ -1,18 +1,21 @@
 icons:
-    profile: 'user'
-    login: 'sign-in'
-    logout: 'sign-out'
-    forgot_password: 'key'
-    home: 'home'
-    user: 'user'
-    page: 'file-text-o'
-    component: 'cube'
-    frontend: 'rocket'
-    widget: 'leaf'
-    create: 'plus'
-    read: ''
-    update: 'wrench'
-    delete: 'trash'
+    profile: "user"
+    login: "sign-in"
+    logout: "sign-out"
+    forgot_password: "key"
+    home: "home"
+    user: "user"
+    page: "file-text-o"
+    component: "cube"
+    zone: "cube"
+    program: "globe"
+    media: "picture-o"
+    frontend: "rocket"
+    widget: "leaf"
+    create: "plus"
+    read: ""
+    update: "wrench"
+    delete: "trash"
 actions:
     create: "Create"
     read: "Read"
@@ -23,10 +26,13 @@ login: "Login"
 logout: "Logout"
 forgot_password: "Forgot password?"
 components: "Components"
+zones: "Zones"
 users: "Users"
 pages: "Pages"
 widgets: "Widgets"
 home: "Home"
+medias: "Medias"
+programs: "Programs"
 component:
     id: "ID"
     service: "Service"
