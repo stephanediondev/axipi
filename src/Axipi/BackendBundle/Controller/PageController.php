@@ -86,6 +86,7 @@ class PageController extends AbstractController
     {
         $page = new Page();
         $page->setComponent($parameters->get('component'));
+        $page->setIsActive(true);
 
         $form = $this->createForm(PageType::class, $page, ['programs' => $this->pageManager->getPrograms(), 'components' => $this->pageManager->getComponents(), 'pages' => $this->pageManager->getPages($page)]);
         $form->handleRequest($request);

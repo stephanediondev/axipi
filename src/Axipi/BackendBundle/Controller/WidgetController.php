@@ -86,6 +86,8 @@ class WidgetController extends AbstractController
     {
         $widget = new Widget();
         $widget->setComponent($parameters->get('component'));
+        $widget->setZone($parameters->get('component')->getZone());
+        $widget->setIsActive(true);
 
         $form = $this->createForm(WidgetType::class, $widget, ['programs' => $this->widgetManager->getPrograms(), 'components' => $this->widgetManager->getComponents(), 'zones' => $this->widgetManager->getZones()]);
         $form->handleRequest($request);

@@ -74,6 +74,7 @@ class ComponentController extends AbstractController
     {
         $component = new Component();
         $component->setCategory($parameters->get('category'));
+        $component->setIsActive(true);
 
         $form = $this->createForm(ComponentType::class, $component, ['components' => $this->componentManager->getRows()->getResult(), 'zones' => $this->componentManager->getZones()]);
         $form->handleRequest($request);

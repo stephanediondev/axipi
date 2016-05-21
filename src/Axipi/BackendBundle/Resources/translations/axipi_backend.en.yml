@@ -36,7 +36,7 @@ component:
     isSitemap: "Is sitemap?"
     isSearch: "Is search?"
     isActive: "Is active?"
-    zoneId: "Zone"
+    zone: "Zone"
     parent: "Parent"
     isUnique: "Is unique?"
     attributesSchema: "Attributes schema"
