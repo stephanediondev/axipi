@@ -88,7 +88,7 @@ class PageController extends AbstractController
         $page->setComponent($parameters->get('component'));
         $page->setIsActive(true);
 
-        $form = $this->createForm(PageType::class, $page, ['programs' => $this->pageManager->getPrograms(), 'components' => $this->pageManager->getComponents(), 'pages' => $this->pageManager->getPages($page)]);
+        $form = $this->createForm(PageType::class, $page, ['page' => $page, 'programs' => $this->pageManager->getPrograms(), 'components' => $this->pageManager->getComponents(), 'pages' => $this->pageManager->getPages($page)]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
@@ -111,7 +111,7 @@ class PageController extends AbstractController
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
-        $form = $this->createForm(PageType::class, $parameters->get('page'), ['programs' => $this->pageManager->getPrograms(), 'components' => $this->pageManager->getComponents(), 'pages' => $this->pageManager->getPages($parameters->get('page'))]);
+        $form = $this->createForm(PageType::class, $parameters->get('page'), ['page' => $parameters->get('page'), 'programs' => $this->pageManager->getPrograms(), 'components' => $this->pageManager->getComponents(), 'pages' => $this->pageManager->getPages($parameters->get('page'))]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {

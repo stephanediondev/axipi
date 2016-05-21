@@ -20,8 +20,7 @@ class WidgetType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('program', EntityType::class,
+        $builder->add('program', EntityType::class,
             [
                 'placeholder' => '-',
                 'class' => Program::class,
@@ -29,8 +28,9 @@ class WidgetType extends AbstractType
                 'choice_label' => function ($program) {
                     return $program->getLanguage()->getTitle().' / '.$program->getCountry()->getTitle();
                 }
-            ])
-            ->add('component', EntityType::class,
+            ]
+        );
+        $builder->add('component', EntityType::class,
             [
                 'placeholder' => '-',
                 'class' => Component::class,
@@ -38,8 +38,9 @@ class WidgetType extends AbstractType
                 'choice_label' => function ($component) {
                     return $component->getTitle();
                 }
-            ])
-            ->add('zone', EntityType::class,
+            ]
+        );
+        $builder->add('zone', EntityType::class,
             [
                 'placeholder' => '-',
                 'class' => Zone::class,
@@ -47,13 +48,13 @@ class WidgetType extends AbstractType
                 'choice_label' => function ($zone) {
                     return $zone->getCode();
                 }
-            ])
-            ->add('code')
-            ->add('title')
-            ->add('isActive')
-            ->add('attributes')
-            ->add('submit', SubmitType::class)
-        ;
+            ]
+        );
+        $builder->add('code');
+        $builder->add('title');
+        $builder->add('isActive');
+        $builder->add('attributes', AttributesType::class, ['mapped' => true, 'object' => $options['widget'], 'data' => $options['widget']->getAttributes()]);
+        $builder->add('submit', SubmitType::class);
     }
 
     public function finishView(FormView $view, FormInterface $form, array $options)
@@ -70,6 +71,7 @@ class WidgetType extends AbstractType
         $resolver->setDefaults(array(
             'translation_domain' => 'axipi_backend',
             'data_class' => Widget::class,
+            'widget' => null,
             'programs' => [],
             'components' => [],
             'zones' => [],

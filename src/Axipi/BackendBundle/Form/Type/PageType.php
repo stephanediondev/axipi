@@ -14,13 +14,13 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Axipi\CoreBundle\Entity\Program;
 use Axipi\CoreBundle\Entity\Component;
 use Axipi\CoreBundle\Entity\Page;
+use Axipi\BackendBundle\Form\Type\AttributesType;
 
 class PageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('program', EntityType::class,
+        $builder->add('program', EntityType::class,
             [
                 'placeholder' => '-',
                 'class' => Program::class,
@@ -28,8 +28,9 @@ class PageType extends AbstractType
                 'choice_label' => function ($program) {
                     return $program->getLanguage()->getTitle().' / '.$program->getCountry()->getTitle();
                 }
-            ])
-            ->add('component', EntityType::class,
+            ]
+        );
+        $builder->add('component', EntityType::class,
             [
                 'placeholder' => '-',
                 'class' => Component::class,
@@ -37,8 +38,9 @@ class PageType extends AbstractType
                 'choice_label' => function ($component) {
                     return $component->getTitle();
                 }
-            ])
-            ->add('parent', EntityType::class,
+            ]
+        );
+        $builder->add('parent', EntityType::class,
             [
                 'required' => false,
                 'placeholder' => '-',
@@ -47,14 +49,14 @@ class PageType extends AbstractType
                 'choice_label' => function ($page) {
                     return $page->getTitle();
                 }
-            ])
-            ->add('code')
-            ->add('slug')
-            ->add('title')
-            ->add('isActive')
-            ->add('attributes')
-            ->add('submit', SubmitType::class)
-        ;
+            ]
+        );
+        $builder->add('code');
+        $builder->add('title');
+        $builder->add('slug');
+        $builder->add('isActive');
+        $builder->add('attributes', AttributesType::class, ['mapped' => true, 'object' => $options['page'], 'data' => $options['page']->getAttributes()]);
+        $builder->add('submit', SubmitType::class);
     }
 
     public function finishView(FormView $view, FormInterface $form, array $options)
@@ -71,6 +73,7 @@ class PageType extends AbstractType
         $resolver->setDefaults(array(
             'translation_domain' => 'axipi_backend',
             'data_class' => Page::class,
+            'page' => null,
             'programs' => [],
             'components' => [],
             'pages' => [],

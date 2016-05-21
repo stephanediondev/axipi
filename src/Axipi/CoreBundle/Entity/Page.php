@@ -293,7 +293,7 @@ class Page
      */
     public function setAttributes($attributes)
     {
-        $this->attributes = $attributes;
+        $this->attributes = json_encode($attributes);
 
         return $this;
     }
@@ -305,7 +305,11 @@ class Page
      */
     public function getAttributes()
     {
-        return $this->attributes;
+        if(is_string($this->attributes)) {
+            return $this->attributes = json_decode($this->attributes, true);
+        } else {
+            return $this->attributes;
+        }
     }
 
     /**
@@ -428,11 +432,15 @@ class Page
         return $this->program;
     }
 
+    public function setAttribute($key, $value)
+    {
+        $this->attributes[$key] = $value;
+    }
+
     public function getAttribute($key)
     {
-        $attributes = json_decode($this->attributes, true);
-        if(isset($attributes[$key]) == 1) {
-            return $attributes[$key];
+        if(isset($this->attributes[$key]) == 1) {
+            return $this->attributes[$key];
         } else {
             return false;
         }

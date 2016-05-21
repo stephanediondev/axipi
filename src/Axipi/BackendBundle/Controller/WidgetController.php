@@ -89,7 +89,7 @@ class WidgetController extends AbstractController
         $widget->setZone($parameters->get('component')->getZone());
         $widget->setIsActive(true);
 
-        $form = $this->createForm(WidgetType::class, $widget, ['programs' => $this->widgetManager->getPrograms(), 'components' => $this->widgetManager->getComponents(), 'zones' => $this->widgetManager->getZones()]);
+        $form = $this->createForm(WidgetType::class, $widget, ['widget' => $widget, 'programs' => $this->widgetManager->getPrograms(), 'components' => $this->widgetManager->getComponents(), 'zones' => $this->widgetManager->getZones()]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
@@ -112,7 +112,7 @@ class WidgetController extends AbstractController
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
-        $form = $this->createForm(WidgetType::class, $parameters->get('widget'), ['programs' => $this->widgetManager->getPrograms(), 'components' => $this->widgetManager->getComponents(), 'zones' => $this->widgetManager->getZones()]);
+        $form = $this->createForm(WidgetType::class, $parameters->get('widget'), ['widget' => $parameters->get('widget'), 'programs' => $this->widgetManager->getPrograms(), 'components' => $this->widgetManager->getComponents(), 'zones' => $this->widgetManager->getZones()]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
