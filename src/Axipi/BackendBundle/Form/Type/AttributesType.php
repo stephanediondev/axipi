@@ -17,10 +17,12 @@ class AttributesType extends AbstractType
     {
         $attributes = json_decode($options['object']->getComponent()->getAttributesSchema(), true);
 
-        foreach($attributes as $key => $attribute) {
-            $attribute['options']['mapped'] = true;
-            $attribute['options']['data'] = $options['object']->getAttribute($key);
-            $builder->add($key, $attribute['type'], $attribute['options']);
+        if(is_array($attributes)) {
+            foreach($attributes as $key => $attribute) {
+                $attribute['options']['mapped'] = true;
+                $attribute['options']['data'] = $options['object']->getAttribute($key);
+                $builder->add($key, $attribute['type'], $attribute['options']);
+            }
         }
     }
     
