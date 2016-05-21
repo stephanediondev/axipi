@@ -1,10 +1,14 @@
 {% block form_row %}
 {% spaceless %}
-    <p>
-        {{ form_label(form) }}
-        {{ form_errors(form) }}
+    {% if not compound -%}
+        <p>
+            {{ form_label(form) }}
+            {{ form_errors(form) }}
+            {{ form_widget(form) }}
+        </p>
+    {% else %}
         {{ form_widget(form) }}
-    </p>
+    {% endif %}
 {% endspaceless %}
 {% endblock form_row %}
 

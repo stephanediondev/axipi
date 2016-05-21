@@ -23,10 +23,10 @@
                         {{ macro.read_field('widget.program'|trans({}, 'axipi_backend'), widget.program.id) }}
                         {{ macro.read_field('widget.component'|trans({}, 'axipi_backend'), '<a href="' ~ path('axipi_backend_component', {action: 'read', 'id': widget.component.id}) ~ '">' ~ widget.component.title ~'</a>') }}
                         {{ macro.read_field('widget.code'|trans({}, 'axipi_backend'), widget.code) }}
-                        {{ macro.read_field('widget.title'|trans({}, 'axipi_backend'), widget.title) }}
-                        {{ macro.read_field('widget.zone'|trans({}, 'axipi_backend'), widget.zone.code) }}
                     </div>
                     <div class="col-lg-4">
+                        {{ macro.read_field('widget.title'|trans({}, 'axipi_backend'), widget.title) }}
+                        {{ macro.read_field('widget.zone'|trans({}, 'axipi_backend'), widget.zone.code) }}
                         {{ macro.read_field('widget.isActive'|trans({}, 'axipi_backend'), widget.isActive) }}
                     </div>
                 </div>

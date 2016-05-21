@@ -55,7 +55,7 @@ class PageType extends AbstractType
         $builder->add('title');
         $builder->add('slug');
         $builder->add('isActive');
-        $builder->add('attributes', AttributesType::class, ['mapped' => true, 'object' => $options['page'], 'data' => $options['page']->getAttributes()]);
+        $builder->add('attributes', AttributesType::class, ['mapped' => true, 'required' => false, 'object' => $options['page'], 'data' => $options['page']->getAttributes()]);
         $builder->add('submit', SubmitType::class);
     }
 

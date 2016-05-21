@@ -20,6 +20,7 @@ class AttributesType extends AbstractType
         if(is_array($attributes)) {
             foreach($attributes as $key => $attribute) {
                 $attribute['options']['mapped'] = true;
+                $attribute['options']['data_class'] = null;
                 $attribute['options']['data'] = $options['object']->getAttribute($key);
                 $builder->add($key, $attribute['type'], $attribute['options']);
             }

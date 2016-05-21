@@ -324,8 +324,9 @@ class Widget
 
     public function getAttribute($key)
     {
-        if(isset($this->attributes[$key]) == 1) {
-            return $this->attributes[$key];
+        $attributes = $this->getAttributes();
+        if(isset($attributes[$key]) == 1) {
+            return $attributes[$key];
         } else {
             return false;
         }

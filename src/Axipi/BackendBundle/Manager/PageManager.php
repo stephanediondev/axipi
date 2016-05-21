@@ -31,8 +31,15 @@ class PageManager extends AbstractManager
         return $this->em->getRepository('AxipiCoreBundle:Page')->getPages($page);
     }
 
-    public function persist($data)
+    public function persist($form)
     {
+        /*echo $form->getComponent()->getAttributesSchema();
+        exit(0);
+        $image = $form->get('attributes')->get('image')->getData();
+        $image->move('uploads', $image->getClientOriginalName());*/
+
+        $data = $form->getData();
+        //$data->setAttribute('image', $image->getClientOriginalName());
         if($data->getDateCreated() == null) {
             $data->setDateCreated(new \Datetime());
         }

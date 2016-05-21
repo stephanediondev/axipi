@@ -434,13 +434,16 @@ class Page
 
     public function setAttribute($key, $value)
     {
-        $this->attributes[$key] = $value;
+        $attributes = $this->getAttributes();
+        $attributes[$key] = $value;
+        $this->setAttributes(json_encode($attributes));
     }
 
     public function getAttribute($key)
     {
-        if(isset($this->attributes[$key]) == 1) {
-            return $this->attributes[$key];
+        $attributes = $this->getAttributes();
+        if(isset($attributes[$key]) == 1) {
+            return $attributes[$key];
         } else {
             return false;
         }

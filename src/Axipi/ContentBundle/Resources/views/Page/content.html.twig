@@ -3,11 +3,8 @@
 {% block title %}{{ page.title }}{% endblock %}
 
 {% block main %}
-    <div class="jumbotron">
-        <h1>content controller</h1>
-        <h2>{{ page.title }}</h2>
-        <p><a href="{{ path('axipi_core_slug', {slug: 'a/b/c/d'}) }}">a/b/c/d</a></p>
-        <p><a href="{{ path('axipi_core_slug', {slug: 'axipi'}) }}">axipi</a></p>
+    <div id="page-{{ page.code }}" class="page-content">
+        {{ page.attribute('description')|raw }}
     </div>
 {% endblock %}
 

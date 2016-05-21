@@ -25,13 +25,17 @@
                         {{ form_row(form.program) }}
                         {{ form_row(form.component) }}
                         {{ form_row(form.code) }}
-                        {{ form_row(form.title) }}
-                        {{ form_row(form.zone) }}
                     </div>
                     <div class="col-lg-4">
+                        {{ form_row(form.title) }}
+                        {{ form_row(form.zone) }}
                         {{ form_row(form.isActive) }}
-                        {{ form_row(form.attributes) }}
                         {{ form_row(form.submit) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        {{ form_row(form.attributes) }}
                     </div>
                 </div>
                 {{ form_end(form) }}

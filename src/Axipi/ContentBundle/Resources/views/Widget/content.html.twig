@@ -1,4 +1,5 @@
 {% block widget %}
-    <p>{{ page.title }}</p>
-    <p><strong>widget</strong> {{ widget.title }}</p>
+    <div id="widget-{{ widget.code }}" class="widget-content">
+        {{ widget.attribute('description')|raw }}
+    </div>
 {% endblock %}

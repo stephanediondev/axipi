@@ -93,7 +93,7 @@ class PageController extends AbstractController
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->pageManager->persist($form->getData());
+                $this->pageManager->persist($form);
                 $this->addFlash('success', 'created');
                 return $this->redirectToRoute('axipi_backend_page', []);
             }
@@ -116,7 +116,7 @@ class PageController extends AbstractController
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->pageManager->persist($form->getData());
+                $this->pageManager->persist($form);
                 $this->addFlash('success', 'updated');
                 return $this->redirectToRoute('axipi_backend_page', ['action' => 'read', 'id' => $id]);
             }
