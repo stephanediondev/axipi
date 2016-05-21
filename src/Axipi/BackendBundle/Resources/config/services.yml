@@ -41,3 +41,15 @@ services:
         class: Axipi\BackendBundle\Manager\WidgetManager
         parent: "axipi_core_manager_abstract"
         public: false
+
+    axipi_backend_controller_widget_page:
+        class: Axipi\BackendBundle\Controller\WidgetPageController
+        parent: "axipi_core_controller_abstract"
+        arguments:
+            - "@axipi_backend_manager_widget"
+            - "@axipi_backend_manager_widget_page"
+
+    axipi_backend_manager_widget_page:
+        class: Axipi\BackendBundle\Manager\WidgetPageManager
+        parent: "axipi_core_manager_abstract"
+        public: false

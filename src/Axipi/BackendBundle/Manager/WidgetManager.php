@@ -30,6 +30,11 @@ class WidgetManager extends AbstractManager
         return $this->em->getRepository('AxipiCoreBundle:Widget')->getZones();
     }
 
+    public function getPages($id)
+    {
+        return $this->em->getRepository('AxipiCoreBundle:Widget')->getPages($id);
+    }
+
     public function persist($data)
     {
         if($data->getDateCreated() == null) {

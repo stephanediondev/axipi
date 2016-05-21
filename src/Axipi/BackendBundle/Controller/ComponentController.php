@@ -61,7 +61,7 @@ class ComponentController extends AbstractController
         $paginator->setDefaultPaginatorOptions(['pageParameterName' => 'components']);
         $pagination = $paginator->paginate(
             $this->componentManager->getRows(),
-            $request->query->getInt('page', 1),
+            $request->query->getInt('components', 1),
             20
         );
 

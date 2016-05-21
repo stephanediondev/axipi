@@ -1,4 +1,5 @@
 Axipi\CoreBundle\Entity\WidgetPage:
+    repositoryClass: Axipi\CoreBundle\Repository\WidgetPageRepository
     type: entity
     table: widget_page
     indexes:

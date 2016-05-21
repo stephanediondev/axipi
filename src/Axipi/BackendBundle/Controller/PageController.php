@@ -63,7 +63,7 @@ class PageController extends AbstractController
         }
 
         $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_component', []);
+        return $this->redirectToRoute('axipi_backend_page', []);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters)
@@ -72,7 +72,7 @@ class PageController extends AbstractController
         $paginator->setDefaultPaginatorOptions(['pageParameterName' => 'pages']);
         $pagination = $paginator->paginate(
             $this->pageManager->getRows(),
-            $request->query->getInt('page', 1),
+            $request->query->getInt('pages', 1),
             20
         );
 
@@ -134,7 +134,7 @@ class PageController extends AbstractController
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->pageManager->remove($parameters->get('component'));
+                $this->pageManager->remove($parameters->get('page'));
                 $this->addFlash('success', 'deleted');
                 return $this->redirectToRoute('axipi_backend_page', []);
             }

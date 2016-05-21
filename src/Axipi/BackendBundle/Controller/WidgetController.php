@@ -72,7 +72,7 @@ class WidgetController extends AbstractController
         $paginator->setDefaultPaginatorOptions(['pageParameterName' => 'widgets']);
         $pagination = $paginator->paginate(
             $this->widgetManager->getRows(),
-            $request->query->getInt('widget', 1),
+            $request->query->getInt('widgets', 1),
             20
         );
 
@@ -107,6 +107,8 @@ class WidgetController extends AbstractController
 
     public function readAction(Request $request, ParameterBag $parameters, $id)
     {
+        $parameters->set('objects', $this->widgetManager->getPages($id));
+
         return $this->render('AxipiBackendBundle:Widget:read.html.twig', $parameters->all());
     }
 
@@ -135,7 +137,7 @@ class WidgetController extends AbstractController
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->widgetManager->remove($parameters->get('component'));
+                $this->widgetManager->remove($parameters->get('widget'));
                 $this->addFlash('success', 'deleted');
                 return $this->redirectToRoute('axipi_backend_widget', []);
             }

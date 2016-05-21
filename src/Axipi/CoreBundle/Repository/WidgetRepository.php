@@ -32,6 +32,23 @@ class WidgetRepository extends EntityRepository {
         return $query->getQuery();
     }
 
+    public function getPages($id) {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQueryBuilder();
+        $query->addSelect('wdg_pge', 'wdg', 'pge');
+        $query->from('AxipiCoreBundle:WidgetPage', 'wdg_pge');
+        $query->leftJoin('wdg_pge.widget', 'wdg');
+        $query->leftJoin('wdg_pge.page', 'pge');
+        $query->where('wdg.id = :widget');
+
+        $query->setParameter(':widget', $id);
+
+        $query->orderBy('wdg_pge.ordering');
+
+        return $query->getQuery()->getResult();
+    }
+
     public function getPrograms() {
         $em = $this->getEntityManager();
 

@@ -170,34 +170,6 @@ class Widget
     }
 
     /**
-     * Set attributes
-     *
-     * @param string $attributes
-     *
-     * @return Page
-     */
-    public function setAttributes($attributes)
-    {
-        $this->attributes = json_encode($attributes);
-
-        return $this;
-    }
-
-    /**
-     * Get attributes
-     *
-     * @return string
-     */
-    public function getAttributes()
-    {
-        if(is_string($this->attributes)) {
-            return $this->attributes = json_decode($this->attributes, true);
-        } else {
-            return $this->attributes;
-        }
-    }
-
-    /**
      * Set dateCreated
      *
      * @param \DateTime $dateCreated
@@ -317,9 +289,23 @@ class Widget
         return $this->zone;
     }
 
+    public function setAttributes($attributes)
+    {
+        $this->attributes = json_encode($attributes);
+
+        return $this;
+    }
+
+    public function getAttributes()
+    {
+        return json_decode($this->attributes, true);
+    }
+
     public function setAttribute($key, $value)
     {
-        $this->attributes[$key] = $value;
+        $attributes = $this->getAttributes();
+        $attributes[$key] = $value;
+        $this->setAttributes($attributes);
     }
 
     public function getAttribute($key)

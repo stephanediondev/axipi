@@ -20,7 +20,7 @@ class WidgetPage
     /**
      * @var boolean
      */
-    private $isActive = '0';
+    private $isActive = false;
 
     /**
      * @var integer
@@ -46,7 +46,6 @@ class WidgetPage
      * @var \Axipi\CoreBundle\Entity\Widget
      */
     private $widget;
-
 
     /**
      * Get id
