@@ -10,21 +10,23 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+{% block navbar %}
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                {{ getWidgets('navbar-collapse') }}
+            </div>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            {{ getWidgets('navbar-collapse') }}
-        </div>
-    </div>
-</nav>
+    </nav>
+{% endblock %}
 
 <div class="container">
     {{ getWidgets('before_content') }}
@@ -33,11 +35,13 @@
     {% endblock %}
 </div>
 
-<footer class="footer">
-    <div class="container">
-        {{ getWidgets('footer') }}
-    </div>
-</footer>
+{% block footer %}
+    <footer class="footer">
+        <div class="container">
+            {{ getWidgets('footer') }}
+        </div>
+    </footer>
+{% endblock %}
 
 {% block script %}
 <script type="text/javascript" src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>

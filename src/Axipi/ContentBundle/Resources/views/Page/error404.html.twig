@@ -1,13 +1,13 @@
-{% extends 'AxipiCoreBundle::base.html.twig' %}
+{% extends 'AxipiContentBundle::base.html.twig' %}
 
 {% block title %}{{ page.title }}{% endblock %}
 
-{% block body %}
+{% block main %}
     <div class="jumbotron">
         <h1>error404 controller</h1>
-        <p>slug {{ page.title }}</p>
-        <p>{{ 'test1.test2'|trans({}, 'core') }}</p>
+        <h2>{{ page.title }}</h2>
         <p><a href="{{ path('axipi_core_slug', {slug: 'a/b/c/d'}) }}">a/b/c/d</a></p>
+        <p><a href="{{ path('axipi_core_slug', {slug: 'axipi'}) }}">axipi</a></p>
     </div>
 {% endblock %}
 
