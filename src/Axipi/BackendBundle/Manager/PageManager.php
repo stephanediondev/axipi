@@ -33,13 +33,15 @@ class PageManager extends AbstractManager
 
     public function persist($form)
     {
-        /*echo $form->getComponent()->getAttributesSchema();
-        exit(0);
-        $image = $form->get('attributes')->get('image')->getData();
-        $image->move('uploads', $image->getClientOriginalName());*/
+        /*$image = $form->get('attributes')->get('image')->getData();
+        if($image) {
+            $image->move('uploads', $image->getClientOriginalName());
+        }*/
 
         $data = $form->getData();
-        //$data->setAttribute('image', $image->getClientOriginalName());
+        /*if($image) {
+            $data->setAttribute('image', $image->getClientOriginalName());
+        }*/
         if($data->getDateCreated() == null) {
             $data->setDateCreated(new \Datetime());
         }

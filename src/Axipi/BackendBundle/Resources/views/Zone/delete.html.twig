@@ -1,6 +1,6 @@
 {% extends 'AxipiBackendBundle::base.html.twig' %}
 
-{% block title %}{{ widget_page.widget.title }} - {{ 'widgets'|trans({}, 'axipi_backend') }}{% endblock %}
+{% block title %}{{ zone.code }} - {{ 'zones'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
 <div class="container-fluid">
@@ -8,13 +8,12 @@
         <div class="col-lg-12">
             {% embed 'AxipiBackendBundle::block_title.html.twig' %}
                 {% block block_title %}
-                    <span><a href="{{ path('axipi_backend_widget', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></span>
-                    <span><a href="{{ path('axipi_backend_widget', {action: 'read', 'id': widget_page.widget.id}) }}"><i class="fa fa-{{ widget_page.widget.component.icon }}"></i>{{ widget_page.widget.title }}</a></span>
-                    <span><a href="{{ path('axipi_backend_widget_page', {action: 'read', 'id': widget_page.id}) }}"><i class="fa fa-{{ widget_page.page.component.icon }}"></i>{{ widget_page.page.title }}</a></span>
+                    <span><a href="{{ path('axipi_backend_zone', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'zones'|trans({}, 'axipi_backend') }}</a></span>
+                    <span><a href="{{ path('axipi_backend_zone', {action: 'read', 'id': zone.id}) }}">{{ zone.code }}</a></span>
                     <span><i class="fa fa-{{ 'icons.delete'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.delete'|trans({}, 'axipi_backend') }}</span>
                 {% endblock %}
                 {% block block_title_actions %}
-                    <li><a href="{{ path('axipi_backend_widget_page', {action: 'update', 'id': widget_page.id}) }}"><i class="fa fa-{{ 'icons.update'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.update'|trans({}, 'axipi_backend') }}</a></li>
+                    <li><a href="{{ path('axipi_backend_zone', {action: 'update', 'id': zone.id}) }}"><i class="fa fa-{{ 'icons.update'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.update'|trans({}, 'axipi_backend') }}</a></li>
                 {% endblock %}
             {% endembed %}
 

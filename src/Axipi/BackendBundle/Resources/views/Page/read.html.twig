@@ -9,7 +9,7 @@
             {% embed 'AxipiBackendBundle::block_title.html.twig' %}
                 {% block block_title %}
                     <span><a href="{{ path('axipi_backend_page', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></span>
-                    <span><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ page.title }}</span>
+                    <span><i class="fa fa-{{ page.component.icon }}"></i>{{ page.title }}</span>
                 {% endblock %}
                 {% block block_title_actions %}
                     <li><a href="{{ path('axipi_backend_page', {action: 'update', 'id': page.id}) }}"><i class="fa fa-{{ 'icons.update'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.update'|trans({}, 'axipi_backend') }}</a></li>
@@ -28,6 +28,8 @@
                     <div class="col-lg-4">
                         {{ macro.read_field('page.title'|trans({}, 'axipi_backend'), page.title) }}
                         {{ macro.read_field('page.slug'|trans({}, 'axipi_backend'), page.slug) }}
+                        {{ macro.read_field('page.titleSeo'|trans({}, 'axipi_backend'), page.titleSeo) }}
+                        {{ macro.read_field('page.descriptionSeo'|trans({}, 'axipi_backend'), page.descriptionSeo) }}
                         {{ macro.read_field('page.isActive'|trans({}, 'axipi_backend'), page.isActive) }}
                     </div>
                 </div>

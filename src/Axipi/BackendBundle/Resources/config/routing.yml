@@ -41,3 +41,10 @@ axipi_backend_widget_page:
         _controller: "axipi_backend_controller_widget_page:dispatchAction"
         action: "index"
         id: null
+
+axipi_backend_zone:
+    path:  /zone/{action}/{id}
+    defaults:
+        _controller: "axipi_backend_controller_zone:dispatchAction"
+        action: "index"
+        id: null

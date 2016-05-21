@@ -53,3 +53,14 @@ services:
         class: Axipi\BackendBundle\Manager\WidgetPageManager
         parent: "axipi_core_manager_abstract"
         public: false
+
+    axipi_backend_controller_zone:
+        class: Axipi\BackendBundle\Controller\ZoneController
+        parent: "axipi_core_controller_abstract"
+        arguments:
+            - "@axipi_backend_manager_zone"
+
+    axipi_backend_manager_zone:
+        class: Axipi\BackendBundle\Manager\ZoneManager
+        parent: "axipi_core_manager_abstract"
+        public: false

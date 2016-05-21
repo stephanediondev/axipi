@@ -8,6 +8,7 @@
         <h2>{{ page.title }}</h2>
         <p><a href="{{ path('axipi_core_slug', {slug: 'a/b/c/d'}) }}">a/b/c/d</a></p>
         <p><a href="{{ path('axipi_core_slug', {slug: 'axipi'}) }}">axipi</a></p>
+        <p><img src="{{ asset('uploads/' ~ page.attribute('image')) }}"></p>
     </div>
 {% endblock %}
 

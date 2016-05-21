@@ -9,8 +9,8 @@
             {% embed 'AxipiBackendBundle::block_title.html.twig' %}
                 {% block block_title %}
                     <span><a href="{{ path('axipi_backend_widget', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></span>
-                    <span><a href="{{ path('axipi_backend_widget', {action: 'read', 'id': widget_page.widget.id}) }}"><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ widget_page.widget.title }}</a></span>
-                    <span><a href="{{ path('axipi_backend_widget_page', {action: 'read', 'id': widget_page.id}) }}"><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ widget_page.page.title }}</a></span>
+                    <span><a href="{{ path('axipi_backend_widget', {action: 'read', 'id': widget_page.widget.id}) }}"><i class="fa fa-{{ widget_page.widget.component.icon }}"></i>{{ widget_page.widget.title }}</a></span>
+                    <span><a href="{{ path('axipi_backend_widget_page', {action: 'read', 'id': widget_page.id}) }}"><i class="fa fa-{{ widget_page.page.component.icon }}"></i>{{ widget_page.page.title }}</a></span>
                     <span><i class="fa fa-{{ 'icons.update'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.update'|trans({}, 'axipi_backend') }}</span>
                 {% endblock %}
                 {% block block_title_actions %}
