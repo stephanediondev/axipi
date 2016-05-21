@@ -9,7 +9,7 @@ Axipi\CoreBundle\Entity\Page:
         parent:
             columns:
                 - parent
-        IDX_140AB6203EB8070A:
+        program_id:
             columns:
                 - program_id
     uniqueConstraints:

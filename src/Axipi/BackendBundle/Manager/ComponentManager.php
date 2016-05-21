@@ -20,6 +20,11 @@ class ComponentManager extends AbstractManager
         return ['page', 'widget'];
     }
 
+    public function getZones()
+    {
+        return $this->em->getRepository('AxipiCoreBundle:Component')->getZones();
+    }
+
     public function persist($data)
     {
         if($data->getDateCreated() == null) {

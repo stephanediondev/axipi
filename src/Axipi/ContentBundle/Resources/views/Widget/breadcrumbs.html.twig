@@ -1,0 +1,14 @@
+{% block widget %}
+    {% if page.parent %}
+        <ol id="widget_{{ widget.code }}" class="breadcrumb">
+            {% if page.parent.parent %}
+                {% if page.parent.parent.parent %}
+                    <li><a href="{{ path('axipi_core_slug', {slug: page.parent.parent.parent.slug}) }}">{{ page.parent.parent.parent.title }}</a></li>
+                {% endif %}
+                <li><a href="{{ path('axipi_core_slug', {slug: page.parent.parent.slug}) }}">{{ page.parent.parent.title }}</a></li>
+            {% endif %}
+            <li><a href="{{ path('axipi_core_slug', {slug: page.parent.slug}) }}">{{ page.parent.title }}</a></li>
+            <li>{{ page.title }}</li>
+        </ol>
+    {% endif %}
+{% endblock %}

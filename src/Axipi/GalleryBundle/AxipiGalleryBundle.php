@@ -1,9 +1,8 @@
 <?php
-
-namespace Axipi\BackendBundle;
+namespace Axipi\GalleryBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class BackendBundle extends Bundle
+class AxipiGalleryBundle extends Bundle
 {
 }

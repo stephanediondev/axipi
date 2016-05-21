@@ -69,7 +69,7 @@ class WidgetController extends AbstractController
     public function indexAction(Request $request, ParameterBag $parameters)
     {
         $paginator  = $this->get('knp_paginator');
-        $paginator->setDefaultPaginatorOptions(['widgetParameterName' => 'types']);
+        $paginator->setDefaultPaginatorOptions(['pageParameterName' => 'widgets']);
         $pagination = $paginator->paginate(
             $this->widgetManager->getRows(),
             $request->query->getInt('widget', 1),

@@ -25,4 +25,14 @@ class ComponentRepository extends EntityRepository {
 
         return $query->getQuery();
     }
+
+    public function getZones() {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQueryBuilder();
+        $query->addSelect('zon');
+        $query->from('AxipiCoreBundle:Zone', 'zon');
+
+        return $query->getQuery()->getResult();
+    }
 }

@@ -2,6 +2,13 @@ Axipi\CoreBundle\Entity\Component:
     repositoryClass: Axipi\CoreBundle\Repository\ComponentRepository
     type: entity
     table: component
+    indexes:
+        parent:
+            columns:
+                - parent
+        zone_id:
+            columns:
+                - zone_id
     uniqueConstraints:
         service:
             columns:
@@ -22,12 +29,6 @@ Axipi\CoreBundle\Entity\Component:
             length: 255
             options:
                 fixed: false
-        zoneId:
-            type: integer
-            nullable: true
-            options:
-                unsigned: true
-            column: zone_id
         service:
             type: string
             nullable: false
@@ -40,11 +41,6 @@ Axipi\CoreBundle\Entity\Component:
             length: 255
             options:
                 fixed: false
-        parent:
-            type: integer
-            nullable: true
-            options:
-                unsigned: true
         icon:
             type: string
             nullable: true
@@ -91,3 +87,26 @@ Axipi\CoreBundle\Entity\Component:
             nullable: true
             column: date_modified
     lifecycleCallbacks: {  }
+    manyToOne:
+        parent:
+            targetEntity: Component
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                parent:
+                    referencedColumnName: id
+                    onDelete: "set null"
+            orphanRemoval: false
+        zone:
+            targetEntity: Zone
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                zone_id:
+                    referencedColumnName: id
+                    onDelete: "set null"
+            orphanRemoval: false

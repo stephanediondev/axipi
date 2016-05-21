@@ -22,6 +22,7 @@ class PageType extends AbstractType
         $builder
             ->add('program', EntityType::class,
             [
+                'placeholder' => '-',
                 'class' => Program::class,
                 'choices' => $options['programs'],
                 'choice_label' => function ($program) {
@@ -30,10 +31,21 @@ class PageType extends AbstractType
             ])
             ->add('component', EntityType::class,
             [
+                'placeholder' => '-',
                 'class' => Component::class,
                 'choices' => $options['components'],
                 'choice_label' => function ($component) {
                     return $component->getTitle();
+                }
+            ])
+            ->add('parent', EntityType::class,
+            [
+                'required' => false,
+                'placeholder' => '-',
+                'class' => Page::class,
+                'choices' => $options['pages'],
+                'choice_label' => function ($page) {
+                    return $page->getTitle();
                 }
             ])
             ->add('code')
@@ -61,6 +73,7 @@ class PageType extends AbstractType
             'data_class' => Page::class,
             'programs' => [],
             'components' => [],
+            'pages' => [],
         ));
     }
 }

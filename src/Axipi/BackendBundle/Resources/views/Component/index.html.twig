@@ -38,11 +38,11 @@
                     {% endblock %}
 
                     {% block table_head %}
-                        <th class=""><a href="#">{{ 'component.id'|trans({}, 'axipi_backend') }}</a></th>
-                        <th class=""><a href="#">{{ 'component.category'|trans({}, 'axipi_backend') }}</a></th>
-                        <th class=""><a href="#">{{ 'component.title'|trans({}, 'axipi_backend') }}</a></th>
-                        <th class=""><a href="#">{{ 'component.service'|trans({}, 'axipi_backend') }}</a></th>
-                        <th class=""><a href="#">{{ 'component.dateCreated'|trans({}, 'axipi_backend') }}</a></th>
+                        <th{% if objects.isSorted('cmp.id') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'component.id'|trans({}, 'axipi_backend'), 'cmp.id') }}</th>
+                        <th{% if objects.isSorted('cmp.category') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'component.category'|trans({}, 'axipi_backend'), 'cmp.category') }}</th>
+                        <th{% if objects.isSorted('cmp.title') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'component.title'|trans({}, 'axipi_backend'), 'cmp.title') }}</th>
+                        <th{% if objects.isSorted('cmp.service') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'component.service'|trans({}, 'axipi_backend'), 'cmp.service') }}</th>
+                        <th{% if objects.isSorted('cmp.dateCreated') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'component.dateCreated'|trans({}, 'axipi_backend'), 'cmp.dateCreated') }}</th>
                     {% endblock %}
 
                     {% block table_row %}

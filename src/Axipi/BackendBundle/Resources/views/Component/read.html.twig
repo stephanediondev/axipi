@@ -23,8 +23,8 @@
                         {{ macro.read_field('component.category'|trans({}, 'axipi_backend'), component.category) }}
                         {{ macro.read_field('component.service'|trans({}, 'axipi_backend'), component.service) }}
                         {{ macro.read_field('component.title'|trans({}, 'axipi_backend'), component.title) }}
-                        {{ macro.read_field('component.zoneId'|trans({}, 'axipi_backend'), component.zoneId) }}
-                        {{ macro.read_field('component.parent'|trans({}, 'axipi_backend'), component.parent) }}
+                        {% if component.zone %}{{ macro.read_field('component.zone'|trans({}, 'axipi_backend'), component.zone.code) }}{% endif %}
+                        {% if component.parent %}{{ macro.read_field('component.parent'|trans({}, 'axipi_backend'), component.parent.title) }}{% endif %}
                         {{ macro.read_field('component.icon'|trans({}, 'axipi_backend'), component.icon) }}
                     </div>
                     <div class="col-lg-4">

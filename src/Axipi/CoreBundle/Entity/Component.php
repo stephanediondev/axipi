@@ -15,7 +15,7 @@ class Component
     /**
      * @var integer
      */
-    private $zoneId;
+    private $zone;
 
     /**
      * @var string
@@ -89,27 +89,27 @@ class Component
     }
 
     /**
-     * Set zoneId
+     * Set zone
      *
-     * @param integer $zoneId
+     * @param integer $zone
      *
      * @return Component
      */
-    public function setZoneId($zoneId)
+    public function setZone($zone)
     {
-        $this->zoneId = $zoneId;
+        $this->zone = $zone;
 
         return $this;
     }
 
     /**
-     * Get zoneId
+     * Get zone
      *
      * @return integer
      */
-    public function getZoneId()
+    public function getZone()
     {
-        return $this->zoneId;
+        return $this->zone;
     }
 
     /**

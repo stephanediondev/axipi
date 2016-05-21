@@ -25,7 +25,9 @@ CREATE TABLE IF NOT EXISTS `component` (
   `category` varchar(255) NOT NULL,
   `attributes_schema` longtext,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `service` (`service`)
+  UNIQUE KEY `service` (`service`),
+  KEY `parent` (`parent`),
+  KEY `zone_id` (`zone_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
@@ -36,15 +38,17 @@ INSERT INTO `component` (`id`, `zone_id`, `service`, `title`, `parent`, `icon`, 
 (3, NULL, 'axipi_content_controller_content', 'Content', NULL, 'file-text-o', 0, 1, 1, 1, '2016-05-18 17:44:09', NULL, 'page', NULL),
 (4, NULL, 'axipi_content_widget_content', 'Content', NULL, 'file-text-o', 0, 0, 0, 0, '2016-05-18 18:10:25', NULL, 'widget', NULL),
 (5, NULL, 'axipi_gallery_controller_album', 'Gallery / Album', NULL, 'picture-o', 0, 0, 0, 1, '2016-05-18 22:35:46', '2016-05-20 19:00:18', 'page', NULL),
-(6, NULL, 'axipi_gallery_controller_media', 'Gallery / Media', NULL, 'picture-o', 0, 0, 0, 1, '2016-05-18 22:36:09', '2016-05-20 19:00:24', 'page', NULL),
+(6, NULL, 'axipi_gallery_controller_media', 'Gallery / Media', 5, 'picture-o', 0, 0, 0, 1, '2016-05-18 22:36:09', '2016-05-20 19:00:24', 'page', NULL),
 (7, NULL, 'axipi_google_widget_analytics', 'Google Analytics', NULL, 'google', 0, 0, 0, 1, '2016-05-18 22:36:43', '2016-05-20 20:40:43', 'widget', '{\r\n            type: "object",\r\n            title: "Google Analytics",\r\n            properties: {\r\n                code: {\r\n                    type: "string"\r\n                }\r\n            }\r\n        }'),
-(8, NULL, 'menu', 'Menu', NULL, 'bars', 0, 0, 0, 1, '2016-05-18 22:37:33', NULL, 'widget', NULL),
+(8, NULL, 'axipi_content_widget_menu', 'Menu', NULL, 'bars', 0, 0, 0, 1, '2016-05-18 22:37:33', '2016-05-21 00:12:35', 'widget', NULL),
 (9, NULL, 'axipi_content_controller_link', 'Link', NULL, 'share-square-o', 0, 0, 0, 1, '2016-05-18 22:38:59', '2016-05-20 20:46:10', 'page', '{\r\n            type: "object",\r\n            title: "Link",\r\n            properties: {\r\n                url: {\r\n                    type: "string"\r\n                }\r\n            }\r\n        }'),
-(10, NULL, 'blog', 'Blog', NULL, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:39:45', NULL, 'page', NULL),
-(11, NULL, 'blog_category', 'Blog / Category', NULL, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:39:51', NULL, 'page', NULL),
-(12, NULL, 'blog_post', 'Blog / Post', NULL, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:40:24', NULL, 'page', NULL),
-(13, NULL, 'home', 'Home', NULL, 'home', 0, 0, 0, 1, '2016-05-18 22:44:46', NULL, 'page', NULL),
-(14, NULL, 'axipi_google_widget_searchconsole', 'Google Search Console', NULL, 'google', 0, 0, 0, 1, '2016-05-20 18:42:10', '2016-05-20 20:43:24', 'widget', '{\r\n            type: "object",\r\n            title: "Google Search Console",\r\n            properties: {\r\n                code: {\r\n                    type: "string"\r\n                }\r\n            }\r\n        }');
+(10, NULL, 'axipi_blog_controller_blog', 'Blog', NULL, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:39:45', '2016-05-21 00:12:10', 'page', NULL),
+(11, NULL, 'axipi_blog_controller_category', 'Blog / Category', 10, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:39:51', '2016-05-21 00:11:53', 'page', NULL),
+(12, NULL, 'axipi_blog_controller_post', 'Blog / Post', 11, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:40:24', '2016-05-21 00:12:24', 'page', NULL),
+(13, NULL, 'axipi_content_controller_home', 'Home', NULL, 'home', 1, 0, 0, 1, '2016-05-18 22:44:46', '2016-05-20 23:16:11', 'page', NULL),
+(14, NULL, 'axipi_google_widget_searchconsole', 'Google Search Console', NULL, 'google', 0, 0, 0, 1, '2016-05-20 18:42:10', '2016-05-20 20:43:24', 'widget', '{\r\n            type: "object",\r\n            title: "Google Search Console",\r\n            properties: {\r\n                code: {\r\n                    type: "string"\r\n                }\r\n            }\r\n        }'),
+(15, NULL, 'axipi_content_controller_error404', 'Error 404', NULL, 'times', 1, 0, 0, 1, '2016-05-20 23:16:31', '2016-05-20 23:17:01', 'page', NULL),
+(16, NULL, 'axipi_content_widget_breadcrumbs', 'Breadcrumbs', NULL, 'road', 0, 0, 0, 1, '2016-05-20 23:52:18', '2016-05-21 00:01:04', 'widget', NULL);
 
 -- --------------------------------------------------------
 
@@ -121,7 +125,8 @@ CREATE TABLE IF NOT EXISTS `page` (
   UNIQUE KEY `program_id_code` (`program_id`,`code`),
   UNIQUE KEY `program_id_slug` (`program_id`,`slug`),
   KEY `component_id` (`component_id`),
-  KEY `parent` (`parent`)
+  KEY `parent` (`parent`),
+  KEY `program_id` (`program_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
@@ -129,10 +134,18 @@ CREATE TABLE IF NOT EXISTS `page` (
 --
 
 INSERT INTO `page` (`id`, `program_id`, `component_id`, `title`, `code`, `parent`, `slug`, `title_seo`, `description_seo`, `meta_robots`, `is_active`, `ordering`, `attributes`, `date_created`, `date_modified`) VALUES
-(1, 1, 3, 'test', 'test', NULL, 'a/b/c/d', NULL, NULL, NULL, 1, 0, '{"test":"OO"}', '2016-05-18 18:27:14', NULL),
-(2, 1, 3, 'Error 404', 'error404', NULL, 'error404', NULL, NULL, NULL, 1, 0, NULL, '2016-05-18 21:45:27', NULL),
-(3, 1, 5, '5', '5', NULL, '5', NULL, NULL, NULL, 0, 0, NULL, '2016-05-18 20:38:09', NULL),
-(4, 1, 9, 'sdion.net', 'sdion', NULL, 'sdion', NULL, NULL, NULL, 1, 0, '{"url":"https://locatemarker.com"}', '2016-05-20 19:53:05', '2016-05-20 20:47:39');
+(1, 1, 3, 'd', 'd', 12, 'a/b/c/d', NULL, NULL, NULL, 1, 0, NULL, '2016-05-18 18:27:14', '2016-05-21 00:10:11'),
+(2, 1, 15, 'Error 404', 'error404', NULL, 'error404', NULL, NULL, NULL, 1, 0, NULL, '2016-05-18 21:45:27', '2016-05-20 23:18:45'),
+(3, 1, 5, 'Album', 'album', NULL, 'album', NULL, NULL, NULL, 1, 0, NULL, '2016-05-18 20:38:09', '2016-05-20 23:39:30'),
+(4, 1, 9, 'Axipi', 'axipi-link', NULL, 'axipi', NULL, NULL, NULL, 1, 0, '{"url":"https://code.sdion.net/opensource/axipi"}', '2016-05-20 19:53:05', '2016-05-21 00:14:48'),
+(5, 1, 10, 'Blog', 'blog', NULL, 'blog', NULL, NULL, NULL, 0, 0, NULL, '2016-05-20 23:31:20', '2016-05-20 23:31:20'),
+(6, 1, 11, 'Blog category', 'blog-cat', 5, 'blog/category', NULL, NULL, NULL, 1, 0, NULL, '2016-05-20 23:31:54', '2016-05-21 00:14:08'),
+(7, 1, 12, 'Blog post', 'blog-post', 6, 'blog/category/post', NULL, NULL, NULL, 1, 0, NULL, '2016-05-20 23:32:13', '2016-05-21 00:13:55'),
+(8, 1, 6, 'Media', 'media', 3, 'album/media', NULL, NULL, NULL, 1, 0, NULL, '2016-05-20 23:39:47', '2016-05-20 23:39:47'),
+(9, 1, 13, 'Home', 'home', NULL, 'home', NULL, NULL, NULL, 1, 0, NULL, '2016-05-20 23:46:13', '2016-05-20 23:46:13'),
+(10, 1, 3, 'a', 'a', NULL, 'a', NULL, NULL, NULL, 1, 0, NULL, '2016-05-21 00:08:48', '2016-05-21 00:08:48'),
+(11, 1, 3, 'b', 'b', 10, 'a/b', NULL, NULL, NULL, 1, 0, NULL, '2016-05-21 00:09:01', '2016-05-21 00:09:30'),
+(12, 1, 3, 'c', 'c', 11, 'a/b/c', NULL, NULL, NULL, 0, 0, NULL, '2016-05-21 00:09:16', '2016-05-21 00:09:16');
 
 -- --------------------------------------------------------
 
@@ -271,9 +284,10 @@ CREATE TABLE IF NOT EXISTS `widget` (
 
 INSERT INTO `widget` (`id`, `program_id`, `component_id`, `zone_id`, `title`, `code`, `is_active`, `ordering`, `attributes`, `date_created`, `date_modified`) VALUES
 (1, 1, 4, 1, 'Footer aa', 'footer', 1, 0, NULL, '2016-05-18 21:16:37', NULL),
-(2, 1, 7, 1, 'pp', 'ii', 0, 0, '{"code":"aa"}', '2016-05-20 18:29:31', '2016-05-20 20:42:09'),
-(3, 1, 8, 1, 'o', 'oa', 0, 0, NULL, '2016-05-20 18:30:12', NULL),
-(4, 1, 14, 1, 'Search Console', 'searchconsole', 0, 0, '{"code":"ee"}', '2016-05-20 19:28:25', '2016-05-20 20:43:34');
+(2, 1, 7, 1, 'GA', 'ga', 0, 0, '{"code":"--"}', '2016-05-20 18:29:31', '2016-05-21 00:16:43'),
+(3, 1, 8, 3, 'Menu', 'menu', 1, 0, NULL, '2016-05-20 18:30:12', '2016-05-21 00:19:31'),
+(4, 1, 14, 1, 'Search Console', 'searchconsole', 0, 0, '{"code":"ee"}', '2016-05-20 19:28:25', '2016-05-20 20:55:50'),
+(5, 1, 16, 2, 'Breadcrumbs', 'breadcrumbs', 1, 0, NULL, '2016-05-20 20:56:07', '2016-05-21 00:03:00');
 
 -- --------------------------------------------------------
 
@@ -324,11 +338,20 @@ CREATE TABLE IF NOT EXISTS `zone` (
 --
 
 INSERT INTO `zone` (`id`, `code`, `is_active`, `date_created`, `date_modified`) VALUES
-(1, 'footer', 1, '2016-05-18 21:17:11', NULL);
+(1, 'footer', 1, '2016-05-18 21:17:11', NULL),
+(2, 'before_content', 1, '2016-05-21 02:01:25', NULL),
+(3, 'navbar-collapse', 1, '2016-05-21 02:18:34', NULL);
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `component`
+--
+ALTER TABLE `component`
+  ADD CONSTRAINT `FK_49FEA1573D8E604F` FOREIGN KEY (`parent`) REFERENCES `component` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `FK_49FEA1579F2C3FAB` FOREIGN KEY (`zone_id`) REFERENCES `zone` (`id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `page`

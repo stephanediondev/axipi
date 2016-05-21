@@ -2,6 +2,7 @@
 namespace Axipi\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Axipi\CoreBundle\Entity\Page;
 
 class PageRepository extends EntityRepository {
     public function getById($id) {
@@ -71,6 +72,24 @@ class PageRepository extends EntityRepository {
         $query->setParameter(':active', 1);
 
         $query->orderBy('cmp.title');
+
+        return $query->getQuery()->getResult();
+    }
+
+    public function getPages(Page $page) {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQueryBuilder();
+        $query->addSelect('pge', 'cmp');
+        $query->from('AxipiCoreBundle:Page', 'pge');
+        $query->leftJoin('pge.component', 'cmp');
+
+        if($page->getComponent()->getParent()) {
+            $query->where('pge.component = :component_parent');
+            $query->setParameter(':component_parent', $page->getComponent()->getParent());
+        }
+
+        $query->orderBy('pge.title');
 
         return $query->getQuery()->getResult();
     }

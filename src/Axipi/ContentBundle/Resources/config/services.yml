@@ -7,6 +7,22 @@ services:
         class: Axipi\ContentBundle\Controller\LinkController
         parent: "axipi_core_controller_abstract"
 
+    axipi_content_controller_home:
+        class: Axipi\ContentBundle\Controller\HomeController
+        parent: "axipi_core_controller_abstract"
+
+    axipi_content_controller_error404:
+        class: Axipi\ContentBundle\Controller\Error404Controller
+        parent: "axipi_core_controller_abstract"
+
     axipi_content_widget_content:
         class: Axipi\ContentBundle\Widget\ContentWidget
+        parent: "axipi_core_controller_abstract"
+
+    axipi_content_widget_breadcrumbs:
+        class: Axipi\ContentBundle\Widget\BreadcrumbsWidget
+        parent: "axipi_core_controller_abstract"
+
+    axipi_content_widget_menu:
+        class: Axipi\ContentBundle\Widget\MenuWidget
         parent: "axipi_core_controller_abstract"

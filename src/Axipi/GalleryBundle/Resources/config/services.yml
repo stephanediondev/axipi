@@ -1,0 +1,8 @@
+services:
+    axipi_gallery_controller_album:
+        class: Axipi\GalleryBundle\Controller\AlbumController
+        parent: "axipi_core_controller_abstract"
+
+    axipi_gallery_controller_media:
+        class: Axipi\GalleryBundle\Controller\MediaController
+        parent: "axipi_core_controller_abstract"

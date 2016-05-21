@@ -58,7 +58,7 @@ class ComponentController extends AbstractController
     public function indexAction(Request $request, ParameterBag $parameters)
     {
         $paginator  = $this->get('knp_paginator');
-        $paginator->setDefaultPaginatorOptions(['pageParameterName' => 'types']);
+        $paginator->setDefaultPaginatorOptions(['pageParameterName' => 'components']);
         $pagination = $paginator->paginate(
             $this->componentManager->getRows(),
             $request->query->getInt('page', 1),
@@ -75,7 +75,7 @@ class ComponentController extends AbstractController
         $component = new Component();
         $component->setCategory($parameters->get('category'));
 
-        $form = $this->createForm(ComponentType::class, $component, []);
+        $form = $this->createForm(ComponentType::class, $component, ['components' => $this->componentManager->getRows()->getResult(), 'zones' => $this->componentManager->getZones()]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
@@ -98,7 +98,7 @@ class ComponentController extends AbstractController
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
-        $form = $this->createForm(ComponentType::class, $parameters->get('component'), []);
+        $form = $this->createForm(ComponentType::class, $parameters->get('component'), ['components' => $this->componentManager->getRows()->getResult(), 'zones' => $this->componentManager->getZones()]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {

@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Axipi\CoreBundle\Entity\Component;
+use Axipi\CoreBundle\Entity\Zone;
 
 class ComponentType extends AbstractType
 {
@@ -19,10 +20,28 @@ class ComponentType extends AbstractType
     {
         $builder
             ->add('category')
-            ->add('zoneId')
+            ->add('zone', EntityType::class,
+            [
+                'required' => false,
+                'placeholder' => '-',
+                'class' => Zone::class,
+                'choices' => $options['zones'],
+                'choice_label' => function ($zone) {
+                    return $zone->getCode();
+                }
+            ])
             ->add('service')
             ->add('title')
-            ->add('parent')
+            ->add('parent', EntityType::class,
+            [
+                'required' => false,
+                'placeholder' => '-',
+                'class' => Component::class,
+                'choices' => $options['components'],
+                'choice_label' => function ($component) {
+                    return $component->getTitle();
+                }
+            ])
             ->add('icon')
             ->add('isUnique')
             ->add('isSearch')
@@ -47,7 +66,8 @@ class ComponentType extends AbstractType
         $resolver->setDefaults(array(
             'translation_domain' => 'axipi_backend',
             'data_class' => Component::class,
-            'categories' => [],
+            'components' => [],
+            'zones' => [],
         ));
     }
 }

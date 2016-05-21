@@ -2,6 +2,7 @@
 namespace Axipi\BackendBundle\Manager;
 
 use Axipi\CoreBundle\Manager\AbstractManager;
+use Axipi\CoreBundle\Entity\Page;
 
 class PageManager extends AbstractManager
 {
@@ -23,6 +24,11 @@ class PageManager extends AbstractManager
     public function getComponents()
     {
         return $this->em->getRepository('AxipiCoreBundle:Page')->getComponents();
+    }
+
+    public function getPages(Page $page)
+    {
+        return $this->em->getRepository('AxipiCoreBundle:Page')->getPages($page);
     }
 
     public function persist($data)

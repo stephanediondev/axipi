@@ -23,6 +23,7 @@ class WidgetType extends AbstractType
         $builder
             ->add('program', EntityType::class,
             [
+                'placeholder' => '-',
                 'class' => Program::class,
                 'choices' => $options['programs'],
                 'choice_label' => function ($program) {
@@ -31,6 +32,7 @@ class WidgetType extends AbstractType
             ])
             ->add('component', EntityType::class,
             [
+                'placeholder' => '-',
                 'class' => Component::class,
                 'choices' => $options['components'],
                 'choice_label' => function ($component) {
@@ -39,6 +41,7 @@ class WidgetType extends AbstractType
             ])
             ->add('zone', EntityType::class,
             [
+                'placeholder' => '-',
                 'class' => Zone::class,
                 'choices' => $options['zones'],
                 'choice_label' => function ($zone) {
