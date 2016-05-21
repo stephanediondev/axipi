@@ -44,6 +44,8 @@ class PageRepository extends EntityRepository {
 
         $query->setParameter(':category', 'page');
 
+        $query->orderBy('pge.slug');
+
         return $query->getQuery();
     }
 

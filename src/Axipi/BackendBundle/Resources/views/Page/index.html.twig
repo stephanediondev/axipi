@@ -38,19 +38,19 @@
 
                     {% block table_head %}
                         <th{% if objects.isSorted('pge.id') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'page.id'|trans({}, 'axipi_backend'), 'pge.id') }}</th>
-                        <th>{{ 'page.component'|trans({}, 'axipi_backend') }}</th>
                         <th{% if objects.isSorted('pge.title') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'page.title'|trans({}, 'axipi_backend'), 'pge.title') }}</th>
                         <th{% if objects.isSorted('pge.code') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'page.code'|trans({}, 'axipi_backend'), 'pge.code') }}</th>
                         <th{% if objects.isSorted('pge.slug') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'page.slug'|trans({}, 'axipi_backend'), 'pge.slug') }}</th>
+                        <th{% if objects.isSorted('pge.isActive') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'page.isActive'|trans({}, 'axipi_backend'), 'pge.isActive') }}</th>
                         <th{% if objects.isSorted('pge.dateCreated') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'page.dateCreated'|trans({}, 'axipi_backend'), 'pge.dateCreated') }}</th>
                     {% endblock %}
 
                     {% block table_row %}
                         <td><a href="{{ path('axipi_backend_page', {action: 'read', 'id': object.id}) }}">{{ object.id }}</a></td>
-                        <td><a href="{{ path('axipi_backend_component', {action: 'read', 'id': object.component.id}) }}"><i class="fa fa-{{ object.component.icon }}"></i>{{ object.component.title }}</a></td>
-                        <td><a href="{{ path('axipi_backend_page', {action: 'read', 'id': object.id}) }}">{{ object.title }}</a></td>
+                        <td><a href="{{ path('axipi_backend_page', {action: 'read', 'id': object.id}) }}"><i class="fa fa-{{ object.component.icon }}"></i>{{ object.title }}</a></td>
                         <td>{{ object.code }}</td>
                         <td>{{ object.slug }}</td>
+                        <td>{{ object.isActive }}</td>
                         <td>{{ object.dateCreated|date }}</td>
                     {% endblock %}
 

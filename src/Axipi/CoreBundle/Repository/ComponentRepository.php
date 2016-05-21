@@ -23,6 +23,8 @@ class ComponentRepository extends EntityRepository {
         $query->addSelect('cmp');
         $query->from('AxipiCoreBundle:Component', 'cmp');
 
+        $query->orderBy('cmp.title');
+
         return $query->getQuery();
     }
 
