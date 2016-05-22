@@ -27,17 +27,17 @@
                     {% endblock %}
 
                     {% block table_head %}
-                        <th{% if objects.isSorted('zon.id') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'zone.id'|trans({}, 'axipi_backend'), 'zon.id') }}</th>
-                        <th{% if objects.isSorted('zon.code') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'zone.code'|trans({}, 'axipi_backend'), 'zon.code') }}</th>
-                        <th{% if objects.isSorted('zon.isActive') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'zone.isActive'|trans({}, 'axipi_backend'), 'zon.isActive') }}</th>
-                        <th{% if objects.isSorted('zon.dateCreated') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'zone.dateCreated'|trans({}, 'axipi_backend'), 'zon.dateCreated') }}</th>
+                        <th class="hidden-xs{% if objects.isSorted('zon.id') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'zone.id'|trans({}, 'axipi_backend'), 'zon.id') }}</th>
+                        <th class="{% if objects.isSorted('zon.code') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'zone.code'|trans({}, 'axipi_backend'), 'zon.code') }}</th>
+                        <th class="hidden-xs{% if objects.isSorted('zon.isActive') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'zone.isActive'|trans({}, 'axipi_backend'), 'zon.isActive') }}</th>
+                        <th class="hidden-xs{% if objects.isSorted('zon.dateCreated') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'zone.dateCreated'|trans({}, 'axipi_backend'), 'zon.dateCreated') }}</th>
                     {% endblock %}
 
                     {% block table_row %}
-                        <td><a href="{{ path('axipi_backend_zone', {action: 'read', 'id': object.id}) }}">{{ object.id }}</a></td>
+                        <td class="hidden-xs"><a href="{{ path('axipi_backend_zone', {action: 'read', 'id': object.id}) }}">{{ object.id }}</a></td>
                         <td><a href="{{ path('axipi_backend_zone', {action: 'read', 'id': object.id}) }}">{{ object.code }}</a></td>
-                        <td>{{ object.isActive }}</td>
-                        <td>{{ object.dateCreated|date }}</td>
+                        <td class="hidden-xs">{{ object.isActive }}</td>
+                        <td class="hidden-xs">{{ object.dateCreated|date }}</td>
                     {% endblock %}
 
                     {% block table_row_actions %}

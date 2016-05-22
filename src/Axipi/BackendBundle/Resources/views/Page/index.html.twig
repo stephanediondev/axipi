@@ -37,21 +37,21 @@
                     {% endblock %}
 
                     {% block table_head %}
-                        <th{% if objects.isSorted('pge.id') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'page.id'|trans({}, 'axipi_backend'), 'pge.id') }}</th>
-                        <th{% if objects.isSorted('pge.title') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'page.title'|trans({}, 'axipi_backend'), 'pge.title') }}</th>
-                        <th{% if objects.isSorted('pge.code') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'page.code'|trans({}, 'axipi_backend'), 'pge.code') }}</th>
-                        <th{% if objects.isSorted('pge.slug') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'page.slug'|trans({}, 'axipi_backend'), 'pge.slug') }}</th>
-                        <th{% if objects.isSorted('pge.isActive') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'page.isActive'|trans({}, 'axipi_backend'), 'pge.isActive') }}</th>
-                        <th{% if objects.isSorted('pge.dateCreated') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'page.dateCreated'|trans({}, 'axipi_backend'), 'pge.dateCreated') }}</th>
+                        <th class="hidden-xs{% if objects.isSorted('pge.id') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'page.id'|trans({}, 'axipi_backend'), 'pge.id') }}</th>
+                        <th class="{% if objects.isSorted('pge.title') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'page.title'|trans({}, 'axipi_backend'), 'pge.title') }}</th>
+                        <th class="hidden-xs{% if objects.isSorted('pge.code') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'page.code'|trans({}, 'axipi_backend'), 'pge.code') }}</th>
+                        <th class="hidden-xs{% if objects.isSorted('pge.slug') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'page.slug'|trans({}, 'axipi_backend'), 'pge.slug') }}</th>
+                        <th class="hidden-xs{% if objects.isSorted('pge.isActive') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'page.isActive'|trans({}, 'axipi_backend'), 'pge.isActive') }}</th>
+                        <th class="hidden-xs{% if objects.isSorted('pge.dateCreated') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'page.dateCreated'|trans({}, 'axipi_backend'), 'pge.dateCreated') }}</th>
                     {% endblock %}
 
                     {% block table_row %}
-                        <td><a href="{{ path('axipi_backend_page', {action: 'read', 'id': object.id}) }}">{{ object.id }}</a></td>
+                        <td class="hidden-xs"><a href="{{ path('axipi_backend_page', {action: 'read', 'id': object.id}) }}">{{ object.id }}</a></td>
                         <td><a href="{{ path('axipi_backend_page', {action: 'read', 'id': object.id}) }}"><i class="fa fa-{{ object.component.icon }}"></i>{{ object.title }}</a></td>
-                        <td>{{ object.code }}</td>
-                        <td>{{ object.slug }}</td>
-                        <td>{{ object.isActive }}</td>
-                        <td>{{ object.dateCreated|date }}</td>
+                        <td class="hidden-xs">{{ object.code }}</td>
+                        <td class="hidden-xs">{{ object.slug }}</td>
+                        <td class="hidden-xs">{{ object.isActive }}</td>
+                        <td class="hidden-xs">{{ object.dateCreated|date }}</td>
                     {% endblock %}
 
                     {% block table_row_actions %}

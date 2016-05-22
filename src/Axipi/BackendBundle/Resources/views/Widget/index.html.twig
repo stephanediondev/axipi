@@ -37,21 +37,21 @@
                     {% endblock %}
 
                     {% block table_head %}
-                        <th{% if objects.isSorted('wdg.id') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'widget.id'|trans({}, 'axipi_backend'), 'wdg.id') }}</th>
-                        <th{% if objects.isSorted('wdg.title') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'widget.title'|trans({}, 'axipi_backend'), 'wdg.title') }}</th>
-                        <th{% if objects.isSorted('wdg.code') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'widget.code'|trans({}, 'axipi_backend'), 'wdg.code') }}</th>
-                        <th>{{ 'widget.zone'|trans({}, 'axipi_backend') }}</th>
-                        <th{% if objects.isSorted('wdg.isActive') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'widget.isActive'|trans({}, 'axipi_backend'), 'wdg.isActive') }}</th>
-                        <th{% if objects.isSorted('wdg.dateCreated') %} class="sort_asc"{% endif %}>{{ knp_pagination_sortable(objects, 'widget.dateCreated'|trans({}, 'axipi_backend'), 'wdg.dateCreated') }}</th>
+                        <th class="hidden-xs{% if objects.isSorted('wdg.id') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'widget.id'|trans({}, 'axipi_backend'), 'wdg.id') }}</th>
+                        <th class="{% if objects.isSorted('wdg.title') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'widget.title'|trans({}, 'axipi_backend'), 'wdg.title') }}</th>
+                        <th class="hidden-xs{% if objects.isSorted('wdg.code') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'widget.code'|trans({}, 'axipi_backend'), 'wdg.code') }}</th>
+                        <th class="hidden-xs">{{ 'widget.zone'|trans({}, 'axipi_backend') }}</th>
+                        <th class="hidden-xs{% if objects.isSorted('wdg.isActive') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'widget.isActive'|trans({}, 'axipi_backend'), 'wdg.isActive') }}</th>
+                        <th class="hidden-xs{% if objects.isSorted('wdg.dateCreated') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'widget.dateCreated'|trans({}, 'axipi_backend'), 'wdg.dateCreated') }}</th>
                     {% endblock %}
 
                     {% block table_row %}
-                        <td><a href="{{ path('axipi_backend_widget', {action: 'read', 'id': object.id}) }}">{{ object.id }}</a></td>
+                        <td class="hidden-xs"><a href="{{ path('axipi_backend_widget', {action: 'read', 'id': object.id}) }}">{{ object.id }}</a></td>
                         <td><a href="{{ path('axipi_backend_widget', {action: 'read', 'id': object.id}) }}"><i class="fa fa-{{ object.component.icon }}"></i>{{ object.title }}</a></td>
-                        <td>{{ object.code }}</td>
-                        <td>{{ object.zone.code }}</td>
-                        <td>{{ object.isActive }}</td>
-                        <td>{{ object.dateCreated|date }}</td>
+                        <td class="hidden-xs">{{ object.code }}</td>
+                        <td class="hidden-xs">{{ object.zone.code }}</td>
+                        <td class="hidden-xs">{{ object.isActive }}</td>
+                        <td class="hidden-xs">{{ object.dateCreated|date }}</td>
                     {% endblock %}
 
                     {% block table_row_actions %}
