@@ -35,20 +35,22 @@ CREATE TABLE IF NOT EXISTS `component` (
 --
 
 INSERT INTO `component` (`id`, `zone_id`, `service`, `title`, `parent`, `icon`, `is_unique`, `is_search`, `is_sitemap`, `is_active`, `date_created`, `date_modified`, `category`, `attributes_schema`) VALUES
-(3, NULL, 'axipi_content_controller_content', 'Content', NULL, 'file-text-o', 0, 1, 1, 1, '2016-05-18 17:44:09', NULL, 'page', NULL),
-(4, NULL, 'axipi_content_widget_content', 'Content', NULL, 'file-text-o', 0, 0, 0, 1, '2016-05-18 18:10:25', '2016-05-21 00:29:53', 'widget', NULL),
+(3, NULL, 'axipi_content_controller_page', 'Content / Page', NULL, 'file-text-o', 0, 1, 1, 1, '2016-05-18 17:44:09', '2016-05-23 20:17:33', 'page', '{\r\n    "description": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextareaType",\r\n        "options": {\r\n            "required": "false",\r\n"attr": {"class":"wysiwyg"}\r\n        }\r\n    }\r\n}'),
+(4, NULL, 'axipi_content_widget_block', 'Content / Block', NULL, 'file-text-o', 0, 0, 0, 1, '2016-05-18 18:10:25', '2016-05-23 20:16:43', 'widget', '{\r\n    "description": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextareaType",\r\n        "options": {\r\n            "required": "false",\r\n"attr": {"class":"wysiwyg"}\r\n        }\r\n    }\r\n}'),
 (5, NULL, 'axipi_gallery_controller_album', 'Gallery / Album', NULL, 'picture-o', 0, 0, 0, 1, '2016-05-18 22:35:46', '2016-05-20 19:00:18', 'page', NULL),
-(6, NULL, 'axipi_gallery_controller_media', 'Gallery / Media', 5, 'picture-o', 0, 0, 0, 1, '2016-05-18 22:36:09', '2016-05-20 19:00:24', 'page', NULL),
-(7, 2, 'axipi_google_widget_analytics', 'Google Analytics', NULL, 'google', 0, 0, 0, 1, '2016-05-18 22:36:43', '2016-05-21 00:31:04', 'widget', '{\r\n    "code": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "true"\r\n        }\r\n    }\r\n}\r\n'),
-(8, NULL, 'axipi_content_widget_menu', 'Menu', NULL, 'bars', 0, 0, 0, 1, '2016-05-18 22:37:33', '2016-05-21 00:12:35', 'widget', NULL),
-(9, NULL, 'axipi_content_controller_link', 'Link', NULL, 'share-square-o', 0, 0, 0, 1, '2016-05-18 22:38:59', '2016-05-20 20:46:10', 'page', '{\r\n    "url": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "true"\r\n        }\r\n    }\r\n}\r\n'),
+(6, NULL, 'axipi_gallery_controller_media', 'Gallery / Media', 5, 'picture-o', 0, 0, 0, 1, '2016-05-18 22:36:09', '2016-05-20 19:00:24', 'page', '{\r\n    "image": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\FileType",\r\n        "options": {\r\n            "required": "true"\r\n        }\r\n    },\r\n    "description": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextareaType",\r\n        "options": {\r\n            "required": "false",\r\n"attr": {"class":"wysiwyg"}\r\n        }\r\n    }\r\n}\r\n'),
+(7, 2, 'axipi_google_widget_analytics', 'Google / Analytics', NULL, 'google', 0, 0, 0, 1, '2016-05-18 22:36:43', '2016-05-21 20:30:01', 'widget', '{\r\n    "code": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "true"\r\n        }\r\n    }\r\n}'),
+(8, NULL, 'axipi_content_widget_menu', 'Content / Menu', NULL, 'bars', 0, 0, 0, 1, '2016-05-18 22:37:33', '2016-05-23 20:16:51', 'widget', '{\r\n    "display_title": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\CheckboxType",\r\n        "options": {\r\n            "required": "false"\r\n        }\r\n    },\r\n    "class": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "false"\r\n        }\r\n    }\r\n}'),
+(9, NULL, 'axipi_content_controller_link', 'Content / Link', NULL, 'share-square-o', 0, 0, 0, 1, '2016-05-18 22:38:59', '2016-05-23 20:17:46', 'page', '{\r\n    "url": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "true"\r\n        }\r\n    }\r\n}'),
 (10, NULL, 'axipi_blog_controller_blog', 'Blog', NULL, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:39:45', '2016-05-21 00:12:10', 'page', NULL),
 (11, NULL, 'axipi_blog_controller_category', 'Blog / Category', 10, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:39:51', '2016-05-21 00:11:53', 'page', NULL),
 (12, NULL, 'axipi_blog_controller_post', 'Blog / Post', 11, 'pencil-square-o', 0, 0, 0, 1, '2016-05-18 22:40:24', '2016-05-21 00:12:24', 'page', NULL),
-(13, NULL, 'axipi_content_controller_home', 'Home', NULL, 'home', 1, 0, 0, 1, '2016-05-18 22:44:46', '2016-05-20 23:16:11', 'page', NULL),
-(14, NULL, 'axipi_google_widget_searchconsole', 'Google Search Console', NULL, 'google', 0, 0, 0, 1, '2016-05-20 18:42:10', '2016-05-20 20:43:24', 'widget', '{\r\n    "code": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "true"\r\n        }\r\n    }\r\n}\r\n'),
-(15, NULL, 'axipi_content_controller_error404', 'Error 404', NULL, 'times', 1, 0, 0, 1, '2016-05-20 23:16:31', '2016-05-20 23:17:01', 'page', NULL),
-(16, NULL, 'axipi_content_widget_breadcrumbs', 'Breadcrumbs', NULL, 'road', 0, 0, 0, 1, '2016-05-20 23:52:18', '2016-05-21 00:01:04', 'widget', NULL);
+(13, NULL, 'axipi_content_controller_home', 'Content / Home', NULL, 'home', 1, 0, 0, 1, '2016-05-18 22:44:46', '2016-05-23 20:17:42', 'page', '{\r\n    "description": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextareaType",\r\n        "options": {\r\n            "required": "false",\r\n"attr": {"class":"wysiwyg"}\r\n        }\r\n    }\r\n}'),
+(14, NULL, 'axipi_google_widget_searchconsole', 'Google / Search Console', NULL, 'google', 0, 0, 0, 1, '2016-05-20 18:42:10', '2016-05-21 20:30:07', 'widget', '{\r\n    "code": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "true"\r\n        }\r\n    }\r\n}'),
+(15, NULL, 'axipi_content_controller_error404', 'Content / Error 404', NULL, 'times', 1, 0, 0, 1, '2016-05-20 23:16:31', '2016-05-23 20:17:38', 'page', NULL),
+(16, NULL, 'axipi_content_widget_breadcrumbs', 'Content / Breadcrumbs', NULL, 'road', 0, 0, 0, 1, '2016-05-20 23:52:18', '2016-05-23 20:16:33', 'widget', NULL),
+(17, NULL, 'axipi_google_widget_tagmanager', 'Google / Tag Manager', NULL, 'google', 0, 0, 0, 1, '2016-05-21 20:27:40', '2016-05-21 20:30:03', 'widget', '{\r\n    "code": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "true"\r\n        }\r\n    }\r\n}'),
+(18, NULL, 'axipi_content_widget_icon', 'Content / Favicon', NULL, 'star-o', 0, 0, 0, 1, '2016-05-23 20:06:34', '2016-05-23 20:16:47', 'widget', '{\r\n    "image": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\FileType",\r\n        "options": {\r\n            "required": "true"\r\n        }\r\n    }\r\n}');
 
 -- --------------------------------------------------------
 
@@ -134,19 +136,19 @@ CREATE TABLE IF NOT EXISTS `page` (
 --
 
 INSERT INTO `page` (`id`, `program_id`, `component_id`, `title`, `code`, `parent`, `slug`, `title_seo`, `description_seo`, `meta_robots`, `is_active`, `ordering`, `attributes`, `date_created`, `date_modified`) VALUES
-(1, 1, 3, 'd', 'd', 12, 'a/b/c/d', NULL, NULL, NULL, 1, 0, NULL, '2016-05-18 18:27:14', '2016-05-21 00:10:11'),
+(1, 1, 3, 'd', 'd', 12, 'a/b/c/d', 'a', 'b', NULL, 1, 0, '{"description":null}', '2016-05-18 18:27:14', '2016-05-21 20:49:04'),
 (2, 1, 15, 'Error 404', 'error404', NULL, 'error404', NULL, NULL, NULL, 1, 0, NULL, '2016-05-18 21:45:27', '2016-05-20 23:18:45'),
 (3, 1, 5, 'Album', 'album', NULL, 'album', NULL, NULL, NULL, 1, 0, NULL, '2016-05-18 20:38:09', '2016-05-20 23:39:30'),
-(4, 1, 9, 'Axipi', 'axipi-link', NULL, 'axipi', NULL, NULL, NULL, 1, 0, '{"url":"OOOaa"}', '2016-05-20 19:53:05', '2016-05-21 08:34:45'),
-(5, 1, 10, 'Blog', 'blog', NULL, 'blog', NULL, NULL, NULL, 0, 0, NULL, '2016-05-20 23:31:20', '2016-05-20 23:31:20'),
+(4, 1, 9, 'Axipi', 'axipi-link', NULL, 'axipi', NULL, NULL, NULL, 1, 0, '{"url":"http:\\/\\/axipi.com"}', '2016-05-20 19:53:05', '2016-05-23 20:19:02'),
+(5, 1, 10, 'Blog', 'blog', NULL, 'blog', NULL, NULL, NULL, 1, 0, '[]', '2016-05-20 23:31:20', '2016-05-21 20:21:32'),
 (6, 1, 11, 'Blog category', 'blog-cat', 5, 'blog/category', NULL, NULL, NULL, 1, 0, NULL, '2016-05-20 23:31:54', '2016-05-21 00:14:08'),
 (7, 1, 12, 'Blog post', 'blog-post', 6, 'blog/category/post', NULL, NULL, NULL, 1, 0, NULL, '2016-05-20 23:32:13', '2016-05-21 00:13:55'),
-(8, 1, 6, 'Media', 'media', 3, 'album/media', NULL, NULL, NULL, 1, 0, NULL, '2016-05-20 23:39:47', '2016-05-20 23:39:47'),
-(9, 1, 13, 'Home', 'home', NULL, 'home', NULL, NULL, NULL, 1, 0, NULL, '2016-05-20 23:46:13', '2016-05-20 23:46:13'),
+(9, 1, 13, 'Home', 'home', NULL, 'home', NULL, NULL, NULL, 1, 0, '{"description":"<p>Nunc ante enim, consectetur ac elit in, maximus blandit turpis. Praesent facilisis venenatis urna, non porta felis rutrum nec. Fusce at arcu at dui lobortis tristique in eu leo. Donec rhoncus pharetra lectus id accumsan. Vivamus viverra magna leo, quis hendrerit nisl feugiat eget. Duis ornare justo et mi convallis, vitae ultrices elit ornare. Mauris dignissim, nisi a pretium vehicula, leo neque accumsan sem, non faucibus purus nulla posuere leo.<\\/p>\\r\\n<p>Nunc bibendum hendrerit felis id volutpat. Praesent cursus libero eget tellus convallis, vel iaculis lacus commodo. Vestibulum turpis orci, ultrices eu felis ut, rutrum mollis odio. Maecenas eget ex et elit rhoncus eleifend. Aliquam non felis metus. Aenean rutrum, leo eu ultricies molestie, ex felis sodales magna, sed ullamcorper felis ligula gravida quam. Proin at dui leo. Proin iaculis ornare odio non porta.<\\/p>"}', '2016-05-20 23:46:13', '2016-05-21 20:33:01'),
 (10, 1, 3, 'a', 'a', NULL, 'a', NULL, NULL, NULL, 1, 0, NULL, '2016-05-21 00:08:48', '2016-05-21 00:08:48'),
-(11, 1, 3, 'b', 'b', 10, 'a/b', NULL, NULL, NULL, 1, 0, NULL, '2016-05-21 00:09:01', '2016-05-21 00:09:30'),
-(12, 1, 3, 'c', 'c', 11, 'a/b/c', NULL, NULL, NULL, 0, 0, NULL, '2016-05-21 00:09:16', '2016-05-21 00:09:16'),
-(13, 1, 9, 'Site perso', 'sdion.net', NULL, 'sdion', NULL, NULL, NULL, 1, 0, '{"url":"https:\\/\\/sdion.net"}', '2016-05-21 08:37:22', '2016-05-21 08:37:22');
+(11, 1, 3, 'b', 'b', 10, 'a/b', NULL, NULL, NULL, 1, 0, '{"description":"<p><strong>test<\\/strong><\\/p>\\r\\n<p><em>test<\\/em> esr<\\/p>"}', '2016-05-21 00:09:01', '2016-05-21 18:50:25'),
+(12, 1, 3, 'c', 'c', 11, 'a/b/c', NULL, NULL, NULL, 1, 0, '{"description":"<p>t t t<\\/p>\\r\\n<p>g<\\/p>", "test":"test"}', '2016-05-21 00:09:16', '2016-05-21 16:47:38'),
+(13, 1, 9, 'Site perso', 'sdion.net', NULL, 'sdion', NULL, NULL, NULL, 1, 0, '{"url":"https:\\/\\/sdion.net"}', '2016-05-21 08:37:22', '2016-05-21 08:37:22'),
+(14, 1, 6, 'Media', 'media', 3, 'album/media', NULL, NULL, NULL, 1, 0, '{"image":"3680468.jpg","description":null}', '2016-05-23 19:59:03', '2016-05-23 19:59:03');
 
 -- --------------------------------------------------------
 
@@ -251,7 +253,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `firstname`, `lastname`, `is_authorized`, `roles`, `date_created`, `date_modified`) VALUES
-(1, 'example@example.com', '$2y$13$5lgE1eupJw7yp1fVuAing.M7Bov4AcopfAmeXhRv3s7EljCzLJm6i', 'Example', NULL, 1, '["ROLE_ADMIN"]', '2016-05-19 22:06:18', NULL);
+(1, 'example@example.com', '$2y$13$RiodLgzy6Mb8HPLzTIGpFueymV1QciZyYxXP0rgN2N11ZR9Hnqdam', 'Example', NULL, 1, '["ROLE_ADMIN"]', '2016-05-19 22:06:18', '2016-05-23 20:19:45'),
+(3, 'tset', '$2y$13$oaFueOhXqKOUotCGrPOybOwVKovBZnDhI1512MzaepqJO5SOO4YlO', 'test', 'test', 1, NULL, '2016-05-23 18:58:15', '2016-05-23 18:58:15'),
+(4, 'aaff', '$2y$13$GEBMS1QD7q6pccdgGbn1b.ryWvCl1N9retEZydN3KL35xMFz4s03y', 'a', NULL, 1, NULL, '2016-05-23 18:59:47', '2016-05-23 20:19:56');
 
 -- --------------------------------------------------------
 
@@ -284,11 +288,12 @@ CREATE TABLE IF NOT EXISTS `widget` (
 --
 
 INSERT INTO `widget` (`id`, `program_id`, `component_id`, `zone_id`, `title`, `code`, `is_active`, `ordering`, `attributes`, `date_created`, `date_modified`) VALUES
-(1, 1, 4, 1, 'Footer aa', 'footer', 1, 0, NULL, '2016-05-18 21:16:37', NULL),
+(1, 1, 4, 1, 'Footer aa', 'footer', 1, 0, '{"description":"<p>Morbi vel lorem sed urna fermentum cursus quis vel nunc. Nullam sed nulla fringilla, semper felis id, pretium ligula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent dapibus consequat turpis vel elementum. Curabitur ut lorem a neque auctor tristique eu a justo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec pulvinar faucibus dolor, sed tristique neque condimentum quis. Integer enim tortor, tincidunt id ex eget, cursus feugiat orci. Mauris elementum lectus eu eleifend blandit. Aenean eleifend justo tellus, vitae lobortis leo accumsan at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam ante augue, porta in molestie ut, faucibus venenatis risus.<\\/p>"}', '2016-05-18 21:16:37', '2016-05-21 18:51:39'),
 (2, 1, 7, 1, 'GA', 'ga', 0, 0, '{"code":"-aaa"}', '2016-05-20 18:29:31', '2016-05-21 08:43:57'),
-(3, 1, 8, 3, 'Menu', 'menu', 1, 0, NULL, '2016-05-20 18:30:12', '2016-05-21 00:19:31'),
-(4, 1, 14, 1, 'Search Console', 'searchconsole', 0, 0, '{"code":"ee"}', '2016-05-20 19:28:25', '2016-05-20 20:55:50'),
-(5, 1, 16, 2, 'Breadcrumbs', 'breadcrumbs', 1, 0, NULL, '2016-05-20 20:56:07', '2016-05-21 00:03:00');
+(3, 1, 8, 3, 'Menu', 'menu', 1, 0, '{"display_title":true,"class":"aa"}', '2016-05-20 18:30:12', '2016-05-21 18:53:35'),
+(4, 1, 14, 1, 'Search Console', 'searchconsole', 0, 0, '{"code":"ee88"}', '2016-05-20 19:28:25', '2016-05-21 08:46:21'),
+(5, 1, 16, 2, 'Breadcrumbs', 'breadcrumbs', 1, 0, NULL, '2016-05-20 20:56:07', '2016-05-21 00:03:00'),
+(6, 1, 18, 4, 'Fav', 'fav', 1, 0, '{"image":"axipi-16x16.jpg"}', '2016-05-23 20:08:02', '2016-05-23 20:12:48');
 
 -- --------------------------------------------------------
 
@@ -310,12 +315,17 @@ CREATE TABLE IF NOT EXISTS `widget_page` (
   UNIQUE KEY `widget_id_page_id` (`widget_id`,`page_id`),
   KEY `widget_id` (`widget_id`),
   KEY `page_id` (`page_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `widget_page`
 --
 
+INSERT INTO `widget_page` (`id`, `widget_id`, `page_id`, `title`, `is_active`, `ordering`, `date_created`, `date_modified`) VALUES
+(3, 3, 3, NULL, 1, 0, '2016-05-21 19:42:11', '2016-05-21 19:42:11'),
+(4, 3, 9, NULL, 1, -10, '2016-05-21 19:42:17', '2016-05-21 19:56:25'),
+(5, 3, 5, NULL, 1, 0, '2016-05-21 19:57:12', '2016-05-21 19:57:12'),
+(6, 3, 1, NULL, 1, 0, '2016-05-21 19:57:19', '2016-05-21 19:57:19');
 
 -- --------------------------------------------------------
 
@@ -339,9 +349,10 @@ CREATE TABLE IF NOT EXISTS `zone` (
 --
 
 INSERT INTO `zone` (`id`, `code`, `is_active`, `date_created`, `date_modified`) VALUES
-(1, 'footer', 1, '2016-05-18 21:17:11', NULL),
-(2, 'before_content', 1, '2016-05-21 02:01:25', NULL),
-(3, 'navbar-collapse', 1, '2016-05-21 02:18:34', NULL);
+(1, 'footer', 0, '2016-05-18 21:17:11', '2016-05-21 21:47:49'),
+(2, 'before_content', 1, '2016-05-21 02:01:25', '2016-05-21 21:46:30'),
+(3, 'navbar-collapse', 1, '2016-05-21 02:18:34', NULL),
+(4, 'head', 1, '2016-05-23 20:12:38', '2016-05-23 20:12:38');
 
 --
 -- Constraints for dumped tables

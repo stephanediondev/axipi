@@ -1,6 +1,6 @@
 services:
-    axipi_content_controller_content:
-        class: Axipi\ContentBundle\Controller\ContentController
+    axipi_content_controller_page:
+        class: Axipi\ContentBundle\Controller\PageController
         parent: "axipi_core_controller_abstract"
 
     axipi_content_controller_link:
@@ -15,8 +15,8 @@ services:
         class: Axipi\ContentBundle\Controller\Error404Controller
         parent: "axipi_core_controller_abstract"
 
-    axipi_content_widget_content:
-        class: Axipi\ContentBundle\Widget\ContentWidget
+    axipi_content_widget_block:
+        class: Axipi\ContentBundle\Widget\BlockWidget
         parent: "axipi_core_controller_abstract"
 
     axipi_content_widget_breadcrumbs:
