@@ -1,5 +1,3 @@
-{% block widget %}
-    <div id="widget-{{ widget.code }}" class="widget-content">
-        {{ widget.attribute('description')|raw }}
-    </div>
-{% endblock %}
+<div id="widget-{{ widget.code }}" class="widget-content">
+    {{ widget.attribute('description')|raw }}
+</div>

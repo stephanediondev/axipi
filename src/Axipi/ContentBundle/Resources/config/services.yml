@@ -26,3 +26,7 @@ services:
     axipi_content_widget_menu:
         class: Axipi\ContentBundle\Widget\MenuWidget
         parent: "axipi_core_controller_abstract"
+
+    axipi_content_widget_icon:
+        class: Axipi\ContentBundle\Widget\IconWidget
+        parent: "axipi_core_controller_abstract"
