@@ -81,6 +81,7 @@ class Page
      */
     private $program;
 
+    private $attributesChange = [];
 
     /**
      * Get id
@@ -431,5 +432,17 @@ class Page
         } else {
             return false;
         }
+    }
+
+    public function setAttributesChange($attributesChange)
+    {
+        $this->attributesChange = $attributesChange;
+
+        return $this;
+    }
+
+    public function getAttributesChange()
+    {
+        return $this->attributesChange;
     }
 }

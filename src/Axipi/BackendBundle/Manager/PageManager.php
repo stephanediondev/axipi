@@ -1,6 +1,8 @@
 <?php
 namespace Axipi\BackendBundle\Manager;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 use Axipi\CoreBundle\Manager\AbstractManager;
 use Axipi\CoreBundle\Entity\Page;
 
@@ -31,17 +33,29 @@ class PageManager extends AbstractManager
         return $this->em->getRepository('AxipiCoreBundle:Page')->getPages($page);
     }
 
-    public function persist($form)
+    public function persist($data)
     {
-        /*$image = $form->get('attributes')->get('image')->getData();
-        if($image) {
-            $image->move('uploads', $image->getClientOriginalName());
-        }*/
+        $attributes = json_decode($data->getComponent()->getAttributesSchema(), true);
+        foreach($attributes as $key => $attribute) {
+        }
 
-        $data = $form->getData();
-        /*if($image) {
-            $data->setAttribute('image', $image->getClientOriginalName());
-        }*/
+        foreach($data->getAttributesChange() as $key => $attribute) {
+            if(isset($attributes[$key]) == 1 && $attributes[$key]['type'] == 'Symfony\Component\Form\Extension\Core\Type\FileType') {
+                if(is_object($attribute) && $attribute instanceof UploadedFile) {
+                    if($attribute->isValid()) {
+                        if(file_exists('uploads/'.$data->getAttribute('image'))) {
+                            @unlink('uploads/'.$data->getAttribute('image'));
+                        }
+                        $data->setAttribute($key, $attribute->getClientOriginalName());
+                        $attribute->move('uploads', $attribute->getClientOriginalName());
+                    }
+                }
+            } else {
+                $data->setAttribute($key, $attribute);
+            }
+        }
+        $data->setAttributesChange([]);
+
         if($data->getDateCreated() == null) {
             $data->setDateCreated(new \Datetime());
         }
@@ -53,6 +67,10 @@ class PageManager extends AbstractManager
 
     public function remove($type)
     {
+        if(file_exists('uploads/'.$type->getAttribute('image'))) {
+            @unlink('uploads/'.$type->getAttribute('image'));
+        }
+
         $this->em->remove($type);
         $this->em->flush();
     }

@@ -62,6 +62,7 @@ class Widget
      */
     private $zone;
 
+    private $attributesChange = [];
 
     /**
      * Get id
@@ -316,5 +317,17 @@ class Widget
         } else {
             return false;
         }
+    }
+
+    public function setAttributesChange($attributesChange)
+    {
+        $this->attributesChange = $attributesChange;
+
+        return $this;
+    }
+
+    public function getAttributesChange()
+    {
+        return $this->attributesChange;
     }
 }

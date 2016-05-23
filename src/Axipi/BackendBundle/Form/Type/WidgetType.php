@@ -53,7 +53,7 @@ class WidgetType extends AbstractType
         $builder->add('code');
         $builder->add('title');
         $builder->add('isActive');
-        $builder->add('attributes', AttributesType::class, ['mapped' => true, 'required' => false, 'object' => $options['widget'], 'data' => $options['widget']->getAttributes()]);
+        $builder->add('attributesChange', AttributesType::class, ['mapped' => true, 'required' => false, 'object' => $options['widget'], 'data' => $options['widget']->getAttributes()]);
         $builder->add('submit', SubmitType::class);
     }
 

@@ -57,7 +57,7 @@ class PageType extends AbstractType
         $builder->add('titleSeo');
         $builder->add('descriptionSeo');
         $builder->add('isActive');
-        $builder->add('attributes', AttributesType::class, ['mapped' => true, 'required' => false, 'object' => $options['page'], 'data' => $options['page']->getAttributes()]);
+        $builder->add('attributesChange', AttributesType::class, ['mapped' => true, 'required' => false, 'object' => $options['page'], 'data' => $options['page']->getAttributes()]);
         $builder->add('submit', SubmitType::class);
     }
 
