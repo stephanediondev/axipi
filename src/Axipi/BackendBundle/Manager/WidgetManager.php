@@ -52,7 +52,7 @@ class WidgetManager extends AbstractManager
                             @unlink('uploads/'.$data->getAttribute('image'));
                         }
                         $data->setAttribute($key, $attribute->getClientOriginalName());
-                        $data->setAttribute($key.'_mime', $attribute->getClientMimeType());
+                        $data->setAttribute($key.'_mime', $attribute->getMimeType());
                         $data->setAttribute($key.'_size', $attribute->getClientSize());
                         $attribute->move('uploads', $attribute->getClientOriginalName());
                     }
