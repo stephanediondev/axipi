@@ -84,3 +84,11 @@ zone:
     code: "Code"
     isActive: "Is active?"
     dateCreated: "Date created"
+user:
+    id: "ID"
+    username: "Email"
+    password: "Password"
+    firstname: "Firstname"
+    lastname: "Lastname"
+    isAuthorized: "Is authorized?"
+    dateCreated: "Date created"

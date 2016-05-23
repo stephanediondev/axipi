@@ -64,3 +64,16 @@ services:
         class: Axipi\BackendBundle\Manager\ZoneManager
         parent: "axipi_core_manager_abstract"
         public: false
+
+    axipi_backend_controller_user:
+        class: Axipi\BackendBundle\Controller\UserController
+        parent: "axipi_core_controller_abstract"
+        arguments:
+            - "@axipi_backend_manager_user"
+
+    axipi_backend_manager_user:
+        class: Axipi\BackendBundle\Manager\UserManager
+        parent: "axipi_core_manager_abstract"
+        public: false
+        arguments:
+            - "@security.encoder_factory"

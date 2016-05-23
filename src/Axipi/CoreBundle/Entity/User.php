@@ -23,6 +23,8 @@ class User implements AdvancedUserInterface, \Serializable
 
     private $dateModified;
 
+    private $passwordPlain;
+
     public function getId()
     {
         return $this->id;
@@ -173,5 +175,17 @@ class User implements AdvancedUserInterface, \Serializable
     public function isEnabled()
     {
         return $this->isAuthorized;
+    }
+
+    public function setPasswordPlain($passwordPlain)
+    {
+        $this->passwordPlain = $passwordPlain;
+
+        return $this;
+    }
+
+    public function getPasswordPlain()
+    {
+        return $this->passwordPlain;
     }
 }

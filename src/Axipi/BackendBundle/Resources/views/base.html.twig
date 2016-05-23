@@ -34,7 +34,7 @@
                     <li><a href="#"><i class="fa-lg fa fa-{{ 'icons.program'|trans({}, 'axipi_backend') }}"></i>{{ 'programs'|trans({}, 'axipi_backend') }}</a></li>
                     <li><a href="{{ path('axipi_backend_component', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.component'|trans({}, 'axipi_backend') }}"></i>{{ 'components'|trans({}, 'axipi_backend') }}</a></li>
                     <li><a href="{{ path('axipi_backend_zone', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'zones'|trans({}, 'axipi_backend') }}</a></li>
-                    <li><a href="#"><i class="fa-lg fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ 'users'|trans({}, 'axipi_backend') }}</a></li>
+                    <li><a href="{{ path('axipi_backend_user', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ 'users'|trans({}, 'axipi_backend') }}</a></li>
                 {% endif %}
                 <li><a href="#"><i class="fa-lg fa fa-{{ 'icons.profile'|trans({}, 'axipi_backend') }}"></i>{{ app.user.firstname }}{% if app.user.lastname %} {{ app.user.lastname }}{% endif %}</a></li>
                 <li><a href="{{ logout_path('axipi_backend') }}"><i class="fa-lg fa fa-{{ 'icons.logout'|trans({}, 'axipi_backend') }}"></i>{{ 'logout'|trans({}, 'axipi_backend') }}</a></li>

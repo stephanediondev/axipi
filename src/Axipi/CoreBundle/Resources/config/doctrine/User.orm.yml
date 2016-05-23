@@ -1,4 +1,5 @@
 Axipi\CoreBundle\Entity\User:
+    repositoryClass: Axipi\CoreBundle\Repository\UserRepository
     type: entity
     table: user
     uniqueConstraints:
