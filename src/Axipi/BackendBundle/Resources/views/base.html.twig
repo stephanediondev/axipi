@@ -39,7 +39,7 @@
                 <li><a href="#"><i class="fa-lg fa fa-{{ 'icons.profile'|trans({}, 'axipi_backend') }}"></i>{{ app.user.firstname }}{% if app.user.lastname %} {{ app.user.lastname }}{% endif %}</a></li>
                 <li><a href="{{ logout_path('axipi_backend') }}"><i class="fa-lg fa fa-{{ 'icons.logout'|trans({}, 'axipi_backend') }}"></i>{{ 'logout'|trans({}, 'axipi_backend') }}</a></li>
             {% endif %}
-            <li><a target="_blank" href="{{ path('axipi_core_home', {}) }}"><i class="fa-lg fa fa-{{ 'icons.frontend'|trans({}, 'axipi_backend') }}"></i>Frontend</a></li>
+            <li><a target="_blank" href="{{ path('axipi_core_home', {}) }}"><i class="fa-lg fa fa-{{ 'icons.frontend'|trans({}, 'axipi_backend') }}"></i>{{ 'frontend'|trans({}, 'axipi_backend') }}</a></li>
         </ul>
     </div>
 </nav>

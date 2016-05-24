@@ -32,6 +32,7 @@ pages: "Pages"
 widgets: "Widgets"
 home: "Home"
 medias: "Medias"
+frontend: "Frontend"
 programs: "Programs"
 component:
     id: "ID"

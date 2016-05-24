@@ -55,8 +55,8 @@
                     {% endblock %}
 
                     {% block table_row_actions %}
-                        <a href="{{ path('axipi_backend_widget', {action: 'update', 'id': object.id}) }}"><i class="fa fa-{{ 'icons.update'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
-                        <a href="{{ path('axipi_backend_widget', {action: 'delete', 'id': object.id}) }}"><i class="fa fa-{{ 'icons.delete'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
+                        <a class="hidden-xs" href="{{ path('axipi_backend_widget', {action: 'update', 'id': object.id}) }}"><i class="fa fa-{{ 'icons.update'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
+                        <a class="hidden-xs" href="{{ path('axipi_backend_widget', {action: 'delete', 'id': object.id}) }}"><i class="fa fa-{{ 'icons.delete'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
                     {% endblock %}
                 {% endembed %}
             </div>
