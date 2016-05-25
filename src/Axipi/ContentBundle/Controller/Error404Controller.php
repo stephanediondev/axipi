@@ -7,6 +7,11 @@ class Error404Controller extends AbstractController
 {
     public function getPage($page)
     {
-        return $this->render('AxipiContentBundle:Page:error404.html.twig', ['page' => $page]);
+        if($page->getTemplate()) {
+            $template = $page->getTemplate();
+        } else {
+            $template = $page->getComponent()->getTemplate();
+        }
+        return $this->render($template, ['page' => $page]);
     }
 }

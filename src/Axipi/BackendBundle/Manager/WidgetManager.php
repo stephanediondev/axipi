@@ -41,27 +41,29 @@ class WidgetManager extends AbstractManager
     public function persist($data)
     {
         $attributes = json_decode($data->getComponent()->getAttributesSchema(), true);
-        foreach($attributes as $key => $attribute) {
-        }
-
-        foreach($data->getAttributesChange() as $key => $attribute) {
-            if(isset($attributes[$key]) == 1 && $attributes[$key]['type'] == 'Symfony\Component\Form\Extension\Core\Type\FileType') {
-                if(is_object($attribute) && $attribute instanceof UploadedFile) {
-                    if($attribute->isValid()) {
-                        if(file_exists('uploads/'.$data->getAttribute('image'))) {
-                            @unlink('uploads/'.$data->getAttribute('image'));
-                        }
-                        $data->setAttribute($key, $attribute->getClientOriginalName());
-                        $data->setAttribute($key.'_mime', $attribute->getMimeType());
-                        $data->setAttribute($key.'_size', $attribute->getClientSize());
-                        $attribute->move('uploads', $attribute->getClientOriginalName());
-                    }
-                }
-            } else {
-                $data->setAttribute($key, $attribute);
+        if($attributes) {
+            foreach($attributes as $key => $attribute) {
             }
+
+            foreach($data->getAttributesChange() as $key => $attribute) {
+                if(isset($attributes[$key]) == 1 && $attributes[$key]['type'] == 'Symfony\Component\Form\Extension\Core\Type\FileType') {
+                    if(is_object($attribute) && $attribute instanceof UploadedFile) {
+                        if($attribute->isValid()) {
+                            if(file_exists('uploads/'.$data->getAttribute('image'))) {
+                                @unlink('uploads/'.$data->getAttribute('image'));
+                            }
+                            $data->setAttribute($key, $attribute->getClientOriginalName());
+                            $data->setAttribute($key.'_mime', $attribute->getMimeType());
+                            $data->setAttribute($key.'_size', $attribute->getClientSize());
+                            $attribute->move('uploads', $attribute->getClientOriginalName());
+                        }
+                    }
+                } else {
+                    $data->setAttribute($key, $attribute);
+                }
+            }
+            $data->setAttributesChange([]);
         }
-        $data->setAttributesChange([]);
 
         if($data->getDateCreated() == null) {
             $data->setDateCreated(new \Datetime());

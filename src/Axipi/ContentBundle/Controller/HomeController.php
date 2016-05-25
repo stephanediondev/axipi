@@ -7,6 +7,11 @@ class HomeController extends AbstractController
 {
     public function getPage($page)
     {
-        return $this->render('AxipiContentBundle:Page:home.html.twig', ['page' => $page]);
+        if($page->getTemplate()) {
+            $template = $page->getTemplate();
+        } else {
+            $template = $page->getComponent()->getTemplate();
+        }
+        return $this->render($template, ['page' => $page]);
     }
 }

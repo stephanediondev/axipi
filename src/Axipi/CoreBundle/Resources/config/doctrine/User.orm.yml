@@ -40,12 +40,12 @@ Axipi\CoreBundle\Entity\User:
             length: 255
             options:
                 fixed: false
-        isAuthorized:
+        isActive:
             type: boolean
             nullable: false
             options:
                 default: '0'
-            column: is_authorized
+            column: is_active
         roles:
             type: text
             nullable: true

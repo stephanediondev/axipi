@@ -15,7 +15,7 @@ class User implements AdvancedUserInterface, \Serializable
 
     private $lastname;
 
-    private $isAuthorized = false;
+    private $isActive = false;
 
     private $roles;
 
@@ -78,16 +78,16 @@ class User implements AdvancedUserInterface, \Serializable
         return $this->lastname;
     }
 
-    public function setIsAuthorized($isAuthorized)
+    public function setisActive($isActive)
     {
-        $this->isAuthorized = $isAuthorized;
+        $this->isActive = $isActive;
 
         return $this;
     }
 
-    public function getIsAuthorized()
+    public function getisActive()
     {
-        return $this->isAuthorized;
+        return $this->isActive;
     }
 
     public function setRoles($roles)
@@ -174,7 +174,7 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function isEnabled()
     {
-        return $this->isAuthorized;
+        return $this->isActive;
     }
 
     public function setPasswordPlain($passwordPlain)

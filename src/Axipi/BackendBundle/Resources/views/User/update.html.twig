@@ -28,7 +28,7 @@
                         {{ form_row(form.lastname) }}
                     </div>
                     <div class="col-lg-4">
-                        {% if app.user.id != user.id %}{{ form_row(form.isAuthorized) }}{% endif %}
+                        {% if app.user.id != user.id %}{{ form_row(form.isActive) }}{% endif %}
                         {{ form_row(form.submit) }}
                     </div>
                 </div>

@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Axipi\CoreBundle\Entity\Program;
@@ -30,14 +31,12 @@ class WidgetType extends AbstractType
                 }
             ]
         );
-        $builder->add('component', EntityType::class,
+        $builder->add('template', TextType::class,
             [
-                'placeholder' => '-',
-                'class' => Component::class,
-                'choices' => $options['components'],
-                'choice_label' => function ($component) {
-                    return $component->getTitle();
-                }
+                'required' => false,
+                'attr' => [
+                    'placeholder' => $options['widget']->getComponent()->getTemplate(),
+                ]
             ]
         );
         $builder->add('zone', EntityType::class,

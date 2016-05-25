@@ -31,6 +31,7 @@ class ComponentType extends AbstractType
                 }
             ])
             ->add('service')
+            ->add('template')
             ->add('title')
             ->add('parent', EntityType::class,
             [

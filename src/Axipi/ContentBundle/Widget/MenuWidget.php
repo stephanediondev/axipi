@@ -7,6 +7,11 @@ class MenuWidget extends AbstractWidget
 {
     public function getWidget($widget, $page)
     {
-        return $this->render('AxipiContentBundle:Widget:menu.html.twig', ['widget' => $widget, 'page' => $page]);
+        if($widget->getTemplate()) {
+            $template = $widget->getTemplate();
+        } else {
+            $template = $widget->getComponent()->getTemplate();
+        }
+        return $this->render($template, ['widget' => $widget, 'page' => $page]);
     }
 }

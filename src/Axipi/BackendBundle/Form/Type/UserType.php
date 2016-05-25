@@ -40,7 +40,7 @@ class UserType extends AbstractType
         $builder->add('lastname', TextType::class, ['required' => false]);
 
         if($options['user_connected']->getid() != $options['user']->getid()) {
-            $builder->add('isAuthorized');
+            $builder->add('isActive');
         }
 
         $builder->add('submit', SubmitType::class);

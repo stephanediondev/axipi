@@ -31,12 +31,27 @@ class Page
     /**
      * @var string
      */
+    private $template;
+
+    /**
+     * @var string
+     */
     private $titleSeo;
 
     /**
      * @var string
      */
     private $descriptionSeo;
+
+    /**
+     * @var string
+     */
+    private $titleSocial;
+
+    /**
+     * @var string
+     */
+    private $descriptionSocial;
 
     /**
      * @var string
@@ -169,6 +184,18 @@ class Page
         return $this->slug;
     }
 
+    public function setTemplate($template)
+    {
+        $this->template = $template;
+
+        return $this;
+    }
+
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
     /**
      * Set titleSeo
      *
@@ -215,6 +242,54 @@ class Page
     public function getDescriptionSeo()
     {
         return $this->descriptionSeo;
+    }
+
+    /**
+     * Set titleSocial
+     *
+     * @param string $titleSocial
+     *
+     * @return Page
+     */
+    public function setTitleSocial($titleSocial)
+    {
+        $this->titleSocial = $titleSocial;
+
+        return $this;
+    }
+
+    /**
+     * Get titleSocial
+     *
+     * @return string
+     */
+    public function getTitleSocial()
+    {
+        return $this->titleSocial;
+    }
+
+    /**
+     * Set descriptionSocial
+     *
+     * @param string $descriptionSocial
+     *
+     * @return Page
+     */
+    public function setDescriptionSocial($descriptionSocial)
+    {
+        $this->descriptionSocial = $descriptionSocial;
+
+        return $this;
+    }
+
+    /**
+     * Get descriptionSocial
+     *
+     * @return string
+     */
+    public function getDescriptionSocial()
+    {
+        return $this->descriptionSocial;
     }
 
     /**

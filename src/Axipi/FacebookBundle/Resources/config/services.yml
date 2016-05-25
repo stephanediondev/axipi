@@ -1,0 +1,4 @@
+services:
+    axipi_facebook_widget_opengraph:
+        class: Axipi\FacebookBundle\Widget\OpengraphWidget
+        parent: "axipi_core_controller_abstract"

@@ -23,6 +23,8 @@ class AppKernel extends Kernel
             new Axipi\ContentBundle\AxipiContentBundle(),
             new Axipi\GalleryBundle\AxipiGalleryBundle(),
             new Axipi\GoogleBundle\AxipiGoogleBundle(),
+            new Axipi\TwitterBundle\AxipiTwitterBundle(),
+            new Axipi\FacebookBundle\AxipiFacebookBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

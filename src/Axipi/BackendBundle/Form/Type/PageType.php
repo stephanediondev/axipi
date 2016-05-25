@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Axipi\CoreBundle\Entity\Program;
@@ -30,14 +31,12 @@ class PageType extends AbstractType
                 }
             ]
         );
-        $builder->add('component', EntityType::class,
+        $builder->add('template', TextType::class,
             [
-                'placeholder' => '-',
-                'class' => Component::class,
-                'choices' => $options['components'],
-                'choice_label' => function ($component) {
-                    return $component->getTitle();
-                }
+                'required' => false,
+                'attr' => [
+                    'placeholder' => $options['page']->getComponent()->getTemplate(),
+                ]
             ]
         );
         $builder->add('parent', EntityType::class,
@@ -56,6 +55,8 @@ class PageType extends AbstractType
         $builder->add('slug');
         $builder->add('titleSeo');
         $builder->add('descriptionSeo');
+        $builder->add('titleSocial');
+        $builder->add('descriptionSocial');
         $builder->add('isActive');
         $builder->add('attributesChange', AttributesType::class, ['mapped' => true, 'required' => false, 'object' => $options['page'], 'data' => $options['page']->getAttributes()]);
         $builder->add('submit', SubmitType::class);

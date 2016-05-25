@@ -23,6 +23,11 @@ class Widget
     private $code;
 
     /**
+     * @var string
+     */
+    private $template;
+
+    /**
      * @var boolean
      */
     private $isActive = false;
@@ -120,6 +125,18 @@ class Widget
     public function getCode()
     {
         return $this->code;
+    }
+
+    public function setTemplate($template)
+    {
+        $this->template = $template;
+
+        return $this;
+    }
+
+    public function getTemplate()
+    {
+        return $this->template;
     }
 
     /**

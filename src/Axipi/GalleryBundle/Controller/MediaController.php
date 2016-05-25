@@ -7,6 +7,11 @@ class MediaController extends AbstractController
 {
     public function getPage($page)
     {
-        return $this->render('AxipiGalleryBundle:Page:media.html.twig', ['page' => $page]);
+        if($page->getTemplate()) {
+            $template = $page->getTemplate();
+        } else {
+            $template = $page->getComponent()->getTemplate();
+        }
+        return $this->render($template, ['page' => $page]);
     }
 }

@@ -30,6 +30,11 @@ class Component
     /**
      * @var string
      */
+    private $template;
+
+    /**
+     * @var string
+     */
     private $title;
 
     /**
@@ -158,6 +163,18 @@ class Component
     public function getService()
     {
         return $this->service;
+    }
+
+    public function setTemplate($template)
+    {
+        $this->template = $template;
+
+        return $this;
+    }
+
+    public function getTemplate()
+    {
+        return $this->template;
     }
 
     /**

@@ -41,6 +41,7 @@
                         <th class="hidden-xs{% if objects.isSorted('cmp.id') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'component.id'|trans({}, 'axipi_backend'), 'cmp.id') }}</th>
                         <th class="{% if objects.isSorted('cmp.title') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'component.title'|trans({}, 'axipi_backend'), 'cmp.title') }}</th>
                         <th class="hidden-xs{% if objects.isSorted('cmp.service') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'component.service'|trans({}, 'axipi_backend'), 'cmp.service') }}</th>
+                        <th class="hidden-xs{% if objects.isSorted('cmp.template') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'component.template'|trans({}, 'axipi_backend'), 'cmp.template') }}</th>
                         <th class="hidden-xs{% if objects.isSorted('cmp.isActive') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'component.isActive'|trans({}, 'axipi_backend'), 'cmp.isActive') }}</th>
                         <th class="hidden-xs{% if objects.isSorted('cmp.dateCreated') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'component.dateCreated'|trans({}, 'axipi_backend'), 'cmp.dateCreated') }}</th>
                     {% endblock %}
@@ -49,6 +50,7 @@
                         <td class="hidden-xs"<a href="{{ path('axipi_backend_component', {action: 'read', 'id': object.id}) }}">{{ object.id }}</a></td>
                         <td><a href="{{ path('axipi_backend_component', {action: 'read', 'id': object.id}) }}"><i class="fa fa-{{ ('icons.' ~ object.category)|trans({}, 'axipi_backend') }}"></i>{{ object.title }}</a></td>
                         <td class="hidden-xs">{{ object.service }}</td>
+                        <td class="hidden-xs">{{ object.template }}</td>
                         <td class="hidden-xs">{{ object.isActive }}</td>
                         <td class="hidden-xs">{{ object.dateCreated|date }}</td>
                     {% endblock %}

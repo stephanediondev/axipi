@@ -31,7 +31,7 @@
                         <th class="{% if objects.isSorted('usr.username') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'user.username'|trans({}, 'axipi_backend'), 'usr.username') }}</th>
                         <th class="hidden-xs{% if objects.isSorted('usr.firstname') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'user.firstname'|trans({}, 'axipi_backend'), 'usr.firstname') }}</th>
                         <th class="hidden-xs{% if objects.isSorted('usr.lastname') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'user.lastname'|trans({}, 'axipi_backend'), 'usr.lastname') }}</th>
-                        <th class="hidden-xs{% if objects.isSorted('usr.isAuthorized') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'user.isAuthorized'|trans({}, 'axipi_backend'), 'usr.isAuthorized') }}</th>
+                        <th class="hidden-xs{% if objects.isSorted('usr.isActive') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'user.isActive'|trans({}, 'axipi_backend'), 'usr.isActive') }}</th>
                         <th class="hidden-xs{% if objects.isSorted('usr.dateCreated') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'user.dateCreated'|trans({}, 'axipi_backend'), 'usr.dateCreated') }}</th>
                     {% endblock %}
 
@@ -40,7 +40,7 @@
                         <td><a href="{{ path('axipi_backend_user', {action: 'read', 'id': object.id}) }}">{{ object.username }}</a></td>
                         <td class="hidden-xs">{{ object.firstname }}</td>
                         <td class="hidden-xs">{{ object.lastname }}</td>
-                        <td class="hidden-xs">{{ object.isAuthorized }}</td>
+                        <td class="hidden-xs">{{ object.isActive }}</td>
                         <td class="hidden-xs">{{ object.dateCreated|date }}</td>
                     {% endblock %}
 

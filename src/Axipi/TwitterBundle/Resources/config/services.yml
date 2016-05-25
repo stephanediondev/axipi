@@ -1,0 +1,4 @@
+services:
+    axipi_twitter_widget_card:
+        class: Axipi\TwitterBundle\Widget\CardWidget
+        parent: "axipi_core_controller_abstract"
