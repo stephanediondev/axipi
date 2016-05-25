@@ -102,7 +102,7 @@ Axipi\CoreBundle\Entity\Page:
             cascade: {  }
             fetch: LAZY
             mappedBy: null
-            inversedBy: null
+            inversedBy: "children"
             joinColumns:
                 parent:
                     referencedColumnName: id
@@ -132,4 +132,8 @@ Axipi\CoreBundle\Entity\Page:
                     referencedColumnName: id
                     onDelete: "cascade"
             orphanRemoval: false
+    oneToMany:
+        children:
+            targetEntity: Page
+            mappedBy: parent
     lifecycleCallbacks: {  }

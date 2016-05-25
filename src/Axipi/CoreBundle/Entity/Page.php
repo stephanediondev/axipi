@@ -1,6 +1,8 @@
 <?php
 namespace Axipi\CoreBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
  * Page
  */
@@ -82,6 +84,8 @@ class Page
     private $program;
 
     private $attributesChange = [];
+
+    private $children;
 
     /**
      * Get id
@@ -444,5 +448,10 @@ class Page
     public function getAttributesChange()
     {
         return $this->attributesChange;
+    }
+
+    public function getChildren()
+    {
+        return $this->children;
     }
 }
