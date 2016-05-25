@@ -5,6 +5,8 @@
 {% block main %}
     <div id="page-{{ page.code }}" class="page-content">
         {{ page.attribute('description')|raw }}
+
+        {# renderString(page.attribute('description')|raw) #}
     </div>
 {% endblock %}
 

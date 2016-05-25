@@ -4,6 +4,7 @@ namespace Axipi\CoreBundle\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Twig_Environment;
 
 use Axipi\CoreBundle\Entity\Widget;
 
@@ -32,6 +33,7 @@ class CoreExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFunction('getWidgets', [$this, 'getWidgets'], array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('renderString', [$this, 'renderString'], array('needs_environment' => true)),
         ];
     }
 
@@ -54,5 +56,10 @@ class CoreExtension extends \Twig_Extension
             }
         }
         return $content;
+    }
+
+    public function renderString(Twig_Environment $env, $template)
+    {
+        return $env->createTemplate((string) $template);
     }
 }
