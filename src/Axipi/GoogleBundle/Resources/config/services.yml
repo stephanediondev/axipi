@@ -1,4 +1,8 @@
 services:
+    axipi_google_controller_map:
+        class: Axipi\GoogleBundle\Controller\MapController
+        parent: "axipi_core_controller_abstract"
+
     axipi_google_widget_analytics:
         class: Axipi\GoogleBundle\Widget\AnalyticsWidget
         parent: "axipi_core_controller_abstract"
