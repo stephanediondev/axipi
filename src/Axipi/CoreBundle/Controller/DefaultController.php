@@ -29,6 +29,9 @@ class DefaultController extends AbstractController
 
         $this->coreManager->setProgram($program);
 
+        if(substr($slug, -1) == '/') {
+            $slug = substr($slug, 0, -1);
+        }
         $page = $this->coreManager->getBySlug($slug);
         if(!$page) {
             $page = $this->coreManager->getBySlug('error404');
