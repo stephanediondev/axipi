@@ -20,7 +20,7 @@
             <div class="block">
                 <div class="row">
                     <div class="col-lg-4">
-                        {{ macro.read_field('widget.program'|trans({}, 'axipi_backend'), widget.program.id) }}
+                        {{ macro.read_field('widget.program'|trans({}, 'axipi_backend'), widget.program.fullName) }}
                         {{ macro.read_field('widget.component'|trans({}, 'axipi_backend'), '<a href="' ~ path('axipi_backend_component', {action: 'read', 'id': widget.component.id}) ~ '">' ~ widget.component.title ~'</a>') }}
                         {{ macro.read_field('widget.template'|trans({}, 'axipi_backend'), widget.template) }}
                         {{ macro.read_field('widget.code'|trans({}, 'axipi_backend'), widget.code) }}

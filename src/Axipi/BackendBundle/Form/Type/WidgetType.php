@@ -27,7 +27,7 @@ class WidgetType extends AbstractType
                 'class' => Program::class,
                 'choices' => $options['programs'],
                 'choice_label' => function ($program) {
-                    return $program->getLanguage()->getTitle().' / '.$program->getCountry()->getTitle();
+                    return $program->getFullname();
                 }
             ]
         );

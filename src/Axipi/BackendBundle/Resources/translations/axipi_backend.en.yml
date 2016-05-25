@@ -78,6 +78,7 @@ widget:
     zone: "Zone"
     isActive: "Is active?"
     parent: "Parent"
+    ordering: "Ordering"
     attributes: "Attributes"
     dateCreated: "Date created"
 widget_page:

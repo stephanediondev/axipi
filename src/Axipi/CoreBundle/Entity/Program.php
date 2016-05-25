@@ -254,5 +254,9 @@ class Program
     {
         return $this->language;
     }
-}
 
+    public function getFullname()
+    {
+        return $this->getLanguage()->getTitle().' / '.$this->getCountry()->getTitle();
+    }
+}
