@@ -9,7 +9,7 @@
             {% embed 'AxipiBackendBundle::block_title.html.twig' %}
                 {% block block_title %}
                     <span><a href="{{ path('axipi_backend_zone', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'zones'|trans({}, 'axipi_backend') }}</a></span>
-                    <span><a href="{{ path('axipi_backend_zone', {action: 'read', 'id': zone.id}) }}">{{ zone.code }}</a></span>
+                    <span><a href="{{ path('axipi_backend_zone', {action: 'read', 'id': zone.id}) }}"><i class="fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ zone.code }}</a></span>
                     <span><i class="fa fa-{{ 'icons.delete'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.delete'|trans({}, 'axipi_backend') }}</span>
                 {% endblock %}
                 {% block block_title_actions %}

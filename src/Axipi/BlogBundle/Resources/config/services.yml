@@ -1,0 +1,12 @@
+services:
+    axipi_blog_controller_blog:
+        class: Axipi\BlogBundle\Controller\BlogController
+        parent: "axipi_core_controller_abstract"
+
+    axipi_blog_controller_category:
+        class: Axipi\BlogBundle\Controller\CategoryController
+        parent: "axipi_core_controller_abstract"
+
+    axipi_blog_controller_post:
+        class: Axipi\BlogBundle\Controller\PostController
+        parent: "axipi_core_controller_abstract"

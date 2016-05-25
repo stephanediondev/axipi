@@ -1,9 +1,9 @@
 <?php
 
-namespace Axipi\BackendBundle;
+namespace Axipi\BlogBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class BackendBundle extends Bundle
+class AxipiBlogBundle extends Bundle
 {
 }

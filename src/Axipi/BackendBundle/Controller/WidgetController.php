@@ -68,16 +68,8 @@ class WidgetController extends AbstractController
 
     public function indexAction(Request $request, ParameterBag $parameters)
     {
-        $paginator  = $this->get('knp_paginator');
-        $paginator->setDefaultPaginatorOptions(['pageParameterName' => 'widgets']);
-        $pagination = $paginator->paginate(
-            $this->widgetManager->getRows(),
-            $request->query->getInt('widgets', 1),
-            20
-        );
-
-        $parameters->set('objects', $pagination);
         $parameters->set('components', $this->widgetManager->getComponents());
+        $parameters->set('zones', $this->widgetManager->getZones());
 
         return $this->render('AxipiBackendBundle:Widget:index.html.twig', $parameters->all());
     }

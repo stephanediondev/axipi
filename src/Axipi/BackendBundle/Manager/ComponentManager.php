@@ -10,9 +10,9 @@ class ComponentManager extends AbstractManager
         return $this->em->getRepository('AxipiCoreBundle:Component')->getById($id);
     }
 
-    public function getRows()
+    public function getRows($category = null)
     {
-        return $this->em->getRepository('AxipiCoreBundle:Component')->getRows();
+        return $this->em->getRepository('AxipiCoreBundle:Component')->getRows($category);
     }
 
     public function getCategories()

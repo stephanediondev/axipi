@@ -6,3 +6,7 @@ services:
     axipi_google_widget_searchconsole:
         class: Axipi\GoogleBundle\Widget\SearchconsoleWidget
         parent: "axipi_core_controller_abstract"
+
+    axipi_google_widget_tagmanager:
+        class: Axipi\GoogleBundle\Widget\TagmanagerWidget
+        parent: "axipi_core_controller_abstract"

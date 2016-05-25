@@ -1,6 +1,7 @@
 <?php
-
 namespace Axipi\CoreBundle\Entity;
+
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Zone
@@ -18,6 +19,11 @@ class Zone
     private $code;
 
     /**
+     * @var integer
+     */
+    private $ordering = '0';
+
+    /**
      * @var boolean
      */
     private $isActive = '0';
@@ -32,6 +38,7 @@ class Zone
      */
     private $dateModified;
 
+    private $widgets;
 
     /**
      * Get id
@@ -79,6 +86,30 @@ class Zone
         $this->isActive = $isActive;
 
         return $this;
+    }
+
+    /**
+     * Set ordering
+     *
+     * @param integer $ordering
+     *
+     * @return Zone
+     */
+    public function setOrdering($ordering)
+    {
+        $this->ordering = $ordering;
+
+        return $this;
+    }
+
+    /**
+     * Get ordering
+     *
+     * @return integer
+     */
+    public function getOrdering()
+    {
+        return $this->ordering;
     }
 
     /**
@@ -138,5 +169,9 @@ class Zone
     {
         return $this->dateModified;
     }
-}
 
+    public function getWidgets()
+    {
+        return $this->widgets;
+    }
+}

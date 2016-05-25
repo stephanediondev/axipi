@@ -31,8 +31,6 @@ class WidgetRepository extends EntityRepository {
 
         $query->setParameter(':category', 'widget');
 
-        $query->orderBy('wdg.title');
-
         return $query->getQuery();
     }
 
@@ -88,6 +86,9 @@ class WidgetRepository extends EntityRepository {
         $query = $em->createQueryBuilder();
         $query->addSelect('zon');
         $query->from('AxipiCoreBundle:Zone', 'zon');
+
+        $query->addOrderBy('zon.ordering');
+        $query->addOrderBy('zon.code');
 
         return $query->getQuery()->getResult();
     }

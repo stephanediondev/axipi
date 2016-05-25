@@ -3,7 +3,7 @@ namespace Axipi\GoogleBundle\Widget;
 
 use Axipi\CoreBundle\Widget\AbstractWidget;
 
-class AnalyticsWidget extends AbstractWidget
+class TagmanagerWidget extends AbstractWidget
 {
     public function getWidget($widget, $page)
     {

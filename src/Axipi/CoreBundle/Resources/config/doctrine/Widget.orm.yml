@@ -101,7 +101,7 @@ Axipi\CoreBundle\Entity\Widget:
             cascade: {  }
             fetch: LAZY
             mappedBy: null
-            inversedBy: null
+            inversedBy: widgets
             joinColumns:
                 zone_id:
                     referencedColumnName: id

@@ -22,6 +22,12 @@ Axipi\CoreBundle\Entity\Zone:
             length: 30
             options:
                 fixed: false
+        ordering:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
         isActive:
             type: boolean
             nullable: false
@@ -36,4 +42,11 @@ Axipi\CoreBundle\Entity\Zone:
             type: datetime
             nullable: true
             column: date_modified
+    oneToMany:
+        widgets:
+            targetEntity: Axipi\CoreBundle\Entity\Widget
+            mappedBy: "zone"
+            cascade: [ "persist" ]
+            orderBy:
+                ordering: ASC
     lifecycleCallbacks: {  }

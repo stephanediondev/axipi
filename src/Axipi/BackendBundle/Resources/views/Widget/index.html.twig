@@ -8,7 +8,7 @@
         <div class="col-lg-12">
             {% embed 'AxipiBackendBundle::block_title.html.twig' %}
                 {% block block_title %}
-                    <span><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }} ({{ objects.getTotalItemCount }})</span>
+                    <span><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</span>
                 {% endblock %}
                 {% block block_title_actions %}
                     <li><a role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample"><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.create'|trans({}, 'axipi_backend') }}</a></li>
@@ -25,41 +25,25 @@
                 </div>
             </div>
 
-            <div class="block">
-                {% embed 'AxipiBackendBundle::table.html.twig' with {'table_actions': false, 'row_actions': true} %}
-                    {% block table_actions %}
-                        <div>
-                            <button name="submit" type="button" data-href="#select" data-id="works-works" class="inputsubmit submitcheckbox"><i class="fa fa-shopping-cart"></i>Sélectionner</button>
-                        </div>
-                        <div>
-                            <button name="submit" type="button" data-href="#merge" data-id="works-works" class="inputsubmit submitcheckbox"><i class="fa fa-chain"></i>Fusionner</button>
-                        </div>
+            {% for zone in zones %}
+                {% embed 'AxipiBackendBundle::block_title.html.twig' %}
+                    {% block block_title %}
+                        <span><i class="fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ zone.code }}</span>
                     {% endblock %}
-
-                    {% block table_head %}
-                        <th class="hidden-xs{% if objects.isSorted('wdg.id') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'widget.id'|trans({}, 'axipi_backend'), 'wdg.id') }}</th>
-                        <th class="{% if objects.isSorted('wdg.title') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'widget.title'|trans({}, 'axipi_backend'), 'wdg.title') }}</th>
-                        <th class="hidden-xs{% if objects.isSorted('wdg.code') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'widget.code'|trans({}, 'axipi_backend'), 'wdg.code') }}</th>
-                        <th class="hidden-xs">{{ 'widget.zone'|trans({}, 'axipi_backend') }}</th>
-                        <th class="hidden-xs{% if objects.isSorted('wdg.isActive') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'widget.isActive'|trans({}, 'axipi_backend'), 'wdg.isActive') }}</th>
-                        <th class="hidden-xs{% if objects.isSorted('wdg.dateCreated') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'widget.dateCreated'|trans({}, 'axipi_backend'), 'wdg.dateCreated') }}</th>
-                    {% endblock %}
-
-                    {% block table_row %}
-                        <td class="hidden-xs"><a href="{{ path('axipi_backend_widget', {action: 'read', 'id': object.id}) }}">{{ object.id }}</a></td>
-                        <td><a href="{{ path('axipi_backend_widget', {action: 'read', 'id': object.id}) }}"><i class="fa fa-{{ object.component.icon }}"></i>{{ object.title }}</a></td>
-                        <td class="hidden-xs">{{ object.code }}</td>
-                        <td class="hidden-xs">{{ object.zone.code }}</td>
-                        <td class="hidden-xs">{{ object.isActive }}</td>
-                        <td class="hidden-xs">{{ object.dateCreated|date }}</td>
-                    {% endblock %}
-
-                    {% block table_row_actions %}
-                        <a class="hidden-xs" href="{{ path('axipi_backend_widget', {action: 'update', 'id': object.id}) }}"><i class="fa fa-{{ 'icons.update'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
-                        <a class="hidden-xs" href="{{ path('axipi_backend_widget', {action: 'delete', 'id': object.id}) }}"><i class="fa fa-{{ 'icons.delete'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
+                    {% block block_title_actions %}
                     {% endblock %}
                 {% endembed %}
-            </div>
+
+                <div class="block">
+                    <div class="row">
+                        {% for object in zone.widgets %}
+                            <div class="col-lg-2 col-sm-3 text-center">
+                                <a class="thumbnail" href="{{ path('axipi_backend_widget', {action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </div>

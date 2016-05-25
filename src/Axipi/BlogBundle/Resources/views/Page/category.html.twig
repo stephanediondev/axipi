@@ -1,0 +1,17 @@
+{% extends 'AxipiBlogBundle::base.html.twig' %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block main %}
+    <div id="page-{{ page.code }}" class="page-content">
+        {{ page.attribute('description')|raw }}
+    </div>
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+{% endblock %}

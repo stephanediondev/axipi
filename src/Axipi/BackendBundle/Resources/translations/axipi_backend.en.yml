@@ -1,3 +1,6 @@
+category:
+    page: "Page"
+    widget: "Widget"
 icons:
     profile: "user"
     login: "sign-in"
@@ -7,7 +10,7 @@ icons:
     user: "user"
     page: "file-text-o"
     component: "cube"
-    zone: "cube"
+    zone: "inbox"
     program: "globe"
     media: "picture-o"
     frontend: "rocket"
@@ -96,5 +99,5 @@ user:
     password: "Password"
     firstname: "Firstname"
     lastname: "Lastname"
-    isActive: "Is authorized?"
+    isActive: "Is active?"
     dateCreated: "Date created"

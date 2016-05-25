@@ -57,15 +57,8 @@ class ComponentController extends AbstractController
 
     public function indexAction(Request $request, ParameterBag $parameters)
     {
-        $paginator  = $this->get('knp_paginator');
-        $paginator->setDefaultPaginatorOptions(['pageParameterName' => 'components']);
-        $pagination = $paginator->paginate(
-            $this->componentManager->getRows(),
-            $request->query->getInt('components', 1),
-            20
-        );
-
-        $parameters->set('objects', $pagination);
+        $parameters->set('pages', $this->componentManager->getRows('page'));
+        $parameters->set('widgets', $this->componentManager->getRows('widget'));
 
         return $this->render('AxipiBackendBundle:Component:index.html.twig', $parameters->all());
     }
@@ -76,7 +69,7 @@ class ComponentController extends AbstractController
         $component->setCategory($parameters->get('category'));
         $component->setIsActive(true);
 
-        $form = $this->createForm(ComponentType::class, $component, ['components' => $this->componentManager->getRows()->getResult(), 'zones' => $this->componentManager->getZones()]);
+        $form = $this->createForm(ComponentType::class, $component, ['components' => $this->componentManager->getRows(), 'zones' => $this->componentManager->getZones()]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
@@ -99,7 +92,7 @@ class ComponentController extends AbstractController
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
-        $form = $this->createForm(ComponentType::class, $parameters->get('component'), ['components' => $this->componentManager->getRows()->getResult(), 'zones' => $this->componentManager->getZones()]);
+        $form = $this->createForm(ComponentType::class, $parameters->get('component'), ['components' => $this->componentManager->getRows(), 'zones' => $this->componentManager->getZones()]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {

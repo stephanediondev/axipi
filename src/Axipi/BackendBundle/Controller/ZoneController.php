@@ -55,15 +55,7 @@ class ZoneController extends AbstractController
 
     public function indexAction(Request $request, ParameterBag $parameters)
     {
-        $paginator  = $this->get('knp_paginator');
-        $paginator->setDefaultPaginatorOptions(['pageParameterName' => 'zones']);
-        $pagination = $paginator->paginate(
-            $this->zoneManager->getRows(),
-            $request->query->getInt('zones', 1),
-            20
-        );
-
-        $parameters->set('objects', $pagination);
+        $parameters->set('objects', $this->zoneManager->getRows());
 
         return $this->render('AxipiBackendBundle:Zone:index.html.twig', $parameters->all());
     }

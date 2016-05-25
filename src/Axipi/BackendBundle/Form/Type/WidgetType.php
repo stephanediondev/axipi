@@ -50,6 +50,7 @@ class WidgetType extends AbstractType
             ]
         );
         $builder->add('code');
+        $builder->add('ordering');
         $builder->add('title');
         $builder->add('isActive');
         $builder->add('attributesChange', AttributesType::class, ['mapped' => true, 'required' => false, 'object' => $options['widget'], 'data' => $options['widget']->getAttributes()]);

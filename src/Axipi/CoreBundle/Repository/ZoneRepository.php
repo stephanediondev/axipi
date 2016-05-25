@@ -23,9 +23,10 @@ class ZoneRepository extends EntityRepository {
         $query->addSelect('zon');
         $query->from('AxipiCoreBundle:Zone', 'zon');
 
-        $query->orderBy('zon.code');
+        $query->addOrderBy('zon.ordering');
+        $query->addOrderBy('zon.code');
 
-        return $query->getQuery();
+        return $query->getQuery()->getResult();
     }
 
     public function getWidgets($code) {
