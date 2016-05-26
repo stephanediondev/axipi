@@ -10,3 +10,7 @@ services:
     axipi_blog_controller_post:
         class: Axipi\BlogBundle\Controller\PostController
         parent: "axipi_core_controller_abstract"
+
+    axipi_blog_widget_categories:
+        class: Axipi\BlogBundle\Widget\CategoriesWidget
+        parent: "axipi_core_widget_abstract"

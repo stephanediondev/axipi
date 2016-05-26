@@ -1,0 +1,9 @@
+<!-- Content / Menu -->
+<div id="widget-{{ widget.code }}" class="col-lg-12">
+    <h3>Categories</h3>
+    <ul class="nav nav-pills nav-stacked">
+        <li{% if page.slug == 'blog/category' %} class="active"{% endif %}><a href="{{ path('axipi_core_slug', {slug: 'blog/category'}) }}">Blog category</a></li>
+        <li><a href="#">TODO</a></li>
+    </ul>
+</div>
+<!-- Content / Menu (end) -->

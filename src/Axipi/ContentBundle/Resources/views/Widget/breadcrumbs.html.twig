@@ -1,7 +1,7 @@
 <!-- Content / Breadcrumbs -->
 {% if page.parent %}
-    <div class="col-lg-12">
-        <ol id="widget-{{ widget.code }}" class="breadcrumb">
+    <div id="widget-{{ widget.code }}" class="col-lg-12">
+        <ol class="breadcrumb">
             {% if page.parent.parent %}
                 {% if page.parent.parent.parent %}
                     <li><a href="{{ path('axipi_core_slug', {slug: page.parent.parent.parent.slug}) }}">{{ page.parent.parent.parent.title }}</a></li>
