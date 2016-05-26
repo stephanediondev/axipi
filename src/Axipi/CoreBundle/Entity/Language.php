@@ -23,6 +23,11 @@ class Language
     private $title;
 
     /**
+     * @var boolean
+     */
+    private $isActive = '0';
+
+    /**
      * @var \DateTime
      */
     private $dateCreated;
@@ -89,6 +94,30 @@ class Language
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     *
+     * @return Zone
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
     }
 
     /**

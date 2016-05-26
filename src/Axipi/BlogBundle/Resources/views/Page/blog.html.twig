@@ -3,9 +3,13 @@
 {% block title %}{{ page.title }}{% endblock %}
 
 {% block main %}
-    <div id="page-{{ page.code }}" class="page-content">
-        {{ page.attribute('description')|raw }}
+    <!-- Blog -->
+    <div class="row">
+        <div class="col-lg-12">
+            {{ page.attribute('description')|raw }}
+        </div>
     </div>
+    <!-- Blog (end) -->
 {% endblock %}
 
 {% block style %}

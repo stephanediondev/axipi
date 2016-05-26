@@ -1,6 +1,8 @@
 AxipiBackendBundle:
     resource: "@AxipiBackendBundle/Resources/config/routing.yml"
     prefix: "/backend"
+    defaults:
+        _locale: "en"
 
 AxipiCoreBundle:
     resource: "@AxipiCoreBundle/Resources/config/routing.yml"

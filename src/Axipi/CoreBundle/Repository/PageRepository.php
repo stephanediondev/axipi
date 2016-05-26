@@ -49,14 +49,12 @@ class PageRepository extends EntityRepository {
         return $query->getQuery();
     }
 
-    public function getPrograms() {
+    public function getLanguages() {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
-        $query->addSelect('prg', 'lng', 'cou');
-        $query->from('AxipiCoreBundle:Program', 'prg');
-        $query->leftJoin('prg.language', 'lng');
-        $query->leftJoin('prg.country', 'cou');
+        $query->addSelect('lng');
+        $query->from('AxipiCoreBundle:Language', 'lng');
 
         return $query->getQuery()->getResult();
     }

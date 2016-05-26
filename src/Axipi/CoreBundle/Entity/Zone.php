@@ -75,20 +75,6 @@ class Zone
     }
 
     /**
-     * Set isActive
-     *
-     * @param boolean $isActive
-     *
-     * @return Zone
-     */
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
-
-        return $this;
-    }
-
-    /**
      * Set ordering
      *
      * @param integer $ordering
@@ -110,6 +96,20 @@ class Zone
     public function getOrdering()
     {
         return $this->ordering;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     *
+     * @return Zone
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
     }
 
     /**

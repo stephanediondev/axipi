@@ -12,7 +12,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-use Axipi\CoreBundle\Entity\Program;
+use Axipi\CoreBundle\Entity\Language;
 use Axipi\CoreBundle\Entity\Component;
 use Axipi\CoreBundle\Entity\Zone;
 use Axipi\CoreBundle\Entity\Widget;
@@ -21,13 +21,13 @@ class WidgetType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('program', EntityType::class,
+        $builder->add('language', EntityType::class,
             [
                 'placeholder' => '-',
-                'class' => Program::class,
-                'choices' => $options['programs'],
-                'choice_label' => function ($program) {
-                    return $program->getFullname();
+                'class' => Language::class,
+                'choices' => $options['languages'],
+                'choice_label' => function ($language) {
+                    return $language->getTitle();
                 }
             ]
         );
@@ -72,7 +72,7 @@ class WidgetType extends AbstractType
             'translation_domain' => 'axipi_backend',
             'data_class' => Widget::class,
             'widget' => null,
-            'programs' => [],
+            'languages' => [],
             'components' => [],
             'zones' => [],
         ));

@@ -18,9 +18,9 @@ class WidgetManager extends AbstractManager
         return $this->em->getRepository('AxipiCoreBundle:Widget')->getRows();
     }
 
-    public function getPrograms()
+    public function getLanguages()
     {
-        return $this->em->getRepository('AxipiCoreBundle:Widget')->getPrograms();
+        return $this->em->getRepository('AxipiCoreBundle:Widget')->getLanguages();
     }
 
     public function getComponents()

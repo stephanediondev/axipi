@@ -9,17 +9,17 @@ Axipi\CoreBundle\Entity\Page:
         parent:
             columns:
                 - parent
-        program_id:
+        language_id:
             columns:
-                - program_id
+                - language_id
     uniqueConstraints:
-        program_id_code:
+        language_id_code:
             columns:
-                - program_id
+                - language_id
                 - code
-        program_id_slug:
+        language_id_slug:
             columns:
-                - program_id
+                - language_id
                 - slug
     id:
         id:
@@ -140,14 +140,14 @@ Axipi\CoreBundle\Entity\Page:
                     referencedColumnName: id
                     onDelete: "cascade"
             orphanRemoval: false
-        program:
-            targetEntity: Program
+        language:
+            targetEntity: Language
             cascade: {  }
             fetch: LAZY
             mappedBy: null
             inversedBy: null
             joinColumns:
-                program_id:
+                language_id:
                     nullable: false
                     referencedColumnName: id
                     onDelete: "cascade"

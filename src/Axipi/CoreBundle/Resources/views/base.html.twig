@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app.request.locale }}">
 <head>
 <title>{% block title %}Welcome!{% endblock %}</title>
 {% block style %}
 <link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/axipicore/css/base.css') }}">
 {% endblock %}
 {% block meta %}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% endblock %}
 {{ getWidgets('head') }}
 </head>
-<body>
+<body id="page-{{ page.code }}">
 
 {% block navbar %}
-    <nav class="navbar navbar-default">
-        <div class="container">
+    <div class="container">
+        <nav class="navbar navbar-default">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
@@ -23,15 +24,17 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <div id="navbar" class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse" id="navbar">
                 {{ getWidgets('navbar-collapse') }}
             </div>
-        </div>
-    </nav>
+        </nav>
+    </div>
 {% endblock %}
 
 <div class="container">
-    {{ getWidgets('before_content') }}
+    <div class="row">
+        {{ getWidgets('before_content') }}
+    </div>
 
     {% block body %}
     {% endblock %}
@@ -46,8 +49,14 @@
 {% endblock %}
 
 {% block script %}
+<script type="text/javascript">
+var app_environment = '{{ app.environment }}';
+var app_request_locale = '{{ app.request.locale }}';
+var app_request_uri = '{{ app.request.uri }}';
+</script>
 <script type="text/javascript" src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/axipicore/js/base.js') }}"></script>
 {% endblock %}
 
 </body>

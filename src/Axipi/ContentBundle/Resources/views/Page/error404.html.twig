@@ -3,12 +3,16 @@
 {% block title %}{{ page.title }}{% endblock %}
 
 {% block main %}
-    <div class="jumbotron">
-        <h1>error404 controller</h1>
-        <h2>{{ page.title }}</h2>
-        <p><a href="{{ path('axipi_core_slug', {slug: 'a/b/c/d'}) }}">a/b/c/d</a></p>
-        <p><a href="{{ path('axipi_core_slug', {slug: 'axipi'}) }}">axipi</a></p>
+    <!-- Content / Error 404 -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>error404 controller</h1>
+            <h2>{{ page.title }}</h2>
+            <p><a href="{{ path('axipi_core_slug', {slug: 'a/b/c/d'}) }}">a/b/c/d</a></p>
+            <p><a href="{{ path('axipi_core_slug', {slug: 'axipi'}) }}">axipi</a></p>
+        </div>
     </div>
+    <!-- Content / Error 404 (end) -->
 {% endblock %}
 
 {% block style %}

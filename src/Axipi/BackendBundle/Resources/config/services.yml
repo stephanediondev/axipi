@@ -65,6 +65,17 @@ services:
         parent: "axipi_core_manager_abstract"
         public: false
 
+    axipi_backend_controller_language:
+        class: Axipi\BackendBundle\Controller\LanguageController
+        parent: "axipi_core_controller_abstract"
+        arguments:
+            - "@axipi_backend_manager_language"
+
+    axipi_backend_manager_language:
+        class: Axipi\BackendBundle\Manager\LanguageManager
+        parent: "axipi_core_manager_abstract"
+        public: false
+
     axipi_backend_controller_user:
         class: Axipi\BackendBundle\Controller\UserController
         parent: "axipi_core_controller_abstract"

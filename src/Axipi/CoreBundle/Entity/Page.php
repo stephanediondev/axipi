@@ -94,9 +94,9 @@ class Page
     private $component;
 
     /**
-     * @var \Axipi\CoreBundle\Entity\Program
+     * @var \Axipi\CoreBundle\Entity\Language
      */
-    private $program;
+    private $language;
 
     private $attributesChange = [];
 
@@ -461,27 +461,27 @@ class Page
     }
 
     /**
-     * Set program
+     * Set language
      *
-     * @param \Axipi\CoreBundle\Entity\Program $program
+     * @param \Axipi\CoreBundle\Entity\Language $language
      *
      * @return Page
      */
-    public function setProgram(\Axipi\CoreBundle\Entity\Program $program = null)
+    public function setLanguage(\Axipi\CoreBundle\Entity\Language $language = null)
     {
-        $this->program = $program;
+        $this->language = $language;
 
         return $this;
     }
 
     /**
-     * Get program
+     * Get language
      *
-     * @return \Axipi\CoreBundle\Entity\Program
+     * @return \Axipi\CoreBundle\Entity\Language
      */
-    public function getProgram()
+    public function getLanguage()
     {
-        return $this->program;
+        return $this->language;
     }
 
     public function setAttributes($attributes)

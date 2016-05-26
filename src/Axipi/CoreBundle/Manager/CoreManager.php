@@ -5,19 +5,7 @@ use Axipi\CoreBundle\Manager\AbstractManager;
 
 class CoreManager extends AbstractManager
 {
-    protected $program;
-
     protected $page;
-
-    public function setProgram($program)
-    {
-        $this->program = $program;
-    }
-
-    public function getProgram()
-    {
-        return $this->program;
-    }
 
     public function setPage($page)
     {

@@ -5,6 +5,8 @@ axipi_backend_login:
 
 axipi_backend_login_check:
     path: /login_check
+    defaults:
+        _locale: "en"
 
 axipi_backend_logout:
     path: /logout
@@ -46,6 +48,13 @@ axipi_backend_zone:
     path:  /zone/{action}/{id}
     defaults:
         _controller: "axipi_backend_controller_zone:dispatchAction"
+        action: "index"
+        id: null
+
+axipi_backend_language:
+    path:  /language/{action}/{id}
+    defaults:
+        _controller: "axipi_backend_controller_language:dispatchAction"
         action: "index"
         id: null
 

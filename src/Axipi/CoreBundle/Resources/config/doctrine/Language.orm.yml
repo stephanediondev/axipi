@@ -1,4 +1,5 @@
 Axipi\CoreBundle\Entity\Language:
+    repositoryClass: Axipi\CoreBundle\Repository\LanguageRepository
     type: entity
     table: language
     uniqueConstraints:
@@ -27,6 +28,12 @@ Axipi\CoreBundle\Entity\Language:
             length: 255
             options:
                 fixed: false
+        isActive:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: is_active
         dateCreated:
             type: datetime
             nullable: false

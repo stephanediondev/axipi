@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Axipi\CoreBundle\Controller\AbstractController;
 use Axipi\CoreBundle\Manager\CoreManager;
 
-use Axipi\CoreBundle\Entity\Program;
+use Axipi\CoreBundle\Entity\Language;
 use Axipi\CoreBundle\Entity\Page;
 
 class DefaultController extends AbstractController
@@ -24,11 +24,6 @@ class DefaultController extends AbstractController
 
     public function indexAction(Request $request, $slug)
     {
-        $program = new Program();
-        //$program->setLanguage(1);
-
-        $this->coreManager->setProgram($program);
-
         if(substr($slug, -1) == '/') {
             $slug = substr($slug, 0, -1);
         }
@@ -40,7 +35,7 @@ class DefaultController extends AbstractController
         $this->coreManager->setPage($page);
 
         if($this->has($page->getComponent()->getService())) {
-            $response = $this->forward($page->getComponent()->getService().':getPage', ['page' => $page, 'program' => $program]);
+            $response = $this->forward($page->getComponent()->getService().':getPage', ['page' => $page]);
             return $response;
         } else {
             throw new NotFoundHttpException();

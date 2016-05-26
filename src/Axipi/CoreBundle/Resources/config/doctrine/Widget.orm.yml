@@ -9,13 +9,13 @@ Axipi\CoreBundle\Entity\Widget:
         zone_id:
             columns:
                 - zone_id
-        program_id:
+        language_id:
             columns:
-                - program_id
+                - language_id
     uniqueConstraints:
-        program_id_code:
+        language_id_code:
             columns:
-                - program_id
+                - language_id
                 - code
     id:
         id:
@@ -72,14 +72,14 @@ Axipi\CoreBundle\Entity\Widget:
             nullable: true
             column: date_modified
     manyToOne:
-        program:
-            targetEntity: Program
+        language:
+            targetEntity: Language
             cascade: {  }
             fetch: LAZY
             mappedBy: null
             inversedBy: null
             joinColumns:
-                program_id:
+                language_id:
                     nullable: false
                     referencedColumnName: id
                     onDelete: "cascade"
