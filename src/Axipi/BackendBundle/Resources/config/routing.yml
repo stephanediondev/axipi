@@ -24,16 +24,18 @@ axipi_backend_component:
         id: null
 
 axipi_backend_page:
-    path:  /page/{action}/{id}
+    path:  /page/{language}/{action}/{id}
     defaults:
         _controller: "axipi_backend_controller_page:dispatchAction"
+        language: "en"
         action: "index"
         id: null
 
 axipi_backend_widget:
-    path:  /widget/{action}/{id}
+    path:  /widget/{language}/{action}/{id}
     defaults:
         _controller: "axipi_backend_controller_widget:dispatchAction"
+        language: "en"
         action: "index"
         id: null
 

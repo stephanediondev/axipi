@@ -27,6 +27,24 @@
                     </div>
                 </div>
             </div>
+
+            {% embed 'AxipiBackendBundle::block_title.html.twig' %}
+                {% block block_title %}
+                    <span><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }} ({{ zone.widgets|length }})</span>
+                {% endblock %}
+                {% block block_title_actions %}
+                {% endblock %}
+            {% endembed %}
+
+            <div class="block">
+                <div class="row">
+                    {% for object in zone.widgets %}
+                        <div class="col-lg-2 col-sm-3 text-center">
+                            <a class="thumbnail" href="{{ path('axipi_backend_widget', {language: object.language.code, action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 </div>

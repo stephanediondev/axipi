@@ -27,9 +27,10 @@ class WidgetController extends AbstractController
         $this->componentManager = $componentManager;
     }
 
-    public function dispatchAction(Request $request, $action, $id)
+    public function dispatchAction(Request $request, $language, $action, $id)
     {
         $parameters = new ParameterBag();
+        $parameters->set('languages', $this->widgetManager->getLanguages());
 
         if($action == 'create' && null !== $id) {
             $component = $this->componentManager->getById($id);
@@ -51,7 +52,7 @@ class WidgetController extends AbstractController
 
         switch ($action) {
             case 'index':
-                return $this->indexAction($request, $parameters);
+                return $this->indexAction($request, $parameters, $language);
             case 'create':
                 return $this->createAction($request, $parameters, $id);
             case 'read':
@@ -66,7 +67,7 @@ class WidgetController extends AbstractController
         return $this->redirectToRoute('axipi_backend_component', []);
     }
 
-    public function indexAction(Request $request, ParameterBag $parameters)
+    public function indexAction(Request $request, ParameterBag $parameters, $language)
     {
         $parameters->set('components', $this->widgetManager->getComponents());
         $parameters->set('zones', $this->widgetManager->getZones());
@@ -81,7 +82,7 @@ class WidgetController extends AbstractController
         $widget->setZone($parameters->get('component')->getZone());
         $widget->setIsActive(true);
 
-        $form = $this->createForm(WidgetType::class, $widget, ['widget' => $widget, 'languages' => $this->widgetManager->getLanguages(), 'components' => $this->widgetManager->getComponents(), 'zones' => $this->widgetManager->getZones()]);
+        $form = $this->createForm(WidgetType::class, $widget, ['widget' => $widget, 'languages' => $parameters->get('languages'), 'components' => $this->widgetManager->getComponents(), 'zones' => $this->widgetManager->getZones()]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
@@ -106,7 +107,7 @@ class WidgetController extends AbstractController
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
-        $form = $this->createForm(WidgetType::class, $parameters->get('widget'), ['widget' => $parameters->get('widget'), 'languages' => $this->widgetManager->getLanguages(), 'components' => $this->widgetManager->getComponents(), 'zones' => $this->widgetManager->getZones()]);
+        $form = $this->createForm(WidgetType::class, $parameters->get('widget'), ['widget' => $parameters->get('widget'), 'languages' => $parameters->get('languages'), 'components' => $this->widgetManager->getComponents(), 'zones' => $this->widgetManager->getZones()]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {

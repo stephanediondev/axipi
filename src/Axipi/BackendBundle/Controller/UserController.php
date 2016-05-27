@@ -59,15 +59,7 @@ class UserController extends AbstractController
 
     public function indexAction(Request $request, ParameterBag $parameters)
     {
-        $paginator  = $this->get('knp_paginator');
-        $paginator->setDefaultPaginatorOptions(['pageParameterName' => 'users']);
-        $pagination = $paginator->paginate(
-            $this->userManager->getRows(),
-            $request->query->getInt('users', 1),
-            20
-        );
-
-        $parameters->set('objects', $pagination);
+        $parameters->set('objects', $this->userManager->getRows()->getResult());
 
         return $this->render('AxipiBackendBundle:User:index.html.twig', $parameters->all());
     }

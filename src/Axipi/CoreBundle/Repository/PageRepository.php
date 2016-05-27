@@ -33,16 +33,20 @@ class PageRepository extends EntityRepository {
         return $query->getQuery()->getOneOrNullResult();
     }
 
-    public function getRows() {
+    public function getRows($language) {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
         $query->addSelect('pge', 'cmp');
         $query->from('AxipiCoreBundle:Page', 'pge');
         $query->leftJoin('pge.component', 'cmp');
-        $query->where('cmp.category = :category');
+        $query->leftJoin('pge.language', 'lng');
 
+        $query->where('cmp.category = :category');
         $query->setParameter(':category', 'page');
+
+        $query->andWhere('lng.code = :language');
+        $query->setParameter(':language', $language);
 
         $query->orderBy('pge.slug');
 

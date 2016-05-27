@@ -27,9 +27,10 @@ class PageController extends AbstractController
         $this->componentManager = $componentManager;
     }
 
-    public function dispatchAction(Request $request, $action, $id)
+    public function dispatchAction(Request $request, $language, $action, $id)
     {
         $parameters = new ParameterBag();
+        $parameters->set('languages', $this->pageManager->getLanguages());
 
         if($action == 'create' && null !== $id) {
             $component = $this->componentManager->getById($id);
@@ -51,7 +52,7 @@ class PageController extends AbstractController
 
         switch ($action) {
             case 'index':
-                return $this->indexAction($request, $parameters);
+                return $this->indexAction($request, $parameters, $language);
             case 'create':
                 return $this->createAction($request, $parameters, $id);
             case 'read':
@@ -66,12 +67,12 @@ class PageController extends AbstractController
         return $this->redirectToRoute('axipi_backend_page', []);
     }
 
-    public function indexAction(Request $request, ParameterBag $parameters)
+    public function indexAction(Request $request, ParameterBag $parameters, $language)
     {
         $paginator  = $this->get('knp_paginator');
         $paginator->setDefaultPaginatorOptions(['pageParameterName' => 'pages']);
         $pagination = $paginator->paginate(
-            $this->pageManager->getRows(),
+            $this->pageManager->getRows($language),
             $request->query->getInt('pages', 1),
             20
         );
@@ -88,7 +89,7 @@ class PageController extends AbstractController
         $page->setComponent($parameters->get('component'));
         $page->setIsActive(true);
 
-        $form = $this->createForm(PageType::class, $page, ['page' => $page, 'languages' => $this->pageManager->getLanguages(), 'components' => $this->pageManager->getComponents(), 'pages' => $this->pageManager->getPages($page)]);
+        $form = $this->createForm(PageType::class, $page, ['page' => $page, 'languages' => $parameters->get('languages'), 'components' => $this->pageManager->getComponents(), 'pages' => $this->pageManager->getPages($page)]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
@@ -111,7 +112,7 @@ class PageController extends AbstractController
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
-        $form = $this->createForm(PageType::class, $parameters->get('page'), ['page' => $parameters->get('page'), 'languages' => $this->pageManager->getLanguages(), 'components' => $this->pageManager->getComponents(), 'pages' => $this->pageManager->getPages($parameters->get('page'))]);
+        $form = $this->createForm(PageType::class, $parameters->get('page'), ['page' => $parameters->get('page'), 'languages' => $parameters->get('languages'), 'components' => $this->pageManager->getComponents(), 'pages' => $this->pageManager->getPages($parameters->get('page'))]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {

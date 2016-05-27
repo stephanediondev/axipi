@@ -22,7 +22,7 @@ class DefaultController extends AbstractController
         $this->coreManager = $coreManager;
     }
 
-    public function indexAction(Request $request, $slug)
+    public function indexAction(Request $request, $slug, $language = null)
     {
         if(substr($slug, -1) == '/') {
             $slug = substr($slug, 0, -1);
