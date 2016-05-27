@@ -66,3 +66,10 @@ axipi_backend_user:
         _controller: "axipi_backend_controller_user:dispatchAction"
         action: "index"
         id: null
+
+axipi_backend_media:
+    path:  /media/{action}/{id}
+    defaults:
+        _controller: "axipi_backend_controller_media:dispatchAction"
+        action: "index"
+        id: null

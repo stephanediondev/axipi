@@ -88,3 +88,14 @@ services:
         public: false
         arguments:
             - "@security.encoder_factory"
+
+    axipi_backend_controller_media:
+        class: Axipi\BackendBundle\Controller\MediaController
+        parent: "axipi_core_controller_abstract"
+        arguments:
+            - "@axipi_backend_manager_media"
+
+    axipi_backend_manager_media:
+        class: Axipi\BackendBundle\Manager\MediaManager
+        parent: "axipi_core_manager_abstract"
+        public: false
