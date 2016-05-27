@@ -1,0 +1,4 @@
+services:
+    axipi_sitemap_controller_xml:
+        class: Axipi\SitemapBundle\Controller\XmlController
+        parent: "axipi_core_controller_abstract"

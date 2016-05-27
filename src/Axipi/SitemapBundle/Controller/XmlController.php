@@ -1,9 +1,9 @@
 <?php
-namespace Axipi\ContentBundle\Controller;
+namespace Axipi\SitemapBundle\Controller;
 
 use Axipi\CoreBundle\Controller\AbstractController;
 
-class Error404Controller extends AbstractController
+class XmlController extends AbstractController
 {
     public function getPage($page)
     {
@@ -13,7 +13,7 @@ class Error404Controller extends AbstractController
             $template = $page->getComponent()->getTemplate();
         }
         $response = $this->render($template, ['page' => $page]);
-        $response->setStatusCode(404);
+        $response->headers->set('Content-Type', 'text/xml');
         return $response;
     }
 }
