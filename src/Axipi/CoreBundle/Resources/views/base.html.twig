@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
 <head>
-<title>{% block title %}Welcome!{% endblock %}</title>
+<title>{% block title %}{{ page.titleSeo|default(page.title) }}{% endblock %}</title>
 {% block style %}
 <link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/axipicore/css/base.css') }}">
 {% endblock %}
 {% block meta %}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% if page.descriptionSeo %}
+<meta name="description" content="{{ page.descriptionSeo }}">
+{% endif %}
 {% if page.metaRobots %}
 <meta name="robots" content="{{ page.metaRobots }}">
 {% endif %}
