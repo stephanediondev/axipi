@@ -33,7 +33,7 @@ class PageRepository extends EntityRepository {
         return $query->getQuery()->getOneOrNullResult();
     }
 
-    public function getRows($language) {
+    public function getRows($language, $parent) {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
@@ -47,6 +47,13 @@ class PageRepository extends EntityRepository {
 
         $query->andWhere('lng.code = :language');
         $query->setParameter(':language', $language);
+
+        if($parent) {
+            $query->andWhere('pge.parent = :parent');
+            $query->setParameter(':parent', $parent);
+        } else {
+            $query->andWhere('pge.parent IS NULL');
+        }
 
         $query->orderBy('pge.slug');
 

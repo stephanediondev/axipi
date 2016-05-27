@@ -69,15 +69,7 @@ class PageController extends AbstractController
 
     public function indexAction(Request $request, ParameterBag $parameters, $language)
     {
-        $paginator  = $this->get('knp_paginator');
-        $paginator->setDefaultPaginatorOptions(['pageParameterName' => 'pages']);
-        $pagination = $paginator->paginate(
-            $this->pageManager->getRows($language),
-            $request->query->getInt('pages', 1),
-            20
-        );
-
-        $parameters->set('objects', $pagination);
+        $parameters->set('objects', $this->pageManager->getRows($language, null)->getResult());
         $parameters->set('components', $this->pageManager->getComponents());
 
         return $this->render('AxipiBackendBundle:Page:index.html.twig', $parameters->all());

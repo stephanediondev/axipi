@@ -14,7 +14,7 @@
 
             {% embed 'AxipiBackendBundle::block_title.html.twig' %}
                 {% block block_title %}
-                    <span><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }} ({{ objects.getTotalItemCount }})</span>
+                    <span><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</span>
                 {% endblock %}
                 {% block block_title_actions %}
                     <li><a role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample"><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.create'|trans({}, 'axipi_backend') }}</a></li>
@@ -32,40 +32,13 @@
             </div>
 
             <div class="block">
-                {% embed 'AxipiBackendBundle::table.html.twig' with {'table_actions': false, 'row_actions': true} %}
-                    {% block table_actions %}
-                        <div>
-                            <button name="submit" type="button" data-href="#select" data-id="works-works" class="inputsubmit submitcheckbox"><i class="fa fa-shopping-cart"></i>Sélectionner</button>
+                <div class="row">
+                    {% for object in objects %}
+                        <div class="col-lg-2 col-sm-3 text-center">
+                            <a class="thumbnail" href="{{ path('axipi_backend_page', {action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
                         </div>
-                        <div>
-                            <button name="submit" type="button" data-href="#merge" data-id="works-works" class="inputsubmit submitcheckbox"><i class="fa fa-chain"></i>Fusionner</button>
-                        </div>
-                    {% endblock %}
-
-                    {% block table_head %}
-                        <th class="hidden-xs{% if objects.isSorted('pge.id') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'page.id'|trans({}, 'axipi_backend'), 'pge.id') }}</th>
-                        <th class="{% if objects.isSorted('pge.title') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'page.title'|trans({}, 'axipi_backend'), 'pge.title') }}</th>
-                        <th class="hidden-xs{% if objects.isSorted('pge.code') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'page.code'|trans({}, 'axipi_backend'), 'pge.code') }}</th>
-                        <th class="hidden-xs{% if objects.isSorted('pge.slug') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'page.slug'|trans({}, 'axipi_backend'), 'pge.slug') }}</th>
-                        <th class="hidden-xs{% if objects.isSorted('pge.isActive') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'page.isActive'|trans({}, 'axipi_backend'), 'pge.isActive') }}</th>
-                        <th class="hidden-xs{% if objects.isSorted('pge.dateCreated') %} sort_asc{% endif %}">{{ knp_pagination_sortable(objects, 'page.dateCreated'|trans({}, 'axipi_backend'), 'pge.dateCreated') }}</th>
-                    {% endblock %}
-
-                    {% block table_row %}
-                        <td class="hidden-xs"><a href="{{ path('axipi_backend_page', {language: app.request.get('language'), action: 'read', 'id': object.id}) }}">{{ object.id }}</a></td>
-                        <td><a href="{{ path('axipi_backend_page', {language: app.request.get('language'), action: 'read', 'id': object.id}) }}"><i class="fa fa-{{ object.component.icon }}"></i>{{ object.title }}</a></td>
-                        <td class="hidden-xs">{{ object.code }}</td>
-                        <td class="hidden-xs">{{ object.slug }}</td>
-                        <td class="hidden-xs">{{ object.isActive }}</td>
-                        <td class="hidden-xs">{{ object.dateCreated|date }}</td>
-                    {% endblock %}
-
-                    {% block table_row_actions %}
-                        <a href="{{ path('axipi_core_slug', {slug: object.slug}) }}" target="_blank"><i class="fa fa-{{ 'icons.frontend'|trans({}, 'axipi_backend') }}"></i>{{ 'frontend'|trans({}, 'axipi_backend') }}</a>
-                        <a class="hidden-xs" href="{{ path('axipi_backend_page', {language: app.request.get('language'), action: 'update', 'id': object.id}) }}"><i class="fa fa-{{ 'icons.update'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
-                        <a class="hidden-xs" href="{{ path('axipi_backend_page', {language: app.request.get('language'), action: 'delete', 'id': object.id}) }}"><i class="fa fa-{{ 'icons.delete'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
-                    {% endblock %}
-                {% endembed %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

@@ -13,9 +13,9 @@ class PageManager extends AbstractManager
         return $this->em->getRepository('AxipiCoreBundle:Page')->getById($id);
     }
 
-    public function getRows($language)
+    public function getRows($language, $parent)
     {
-        return $this->em->getRepository('AxipiCoreBundle:Page')->getRows($language);
+        return $this->em->getRepository('AxipiCoreBundle:Page')->getRows($language, $parent);
     }
 
     public function getLanguages()
