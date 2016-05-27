@@ -21,16 +21,6 @@ class PageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('language', EntityType::class,
-            [
-                'placeholder' => '-',
-                'class' => Language::class,
-                'choices' => $options['languages'],
-                'choice_label' => function ($language) {
-                    return $language->getTitle();
-                }
-            ]
-        );
         $builder->add('template', TextType::class,
             [
                 'required' => false,
@@ -55,6 +45,7 @@ class PageType extends AbstractType
         $builder->add('slug');
         $builder->add('titleSeo');
         $builder->add('descriptionSeo');
+        $builder->add('metaRobots');
         $builder->add('titleSocial');
         $builder->add('descriptionSocial');
         $builder->add('isActive');

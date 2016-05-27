@@ -64,10 +64,12 @@ page:
     descriptionSeo: "Description (SEO)"
     titleSocial: "Title (social)"
     descriptionSocial: "Description (social)"
+    metaRobots: "Robots (meta)"
     isActive: "Is active?"
     parent: "Parent"
     attributes: "Attributes"
     dateCreated: "Date created"
+    children: "Children"
 widget:
     id: "ID"
     component: "Component"

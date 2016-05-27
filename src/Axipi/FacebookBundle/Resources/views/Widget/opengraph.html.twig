@@ -1,7 +1,9 @@
 <!-- Facebook / Opengraph -->
 <meta property="og:site_name" content="{{ widget.attribute('site') }}">
-<meta property="og:title" content="{{ page.titleSocial }}">
-<!--<meta property="og:image" content="">-->
+<meta property="og:title" content="{{ page.titleSocial|default(page.title) }}">
+{% if page.attribute('thumbnail') %}
+<meta property="og:image" content="{{ absolute_url(asset('uploads/' ~ page.attribute('thumbnail'))) }}">
+{% endif %}
 <meta property="og:description" content="{{ page.descriptionSocial }}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ url('axipi_core_slug', {slug: page.slug}) }}">

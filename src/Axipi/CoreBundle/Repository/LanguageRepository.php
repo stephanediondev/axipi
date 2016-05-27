@@ -16,6 +16,18 @@ class LanguageRepository extends EntityRepository {
         return $query->getQuery()->getOneOrNullResult();
     }
 
+    public function getByCode($code) {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQueryBuilder();
+        $query->addSelect('lng');
+        $query->from('AxipiCoreBundle:Language', 'lng');
+        $query->where('lng.code = :code');
+        $query->setParameter(':code', $code);
+
+        return $query->getQuery()->getOneOrNullResult();
+    }
+
     public function getRows() {
         $em = $this->getEntityManager();
 

@@ -4,13 +4,13 @@ axipi_core_home:
         _controller: "axipi_core_controller_default:indexAction"
         slug: ""
 
-axipi_core_slug_language:
-    path:  /{_locale}/{slug}
-    defaults:
-        _controller: "axipi_core_controller_default:indexAction"
-        _locale: "en"
-    requirements:
-        slug: ".+"
+#axipi_core_slug_language:
+#    path:  /{_locale}/{slug}
+#    defaults:
+#        _controller: "axipi_core_controller_default:indexAction"
+#        _locale: "en"
+#    requirements:
+#        slug: ".+"
 
 axipi_core_slug:
     path:  /{slug}

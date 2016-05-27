@@ -29,8 +29,13 @@ class WidgetController extends AbstractController
 
     public function dispatchAction(Request $request, $language, $action, $id)
     {
+        if($language == 'xx') {
+            return $this->redirectToRoute('axipi_backend_widget', ['language' => 'en', 'action' => 'index']);
+        }
+
         $parameters = new ParameterBag();
         $parameters->set('languages', $this->widgetManager->getLanguages());
+        $parameters->set('language', $this->widgetManager->getLanguageByCode($language));
 
         if($action == 'create' && null !== $id) {
             $component = $this->componentManager->getById($id);
@@ -38,7 +43,7 @@ class WidgetController extends AbstractController
                 $parameters->set('component', $component);
             } else {
                 $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_widget', []);
+                return $this->redirectToRoute('axipi_backend_widget', ['language' => $language]);
             }
         } else if(null !== $id) {
             $widget = $this->widgetManager->getById($id);
@@ -46,7 +51,7 @@ class WidgetController extends AbstractController
                 $parameters->set('widget', $widget);
             } else {
                 $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_widget', []);
+                return $this->redirectToRoute('axipi_backend_widget', ['language' => $language]);
             }
         }
 
@@ -54,7 +59,7 @@ class WidgetController extends AbstractController
             case 'index':
                 return $this->indexAction($request, $parameters, $language);
             case 'create':
-                return $this->createAction($request, $parameters, $id);
+                return $this->createAction($request, $parameters);
             case 'read':
                 return $this->readAction($request, $parameters, $id);
             case 'update':
@@ -64,7 +69,7 @@ class WidgetController extends AbstractController
         }
 
         $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_component', []);
+        return $this->redirectToRoute('axipi_backend_component', ['language' => $language]);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters, $language)
@@ -75,7 +80,7 @@ class WidgetController extends AbstractController
         return $this->render('AxipiBackendBundle:Widget:index.html.twig', $parameters->all());
     }
 
-    public function createAction(Request $request, ParameterBag $parameters, $id)
+    public function createAction(Request $request, ParameterBag $parameters)
     {
         $widget = new Widget();
         $widget->setComponent($parameters->get('component'));
@@ -89,7 +94,7 @@ class WidgetController extends AbstractController
             if($form->isValid()) {
                 $this->widgetManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_widget', []);
+                return $this->redirectToRoute('axipi_backend_widget', ['language' => $parameters->get('language')->getCode()]);
             }
         }
 
@@ -114,7 +119,7 @@ class WidgetController extends AbstractController
             if($form->isValid()) {
                 $this->widgetManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_widget', ['action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_widget', ['language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
             }
         }
 
@@ -132,7 +137,7 @@ class WidgetController extends AbstractController
             if($form->isValid()) {
                 $this->widgetManager->remove($parameters->get('widget'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_widget', []);
+                return $this->redirectToRoute('axipi_backend_widget', ['language' => $parameters->get('language')->getCode()]);
             }
         }
 

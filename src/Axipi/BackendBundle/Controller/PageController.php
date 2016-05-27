@@ -29,8 +29,13 @@ class PageController extends AbstractController
 
     public function dispatchAction(Request $request, $language, $action, $id)
     {
+        if($language == 'xx') {
+            return $this->redirectToRoute('axipi_backend_page', ['language' => 'en', 'action' => 'index']);
+        }
+
         $parameters = new ParameterBag();
         $parameters->set('languages', $this->pageManager->getLanguages());
+        $parameters->set('language', $this->pageManager->getLanguageByCode($language));
 
         if($action == 'create' && null !== $id) {
             $component = $this->componentManager->getById($id);
@@ -38,7 +43,7 @@ class PageController extends AbstractController
                 $parameters->set('component', $component);
             } else {
                 $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_page', []);
+                return $this->redirectToRoute('axipi_backend_page', ['language' => $language]);
             }
         } else if(null !== $id) {
             $page = $this->pageManager->getById($id);
@@ -46,7 +51,7 @@ class PageController extends AbstractController
                 $parameters->set('page', $page);
             } else {
                 $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_page', []);
+                return $this->redirectToRoute('axipi_backend_page', ['language' => $language]);
             }
         }
 
@@ -54,7 +59,7 @@ class PageController extends AbstractController
             case 'index':
                 return $this->indexAction($request, $parameters, $language);
             case 'create':
-                return $this->createAction($request, $parameters, $id);
+                return $this->createAction($request, $parameters);
             case 'read':
                 return $this->readAction($request, $parameters, $id);
             case 'update':
@@ -64,7 +69,7 @@ class PageController extends AbstractController
         }
 
         $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_page', []);
+        return $this->redirectToRoute('axipi_backend_page', ['language' => $language]);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters, $language)
@@ -75,9 +80,10 @@ class PageController extends AbstractController
         return $this->render('AxipiBackendBundle:Page:index.html.twig', $parameters->all());
     }
 
-    public function createAction(Request $request, ParameterBag $parameters, $id)
+    public function createAction(Request $request, ParameterBag $parameters)
     {
         $page = new Page();
+        $page->setLanguage($parameters->get('language'));
         $page->setComponent($parameters->get('component'));
         $page->setIsActive(true);
 
@@ -88,7 +94,7 @@ class PageController extends AbstractController
             if($form->isValid()) {
                 $this->pageManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_page', []);
+                return $this->redirectToRoute('axipi_backend_page', ['language' => $parameters->get('language')->getCode()]);
             }
         }
 
@@ -111,7 +117,7 @@ class PageController extends AbstractController
             if($form->isValid()) {
                 $this->pageManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_page', ['action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_page', ['language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
             }
         }
 
@@ -129,7 +135,7 @@ class PageController extends AbstractController
             if($form->isValid()) {
                 $this->pageManager->remove($parameters->get('page'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_page', []);
+                return $this->redirectToRoute('axipi_backend_page', ['language' => $parameters->get('language')->getCode()]);
             }
         }
 

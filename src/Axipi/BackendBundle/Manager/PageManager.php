@@ -33,6 +33,11 @@ class PageManager extends AbstractManager
         return $this->em->getRepository('AxipiCoreBundle:Page')->getPages($page);
     }
 
+    public function getLanguageByCode($code)
+    {
+        return $this->em->getRepository('AxipiCoreBundle:Language')->getByCode($code);
+    }
+
     public function persist($data)
     {
         $attributes = json_decode($data->getComponent()->getAttributesSchema(), true);
