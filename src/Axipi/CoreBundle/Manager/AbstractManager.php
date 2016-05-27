@@ -8,6 +8,12 @@ abstract class AbstractManager
 {
     protected $em;
 
+    protected $elasticsearchEnabled;
+
+    protected $elasticsearchIndex;
+
+    protected $elasticsearchUrl;
+
     public function setEntityManager(EntityManagerInterface $em)
     {
         $this->em = $em;
@@ -24,5 +30,12 @@ abstract class AbstractManager
             return $this->em->getRepository($this->getEntityName());
         }
         return $this->em->getRepository($entity);
+    }
+
+    public function setElasticSearch($enabled, $index, $url)
+    {
+        $this->elasticsearchEnabled = $enabled;
+        $this->elasticsearchIndex = $index;
+        $this->elasticsearchUrl = $url;
     }
 }

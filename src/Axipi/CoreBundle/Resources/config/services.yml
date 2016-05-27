@@ -22,6 +22,7 @@ services:
         abstract: true
         calls:
             - [ "setEntityManager", [ "@doctrine.orm.entity_manager" ] ]
+            - [ "setElasticSearch", [ "%elasticsearch_enabled%", "%elasticsearch_index%", "%elasticsearch_url%" ] ]
 
     axipi_core_manager_core:
         class: Axipi\CoreBundle\Manager\CoreManager

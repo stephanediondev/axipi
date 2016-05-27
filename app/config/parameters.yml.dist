@@ -17,3 +17,7 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    elasticsearch_enabled: false
+    elasticsearch_index:   axipi
+    elasticsearch_url:     http://127.0.0.1:9200
