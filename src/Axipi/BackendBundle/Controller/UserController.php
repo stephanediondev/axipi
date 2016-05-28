@@ -68,7 +68,7 @@ class UserController extends AbstractController
     {
         $user = new User();
 
-        $form = $this->createForm(UserType::class, $user, ['controller' => 'create', 'user_connected' => $this->getUser(), 'user' => $user]);
+        $form = $this->createForm(UserType::class, $user, ['controller' => 'create', 'user_connected' => $this->getUser(), 'user' => $user, 'roles' => $this->userManager->getRoles()]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
@@ -91,7 +91,7 @@ class UserController extends AbstractController
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
-        $form = $this->createForm(UserType::class, $parameters->get('user'), ['controller' => 'update', 'user_connected' => $this->getUser(), 'user' => $parameters->get('user')]);
+        $form = $this->createForm(UserType::class, $parameters->get('user'), ['controller' => 'update', 'user_connected' => $this->getUser(), 'user' => $parameters->get('user'), 'roles' => $this->userManager->getRoles()]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {

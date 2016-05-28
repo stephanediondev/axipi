@@ -102,5 +102,6 @@ user:
     password: "Password"
     firstname: "Firstname"
     lastname: "Lastname"
+    roles: "Roles"
     isActive: "Is active?"
     dateCreated: "Date created"

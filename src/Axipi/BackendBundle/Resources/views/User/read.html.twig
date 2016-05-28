@@ -25,6 +25,7 @@
                         {{ macro.read_field('user.lastname'|trans({}, 'axipi_backend'), user.lastname) }}
                     </div>
                     <div class="col-lg-4">
+                        {{ macro.read_field('user.roles'|trans({}, 'axipi_backend'), user.roles|join('<br>')) }}
                         {{ macro.read_field('user.isActive'|trans({}, 'axipi_backend'), user.isActive) }}
                     </div>
                 </div>

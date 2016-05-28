@@ -17,13 +17,15 @@ class User implements AdvancedUserInterface, \Serializable
 
     private $isActive = false;
 
-    private $roles;
+    private $roles = [];
 
     private $dateCreated;
 
     private $dateModified;
 
-    private $passwordPlain;
+    private $passwordChange;
+
+    private $rolesChange = [];
 
     public function getId()
     {
@@ -177,15 +179,27 @@ class User implements AdvancedUserInterface, \Serializable
         return $this->isActive;
     }
 
-    public function setPasswordPlain($passwordPlain)
+    public function setPasswordChange($passwordChange)
     {
-        $this->passwordPlain = $passwordPlain;
+        $this->passwordChange = $passwordChange;
 
         return $this;
     }
 
-    public function getPasswordPlain()
+    public function getPasswordChange()
     {
-        return $this->passwordPlain;
+        return $this->passwordChange;
+    }
+
+    public function setRolesChange($rolesChange)
+    {
+        $this->rolesChange = $rolesChange;
+
+        return $this;
+    }
+
+    public function getRolesChange()
+    {
+        return $this->rolesChange;
     }
 }

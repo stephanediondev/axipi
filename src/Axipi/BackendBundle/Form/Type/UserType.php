@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -26,7 +27,7 @@ class UserType extends AbstractType
         } else {
             $required = false;
         }
-        $builder->add('passwordPlain', RepeatedType::class, array(
+        $builder->add('passwordChange', RepeatedType::class, array(
             'type' => PasswordType::class,
             'invalid_message' => 'The password fields must match.',
             'options' => array('attr' => array('class' => 'password-field')),
@@ -38,6 +39,12 @@ class UserType extends AbstractType
         $builder->add('firstname', TextType::class, ['required' => true]);
 
         $builder->add('lastname', TextType::class, ['required' => false]);
+
+        $builder->add('rolesChange', ChoiceType::class, array(
+            'choices' => $options['roles'],
+            'multiple' => true,
+            'data' => $options['user']->getRoles(),
+        ));
 
         if($options['user_connected']->getid() != $options['user']->getid()) {
             $builder->add('isActive');
@@ -63,6 +70,7 @@ class UserType extends AbstractType
             'controller' => null,
             'user_connected' => null,
             'user' => null,
+            'roles' => [],
         ));
     }
 }
