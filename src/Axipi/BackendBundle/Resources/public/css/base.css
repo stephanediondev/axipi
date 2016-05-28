@@ -206,7 +206,7 @@ a.thumbnail:link, a.thumbnail:visited {
 	background-color: #f6f8fa;
 	border: 1px solid #e7e7e7;
 	font-size: 16px;
-	min-height: 120px;
+	min-height: 125px;
 	overflow: hidden;
 	text-decoration: none;
 	text-overflow: ellipsis;
@@ -216,6 +216,9 @@ a.thumbnail:hover {
 	background-color: #AEB2B7;
 	border: 1px solid #AEB2B7;
 	text-decoration: none;
+}
+a.thumbnail img {
+	max-height: 90px;
 }
 .table tr.inactive {
 	opacity: 0.5;

@@ -34,8 +34,8 @@
                 {% if is_granted('ROLE_WIDGETS') %}
                     <li><a href="{{ path('axipi_backend_widget', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></li>
                 {% endif %}
-                {% if is_granted('ROLE_MEDIAS') %}
-                    <li><a href="{{ path('axipi_backend_media', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.media'|trans({}, 'axipi_backend') }}"></i>{{ 'medias'|trans({}, 'axipi_backend') }}</a></li>
+                {% if is_granted('ROLE_FILES') %}
+                    <li><a href="{{ path('axipi_backend_file', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.file'|trans({}, 'axipi_backend') }}"></i>{{ 'files'|trans({}, 'axipi_backend') }}</a></li>
                 {% endif %}
                 {% if is_granted('ROLE_LANGUAGES') %}
                     <li><a href="{{ path('axipi_backend_language', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.language'|trans({}, 'axipi_backend') }}"></i>{{ 'languages'|trans({}, 'axipi_backend') }}</a></li>
@@ -71,9 +71,15 @@
 {% endblock %}
 
 {% block script %}
+<script type="text/javascript">
+var app_environment = '{{ app.environment }}';
+var app_request_locale = '{{ app.request.locale }}';
+var app_request_uri = '{{ app.request.uri }}';
+var axipi_backend_home = '{{ url('axipi_backend_home') }}';
+</script>
 <script type="text/javascript" src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('vendor/tinymce-dist/tinymce.jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/tinymce-dist/tinymce.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/axipibackend/js/base.js') }}"></script>
 {% endblock %}
 

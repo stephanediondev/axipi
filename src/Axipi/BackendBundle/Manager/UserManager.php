@@ -30,7 +30,7 @@ class UserManager extends AbstractManager
         $roles = [];
         $roles[] = 'ROLE_PAGES';
         $roles[] = 'ROLE_WIDGETS';
-        $roles[] = 'ROLE_MEDIAS';
+        $roles[] = 'ROLE_FILES';
         $roles[] = 'ROLE_LANGUAGES';
         $roles[] = 'ROLE_COMPONENTS';
         $roles[] = 'ROLE_ZONES';

@@ -7,11 +7,11 @@ use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesser;
 
 use Axipi\CoreBundle\Manager\AbstractManager;
 
-class MediaManager extends AbstractManager
+class FileManager extends AbstractManager
 {
     //$fs = new Filesystem();
 
-    private $root = 'medias/';
+    private $root = 'files/';
 
     private $filesExcluded = ['.', '..', 'index.php', 'index.html', '.git', '.gitkeep', '.svn', '.DS_Store', '._.DS_Store'];
 
@@ -73,18 +73,18 @@ class MediaManager extends AbstractManager
 
         $parts = explode('/', $slug);
 
-        $media = [];
-        $media['icon'] = $this->getIcon($path);
-        $media['name'] = $parts[count($parts) - 1];
-        $media['slug'] = $slug;
+        $file = [];
+        $file['icon'] = $this->getIcon($path);
+        $file['name'] = $parts[count($parts) - 1];
+        $file['slug'] = $slug;
         if(is_dir($path)) {
-            $media['type'] = 'folder';
+            $file['type'] = 'folder';
         } else {
-            $media['type'] = 'file';
-            $media['size'] = filesize($path);
-            $media['mime'] = $this->getMimeType($path);
+            $file['type'] = 'file';
+            $file['size'] = filesize($path);
+            $file['mime'] = $this->getMimeType($path);
         }
-        return $media;
+        return $file;
     }
 
     public function cleanSlash($slug) {

@@ -89,14 +89,14 @@ services:
         arguments:
             - "@security.encoder_factory"
 
-    axipi_backend_controller_media:
-        class: Axipi\BackendBundle\Controller\MediaController
+    axipi_backend_controller_file:
+        class: Axipi\BackendBundle\Controller\FileController
         parent: "axipi_core_controller_abstract"
         arguments:
-            - "@axipi_backend_manager_media"
+            - "@axipi_backend_manager_file"
 
-    axipi_backend_manager_media:
-        class: Axipi\BackendBundle\Manager\MediaManager
+    axipi_backend_manager_file:
+        class: Axipi\BackendBundle\Manager\FileManager
         parent: "axipi_core_manager_abstract"
         public: false
 
