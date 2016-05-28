@@ -74,8 +74,10 @@ axipi_backend_profile:
         action: "read"
 
 axipi_backend_media:
-    path:  /media/{action}/{id}
+    path:  /media/{action}/{slug}
     defaults:
         _controller: "axipi_backend_controller_media:dispatchAction"
         action: "index"
-        id: null
+        slug: ""
+    requirements:
+        slug: ".+"

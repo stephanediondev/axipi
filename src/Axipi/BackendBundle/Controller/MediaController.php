@@ -22,7 +22,7 @@ class MediaController extends AbstractController
         $this->mediaManager = $mediaManager;
     }
 
-    public function dispatchAction(Request $request, $action, $id)
+    public function dispatchAction(Request $request, $action, $slug)
     {
         if(!$this->isGranted('ROLE_MEDIAS')) {
             return $this->redirectToRoute('axipi_backend_home', []);
@@ -30,8 +30,8 @@ class MediaController extends AbstractController
 
         $parameters = new ParameterBag();
 
-        if(null !== $id) {
-            $media = $this->mediaManager->getById($id);
+        if($action != 'index' && null !== $slug) {
+            $media = $this->mediaManager->getBySlug($slug);
             if($media) {
                 $parameters->set('media', $media);
             } else {
@@ -42,29 +42,29 @@ class MediaController extends AbstractController
 
         switch ($action) {
             case 'index':
-                return $this->indexAction($request, $parameters);
+                return $this->indexAction($request, $parameters, $slug);
             case 'create':
-                return $this->createAction($request, $parameters, $id);
+                return $this->createAction($request, $parameters, $slug);
             case 'read':
-                return $this->readAction($request, $parameters, $id);
+                return $this->readAction($request, $parameters, $slug);
             case 'update':
-                return $this->updateAction($request, $parameters, $id);
+                return $this->updateAction($request, $parameters, $slug);
             case 'delete':
-                return $this->deleteAction($request, $parameters, $id);
+                return $this->deleteAction($request, $parameters, $slug);
         }
 
         $this->addFlash('danger', 'not found');
         return $this->redirectToRoute('axipi_backend_media', []);
     }
 
-    public function indexAction(Request $request, ParameterBag $parameters)
+    public function indexAction(Request $request, ParameterBag $parameters, $slug)
     {
-        $parameters->set('objects', []);
+        $parameters->set('objects', $this->mediaManager->getRows($slug));
 
         return $this->render('AxipiBackendBundle:Media:index.html.twig', $parameters->all());
     }
 
-    public function createAction(Request $request, ParameterBag $parameters, $id)
+    public function createAction(Request $request, ParameterBag $parameters, $slug)
     {
         $media = new Media();
         $media->setIsActive(true);
@@ -85,12 +85,12 @@ class MediaController extends AbstractController
         return $this->render('AxipiBackendBundle:Media:create.html.twig', $parameters->all());
     }
 
-    public function readAction(Request $request, ParameterBag $parameters, $id)
+    public function readAction(Request $request, ParameterBag $parameters, $slug)
     {
         return $this->render('AxipiBackendBundle:Media:read.html.twig', $parameters->all());
     }
 
-    public function updateAction(Request $request, ParameterBag $parameters, $id)
+    public function updateAction(Request $request, ParameterBag $parameters, $slug)
     {
         $form = $this->createForm(MediaType::class, $parameters->get('media'), []);
         $form->handleRequest($request);
@@ -99,7 +99,7 @@ class MediaController extends AbstractController
             if($form->isValid()) {
                 $this->mediaManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_media', ['action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_media', ['action' => 'read', 'id' => $slug]);
             }
         }
 
@@ -108,7 +108,7 @@ class MediaController extends AbstractController
         return $this->render('AxipiBackendBundle:Media:update.html.twig', $parameters->all());
     }
 
-    public function deleteAction(Request $request, ParameterBag $parameters, $id)
+    public function deleteAction(Request $request, ParameterBag $parameters, $slug)
     {
         $form = $this->createForm(DeleteType::class, null, []);
         $form->handleRequest($request);

@@ -35,12 +35,6 @@ class UserManager extends AbstractManager
         $roles[] = 'ROLE_COMPONENTS';
         $roles[] = 'ROLE_ZONES';
         $roles[] = 'ROLE_USERS';
-
-        $languages = $this->em->getRepository('AxipiCoreBundle:Language')->getRows();
-        foreach($languages as $language) {
-            $role = 'ROLE_'.strtoupper($language->getCode());
-            $roles[] = $role;
-        }
         return $roles;
     }
 
