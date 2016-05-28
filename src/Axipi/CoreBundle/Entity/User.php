@@ -17,7 +17,7 @@ class User implements AdvancedUserInterface, \Serializable
 
     private $isActive = false;
 
-    private $roles = [];
+    private $roles;
 
     private $dateCreated;
 
