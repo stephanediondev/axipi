@@ -22,16 +22,11 @@ class ProfileType extends AbstractType
     {
         $builder->add('username');
 
-        if($options['controller'] == 'create') {
-            $required = true;
-        } else {
-            $required = false;
-        }
         $builder->add('passwordChange', RepeatedType::class, array(
             'type' => PasswordType::class,
             'invalid_message' => 'The password fields must match.',
             'options' => array('attr' => array('class' => 'password-field')),
-            'required' => $required,
+            'required' => false,
             'first_options'  => array('label' => 'Password'),
             'second_options' => array('label' => 'Repeat Password'),
         ));
@@ -57,7 +52,6 @@ class ProfileType extends AbstractType
         $resolver->setDefaults(array(
             'translation_domain' => 'axipi_backend',
             'data_class' => User::class,
-            'controller' => null,
         ));
     }
 }

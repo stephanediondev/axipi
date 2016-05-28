@@ -3,8 +3,8 @@
     {% if not compound -%}
         <p>
             {{ form_label(form) }}
-            {{ form_errors(form) }}
             {{ form_widget(form) }}
+            {{ form_errors(form) }}
         </p>
     {% else %}
         {{ form_widget(form) }}
@@ -17,3 +17,13 @@
         {{ form_widget(form) }}
     </p>
 {% endblock button_row %}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        {%- for error in errors -%}
+            <div class="alert alert-danger" role="alert">
+                <p>{{ error.message }}</p>
+            </div>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endblock form_errors -%}

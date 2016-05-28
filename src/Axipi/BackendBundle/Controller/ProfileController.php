@@ -47,7 +47,7 @@ class ProfileController extends AbstractController
 
     public function updateAction(Request $request, ParameterBag $parameters)
     {
-        $form = $this->createForm(ProfileType::class, $parameters->get('user'), ['controller' => 'update']);
+        $form = $this->createForm(ProfileType::class, $parameters->get('user'), []);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
