@@ -28,11 +28,18 @@ class UserManager extends AbstractManager
     public function getRoles()
     {
         $roles = [];
-        $roles['ROLE_ADMIN'] = 'ROLE_ADMIN';
+        $roles[] = 'ROLE_PAGES';
+        $roles[] = 'ROLE_WIDGETS';
+        $roles[] = 'ROLE_MEDIAS';
+        $roles[] = 'ROLE_LANGUAGES';
+        $roles[] = 'ROLE_COMPONENTS';
+        $roles[] = 'ROLE_ZONES';
+        $roles[] = 'ROLE_USERS';
+
         $languages = $this->em->getRepository('AxipiCoreBundle:Language')->getRows();
         foreach($languages as $language) {
             $role = 'ROLE_'.strtoupper($language->getCode());
-            $roles[$role] = $role;
+            $roles[] = $role;
         }
         return $roles;
     }
@@ -53,8 +60,8 @@ class UserManager extends AbstractManager
             foreach($change_roles as $role) {
                 $new_roles[] = $role;
             }
-            if(is_array($old_roles) && in_array('ROLE_ADMIN', $old_roles)) {
-                $new_roles[] = 'ROLE_ADMIN';
+            if(is_array($old_roles) && in_array('ROLE_USERS', $old_roles)) {
+                $new_roles[] = 'ROLE_USERS';
             }
             $new_roles = array_unique($new_roles);
             $data->setRoles($new_roles);

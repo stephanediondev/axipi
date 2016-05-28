@@ -30,6 +30,10 @@ class WidgetPageController extends AbstractController
 
     public function dispatchAction(Request $request, $action, $id)
     {
+        if(!$this->isGranted('ROLE_WIDGETS')) {
+            return $this->redirectToRoute('axipi_backend_home', []);
+        }
+
         $parameters = new ParameterBag();
 
         if($action == 'create' && null !== $id) {

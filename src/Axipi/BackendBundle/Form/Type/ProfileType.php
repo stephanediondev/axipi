@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Axipi\CoreBundle\Entity\User;
 
-class UserType extends AbstractType
+class ProfileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -40,22 +40,6 @@ class UserType extends AbstractType
 
         $builder->add('lastname', TextType::class, ['required' => false]);
 
-        $builder->add('rolesChange', ChoiceType::class, array(
-            'choices' => $options['roles'],
-            'choice_label' => function ($value, $key, $index) {
-                return $value;
-            },
-            'multiple' => true,
-            'data' => $options['user']->getRoles(),
-            'attr' => array(
-                'size' => 10,
-            ),
-        ));
-
-        if($options['user_connected']->getid() != $options['user']->getid()) {
-            $builder->add('isActive');
-        }
-
         $builder->add('submit', SubmitType::class);
     }
 
@@ -74,9 +58,6 @@ class UserType extends AbstractType
             'translation_domain' => 'axipi_backend',
             'data_class' => User::class,
             'controller' => null,
-            'user_connected' => null,
-            'user' => null,
-            'roles' => [],
         ));
     }
 }

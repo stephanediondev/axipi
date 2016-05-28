@@ -99,3 +99,9 @@ services:
         class: Axipi\BackendBundle\Manager\MediaManager
         parent: "axipi_core_manager_abstract"
         public: false
+
+    axipi_backend_controller_profile:
+        class: Axipi\BackendBundle\Controller\ProfileController
+        parent: "axipi_core_controller_abstract"
+        arguments:
+            - "@axipi_backend_manager_user"

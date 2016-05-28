@@ -29,6 +29,10 @@ class WidgetController extends AbstractController
 
     public function dispatchAction(Request $request, $language, $action, $id)
     {
+        if(!$this->isGranted('ROLE_WIDGETS')) {
+            return $this->redirectToRoute('axipi_backend_home', []);
+        }
+
         if($language == 'xx') {
             return $this->redirectToRoute('axipi_backend_widget', ['language' => 'en', 'action' => 'index']);
         }

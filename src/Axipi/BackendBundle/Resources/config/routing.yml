@@ -67,6 +67,12 @@ axipi_backend_user:
         action: "index"
         id: null
 
+axipi_backend_profile:
+    path:  /profile/{action}
+    defaults:
+        _controller: "axipi_backend_controller_profile:dispatchAction"
+        action: "read"
+
 axipi_backend_media:
     path:  /media/{action}/{id}
     defaults:

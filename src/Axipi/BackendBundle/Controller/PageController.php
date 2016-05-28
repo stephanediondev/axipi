@@ -29,6 +29,10 @@ class PageController extends AbstractController
 
     public function dispatchAction(Request $request, $language, $action, $id)
     {
+        if(!$this->isGranted('ROLE_PAGES')) {
+            return $this->redirectToRoute('axipi_backend_home', []);
+        }
+
         if($language == 'xx') {
             return $this->redirectToRoute('axipi_backend_page', ['language' => 'en', 'action' => 'index']);
         }

@@ -24,6 +24,10 @@ class MediaController extends AbstractController
 
     public function dispatchAction(Request $request, $action, $id)
     {
+        if(!$this->isGranted('ROLE_MEDIAS')) {
+            return $this->redirectToRoute('axipi_backend_home', []);
+        }
+
         $parameters = new ParameterBag();
 
         if(null !== $id) {
