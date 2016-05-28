@@ -24,9 +24,18 @@ class MediaManager extends AbstractManager
 
     public function getIcon($path)
     {
-        $icon = 'square-o';
+        $icon = 'file-o';
         if(is_dir($path)) {
-            $icon = 'folder';
+            $icon = 'folder-o';
+            if($dh = opendir($path)) {
+                while(($child = readdir($dh)) !== false) {
+                    if(!in_array($child, $this->filesExcluded) && substr($child, 0, 2) != '._') {
+                        $icon = 'folder';
+                        break;
+                    }
+                }
+            }
+
         } else {
             $guesser = MimeTypeGuesser::getInstance();
             $mime = $guesser->guess($path);
@@ -36,6 +45,9 @@ class MediaManager extends AbstractManager
 
             } else if(strstr($mime, 'video/')) {
                 $icon = 'file-video-o';
+
+            } else if(strstr($mime, 'text/')) {
+                $icon = 'file-text-o';
 
             } else if(strstr($mime, 'excel') || strstr($mime, 'spreadsheetml')) {
                 $icon = 'file-excel-o';
@@ -65,8 +77,13 @@ class MediaManager extends AbstractManager
         $media['icon'] = $this->getIcon($path);
         $media['name'] = $parts[count($parts) - 1];
         $media['slug'] = $slug;
-        $media['size'] = filesize($path);
-        $media['mime'] = $this->getMimeType($path);
+        if(is_dir($path)) {
+            $media['type'] = 'folder';
+        } else {
+            $media['type'] = 'file';
+            $media['size'] = filesize($path);
+            $media['mime'] = $this->getMimeType($path);
+        }
         return $media;
     }
 
@@ -88,15 +105,25 @@ class MediaManager extends AbstractManager
         $dir = $this->root.$slug;
 
         $elements = [];
+        $folders = [];
+        $files = [];
         if(is_dir($dir)) {
             if($dh = opendir($dir)) {
                 while(($file = readdir($dh)) !== false) {
-                    if(!in_array($file, $this->filesExcluded)) {
-                        $elements[] = ['icon' => $this->getIcon($dir.'/'.$file), 'name' => $file, 'slug' => $this->cleanSlash($slug.'/'.$file)];
+                    if(!in_array($file, $this->filesExcluded) && substr($file, 0, 2) != '._') {
+                        $element = $this->getBySlug($slug.'/'.$file);
+                        if($element['type'] == 'directory') {
+                            $folders[] = $element;
+                        } else {
+                            $files[] = $element;
+                        }
                     }
                 }
                 closedir($dh);
             }
+            sort($folders);
+            sort($files);
+            $elements = array_merge($folders, $files);
         }
         return $elements;
     }

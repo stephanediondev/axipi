@@ -207,7 +207,10 @@ a.thumbnail:link, a.thumbnail:visited {
 	border: 1px solid #e7e7e7;
 	font-size: 16px;
 	min-height: 120px;
+	overflow: hidden;
 	text-decoration: none;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 a.thumbnail:hover {
 	background-color: #AEB2B7;

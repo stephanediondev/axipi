@@ -29,6 +29,22 @@ class MediaController extends AbstractController
         }
 
         $parameters = new ParameterBag();
+        $parameters->set('slug', $slug);
+
+        $tree = [];
+        $tree[] = ['slug' => '', 'name' => 'medias', 'icon' => 'folder'];
+        if($slug != '') {
+            $parts = explode('/', $this->mediaManager->cleanSlash($slug));
+            $total_parts = count($parts);
+            $start = '';
+            $u = 0;
+            foreach($parts as $part) {
+                $start = $start.'/'.$part;
+                $tree[] = $this->mediaManager->getBySlug($start);//['slug' => $this->mediaManager->cleanSlash($start), 'name' => $part];
+                $u++;
+            }
+        }
+        $parameters->set('tree', $tree);
 
         if($action != 'index' && null !== $slug) {
             $media = $this->mediaManager->getBySlug($slug);
