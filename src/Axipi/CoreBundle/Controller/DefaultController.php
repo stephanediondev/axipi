@@ -35,7 +35,7 @@ class DefaultController extends AbstractController
         $this->coreManager->setPage($page);
 
         if($this->has($page->getComponent()->getService())) {
-            $response = $this->forward($page->getComponent()->getService().':getPage', ['page' => $page]);
+            $response = $this->forward($page->getComponent()->getService().':getPage', ['request' => $request, 'page' => $page]);
             return $response;
         } else {
             throw new NotFoundHttpException();

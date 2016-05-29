@@ -24,6 +24,7 @@ services:
         arguments:
             - "@axipi_backend_manager_page"
             - "@axipi_backend_manager_component"
+            - "@axipi_search_manager_search"
 
     axipi_backend_manager_page:
         class: Axipi\BackendBundle\Manager\PageManager
@@ -105,3 +106,9 @@ services:
         parent: "axipi_core_controller_abstract"
         arguments:
             - "@axipi_backend_manager_user"
+
+    axipi_backend_controller_search:
+        class: Axipi\BackendBundle\Controller\SearchController
+        parent: "axipi_core_controller_abstract"
+        arguments:
+            - "@axipi_search_manager_search"

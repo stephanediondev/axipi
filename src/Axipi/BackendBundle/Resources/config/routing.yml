@@ -83,3 +83,9 @@ axipi_backend_file:
         slug: ""
     requirements:
         slug: ".+"
+
+axipi_backend_search:
+    path:  /search/{action}
+    defaults:
+        _controller: "axipi_backend_controller_search:dispatchAction"
+        action: "index"

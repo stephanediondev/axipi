@@ -2,6 +2,7 @@ category:
     page: "Page"
     widget: "Widget"
 icons:
+    search: "search"
     profile: "user"
     login: "sign-in"
     logout: "sign-out"
@@ -25,6 +26,7 @@ actions:
     update: "Update"
     delete: "Delete"
     submit: "Submit"
+search: "Search"
 login: "Login"
 logout: "Logout"
 forgot_password: "Forgot password?"

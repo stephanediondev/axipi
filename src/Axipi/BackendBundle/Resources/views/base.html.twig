@@ -47,6 +47,9 @@
                 {% if is_granted('ROLE_ZONES') %}
                     <li><a href="{{ path('axipi_backend_zone', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'zones'|trans({}, 'axipi_backend') }}</a></li>
                 {% endif %}
+                {% if is_granted('ROLE_SEARCH') %}
+                    <li><a href="{{ path('axipi_backend_search', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.search'|trans({}, 'axipi_backend') }}"></i>{{ 'search'|trans({}, 'axipi_backend') }}</a></li>
+                {% endif %}
                 {% if is_granted('ROLE_USERS') %}
                     <li><a href="{{ path('axipi_backend_user', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ 'users'|trans({}, 'axipi_backend') }}</a></li>
                 {% endif %}

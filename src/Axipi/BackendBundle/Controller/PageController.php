@@ -9,6 +9,7 @@ use Axipi\CoreBundle\Controller\AbstractController;
 
 use Axipi\BackendBundle\Manager\PageManager;
 use Axipi\BackendBundle\Manager\ComponentManager;
+use Axipi\SearchBundle\Manager\SearchManager;
 use Axipi\BackendBundle\Form\Type\DeleteType;
 use Axipi\BackendBundle\Form\Type\PageType;
 use Axipi\CoreBundle\Entity\Page;
@@ -19,12 +20,16 @@ class PageController extends AbstractController
 
     protected $componentManager;
 
+    protected $searchManager;
+
     public function __construct(
         PageManager $pageManager,
-        ComponentManager $componentManager
+        ComponentManager $componentManager,
+        SearchManager $searchManager
     ) {
         $this->pageManager = $pageManager;
         $this->componentManager = $componentManager;
+        $this->searchManager = $searchManager;
     }
 
     public function dispatchAction(Request $request, $mode, $language, $action, $id)
@@ -98,6 +103,7 @@ class PageController extends AbstractController
         if($form->isSubmitted()) {
             if($form->isValid()) {
                 $this->pageManager->persist($form->getData());
+                $this->searchManager->indexPage($form->getData());
                 $this->addFlash('success', 'created');
                 return $this->redirectToRoute('axipi_backend_page', ['language' => $parameters->get('language')->getCode()]);
             }
@@ -121,6 +127,7 @@ class PageController extends AbstractController
         if($form->isSubmitted()) {
             if($form->isValid()) {
                 $this->pageManager->persist($form->getData());
+                $this->searchManager->indexPage($form->getData());
                 $this->addFlash('success', 'updated');
                 return $this->redirectToRoute('axipi_backend_page', ['language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
             }

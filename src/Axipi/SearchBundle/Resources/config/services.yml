@@ -1,0 +1,17 @@
+services:
+    axipi_search_controller_page:
+        class: Axipi\SearchBundle\Controller\PageController
+        parent: "axipi_core_controller_abstract"
+        arguments:
+            - "@axipi_search_manager_search"
+
+    axipi_search_widget_form:
+        class: Axipi\SearchBundle\Widget\FormWidget
+        parent: "axipi_core_widget_abstract"
+
+    axipi_search_manager_search:
+        class: Axipi\SearchBundle\Manager\SearchManager
+        parent: "axipi_core_manager_abstract"
+        public: false
+        calls:
+            - [ "setElasticSearch", [ "%elasticsearch_enabled%", "%elasticsearch_index%", "%elasticsearch_url%" ] ]

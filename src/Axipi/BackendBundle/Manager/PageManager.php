@@ -70,34 +70,6 @@ class PageManager extends AbstractManager
         }
         $data->setDateModified(new \Datetime());
 
-        if($this->elasticsearchEnabled) {
-            $index = $this->elasticsearchIndex.'_'.$data->getLanguage()->getCode();
-            $id = $data->getId();
-
-            $path = $this->elasticsearchUrl.'/'.$index.'/page/'.$id;
-
-            if($data->getIsActive()) {
-                $action = 'PUT';
-            } else {
-                $action = 'DELETE';
-            }
-
-            $body = array(
-                'componentService' => $data->getComponent()->getService(),
-                'componentIcon' => $data->getComponent()->getIcon(),
-                'slug' => $data->getSlug(),
-                'title' => strip_tags($data->getTitle()),
-                //'description' => implode(' ', $description),
-            );
-
-            $ci = curl_init();
-            curl_setopt($ci, CURLOPT_URL, $path);
-            curl_setopt($ci, CURLOPT_CUSTOMREQUEST, $action);
-            curl_setopt($ci, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ci, CURLOPT_POSTFIELDS, json_encode($body));
-            curl_exec($ci);
-        }
-
         $this->em->persist($data);
         $this->em->flush();
     }
