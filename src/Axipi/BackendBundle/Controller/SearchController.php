@@ -32,7 +32,7 @@ class SearchController extends AbstractController
                 return $this->indexAction($request, $parameters);
             case 'init':
                 return $this->initAction($request, $parameters);
-            case 'reset':
+            case 'scan':
                 return $this->scanAction($request, $parameters);
         }
 
