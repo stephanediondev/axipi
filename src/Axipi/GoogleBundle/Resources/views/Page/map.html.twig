@@ -44,7 +44,7 @@
         });
 
         var infowindow = new google.maps.InfoWindow({
-            content: '{{ page.attribute('infowindow')|escape('js') }}'
+            content: '{{ convertText(page.attribute('infowindow'))|escape('js') }}'
         });
 
         var marker = new google.maps.Marker({

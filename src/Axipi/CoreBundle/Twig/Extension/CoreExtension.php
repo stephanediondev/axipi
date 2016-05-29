@@ -60,6 +60,9 @@ class CoreExtension extends \Twig_Extension
 
     public function convertText($text)
     {
+        $basePath = $this->container->get('request_stack')->getCurrentRequest()->getBasePath();
+        $text = str_replace('src="../files/', 'src="'.$basePath.'/files/', $text);
+
         $ids = [];
         preg_match_all('/\[page:(\d*):(\S*)\]/im', $text, $matches, PREG_SET_ORDER);
         if(isset($matches) == 1) {
