@@ -4,7 +4,7 @@ namespace Axipi\CoreBundle\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Twig_Environment;
+//use Twig_Extension_StringLoader;
 
 use Axipi\CoreBundle\Entity\Widget;
 
@@ -58,8 +58,19 @@ class CoreExtension extends \Twig_Extension
         return $content;
     }
 
-    public function renderString(Twig_Environment $env, $template)
+    public function renderString(\Twig_Environment $env, $template)
     {
-        return $env->createTemplate((string) $template);
+        /*$this->addClassesToCompile(array(
+            'Twig_Extension_StringLoader',
+        ));*/
+
+        $env = new \Twig_Environment(new \Twig_Loader_String());
+        return $env->render($template);
+
+        //return $template;
+        //return parent::render($template);
+        //return template_from_string($env, (string) $template);
+        //return $env->createTemplate((string) $template);
+        return $env->createTemplate('oo');
     }
 }

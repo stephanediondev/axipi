@@ -26,9 +26,12 @@ class PageRepository extends EntityRepository {
         $query->addSelect('pge', 'cmp');
         $query->from('AxipiCoreBundle:Page', 'pge');
         $query->leftJoin('pge.component', 'cmp');
-        $query->where('pge.slug = :slug');
-
-        $query->setParameter(':slug', $slug);
+        if($slug == '') {
+            $query->where('pge.slug IS NULL');
+        } else {
+            $query->where('pge.slug = :slug');
+            $query->setParameter(':slug', $slug);
+        }
 
         return $query->getQuery()->getOneOrNullResult();
     }

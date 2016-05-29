@@ -16,5 +16,6 @@ axipi_core_slug:
     path:  /{slug}
     defaults:
         _controller: "axipi_core_controller_default:indexAction"
+        slug: ""
     requirements:
         slug: ".+"
