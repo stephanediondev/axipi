@@ -44,11 +44,13 @@ tinymce.init({
 });
 
 function update_image(field_name, src) {
-    $('#' + field_name).attr('value', src);
+    $('#' + field_name).val('');
+    $('#' + field_name).val(src);
     parent.tinyMCE.activeEditor.windowManager.close(current_popup);
 }
 
 function update_file(field_name, href) {
+    $('#' + field_name).val('');
     $('#' + field_name).val(href);
     parent.tinyMCE.activeEditor.windowManager.close(current_popup);
 }
