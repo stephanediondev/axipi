@@ -68,11 +68,14 @@ class CoreExtension extends \Twig_Extension
             $ids = $matches[1];
         }
 
-        $pages = $this->em->getRepository('AxipiCoreBundle:Page')->getConvertPages(array_values($ids));
-
-        foreach($pages as $page) {
-            echo $page->getId();
-            $text = str_replace('[page_'.$page->getId().']', $page->getSlug(), $text);
+        if(count($ids) > 0) {
+            $pages = $this->em->getRepository('AxipiCoreBundle:Page')->getConvertPages($ids);
+            if($pages) {
+                foreach($pages as $page) {
+                    $url = $this->container->get('router')->generate('axipi_core_slug', array('slug' => $page->getSlug()), 0);
+                    $text = str_replace('[page_'.$page->getId().']', $url, $text);
+                }
+            }
         }
         return $text;
     }

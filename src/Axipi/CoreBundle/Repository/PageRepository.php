@@ -71,7 +71,7 @@ class PageRepository extends EntityRepository {
         $query->from('AxipiCoreBundle:Page', 'pge');
         $query->where('pge.id IN ('.implode(',', $ids).')');
 
-        return $query->getQuery();
+        return $query->getQuery()->getResult();
     }
 
     public function getLanguages() {

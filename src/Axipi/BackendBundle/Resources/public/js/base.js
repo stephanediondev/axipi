@@ -32,7 +32,8 @@ tinymce.init({
     selector: '.wysiwyg',
     entity_encoding : 'raw',
     remove_script_host: true,
-    relative_urls: false,
+    relative_urls: true,
+    document_base_url: axipi_core_home,
     visualblocks_default_state: true,
     plugins: 'advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker searchreplace wordcount visualblocks visualchars code fullscreen media nonbreaking table contextmenu directionality template paste',
     toolbar1: 'bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect',
@@ -48,7 +49,7 @@ function update_image(field_name, src) {
 }
 
 function update_file(field_name, href) {
-    $('#' + field_name).attr('value', href);
+    $('#' + field_name).val(href);
     parent.tinyMCE.activeEditor.windowManager.close(current_popup);
 }
 
