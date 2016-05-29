@@ -27,17 +27,18 @@ class PageController extends AbstractController
         $this->componentManager = $componentManager;
     }
 
-    public function dispatchAction(Request $request, $language, $action, $id)
+    public function dispatchAction(Request $request, $mode, $language, $action, $id)
     {
         if(!$this->isGranted('ROLE_PAGES')) {
             return $this->redirectToRoute('axipi_backend_home', []);
         }
 
         if($language == 'xx') {
-            return $this->redirectToRoute('axipi_backend_page', ['language' => 'en', 'action' => 'index']);
+            return $this->redirectToRoute('axipi_backend_page', ['mode' => $mode, 'language' => 'en', 'action' => 'index']);
         }
 
         $parameters = new ParameterBag();
+        $parameters->set('mode', $mode);
         $parameters->set('languages', $this->pageManager->getLanguages());
         $parameters->set('language', $this->pageManager->getLanguageByCode($language));
 

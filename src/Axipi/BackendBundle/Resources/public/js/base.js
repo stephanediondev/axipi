@@ -2,15 +2,23 @@ var current_popup;
 
 tinymce.init({
     file_browser_callback : function(field_name, url, type, win) {
-        if(type != 'image') {
+        if(type == 'image') {
+            var file = axipi_backend_home + 'file/wysiwyg' + field_name;
+            var title = 'Files';
+
+        } else if(type == 'file') {
+            var file = axipi_backend_home + 'page/wysiwyg' + field_name;
+            var title = 'Pages';
+
+        } else {
             return false;
         }
 
         current_popup = win;
 
         tinyMCE.activeEditor.windowManager.open({
-            file : axipi_backend_home + 'file/wysiwyg' + field_name,
-            title : 'Files',
+            file : file,
+            title : title,
             width : 960,
             height : 500,
             resizable : 'yes',
@@ -38,6 +46,12 @@ function update_image(field_name, src) {
     $('#' + field_name).attr('value', src);
     parent.tinyMCE.activeEditor.windowManager.close(current_popup);
 }
+
+function update_file(field_name, href) {
+    $('#' + field_name).attr('value', href);
+    parent.tinyMCE.activeEditor.windowManager.close(current_popup);
+}
+
 $(document).ready(function() {
     // Prevent Bootstrap dialog from blocking focusin
     $(document).on('focusin', function(e) {
@@ -49,9 +63,13 @@ $(document).ready(function() {
     $('.wysiwyg_image').bind('click', function(event) {
         event.preventDefault();
         var img_reference = $(this).find('img');
-        imgSrc = img_reference.attr('src');
-        imgAlt = img_reference.attr('alt');
         imgField = $(this).data('field_name');
+        imgSrc = img_reference.attr('src');
         window.parent.update_image(imgField, imgSrc);
+    });
+
+    $('.wysiwyg_link').bind('click', function(event) {
+        event.preventDefault();
+        window.parent.update_file($(this).data('field_name'), $(this).attr('href'));
     });
 });

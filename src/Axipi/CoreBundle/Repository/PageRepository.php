@@ -63,6 +63,17 @@ class PageRepository extends EntityRepository {
         return $query->getQuery();
     }
 
+    public function getConvertPages($ids) {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQueryBuilder();
+        $query->addSelect('pge');
+        $query->from('AxipiCoreBundle:Page', 'pge');
+        $query->where('pge.id IN ('.implode(',', $ids).')');
+
+        return $query->getQuery();
+    }
+
     public function getLanguages() {
         $em = $this->getEntityManager();
 
