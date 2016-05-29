@@ -4,7 +4,6 @@ namespace Axipi\CoreBundle\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityManagerInterface;
-//use Twig_Extension_StringLoader;
 
 use Axipi\CoreBundle\Entity\Page;
 use Axipi\CoreBundle\Entity\Widget;
@@ -35,7 +34,6 @@ class CoreExtension extends \Twig_Extension
         return [
             new \Twig_SimpleFunction('getWidgets', [$this, 'getWidgets'], array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('convertText', [$this, 'convertText'], array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('renderString', [$this, 'renderString'], array('needs_environment' => true)),
         ];
     }
 
@@ -63,36 +61,35 @@ class CoreExtension extends \Twig_Extension
     public function convertText($text)
     {
         $ids = [];
-        preg_match_all('/\[page_(.*):(.*)\]/i', $text, $matches);
-        if(isset($matches[1]) == 1) {
-            $ids = $matches[1];
+        preg_match_all('/\[page:(\d*):(\S*)\]/im', $text, $matches, PREG_SET_ORDER);
+        if(isset($matches) == 1) {
+            foreach($matches as $match) {
+                $ids[$match[1]] = $match[0];
+            }
         }
 
         if(count($ids) > 0) {
-            $pages = $this->em->getRepository('AxipiCoreBundle:Page')->getConvertPages($ids);
+            $pages = $this->em->getRepository('AxipiCoreBundle:Page')->getConvertPages(array_keys($ids));
             if($pages) {
                 foreach($pages as $page) {
                     $url = $this->container->get('router')->generate('axipi_core_slug', array('slug' => $page->getSlug()), 0);
-                    $text = str_replace('[page_'.$page->getId().':'.$page->getSlug().']', $url, $text);
+                    $text = str_replace($ids[$page->getId()], $url, $text);
                 }
             }
         }
+
+        $widgets = [];
+        preg_match_all('/\[widgets:(.*)\]/i', $text, $matches);
+        if(isset($matches[1]) == 1) {
+            $widgets = $matches[1];
+        }
+        if(count($ids) > 0) {
+            foreach($widgets as $widget) {
+                $text = str_replace('<p>[widgets:'.$widget.']</p>', '[widgets:'.$widget.']', $text);
+                $text = str_replace('[widgets:'.$widget.']', $this->getWidgets($widget), $text);
+            }
+        }
+
         return $text;
-    }
-
-    public function renderString(\Twig_Environment $env, $template)
-    {
-        /*$this->addClassesToCompile(array(
-            'Twig_Extension_StringLoader',
-        ));*/
-
-        $env = new \Twig_Environment(new \Twig_Loader_String());
-        return $env->render($template);
-
-        //return $template;
-        //return parent::render($template);
-        //return template_from_string($env, (string) $template);
-        //return $env->createTemplate((string) $template);
-        return $env->createTemplate('oo');
     }
 }
