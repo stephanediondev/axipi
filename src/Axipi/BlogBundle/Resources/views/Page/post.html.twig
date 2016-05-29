@@ -4,7 +4,7 @@
     <!-- Blog / Post -->
     <div class="row">
         <div class="col-lg-12">
-            {{ page.attribute('description')|raw }}
+            {{ convertText(page.attribute('description')|raw) }}
         </div>
     </div>
     <!-- Blog / Post (end) -->

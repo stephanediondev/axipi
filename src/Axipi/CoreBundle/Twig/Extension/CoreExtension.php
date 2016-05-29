@@ -63,7 +63,7 @@ class CoreExtension extends \Twig_Extension
     public function convertText($text)
     {
         $ids = [];
-        preg_match_all('/\[page_(.*)\]/i', $text, $matches);
+        preg_match_all('/\[page_(.*):(.*)\]/i', $text, $matches);
         if(isset($matches[1]) == 1) {
             $ids = $matches[1];
         }
@@ -73,7 +73,7 @@ class CoreExtension extends \Twig_Extension
             if($pages) {
                 foreach($pages as $page) {
                     $url = $this->container->get('router')->generate('axipi_core_slug', array('slug' => $page->getSlug()), 0);
-                    $text = str_replace('[page_'.$page->getId().']', $url, $text);
+                    $text = str_replace('[page_'.$page->getId().':'.$page->getSlug().']', $url, $text);
                 }
             }
         }
