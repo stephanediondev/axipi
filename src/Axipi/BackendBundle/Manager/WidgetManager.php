@@ -38,6 +38,11 @@ class WidgetManager extends AbstractManager
         return $this->em->getRepository('AxipiCoreBundle:Widget')->getPages($id);
     }
 
+    public function getPagesParent(Widget $widget)
+    {
+        return $this->em->getRepository('AxipiCoreBundle:Widget')->getPagesParent($widget);
+    }
+
     public function getLanguageByCode($code)
     {
         return $this->em->getRepository('AxipiCoreBundle:Language')->getByCode($code);

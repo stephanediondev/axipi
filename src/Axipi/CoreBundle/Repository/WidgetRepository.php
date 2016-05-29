@@ -2,6 +2,7 @@
 namespace Axipi\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Axipi\CoreBundle\Entity\Widget;
 
 class WidgetRepository extends EntityRepository {
     public function getById($id) {
@@ -87,6 +88,24 @@ class WidgetRepository extends EntityRepository {
 
         $query->addOrderBy('zon.ordering');
         $query->addOrderBy('zon.code');
+
+        return $query->getQuery()->getResult();
+    }
+
+    public function getPagesParent(Widget $widget) {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQueryBuilder();
+        $query->addSelect('pge', 'cmp');
+        $query->from('AxipiCoreBundle:Page', 'pge');
+        $query->leftJoin('pge.component', 'cmp');
+
+        if($widget->getComponent()->getParent()) {
+            $query->where('pge.component = :component_parent');
+            $query->setParameter(':component_parent', $widget->getComponent()->getParent());
+        }
+
+        $query->orderBy('pge.title');
 
         return $query->getQuery()->getResult();
     }

@@ -31,6 +31,7 @@
                         {{ macro.read_field('widget.language'|trans({}, 'axipi_backend'), widget.language.title) }}
                         {{ macro.read_field('widget.component'|trans({}, 'axipi_backend'), widget.component.title) }}
                         {{ form_row(form.template) }}
+                        {{ form_row(form.parent) }}
                         {{ form_row(form.code) }}
                         {{ form_row(form.ordering) }}
                     </div>

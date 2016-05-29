@@ -72,6 +72,17 @@ Axipi\CoreBundle\Entity\Widget:
             nullable: true
             column: date_modified
     manyToOne:
+        parent:
+            targetEntity: Page
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                parent:
+                    referencedColumnName: id
+                    onDelete: "set null"
+            orphanRemoval: false
         language:
             targetEntity: Language
             cascade: {  }

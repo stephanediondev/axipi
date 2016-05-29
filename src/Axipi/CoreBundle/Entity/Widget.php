@@ -69,6 +69,8 @@ class Widget
 
     private $attributesChange = [];
 
+    private $parent;
+
     /**
      * Get id
      *
@@ -346,5 +348,29 @@ class Widget
     public function getAttributesChange()
     {
         return $this->attributesChange;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \Axipi\CoreBundle\Entity\Page $parent
+     *
+     * @return Page
+     */
+    public function setParent(\Axipi\CoreBundle\Entity\Page $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \Axipi\CoreBundle\Entity\Page
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }

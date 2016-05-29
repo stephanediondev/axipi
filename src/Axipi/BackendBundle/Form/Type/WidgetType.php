@@ -16,21 +16,12 @@ use Axipi\CoreBundle\Entity\Language;
 use Axipi\CoreBundle\Entity\Component;
 use Axipi\CoreBundle\Entity\Zone;
 use Axipi\CoreBundle\Entity\Widget;
+use Axipi\CoreBundle\Entity\Page;
 
 class WidgetType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('language', EntityType::class,
-            [
-                'placeholder' => '-',
-                'class' => Language::class,
-                'choices' => $options['languages'],
-                'choice_label' => function ($language) {
-                    return $language->getTitle();
-                }
-            ]
-        );
         $builder->add('template', TextType::class,
             [
                 'required' => false,
@@ -46,6 +37,17 @@ class WidgetType extends AbstractType
                 'choices' => $options['zones'],
                 'choice_label' => function ($zone) {
                     return $zone->getCode();
+                }
+            ]
+        );
+        $builder->add('parent', EntityType::class,
+            [
+                'required' => false,
+                'placeholder' => '-',
+                'class' => Page::class,
+                'choices' => $options['pages'],
+                'choice_label' => function ($page) {
+                    return $page->getTitle();
                 }
             ]
         );
@@ -75,6 +77,7 @@ class WidgetType extends AbstractType
             'languages' => [],
             'components' => [],
             'zones' => [],
+            'pages' => [],
         ));
     }
 }
