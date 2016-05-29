@@ -337,7 +337,7 @@ input[type=text].date{width:80px;}
 input[type=text].time{width:80px;}
 option[selected]{font-weight:bold;}
 textarea{height:100px;min-height:100px;resize:vertical;width:100%;}
-textarea.wysiwyg{height:450px;min-height:450px;resize:vertical;width:100%;}
+textarea.wysiwyg{height:500px;min-height:500px;resize:vertical;width:100%;}
 label, .label{color:inherit;cursor:text;display:block;font-size:inherit;font-weight:bold;margin-bottom:2px;padding:0px 0px 0px 0px;position:relative;text-align:left;vertical-align:top;width:auto;}
 label a:link, label a:visited{cursor:pointer;}
 input:-webkit-autofill{-webkit-box-shadow:0px 0px 0px 1000px #FFFFFF inset;}

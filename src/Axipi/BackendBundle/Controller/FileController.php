@@ -22,13 +22,14 @@ class FileController extends AbstractController
         $this->fileManager = $fileManager;
     }
 
-    public function dispatchAction(Request $request, $action, $slug)
+    public function dispatchAction(Request $request, $mode, $action, $slug)
     {
         if(!$this->isGranted('ROLE_FILES')) {
             return $this->redirectToRoute('axipi_backend_home', []);
         }
 
         $parameters = new ParameterBag();
+        $parameters->set('mode', $mode);
         $parameters->set('slug', $slug);
 
         $tree = [];

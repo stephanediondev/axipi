@@ -16,6 +16,7 @@
 </head>
 <body>
 
+{% block navbar %}
 <nav class="navbar navbar-default small" role="navigation">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -56,6 +57,7 @@
         </ul>
     </div>
 </nav>
+{% endblock %}
 
 <div class="container-fluid">
     {% for type, flashes in app.session.flashbag.all() %}

@@ -74,9 +74,10 @@ axipi_backend_profile:
         action: "read"
 
 axipi_backend_file:
-    path:  /file/{action}/{slug}
+    path:  /file/{mode}/{action}/{slug}
     defaults:
         _controller: "axipi_backend_controller_file:dispatchAction"
+        mode: "normal"
         action: "index"
         slug: ""
     requirements:
