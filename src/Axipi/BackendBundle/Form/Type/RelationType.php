@@ -11,10 +11,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-use Axipi\CoreBundle\Entity\Page;
-use Axipi\CoreBundle\Entity\WidgetPage;
+use Axipi\CoreBundle\Entity\Item;
+use Axipi\CoreBundle\Entity\Relation;
 
-class WidgetPageType extends AbstractType
+class RelationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -22,7 +22,7 @@ class WidgetPageType extends AbstractType
             [
                 'required' => false,
                 'placeholder' => '-',
-                'class' => Page::class,
+                'class' => Item::class,
                 'choices' => $options['pages'],
                 'choice_label' => function ($page) {
                     return $page->getTitle();
@@ -39,7 +39,7 @@ class WidgetPageType extends AbstractType
     {
         foreach($view->children as $name => $child) {
             if($name != 'submit') {
-                $child->vars['label'] = 'widget_page.'.$name;
+                $child->vars['label'] = 'relation.'.$name;
             }
         }
     }
@@ -48,8 +48,8 @@ class WidgetPageType extends AbstractType
     {
         $resolver->setDefaults(array(
             'translation_domain' => 'axipi_backend',
-            'data_class' => WidgetPage::class,
-            'widget_page' => null,
+            'data_class' => Relation::class,
+            'relation' => null,
             'pages' => [],
         ));
     }

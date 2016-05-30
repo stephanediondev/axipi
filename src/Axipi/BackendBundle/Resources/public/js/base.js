@@ -3,11 +3,11 @@ var current_popup;
 tinymce.init({
     file_browser_callback : function(field_name, url, type, win) {
         if(type == 'image') {
-            var file = axipi_backend_home + 'file/wysiwyg' + field_name;
+            var file = axipi_backend_home + 'files/wysiwyg' + field_name;
             var title = 'Files';
 
         } else if(type == 'file') {
-            var file = axipi_backend_home + 'page/wysiwyg' + field_name;
+            var file = axipi_backend_home + 'pages/wysiwyg' + field_name;
             var title = 'Pages';
 
         } else {

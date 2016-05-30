@@ -9,7 +9,7 @@ use Axipi\CoreBundle\Controller\AbstractController;
 use Axipi\CoreBundle\Manager\CoreManager;
 
 use Axipi\CoreBundle\Entity\Language;
-use Axipi\CoreBundle\Entity\Page;
+use Axipi\CoreBundle\Entity\Item;
 
 class DefaultController extends AbstractController
 {

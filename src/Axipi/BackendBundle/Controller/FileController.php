@@ -53,7 +53,7 @@ class FileController extends AbstractController
                 $parameters->set('file', $file);
             } else {
                 $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_file', []);
+                return $this->redirectToRoute('axipi_backend_files', []);
             }
         }
 
@@ -71,7 +71,7 @@ class FileController extends AbstractController
         }
 
         $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_file', []);
+        return $this->redirectToRoute('axipi_backend_files', []);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters, $slug)
@@ -93,7 +93,7 @@ class FileController extends AbstractController
             if($form->isValid()) {
                 $this->fileManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_file', []);
+                return $this->redirectToRoute('axipi_backend_files', []);
             }
         }
 
@@ -116,7 +116,7 @@ class FileController extends AbstractController
             if($form->isValid()) {
                 $this->fileManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_file', ['action' => 'read', 'id' => $slug]);
+                return $this->redirectToRoute('axipi_backend_files', ['action' => 'read', 'id' => $slug]);
             }
         }
 
@@ -134,7 +134,7 @@ class FileController extends AbstractController
             if($form->isValid()) {
                 $this->fileManager->remove($parameters->get('file'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_file', []);
+                return $this->redirectToRoute('axipi_backend_files', []);
             }
         }
 

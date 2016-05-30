@@ -36,7 +36,7 @@ class UserController extends AbstractController
                 $parameters->set('user', $user);
             } else {
                 $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_user', []);
+                return $this->redirectToRoute('axipi_backend_users', []);
             }
         }
 
@@ -52,13 +52,13 @@ class UserController extends AbstractController
             case 'delete':
                 if($this->getUser()->getId() == $user->getId()) {
                     $this->addFlash('danger', 'access denied');
-                    return $this->redirectToRoute('axipi_backend_user', []);
+                    return $this->redirectToRoute('axipi_backend_users', []);
                 }
                 return $this->deleteAction($request, $parameters, $id);
         }
 
         $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_user', []);
+        return $this->redirectToRoute('axipi_backend_users', []);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters)
@@ -79,7 +79,7 @@ class UserController extends AbstractController
             if($form->isValid()) {
                 $this->userManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_user', []);
+                return $this->redirectToRoute('axipi_backend_users', []);
             }
         }
 
@@ -102,7 +102,7 @@ class UserController extends AbstractController
             if($form->isValid()) {
                 $this->userManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_user', ['action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_users', ['action' => 'read', 'id' => $id]);
             }
         }
 
@@ -120,7 +120,7 @@ class UserController extends AbstractController
             if($form->isValid()) {
                 $this->userManager->remove($parameters->get('user'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_user', []);
+                return $this->redirectToRoute('axipi_backend_users', []);
             }
         }
 

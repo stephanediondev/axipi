@@ -38,7 +38,7 @@ class ComponentController extends AbstractController
                 $parameters->set('component', $component);
             } else {
                 $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_component', []);
+                return $this->redirectToRoute('axipi_backend_components', []);
             }
         }
 
@@ -56,7 +56,7 @@ class ComponentController extends AbstractController
         }
 
         $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_component', []);
+        return $this->redirectToRoute('axipi_backend_components', []);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters)
@@ -80,7 +80,7 @@ class ComponentController extends AbstractController
             if($form->isValid()) {
                 $this->componentManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_component', []);
+                return $this->redirectToRoute('axipi_backend_components', []);
             }
         }
 
@@ -103,7 +103,7 @@ class ComponentController extends AbstractController
             if($form->isValid()) {
                 $this->componentManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_component', ['action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_components', ['action' => 'read', 'id' => $id]);
             }
         }
 
@@ -121,7 +121,7 @@ class ComponentController extends AbstractController
             if($form->isValid()) {
                 $this->componentManager->remove($parameters->get('component'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_component', []);
+                return $this->redirectToRoute('axipi_backend_components', []);
             }
         }
 

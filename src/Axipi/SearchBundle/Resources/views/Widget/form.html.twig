@@ -1,5 +1,22 @@
 <!-- Content / Menu -->
-<div id="widget-{{ widget.code }}" class="col-lg-12">
-    <p>TODO search widget</p>
+<div id="widget-{{ widget.code }}" class="col-lg-2">
+    <form method="get" class="form-inline" action="{{ path('axipi_core_slug', {slug: widget.parent.slug}) }}">
+        <div class="form-group">
+            <input class="form-control" type="text" name="q" value="{{ request.get('q') }}" placeholder="{{ 'widget.placeholder'|trans({}, 'axipi_search') }}">
+        </div>
+    </form>
 </div>
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": "{{ url('axipi_core_slug', {slug: ''}) }}",
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ url('axipi_core_slug', {slug: widget.parent.slug}) }}?q={query}",
+        "query-input": "required name=query"
+    }
+}
+</script>
 <!-- Content / Menu (end) -->

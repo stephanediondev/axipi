@@ -82,6 +82,7 @@ class Component
      */
     private $dateModified;
 
+    private $children;
 
     /**
      * Get id
@@ -416,5 +417,9 @@ class Component
     {
         return $this->dateModified;
     }
-}
 
+    public function getChildren()
+    {
+        return $this->children;
+    }
+}

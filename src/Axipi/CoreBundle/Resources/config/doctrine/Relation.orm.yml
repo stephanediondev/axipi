@@ -1,7 +1,7 @@
-Axipi\CoreBundle\Entity\WidgetPage:
-    repositoryClass: Axipi\CoreBundle\Repository\WidgetPageRepository
+Axipi\CoreBundle\Entity\Relation:
+    repositoryClass: Axipi\CoreBundle\Repository\RelationRepository
     type: entity
-    table: widget_page
+    table: relation
     indexes:
         widget_id:
             columns:
@@ -52,7 +52,7 @@ Axipi\CoreBundle\Entity\WidgetPage:
             column: date_modified
     manyToOne:
         page:
-            targetEntity: Page
+            targetEntity: Item
             cascade: {  }
             fetch: LAZY
             mappedBy: null
@@ -64,7 +64,7 @@ Axipi\CoreBundle\Entity\WidgetPage:
                     onDelete: "cascade"
             orphanRemoval: false
         widget:
-            targetEntity: Widget
+            targetEntity: Item
             cascade: {  }
             fetch: LAZY
             mappedBy: null

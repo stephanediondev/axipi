@@ -4,43 +4,43 @@ namespace Axipi\BackendBundle\Manager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use Axipi\CoreBundle\Manager\AbstractManager;
-use Axipi\CoreBundle\Entity\Widget;
+use Axipi\CoreBundle\Entity\Item;
 
 class WidgetManager extends AbstractManager
 {
     public function getById($id)
     {
-        return $this->em->getRepository('AxipiCoreBundle:Widget')->getById($id);
+        return $this->em->getRepository('AxipiCoreBundle:Item')->getById($id);
     }
 
     public function getRows()
     {
-        return $this->em->getRepository('AxipiCoreBundle:Widget')->getRows();
+        return $this->em->getRepository('AxipiCoreBundle:Item')->getRows();
     }
 
     public function getLanguages()
     {
-        return $this->em->getRepository('AxipiCoreBundle:Widget')->getLanguages();
+        return $this->em->getRepository('AxipiCoreBundle:Item')->getLanguages();
     }
 
-    public function getComponents()
+    public function getComponents($category)
     {
-        return $this->em->getRepository('AxipiCoreBundle:Widget')->getComponents();
+        return $this->em->getRepository('AxipiCoreBundle:Item')->getComponents($category);
     }
 
     public function getZones()
     {
-        return $this->em->getRepository('AxipiCoreBundle:Widget')->getZones();
+        return $this->em->getRepository('AxipiCoreBundle:Item')->getZones();
     }
 
-    public function getPages($id)
+    public function getPagesWidgetRelated($id)
     {
-        return $this->em->getRepository('AxipiCoreBundle:Widget')->getPages($id);
+        return $this->em->getRepository('AxipiCoreBundle:Item')->getPagesWidgetRelated($id);
     }
 
-    public function getPagesParent(Widget $widget)
+    public function getPagesParent(Item $item)
     {
-        return $this->em->getRepository('AxipiCoreBundle:Widget')->getPagesParent($widget);
+        return $this->em->getRepository('AxipiCoreBundle:Item')->getPagesParent($item);
     }
 
     public function getLanguageByCode($code)

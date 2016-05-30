@@ -44,7 +44,7 @@ Axipi\CoreBundle\Entity\Zone:
             column: date_modified
     oneToMany:
         widgets:
-            targetEntity: Axipi\CoreBundle\Entity\Widget
+            targetEntity: Axipi\CoreBundle\Entity\Item
             mappedBy: "zone"
             cascade: [ "persist" ]
             orderBy:

@@ -1,11 +1,14 @@
-Axipi\CoreBundle\Entity\Page:
-    repositoryClass: Axipi\CoreBundle\Repository\PageRepository
+Axipi\CoreBundle\Entity\Item:
+    repositoryClass: Axipi\CoreBundle\Repository\ItemRepository
     type: entity
-    table: page
+    table: item
     indexes:
         component_id:
             columns:
                 - component_id
+        zone_id:
+            columns:
+                - zone_id
         parent:
             columns:
                 - parent
@@ -125,7 +128,7 @@ Axipi\CoreBundle\Entity\Page:
             column: date_modified
     manyToOne:
         parent:
-            targetEntity: Page
+            targetEntity: Item
             cascade: {  }
             fetch: LAZY
             mappedBy: null
@@ -159,8 +162,19 @@ Axipi\CoreBundle\Entity\Page:
                     referencedColumnName: id
                     onDelete: "cascade"
             orphanRemoval: false
+        zone:
+            targetEntity: Zone
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: widgets
+            joinColumns:
+                zone_id:
+                    referencedColumnName: id
+                    onDelete: "set null"
+            orphanRemoval: false
     oneToMany:
         children:
-            targetEntity: Page
+            targetEntity: Item
             mappedBy: parent
     lifecycleCallbacks: {  }

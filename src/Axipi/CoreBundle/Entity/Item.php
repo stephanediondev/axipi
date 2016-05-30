@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\Collection;
 /**
  * Page
  */
-class Page
+class Item
 {
     /**
      * @var integer
@@ -84,7 +84,7 @@ class Page
     private $dateModified;
 
     /**
-     * @var \Axipi\CoreBundle\Entity\Page
+     * @var \Axipi\CoreBundle\Entity\Item
      */
     private $parent;
 
@@ -101,6 +101,11 @@ class Page
     private $attributesChange = [];
 
     private $children;
+
+    /**
+     * @var \Axipi\CoreBundle\Entity\Zone
+     */
+    private $zone;
 
     /**
      * Get id
@@ -415,11 +420,11 @@ class Page
     /**
      * Set parent
      *
-     * @param \Axipi\CoreBundle\Entity\Page $parent
+     * @param \Axipi\CoreBundle\Entity\Item $parent
      *
      * @return Page
      */
-    public function setParent(\Axipi\CoreBundle\Entity\Page $parent = null)
+    public function setParent(\Axipi\CoreBundle\Entity\Item $parent = null)
     {
         $this->parent = $parent;
 
@@ -429,7 +434,7 @@ class Page
     /**
      * Get parent
      *
-     * @return \Axipi\CoreBundle\Entity\Page
+     * @return \Axipi\CoreBundle\Entity\Item
      */
     public function getParent()
     {
@@ -528,5 +533,29 @@ class Page
     public function getChildren()
     {
         return $this->children;
+    }
+
+    /**
+     * Set zone
+     *
+     * @param \Axipi\CoreBundle\Entity\Zone $zone
+     *
+     * @return Widget
+     */
+    public function setZone(\Axipi\CoreBundle\Entity\Zone $zone = null)
+    {
+        $this->zone = $zone;
+
+        return $this;
+    }
+
+    /**
+     * Get zone
+     *
+     * @return \Axipi\CoreBundle\Entity\Zone
+     */
+    public function getZone()
+    {
+        return $this->zone;
     }
 }

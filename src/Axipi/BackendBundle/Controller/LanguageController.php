@@ -36,7 +36,7 @@ class LanguageController extends AbstractController
                 $parameters->set('language', $language);
             } else {
                 $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_language', []);
+                return $this->redirectToRoute('axipi_backend_languages', []);
             }
         }
 
@@ -54,7 +54,7 @@ class LanguageController extends AbstractController
         }
 
         $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_language', []);
+        return $this->redirectToRoute('axipi_backend_languages', []);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters)
@@ -76,7 +76,7 @@ class LanguageController extends AbstractController
             if($form->isValid()) {
                 $this->languageManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_language', []);
+                return $this->redirectToRoute('axipi_backend_languages', []);
             }
         }
 
@@ -99,7 +99,7 @@ class LanguageController extends AbstractController
             if($form->isValid()) {
                 $this->languageManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_language', ['action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_languages', ['action' => 'read', 'id' => $id]);
             }
         }
 
@@ -117,7 +117,7 @@ class LanguageController extends AbstractController
             if($form->isValid()) {
                 $this->languageManager->remove($parameters->get('language'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_language', []);
+                return $this->redirectToRoute('axipi_backend_languages', []);
             }
         }
 

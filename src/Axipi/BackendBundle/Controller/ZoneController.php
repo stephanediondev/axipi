@@ -36,7 +36,7 @@ class ZoneController extends AbstractController
                 $parameters->set('zone', $zone);
             } else {
                 $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_zone', []);
+                return $this->redirectToRoute('axipi_backend_zones', []);
             }
         }
 
@@ -54,7 +54,7 @@ class ZoneController extends AbstractController
         }
 
         $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_zone', []);
+        return $this->redirectToRoute('axipi_backend_zones', []);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters)
@@ -76,7 +76,7 @@ class ZoneController extends AbstractController
             if($form->isValid()) {
                 $this->zoneManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_zone', []);
+                return $this->redirectToRoute('axipi_backend_zones', []);
             }
         }
 
@@ -99,7 +99,7 @@ class ZoneController extends AbstractController
             if($form->isValid()) {
                 $this->zoneManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_zone', ['action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_zones', ['action' => 'read', 'id' => $id]);
             }
         }
 
@@ -117,7 +117,7 @@ class ZoneController extends AbstractController
             if($form->isValid()) {
                 $this->zoneManager->remove($parameters->get('zone'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_zone', []);
+                return $this->redirectToRoute('axipi_backend_zones', []);
             }
         }
 

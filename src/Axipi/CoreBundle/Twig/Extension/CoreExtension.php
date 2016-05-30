@@ -5,8 +5,7 @@ namespace Axipi\CoreBundle\Twig\Extension;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-use Axipi\CoreBundle\Entity\Page;
-use Axipi\CoreBundle\Entity\Widget;
+use Axipi\CoreBundle\Entity\Item;
 
 class CoreExtension extends \Twig_Extension
 {
@@ -46,13 +45,14 @@ class CoreExtension extends \Twig_Extension
     public function getWidgets($code)
     {
         $content = '';
+        $request = $this->container->get('request_stack')->getMasterRequest();
         $page = $this->container->get('axipi_core_manager_core')->getPage();
 
         $widgets = $this->em->getRepository('AxipiCoreBundle:Zone')->getWidgets($code);
 
         foreach($widgets as $widget) {
             if($this->container->has($widget->getComponent()->getService())) {
-                $content .= $this->container->get($widget->getComponent()->getService())->getWidget($widget, $page);
+                $content .= $this->container->get($widget->getComponent()->getService())->getWidget($request, $widget, $page);
             }
         }
         return $content;
@@ -72,7 +72,7 @@ class CoreExtension extends \Twig_Extension
         }
 
         if(count($ids) > 0) {
-            $pages = $this->em->getRepository('AxipiCoreBundle:Page')->getConvertPages(array_keys($ids));
+            $pages = $this->em->getRepository('AxipiCoreBundle:Item')->getConvertPages(array_keys($ids));
             if($pages) {
                 foreach($pages as $page) {
                     $url = $this->container->get('router')->generate('axipi_core_slug', array('slug' => $page->getSlug()), 0);

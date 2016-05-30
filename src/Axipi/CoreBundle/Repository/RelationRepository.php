@@ -3,13 +3,13 @@ namespace Axipi\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class WidgetPageRepository extends EntityRepository {
+class RelationRepository extends EntityRepository {
     public function getById($id) {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
         $query->addSelect('wdg_pge', 'wdg', 'pge');
-        $query->from('AxipiCoreBundle:WidgetPage', 'wdg_pge');
+        $query->from('AxipiCoreBundle:Relation', 'wdg_pge');
         $query->leftJoin('wdg_pge.widget', 'wdg');
         $query->leftJoin('wdg_pge.page', 'pge');
         $query->where('wdg_pge.id = :id');
@@ -24,7 +24,7 @@ class WidgetPageRepository extends EntityRepository {
 
         $query = $em->createQueryBuilder();
         $query->addSelect('pge', 'cmp');
-        $query->from('AxipiCoreBundle:Page', 'pge');
+        $query->from('AxipiCoreBundle:Item', 'pge');
         $query->leftJoin('pge.component', 'cmp');
 
         return $query->getQuery()->getResult();

@@ -3,16 +3,16 @@ namespace Axipi\BackendBundle\Manager;
 
 use Axipi\CoreBundle\Manager\AbstractManager;
 
-class WidgetPageManager extends AbstractManager
+class RelationManager extends AbstractManager
 {
     public function getById($id)
     {
-        return $this->em->getRepository('AxipiCoreBundle:WidgetPage')->getById($id);
+        return $this->em->getRepository('AxipiCoreBundle:Relation')->getById($id);
     }
 
     public function getPages()
     {
-        return $this->em->getRepository('AxipiCoreBundle:WidgetPage')->getPages();
+        return $this->em->getRepository('AxipiCoreBundle:Relation')->getPages();
     }
 
     public function persist($data)
@@ -34,6 +34,6 @@ class WidgetPageManager extends AbstractManager
 
     public function getEntityName()
     {
-        return WidgetPage::class;
+        return Relation::class;
     }
 }

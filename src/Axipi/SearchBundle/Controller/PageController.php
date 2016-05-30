@@ -21,8 +21,8 @@ class PageController extends AbstractController
     {
 
         $parameters = new ParameterBag();
-        $parameters->set('page', $page);
         $parameters->set('request', $request);
+        $parameters->set('page', $page);
 
         $data = [];
         $data['sort_field'] = array('date.sort' => 'Date', '_score' => 'Score', 'title.sort' => 'Title');

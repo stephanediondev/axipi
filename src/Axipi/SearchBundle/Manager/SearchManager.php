@@ -4,7 +4,7 @@ namespace Axipi\SearchBundle\Manager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use Axipi\CoreBundle\Manager\AbstractManager;
-use Axipi\CoreBundle\Entity\Page;
+use Axipi\CoreBundle\Entity\Item;
 
 class SearchManager extends AbstractManager
 {
@@ -80,9 +80,11 @@ class SearchManager extends AbstractManager
 
     public function indexAll()
     {
-        $pages = $this->em->getRepository('AxipiCoreBundle:Page')->findAll();
+        $pages = $this->em->getRepository('AxipiCoreBundle:Item')->findAll();
         foreach($pages as $page) {
-            $this->indexPage($page);
+            if($page->getComponent()->getCategory() == 'page') {
+                $this->indexPage($page);
+            }
         }
     }
 }

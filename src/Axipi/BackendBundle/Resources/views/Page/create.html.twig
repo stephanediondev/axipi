@@ -8,13 +8,25 @@
         <div class="col-lg-12">
             <ul class="nav nav-tabs">
                 {% for language in languages %}
-                    <li role="presentation"{% if app.request.get('language') == language.code %} class="active"{% endif %}><a href="{{ path('axipi_backend_page', {language: language.code, action: 'index'}) }}">{{ language.title }}</a></li>
+                    <li role="presentation"{% if app.request.get('language') == language.code %} class="active"{% endif %}><a href="{{ path('axipi_backend_pages', {language: language.code, action: 'index'}) }}">{{ language.title }}</a></li>
                 {% endfor %}
             </ul>
 
             {% embed 'AxipiBackendBundle::block_title.html.twig' %}
                 {% block block_title %}
-                    <span><a href="{{ path('axipi_backend_page', {language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></span>
+                    <span><a href="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.top_level'|trans({}, 'axipi_backend') }}"></i>{{ 'top_level'|trans({}, 'axipi_backend') }}</a></span>
+                    {% if page_parent is defined %}
+                        {% if page_parent.parent %}
+                            {% if page_parent.parent.parent %}
+                                {% if page_parent.parent.parent.parent %}
+                                    <span><a href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.parent.parent.parent.id}) }}"><i class="fa fa-{{ page_parent.parent.parent.parent.component.icon }}"></i>{{ page_parent.parent.parent.parent.title }}</a></span>
+                                {% endif %}
+                                <span><a href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.parent.parent.id}) }}"><i class="fa fa-{{ page_parent.parent.parent.component.icon }}"></i>{{ page_parent.parent.parent.title }}</a></span>
+                            {% endif %}
+                            <span><a href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.parent.id}) }}"><i class="fa fa-{{ page_parent.parent.component.icon }}"></i>{{ page_parent.parent.title }}</a></span>
+                        {% endif %}
+                        <span><a href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.id}) }}"><i class="fa fa-{{ page_parent.component.icon }}"></i>{{ page_parent.title }}</a></span>
+                    {% endif %}
                     <span><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.create'|trans({}, 'axipi_backend') }}</span>
                 {% endblock %}
                 {% block block_title_actions %}

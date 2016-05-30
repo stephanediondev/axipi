@@ -54,7 +54,7 @@
                 <div class="block">
                     <div class="row">
                         {% for key, node in nodes.nodes %}
-                            <div class="col-lg-2 col-sm-3 text-center">
+                            <div class="col-lg-2 col-sm-3 col-xs-6 text-center">
                                 <a class="thumbnail" href="#"><i class="fa fa-4x fa-{% if node.attributes.master == 'true' %}star{% else %}star-o{% endif %}"></i><br>{{ node.name }} ({{ node.ip }})</a>
                             </div>
                         {% endfor %}

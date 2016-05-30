@@ -15,8 +15,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Axipi\CoreBundle\Entity\Language;
 use Axipi\CoreBundle\Entity\Component;
 use Axipi\CoreBundle\Entity\Zone;
-use Axipi\CoreBundle\Entity\Widget;
-use Axipi\CoreBundle\Entity\Page;
+use Axipi\CoreBundle\Entity\Item;
+use Axipi\BackendBundle\Form\Type\AttributesType;
 
 class WidgetType extends AbstractType
 {
@@ -44,7 +44,7 @@ class WidgetType extends AbstractType
             [
                 'required' => false,
                 'placeholder' => '-',
-                'class' => Page::class,
+                'class' => Item::class,
                 'choices' => $options['pages'],
                 'choice_label' => function ($page) {
                     return $page->getTitle();
@@ -72,10 +72,8 @@ class WidgetType extends AbstractType
     {
         $resolver->setDefaults(array(
             'translation_domain' => 'axipi_backend',
-            'data_class' => Widget::class,
+            'data_class' => Item::class,
             'widget' => null,
-            'languages' => [],
-            'components' => [],
             'zones' => [],
             'pages' => [],
         ));

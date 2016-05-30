@@ -1,5 +1,5 @@
 <!-- Content / Menu -->
-<div id="widget-{{ widget.code }}" class="col-lg-12">
+<div id="widget-{{ widget.code }}" class="col-lg-10">
     <ul class="nav nav-pills">
         <li{% if page.slug == '' %} class="active"{% endif %}><a href="{{ path('axipi_core_slug', {slug: ''}) }}">Home</a></li>
         <li{% if page.slug == 'album' %} class="active"{% endif %}><a href="{{ path('axipi_core_slug', {slug: 'album'}) }}">Album</a></li>

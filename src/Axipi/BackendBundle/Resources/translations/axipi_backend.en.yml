@@ -2,6 +2,7 @@ category:
     page: "Page"
     widget: "Widget"
 icons:
+    top_level: "level-up"
     search: "search"
     profile: "user"
     login: "sign-in"
@@ -35,6 +36,7 @@ zones: "Zones"
 users: "Users"
 pages: "Pages"
 widgets: "Widgets"
+top_level: "Top level"
 home: "Home"
 files: "Files"
 file: "File"
@@ -56,6 +58,7 @@ component:
     isUnique: "Is unique?"
     attributesSchema: "Attributes schema"
     dateCreated: "Date created"
+    children: "Children"
 page:
     id: "ID"
     component: "Component"
@@ -87,7 +90,7 @@ widget:
     ordering: "Ordering"
     attributes: "Attributes"
     dateCreated: "Date created"
-widget_page:
+relation:
     id: "ID"
     widget: "Widget"
     page: "Page"

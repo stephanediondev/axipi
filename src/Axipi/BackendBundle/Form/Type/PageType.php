@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Axipi\CoreBundle\Entity\Language;
 use Axipi\CoreBundle\Entity\Component;
-use Axipi\CoreBundle\Entity\Page;
+use Axipi\CoreBundle\Entity\Item;
 use Axipi\BackendBundle\Form\Type\AttributesType;
 
 class PageType extends AbstractType
@@ -33,7 +33,7 @@ class PageType extends AbstractType
             [
                 'required' => false,
                 'placeholder' => '-',
-                'class' => Page::class,
+                'class' => Item::class,
                 'choices' => $options['pages'],
                 'choice_label' => function ($page) {
                     return $page->getTitle();
@@ -66,10 +66,8 @@ class PageType extends AbstractType
     {
         $resolver->setDefaults(array(
             'translation_domain' => 'axipi_backend',
-            'data_class' => Page::class,
+            'data_class' => Item::class,
             'page' => null,
-            'languages' => [],
-            'components' => [],
             'pages' => [],
         ));
     }

@@ -92,14 +92,13 @@ Axipi\CoreBundle\Entity\Component:
             type: datetime
             nullable: true
             column: date_modified
-    lifecycleCallbacks: {  }
     manyToOne:
         parent:
             targetEntity: Component
             cascade: {  }
             fetch: LAZY
             mappedBy: null
-            inversedBy: null
+            inversedBy: "children"
             joinColumns:
                 parent:
                     referencedColumnName: id
@@ -116,3 +115,8 @@ Axipi\CoreBundle\Entity\Component:
                     referencedColumnName: id
                     onDelete: "set null"
             orphanRemoval: false
+    oneToMany:
+        children:
+            targetEntity: Component
+            mappedBy: parent
+    lifecycleCallbacks: {  }

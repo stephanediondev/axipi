@@ -34,7 +34,7 @@ class ZoneRepository extends EntityRepository {
 
         $query = $em->createQueryBuilder();
         $query->addSelect('wdg', 'cmp', 'zon');
-        $query->from('AxipiCoreBundle:Widget', 'wdg');
+        $query->from('AxipiCoreBundle:Item', 'wdg');
         $query->leftJoin('wdg.component', 'cmp');
         $query->leftJoin('wdg.zone', 'zon');
         $query->where('zon.code = :code');

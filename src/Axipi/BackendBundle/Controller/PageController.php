@@ -12,7 +12,7 @@ use Axipi\BackendBundle\Manager\ComponentManager;
 use Axipi\SearchBundle\Manager\SearchManager;
 use Axipi\BackendBundle\Form\Type\DeleteType;
 use Axipi\BackendBundle\Form\Type\PageType;
-use Axipi\CoreBundle\Entity\Page;
+use Axipi\CoreBundle\Entity\Item;
 
 class PageController extends AbstractController
 {
@@ -39,7 +39,7 @@ class PageController extends AbstractController
         }
 
         if($language == 'xx') {
-            return $this->redirectToRoute('axipi_backend_page', ['mode' => $mode, 'language' => 'en', 'action' => 'index']);
+            return $this->redirectToRoute('axipi_backend_pages', ['mode' => $mode, 'language' => 'en', 'action' => 'index']);
         }
 
         $parameters = new ParameterBag();
@@ -53,7 +53,7 @@ class PageController extends AbstractController
                 $parameters->set('component', $component);
             } else {
                 $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_page', ['language' => $language]);
+                return $this->redirectToRoute('axipi_backend_pages', ['mode' => $mode, 'language' => $language]);
             }
         } else if(null !== $id) {
             $page = $this->pageManager->getById($id);
@@ -61,7 +61,7 @@ class PageController extends AbstractController
                 $parameters->set('page', $page);
             } else {
                 $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_page', ['language' => $language]);
+                return $this->redirectToRoute('axipi_backend_pages', ['mode' => $mode, 'language' => $language]);
             }
         }
 
@@ -79,25 +79,32 @@ class PageController extends AbstractController
         }
 
         $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_page', ['language' => $language]);
+        return $this->redirectToRoute('axipi_backend_pages', ['mode' => $mode, 'language' => $language]);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters, $language)
     {
         $parameters->set('objects', $this->pageManager->getRows($language, null)->getResult());
-        $parameters->set('components', $this->pageManager->getComponents());
+        $parameters->set('components', $this->pageManager->getComponents('page'));
 
         return $this->render('AxipiBackendBundle:Page:index.html.twig', $parameters->all());
     }
 
     public function createAction(Request $request, ParameterBag $parameters)
     {
-        $page = new Page();
+        $page = new Item();
+        if($request->query->get('parent')) {
+            $page_parent = $this->pageManager->getById($request->query->get('parent'));
+            if($page_parent) {
+                $parameters->set('page_parent', $page_parent);
+                $page->setParent($page_parent);
+            }
+        }
         $page->setLanguage($parameters->get('language'));
         $page->setComponent($parameters->get('component'));
         $page->setIsActive(true);
 
-        $form = $this->createForm(PageType::class, $page, ['page' => $page, 'languages' => $parameters->get('languages'), 'components' => $this->pageManager->getComponents(), 'pages' => $this->pageManager->getPages($page)]);
+        $form = $this->createForm(PageType::class, $page, ['page' => $page, 'pages' => $this->pageManager->getPages($page)]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
@@ -105,7 +112,7 @@ class PageController extends AbstractController
                 $this->pageManager->persist($form->getData());
                 $this->searchManager->indexPage($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_page', ['language' => $parameters->get('language')->getCode()]);
+                return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode()]);
             }
         }
 
@@ -116,12 +123,14 @@ class PageController extends AbstractController
 
     public function readAction(Request $request, ParameterBag $parameters, $id)
     {
+        $parameters->set('components', $this->pageManager->getComponents('page'));
+
         return $this->render('AxipiBackendBundle:Page:read.html.twig', $parameters->all());
     }
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
-        $form = $this->createForm(PageType::class, $parameters->get('page'), ['page' => $parameters->get('page'), 'languages' => $parameters->get('languages'), 'components' => $this->pageManager->getComponents(), 'pages' => $this->pageManager->getPages($parameters->get('page'))]);
+        $form = $this->createForm(PageType::class, $parameters->get('page'), ['page' => $parameters->get('page'), 'pages' => $this->pageManager->getPages($parameters->get('page'))]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
@@ -129,7 +138,7 @@ class PageController extends AbstractController
                 $this->pageManager->persist($form->getData());
                 $this->searchManager->indexPage($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_page', ['language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
             }
         }
 
@@ -147,7 +156,7 @@ class PageController extends AbstractController
             if($form->isValid()) {
                 $this->pageManager->remove($parameters->get('page'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_page', ['language' => $parameters->get('language')->getCode()]);
+                return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode()]);
             }
         }
 

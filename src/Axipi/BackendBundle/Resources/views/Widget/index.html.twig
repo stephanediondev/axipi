@@ -8,7 +8,7 @@
         <div class="col-lg-12">
             <ul class="nav nav-tabs">
                 {% for language in languages %}
-                    <li role="presentation"{% if app.request.get('language') == language.code %} class="active"{% endif %}><a href="{{ path('axipi_backend_widget', {language: language.code, action: 'index'}) }}">{{ language.title }}</a></li>
+                    <li role="presentation"{% if app.request.get('language') == language.code %} class="active"{% endif %}><a href="{{ path('axipi_backend_widgets', {language: language.code, action: 'index'}) }}">{{ language.title }}</a></li>
                 {% endfor %}
             </ul>
 
@@ -24,8 +24,8 @@
             <div class="block collapse" id="collapseExample">
                 <div class="row">
                     {% for component in components %}
-                        <div class="col-lg-2 col-sm-3 text-center">
-                            <a class="thumbnail" href="{{ path('axipi_backend_widget', {language: app.request.get('language'), action: 'create', id: component.id}) }}"><i class="fa fa-4x fa-{{ component.icon }}"></i><br>{{ component.title }}</a>
+                        <div class="col-lg-2 col-sm-3 col-xs-6 text-center">
+                            <a class="thumbnail" href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'create', id: component.id}) }}"><i class="fa fa-4x fa-{{ component.icon }}"></i><br>{{ component.title }}</a>
                         </div>
                     {% endfor %}
                 </div>
@@ -43,8 +43,8 @@
                 <div class="block">
                     <div class="row">
                         {% for object in zone.widgets if object.language.code == app.request.get('language') %}
-                            <div class="col-lg-2 col-sm-3 text-center">
-                                <a class="thumbnail" href="{{ path('axipi_backend_widget', {language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
+                            <div class="col-lg-2 col-sm-3 col-xs-6 text-center">
+                                <a class="thumbnail" href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
                             </div>
                         {% endfor %}
                     </div>

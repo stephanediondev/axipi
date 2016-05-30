@@ -19,15 +19,15 @@
                     <span><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'category.page'|trans({}, 'axipi_backend') }} ({{ pages|length }})</span>
                 {% endblock %}
                 {% block block_title_actions %}
-                    <li><a href="{{ path('axipi_backend_component', {action: 'create', 'id': 'page'}) }}"><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.create'|trans({}, 'axipi_backend') }}</a></li>
+                    <li><a href="{{ path('axipi_backend_components', {action: 'create', 'id': 'page'}) }}"><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.create'|trans({}, 'axipi_backend') }}</a></li>
                 {% endblock %}
             {% endembed %}
 
             <div class="block">
                 <div class="row">
                     {% for object in pages %}
-                        <div class="col-lg-2 col-sm-3 text-center">
-                            <a class="thumbnail" href="{{ path('axipi_backend_component', {action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ object.icon }}"></i><br>{{ object.title }}</a>
+                        <div class="col-lg-2 col-sm-3 col-xs-6 text-center">
+                            <a class="thumbnail" href="{{ path('axipi_backend_components', {action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ object.icon }}"></i><br>{{ object.title }}</a>
                         </div>
                     {% endfor %}
                 </div>
@@ -38,15 +38,15 @@
                     <span><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'category.widget'|trans({}, 'axipi_backend') }} ({{ widgets|length }})</span>
                 {% endblock %}
                 {% block block_title_actions %}
-                    <li><a href="{{ path('axipi_backend_component', {action: 'create', 'id': 'widget'}) }}"><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.create'|trans({}, 'axipi_backend') }}</a></li>
+                    <li><a href="{{ path('axipi_backend_components', {action: 'create', 'id': 'widget'}) }}"><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.create'|trans({}, 'axipi_backend') }}</a></li>
                 {% endblock %}
             {% endembed %}
 
             <div class="block">
                 <div class="row">
                     {% for object in widgets %}
-                        <div class="col-lg-2 col-sm-3 text-center">
-                            <a class="thumbnail" href="{{ path('axipi_backend_component', {action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ object.icon }}"></i><br>{{ object.title }}</a>
+                        <div class="col-lg-2 col-sm-3 col-xs-6 text-center">
+                            <a class="thumbnail" href="{{ path('axipi_backend_components', {action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ object.icon }}"></i><br>{{ object.title }}</a>
                         </div>
                     {% endfor %}
                 </div>

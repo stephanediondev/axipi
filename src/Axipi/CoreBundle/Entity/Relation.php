@@ -3,9 +3,9 @@
 namespace Axipi\CoreBundle\Entity;
 
 /**
- * WidgetPage
+ * Relation
  */
-class WidgetPage
+class Relation
 {
     /**
      * @var integer
@@ -38,12 +38,12 @@ class WidgetPage
     private $dateModified;
 
     /**
-     * @var \Axipi\CoreBundle\Entity\Page
+     * @var \Axipi\CoreBundle\Entity\Item
      */
     private $page;
 
     /**
-     * @var \Axipi\CoreBundle\Entity\Widget
+     * @var \Axipi\CoreBundle\Entity\Item
      */
     private $widget;
 
@@ -62,7 +62,7 @@ class WidgetPage
      *
      * @param string $title
      *
-     * @return WidgetPage
+     * @return Relation
      */
     public function setTitle($title)
     {
@@ -86,7 +86,7 @@ class WidgetPage
      *
      * @param boolean $isActive
      *
-     * @return WidgetPage
+     * @return Relation
      */
     public function setIsActive($isActive)
     {
@@ -110,7 +110,7 @@ class WidgetPage
      *
      * @param integer $ordering
      *
-     * @return WidgetPage
+     * @return Relation
      */
     public function setOrdering($ordering)
     {
@@ -134,7 +134,7 @@ class WidgetPage
      *
      * @param \DateTime $dateCreated
      *
-     * @return WidgetPage
+     * @return Relation
      */
     public function setDateCreated($dateCreated)
     {
@@ -158,7 +158,7 @@ class WidgetPage
      *
      * @param \DateTime $dateModified
      *
-     * @return WidgetPage
+     * @return Relation
      */
     public function setDateModified($dateModified)
     {
@@ -180,11 +180,11 @@ class WidgetPage
     /**
      * Set page
      *
-     * @param \Axipi\CoreBundle\Entity\Page $page
+     * @param \Axipi\CoreBundle\Entity\Item $page
      *
-     * @return WidgetPage
+     * @return Relation
      */
-    public function setPage(\Axipi\CoreBundle\Entity\Page $page = null)
+    public function setPage(\Axipi\CoreBundle\Entity\Item $page = null)
     {
         $this->page = $page;
 
@@ -194,7 +194,7 @@ class WidgetPage
     /**
      * Get page
      *
-     * @return \Axipi\CoreBundle\Entity\Page
+     * @return \Axipi\CoreBundle\Entity\Item
      */
     public function getPage()
     {
@@ -204,11 +204,11 @@ class WidgetPage
     /**
      * Set widget
      *
-     * @param \Axipi\CoreBundle\Entity\Widget $widget
+     * @param \Axipi\CoreBundle\Entity\Item $widget
      *
-     * @return WidgetPage
+     * @return Relation
      */
-    public function setWidget(\Axipi\CoreBundle\Entity\Widget $widget = null)
+    public function setWidget(\Axipi\CoreBundle\Entity\Item $widget = null)
     {
         $this->widget = $widget;
 
@@ -218,7 +218,7 @@ class WidgetPage
     /**
      * Get widget
      *
-     * @return \Axipi\CoreBundle\Entity\Widget
+     * @return \Axipi\CoreBundle\Entity\Item
      */
     public function getWidget()
     {

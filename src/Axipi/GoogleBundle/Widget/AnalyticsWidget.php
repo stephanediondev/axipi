@@ -1,11 +1,14 @@
 <?php
 namespace Axipi\GoogleBundle\Widget;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\ParameterBag;
+
 use Axipi\CoreBundle\Widget\AbstractWidget;
 
 class AnalyticsWidget extends AbstractWidget
 {
-    public function getWidget($widget, $page)
+    public function getWidget(Request $request, $widget, $page)
     {
         if($widget->getTemplate()) {
             $template = $widget->getTemplate();

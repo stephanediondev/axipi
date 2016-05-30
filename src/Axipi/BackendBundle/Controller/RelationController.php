@@ -8,13 +8,13 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 use Axipi\CoreBundle\Controller\AbstractController;
 
 use Axipi\BackendBundle\Manager\WidgetManager;
-use Axipi\BackendBundle\Manager\WidgetPageManager;
+use Axipi\BackendBundle\Manager\RelationManager;
 use Axipi\BackendBundle\Form\Type\DeleteType;
-use Axipi\BackendBundle\Form\Type\WidgetPageType;
-use Axipi\CoreBundle\Entity\Widget;
-use Axipi\CoreBundle\Entity\WidgetPage;
+use Axipi\BackendBundle\Form\Type\RelationType;
+use Axipi\CoreBundle\Entity\Item;
+use Axipi\CoreBundle\Entity\Relation;
 
-class WidgetPageController extends AbstractController
+class RelationController extends AbstractController
 {
     protected $widgetManager;
 
@@ -22,13 +22,13 @@ class WidgetPageController extends AbstractController
 
     public function __construct(
         WidgetManager $widgetManager,
-        WidgetPageManager $widgetPageManager
+        RelationManager $widgetPageManager
     ) {
         $this->widgetManager = $widgetManager;
         $this->widgetPageManager = $widgetPageManager;
     }
 
-    public function dispatchAction(Request $request, $action, $id)
+    public function dispatchAction(Request $request, $language, $action, $id)
     {
         if(!$this->isGranted('ROLE_WIDGETS')) {
             return $this->redirectToRoute('axipi_backend_home', []);
@@ -42,15 +42,15 @@ class WidgetPageController extends AbstractController
                 $parameters->set('widget', $widget);
             } else {
                 $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_widget', []);
+                return $this->redirectToRoute('axipi_backend_widgets', []);
             }
         } else if(null !== $id) {
-            $widget_page = $this->widgetPageManager->getById($id);
-            if($widget_page) {
-                $parameters->set('widget_page', $widget_page);
+            $relation = $this->widgetPageManager->getById($id);
+            if($relation) {
+                $parameters->set('relation', $relation);
             } else {
                 $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_widget', []);
+                return $this->redirectToRoute('axipi_backend_widgets', []);
             }
         }
 
@@ -66,52 +66,52 @@ class WidgetPageController extends AbstractController
         }
 
         $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_widget', []);
+        return $this->redirectToRoute('axipi_backend_widgets', []);
     }
 
     public function createAction(Request $request, ParameterBag $parameters, $id)
     {
-        $widget_page = new WidgetPage();
-        $widget_page->setWidget($parameters->get('widget'));
-        $widget_page->setIsActive(true);
+        $relation = new Relation();
+        $relation->setWidget($parameters->get('widget'));
+        $relation->setIsActive(true);
 
-        $form = $this->createForm(WidgetPageType::class, $widget_page, ['widget_page' => $widget_page, 'pages' => $this->widgetPageManager->getPages()]);
+        $form = $this->createForm(RelationType::class, $relation, ['relation' => $relation, 'pages' => $this->widgetPageManager->getPages()]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
                 $this->widgetPageManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_widget_page', ['action' => 'read', 'id' => $widget_page->getId()]);
+                return $this->redirectToRoute('axipi_backend_relations', ['action' => 'read', 'id' => $relation->getId()]);
             }
         }
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:WidgetPage:create.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Relation:create.html.twig', $parameters->all());
     }
 
     public function readAction(Request $request, ParameterBag $parameters, $id)
     {
-        return $this->render('AxipiBackendBundle:WidgetPage:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Relation:read.html.twig', $parameters->all());
     }
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
-        $form = $this->createForm(WidgetPageType::class, $parameters->get('widget_page'), ['widget_page' => $parameters->get('widget_page'), 'pages' => $this->widgetPageManager->getPages()]);
+        $form = $this->createForm(RelationType::class, $parameters->get('relation'), ['relation' => $parameters->get('relation'), 'pages' => $this->widgetPageManager->getPages()]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
                 $this->widgetPageManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_widget_page', ['action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_relations', ['action' => 'read', 'id' => $id]);
             }
         }
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:WidgetPage:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Relation:update.html.twig', $parameters->all());
     }
 
     public function deleteAction(Request $request, ParameterBag $parameters, $id)
@@ -121,14 +121,14 @@ class WidgetPageController extends AbstractController
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->widgetPageManager->remove($parameters->get('widget_page'));
+                $this->widgetPageManager->remove($parameters->get('relation'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_widget', ['action' => 'read', 'id' => $parameters->get('widget_page')->getWidget()->getId()]);
+                return $this->redirectToRoute('axipi_backend_widgets', ['action' => 'read', 'id' => $parameters->get('relation')->getWidget()->getId()]);
             }
         }
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:WidgetPage:delete.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Relation:delete.html.twig', $parameters->all());
     }
 }
