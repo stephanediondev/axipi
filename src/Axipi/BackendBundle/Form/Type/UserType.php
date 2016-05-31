@@ -62,7 +62,9 @@ class UserType extends AbstractType
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
         foreach($view->children as $name => $child) {
-            if($name != 'submit') {
+            if($name == 'submit') {
+                $child->vars['label'] = 'actions.'.$name;
+            } else {
                 $child->vars['label'] = 'user.'.$name;
             }
         }

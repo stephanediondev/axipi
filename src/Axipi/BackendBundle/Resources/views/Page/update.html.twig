@@ -37,8 +37,8 @@
                 {{ form_errors(form) }}
                 <div class="row">
                     <div class="col-lg-4">
-                        {{ macro.read_field('page.language'|trans({}, 'axipi_backend'), page.language.title) }}
-                        {{ macro.read_field('page.component'|trans({}, 'axipi_backend'), page.component.title) }}
+                        {{ macro.read_field('item.language'|trans({}, 'axipi_backend'), page.language.title) }}
+                        {{ macro.read_field('item.component'|trans({}, 'axipi_backend'), page.component.title) }}
                         {{ form_row(form.template) }}
                         {{ form_row(form.parent) }}
                         {{ form_row(form.code) }}

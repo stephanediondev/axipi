@@ -10,19 +10,9 @@ class ComponentManager extends AbstractManager
         return $this->em->getRepository('AxipiCoreBundle:Component')->getById($id);
     }
 
-    public function getRows($category = null)
+    public function getList($parameters = [])
     {
-        return $this->em->getRepository('AxipiCoreBundle:Component')->getRows($category);
-    }
-
-    public function getCategories()
-    {
-        return ['page', 'widget'];
-    }
-
-    public function getZones()
-    {
-        return $this->em->getRepository('AxipiCoreBundle:Component')->getZones();
+        return $this->em->getRepository('AxipiCoreBundle:Component')->getList($parameters);
     }
 
     public function persist($data)
@@ -41,10 +31,5 @@ class ComponentManager extends AbstractManager
     {
         $this->em->remove($type);
         $this->em->flush();
-    }
-
-    public function getEntityName()
-    {
-        return Type::class;
     }
 }

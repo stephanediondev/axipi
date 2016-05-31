@@ -26,24 +26,24 @@
             <div class="block">
                 <div class="row">
                     <div class="col-lg-4">
-                        {{ macro.read_field('widget.language'|trans({}, 'axipi_backend'), widget.language.title) }}
-                        {{ macro.read_field('widget.component'|trans({}, 'axipi_backend'), widget.component.title) }}
-                        {{ macro.read_field('widget.template'|trans({}, 'axipi_backend'), widget.template) }}
-                        {% if widget.parent %}{{ macro.read_field('widget.parent'|trans({}, 'axipi_backend'), widget.parent.title) }}{% endif %}
-                        {{ macro.read_field('widget.code'|trans({}, 'axipi_backend'), widget.code) }}
-                        {{ macro.read_field('widget.ordering'|trans({}, 'axipi_backend'), widget.ordering) }}
+                        {{ macro.read_field('item.language'|trans({}, 'axipi_backend'), widget.language.title) }}
+                        {{ macro.read_field('item.component'|trans({}, 'axipi_backend'), widget.component.title) }}
+                        {{ macro.read_field('item.template'|trans({}, 'axipi_backend'), widget.template) }}
+                        {% if widget.parent %}{{ macro.read_field('item.parent'|trans({}, 'axipi_backend'), widget.parent.title) }}{% endif %}
+                        {{ macro.read_field('item.code'|trans({}, 'axipi_backend'), widget.code) }}
+                        {{ macro.read_field('item.ordering'|trans({}, 'axipi_backend'), widget.ordering) }}
                     </div>
                     <div class="col-lg-4">
-                        {{ macro.read_field('widget.title'|trans({}, 'axipi_backend'), widget.title) }}
-                        {{ macro.read_field('widget.zone'|trans({}, 'axipi_backend'), widget.zone.code) }}
-                        {{ macro.read_field('widget.isActive'|trans({}, 'axipi_backend'), widget.isActive) }}
+                        {{ macro.read_field('item.title'|trans({}, 'axipi_backend'), widget.title) }}
+                        {{ macro.read_field('item.zone'|trans({}, 'axipi_backend'), widget.zone.code) }}
+                        {{ macro.read_field('item.isActive'|trans({}, 'axipi_backend'), widget.isActive) }}
                     </div>
                 </div>
             </div>
 
             {% embed 'AxipiBackendBundle::block_title.html.twig' %}
                 {% block block_title %}
-                    <span><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }} ({{ objects|length }})</span>
+                    <span><i class="fa fa-{{ 'icons.relation'|trans({}, 'axipi_backend') }}"></i>{{ 'relations'|trans({}, 'axipi_backend') }}</span>
                 {% endblock %}
                 {% block block_title_actions %}
                     <li><a href="{{ path('axipi_backend_relations', {language: app.request.get('language'), action: 'create', 'id': widget.id}) }}"><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.create'|trans({}, 'axipi_backend') }}</a></li>

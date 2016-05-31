@@ -28,12 +28,17 @@ class LanguageRepository extends EntityRepository {
         return $query->getQuery()->getOneOrNullResult();
     }
 
-    public function getRows() {
+    public function getList($parameters = []) {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
         $query->addSelect('lng');
         $query->from('AxipiCoreBundle:Language', 'lng');
+
+        if(isset($parameters['active']) == 1 && $parameters['active'] == true) {
+            $query->andWhere('lng.isActive = :active');
+            $query->setParameter(':active', 1);
+        }
 
         $query->addOrderBy('lng.title');
 

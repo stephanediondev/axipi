@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 use Axipi\CoreBundle\Controller\AbstractController;
 
 use Axipi\BackendBundle\Manager\ComponentManager;
+use Axipi\BackendBundle\Manager\ZoneManager;
 use Axipi\BackendBundle\Form\Type\DeleteType;
 use Axipi\BackendBundle\Form\Type\ComponentType;
 use Axipi\CoreBundle\Entity\Component;
@@ -16,10 +17,14 @@ class ComponentController extends AbstractController
 {
     protected $componentManager;
 
+    protected $zoneManager;
+
     public function __construct(
-        ComponentManager $componentManager
+        ComponentManager $componentManager,
+        ZoneManager $zoneManager
     ) {
         $this->componentManager = $componentManager;
+        $this->zoneManager = $zoneManager;
     }
 
     public function dispatchAction(Request $request, $action, $id)
@@ -61,8 +66,8 @@ class ComponentController extends AbstractController
 
     public function indexAction(Request $request, ParameterBag $parameters)
     {
-        $parameters->set('pages', $this->componentManager->getRows('page'));
-        $parameters->set('widgets', $this->componentManager->getRows('widget'));
+        $parameters->set('pages', $this->componentManager->getList(['category' => 'page']));
+        $parameters->set('widgets', $this->componentManager->getList(['category' => 'widget']));
 
         return $this->render('AxipiBackendBundle:Component:index.html.twig', $parameters->all());
     }
@@ -73,7 +78,10 @@ class ComponentController extends AbstractController
         $component->setCategory($parameters->get('category'));
         $component->setIsActive(true);
 
-        $form = $this->createForm(ComponentType::class, $component, ['components' => $this->componentManager->getRows(), 'zones' => $this->componentManager->getZones()]);
+        $form = $this->createForm(ComponentType::class, $component, [
+            'components' => $this->componentManager->getList(),
+            'zones' => $this->zoneManager->getList(),
+        ]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
@@ -96,7 +104,10 @@ class ComponentController extends AbstractController
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
-        $form = $this->createForm(ComponentType::class, $parameters->get('component'), ['components' => $this->componentManager->getRows(), 'zones' => $this->componentManager->getZones()]);
+        $form = $this->createForm(ComponentType::class, $parameters->get('component'), [
+            'components' => $this->componentManager->getList(),
+            'zones' => $this->zoneManager->getList(),
+        ]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {

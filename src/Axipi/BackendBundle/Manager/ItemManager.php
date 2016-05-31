@@ -6,36 +6,21 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Axipi\CoreBundle\Manager\AbstractManager;
 use Axipi\CoreBundle\Entity\Item;
 
-class PageManager extends AbstractManager
+class ItemManager extends AbstractManager
 {
     public function getById($id)
     {
         return $this->em->getRepository('AxipiCoreBundle:Item')->getById($id);
     }
 
-    public function getRows($language, $parent)
+    public function getBySlug($slug)
     {
-        return $this->em->getRepository('AxipiCoreBundle:Item')->getRows($language, $parent);
+        return $this->em->getRepository('AxipiCoreBundle:Item')->getBySlug($slug);
     }
 
-    public function getLanguages()
+    public function getList($parameters = [])
     {
-        return $this->em->getRepository('AxipiCoreBundle:Item')->getLanguages();
-    }
-
-    public function getComponents($category)
-    {
-        return $this->em->getRepository('AxipiCoreBundle:Item')->getComponents($category);
-    }
-
-    public function getPages(Item $item)
-    {
-        return $this->em->getRepository('AxipiCoreBundle:Item')->getPages($item);
-    }
-
-    public function getLanguageByCode($code)
-    {
-        return $this->em->getRepository('AxipiCoreBundle:Language')->getByCode($code);
+        return $this->em->getRepository('AxipiCoreBundle:Item')->getList($parameters);
     }
 
     public function persist($data)
@@ -65,6 +50,10 @@ class PageManager extends AbstractManager
             $data->setAttributesChange([]);
         }
 
+        if($data->getCode() == null) {
+            $data->setCode(uniqid($data->getLanguage()->getCode().'-', false));
+        }
+
         if($data->getDateCreated() == null) {
             $data->setDateCreated(new \Datetime());
         }
@@ -83,10 +72,5 @@ class PageManager extends AbstractManager
 
         $this->em->remove($type);
         $this->em->flush();
-    }
-
-    public function getEntityName()
-    {
-        return Page::class;
     }
 }

@@ -16,29 +16,24 @@ class ComponentRepository extends EntityRepository {
         return $query->getQuery()->getOneOrNullResult();
     }
 
-    public function getRows($category = null) {
+    public function getList($parameters = []) {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
         $query->addSelect('cmp');
         $query->from('AxipiCoreBundle:Component', 'cmp');
 
-        if($category) {
-            $query->where('cmp.category = :category');
-            $query->setParameter(':category', $category);
+        if(isset($parameters['category']) == 1) {
+            $query->andWhere('cmp.category = :category');
+            $query->setParameter(':category', $parameters['category']);
+        }
+
+        if(isset($parameters['active']) == 1 && $parameters['active'] == true) {
+            $query->andWhere('cmp.isActive = :active');
+            $query->setParameter(':active', 1);
         }
 
         $query->orderBy('cmp.title');
-
-        return $query->getQuery()->getResult();
-    }
-
-    public function getZones() {
-        $em = $this->getEntityManager();
-
-        $query = $em->createQueryBuilder();
-        $query->addSelect('zon');
-        $query->from('AxipiCoreBundle:Zone', 'zon');
 
         return $query->getQuery()->getResult();
     }

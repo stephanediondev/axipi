@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Axipi\CoreBundle\Entity\Item;
@@ -20,25 +21,39 @@ class RelationType extends AbstractType
     {
         $builder->add('page', EntityType::class,
             [
-                'required' => false,
+                'required' => true,
                 'placeholder' => '-',
                 'class' => Item::class,
-                'choices' => $options['pages'],
+                'choices' => $options['items'],
                 'choice_label' => function ($page) {
                     return $page->getTitle();
                 }
             ]
         );
-        $builder->add('title');
-        $builder->add('ordering');
+
+        $builder->add('title', TextType::class,
+            [
+                'required' => false,
+            ]
+        );
+
+        $builder->add('ordering', TextType::class,
+            [
+                'required' => true,
+            ]
+        );
+
         $builder->add('isActive');
+
         $builder->add('submit', SubmitType::class);
     }
 
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
         foreach($view->children as $name => $child) {
-            if($name != 'submit') {
+            if($name == 'submit') {
+                $child->vars['label'] = 'actions.'.$name;
+            } else {
                 $child->vars['label'] = 'relation.'.$name;
             }
         }
@@ -49,8 +64,7 @@ class RelationType extends AbstractType
         $resolver->setDefaults(array(
             'translation_domain' => 'axipi_backend',
             'data_class' => Relation::class,
-            'relation' => null,
-            'pages' => [],
+            'items' => [],
         ));
     }
 }

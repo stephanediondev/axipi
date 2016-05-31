@@ -16,32 +16,32 @@ class ZoneRepository extends EntityRepository {
         return $query->getQuery()->getOneOrNullResult();
     }
 
-    public function getRows() {
+    public function getByCode($code) {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQueryBuilder();
+        $query->addSelect('zon');
+        $query->from('AxipiCoreBundle:Zone', 'zon');
+        $query->where('zon.code = :code');
+        $query->setParameter(':code', $code);
+
+        return $query->getQuery()->getOneOrNullResult();
+    }
+
+    public function getList($parameters = []) {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
         $query->addSelect('zon');
         $query->from('AxipiCoreBundle:Zone', 'zon');
 
+        if(isset($parameters['active']) == 1 && $parameters['active'] == true) {
+            $query->andWhere('zon.isActive = :active');
+            $query->setParameter(':active', 1);
+        }
+
         $query->addOrderBy('zon.ordering');
         $query->addOrderBy('zon.code');
-
-        return $query->getQuery()->getResult();
-    }
-
-    public function getWidgets($code) {
-        $em = $this->getEntityManager();
-
-        $query = $em->createQueryBuilder();
-        $query->addSelect('wdg', 'cmp', 'zon');
-        $query->from('AxipiCoreBundle:Item', 'wdg');
-        $query->leftJoin('wdg.component', 'cmp');
-        $query->leftJoin('wdg.zone', 'zon');
-        $query->where('zon.code = :code');
-        $query->andWhere('wdg.isActive = :active');
-
-        $query->setParameter(':code', $code);
-        $query->setParameter(':active', 1);
 
         return $query->getQuery()->getResult();
     }

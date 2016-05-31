@@ -8,24 +8,32 @@ class RelationRepository extends EntityRepository {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
-        $query->addSelect('wdg_pge', 'wdg', 'pge');
-        $query->from('AxipiCoreBundle:Relation', 'wdg_pge');
-        $query->leftJoin('wdg_pge.widget', 'wdg');
-        $query->leftJoin('wdg_pge.page', 'pge');
-        $query->where('wdg_pge.id = :id');
+        $query->addSelect('rel', 'wdg', 'pge');
+        $query->from('AxipiCoreBundle:Relation', 'rel');
+        $query->leftJoin('rel.widget', 'wdg');
+        $query->leftJoin('rel.page', 'pge');
+        $query->where('rel.id = :id');
 
         $query->setParameter(':id', $id);
 
         return $query->getQuery()->getOneOrNullResult();
     }
 
-    public function getPages() {
+    public function getList($parameters = []) {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
-        $query->addSelect('pge', 'cmp');
-        $query->from('AxipiCoreBundle:Item', 'pge');
-        $query->leftJoin('pge.component', 'cmp');
+        $query->addSelect('rel', 'wdg', 'pge');
+        $query->from('AxipiCoreBundle:Relation', 'rel');
+        $query->leftJoin('rel.widget', 'wdg');
+        $query->leftJoin('rel.page', 'pge');
+
+        if(isset($parameters['widget']) == 1) {
+            $query->andWhere('wdg.id = :widget');
+            $query->setParameter(':widget', $parameters['widget']);
+        }
+
+        $query->orderBy('rel.ordering');
 
         return $query->getQuery()->getResult();
     }

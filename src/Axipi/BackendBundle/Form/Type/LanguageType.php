@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Axipi\CoreBundle\Entity\Language;
@@ -17,19 +17,30 @@ class LanguageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('code')
-            ->add('title')
-            ->add('isActive')
-            ->add('submit', SubmitType::class)
-        ;
+        $builder->add('code', TextType::class,
+            [
+                'required' => true,
+            ]
+        );
+
+        $builder->add('title', TextType::class,
+            [
+                'required' => true,
+            ]
+        );
+
+        $builder->add('isActive');
+
+        $builder->add('submit', SubmitType::class);
     }
 
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
         foreach($view->children as $name => $child) {
-            if($name != 'submit') {
-                $child->vars['label'] = 'zone.'.$name;
+            if($name == 'submit') {
+                $child->vars['label'] = 'actions.'.$name;
+            } else {
+                $child->vars['label'] = 'language.'.$name;
             }
         }
     }

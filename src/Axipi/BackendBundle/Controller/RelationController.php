@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Controller\AbstractController;
 
-use Axipi\BackendBundle\Manager\WidgetManager;
+use Axipi\BackendBundle\Manager\ItemManager;
 use Axipi\BackendBundle\Manager\RelationManager;
 use Axipi\BackendBundle\Form\Type\DeleteType;
 use Axipi\BackendBundle\Form\Type\RelationType;
@@ -16,16 +16,16 @@ use Axipi\CoreBundle\Entity\Relation;
 
 class RelationController extends AbstractController
 {
-    protected $widgetManager;
+    protected $itemManager;
 
-    protected $widgetPageManager;
+    protected $relationManager;
 
     public function __construct(
-        WidgetManager $widgetManager,
-        RelationManager $widgetPageManager
+        ItemManager $itemManager,
+        RelationManager $relationManager
     ) {
-        $this->widgetManager = $widgetManager;
-        $this->widgetPageManager = $widgetPageManager;
+        $this->itemManager = $itemManager;
+        $this->relationManager = $relationManager;
     }
 
     public function dispatchAction(Request $request, $language, $action, $id)
@@ -37,7 +37,7 @@ class RelationController extends AbstractController
         $parameters = new ParameterBag();
 
         if($action == 'create' && null !== $id) {
-            $widget = $this->widgetManager->getById($id);
+            $widget = $this->itemManager->getById($id);
             if($widget) {
                 $parameters->set('widget', $widget);
             } else {
@@ -45,7 +45,7 @@ class RelationController extends AbstractController
                 return $this->redirectToRoute('axipi_backend_widgets', []);
             }
         } else if(null !== $id) {
-            $relation = $this->widgetPageManager->getById($id);
+            $relation = $this->relationManager->getById($id);
             if($relation) {
                 $parameters->set('relation', $relation);
             } else {
@@ -75,12 +75,14 @@ class RelationController extends AbstractController
         $relation->setWidget($parameters->get('widget'));
         $relation->setIsActive(true);
 
-        $form = $this->createForm(RelationType::class, $relation, ['relation' => $relation, 'pages' => $this->widgetPageManager->getPages()]);
+        $form = $this->createForm(RelationType::class, $relation, [
+            'items' => $this->itemManager->getList(),
+        ]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->widgetPageManager->persist($form->getData());
+                $this->relationManager->persist($form->getData());
                 $this->addFlash('success', 'created');
                 return $this->redirectToRoute('axipi_backend_relations', ['action' => 'read', 'id' => $relation->getId()]);
             }
@@ -98,12 +100,14 @@ class RelationController extends AbstractController
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
-        $form = $this->createForm(RelationType::class, $parameters->get('relation'), ['relation' => $parameters->get('relation'), 'pages' => $this->widgetPageManager->getPages()]);
+        $form = $this->createForm(RelationType::class, $parameters->get('relation'), [
+            'items' => $this->itemManager->getList(),
+        ]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->widgetPageManager->persist($form->getData());
+                $this->relationManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
                 return $this->redirectToRoute('axipi_backend_relations', ['action' => 'read', 'id' => $id]);
             }
@@ -121,7 +125,7 @@ class RelationController extends AbstractController
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->widgetPageManager->remove($parameters->get('relation'));
+                $this->relationManager->remove($parameters->get('relation'));
                 $this->addFlash('success', 'deleted');
                 return $this->redirectToRoute('axipi_backend_widgets', ['action' => 'read', 'id' => $parameters->get('relation')->getWidget()->getId()]);
             }

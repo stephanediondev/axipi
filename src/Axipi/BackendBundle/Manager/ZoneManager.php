@@ -10,9 +10,14 @@ class ZoneManager extends AbstractManager
         return $this->em->getRepository('AxipiCoreBundle:Zone')->getById($id);
     }
 
-    public function getRows()
+    public function getByCode($code)
     {
-        return $this->em->getRepository('AxipiCoreBundle:Zone')->getRows();
+        return $this->em->getRepository('AxipiCoreBundle:Zone')->getByCode($code);
+    }
+
+    public function getList($parameters = [])
+    {
+        return $this->em->getRepository('AxipiCoreBundle:Zone')->getList($parameters);
     }
 
     public function persist($data)

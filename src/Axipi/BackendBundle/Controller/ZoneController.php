@@ -59,7 +59,7 @@ class ZoneController extends AbstractController
 
     public function indexAction(Request $request, ParameterBag $parameters)
     {
-        $parameters->set('objects', $this->zoneManager->getRows());
+        $parameters->set('objects', $this->zoneManager->getList());
 
         return $this->render('AxipiBackendBundle:Zone:index.html.twig', $parameters->all());
     }

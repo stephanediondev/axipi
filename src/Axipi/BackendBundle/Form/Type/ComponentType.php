@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Axipi\CoreBundle\Entity\Component;
@@ -18,9 +19,13 @@ class ComponentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('category')
-            ->add('zone', EntityType::class,
+        $builder->add('category', TextType::class,
+            [
+                'required' => true,
+            ]
+        );
+
+        $builder->add('zone', EntityType::class,
             [
                 'required' => false,
                 'placeholder' => '-',
@@ -29,11 +34,28 @@ class ComponentType extends AbstractType
                 'choice_label' => function ($zone) {
                     return $zone->getCode();
                 }
-            ])
-            ->add('service')
-            ->add('template')
-            ->add('title')
-            ->add('parent', EntityType::class,
+            ]
+        );
+
+        $builder->add('service', TextType::class,
+            [
+                'required' => true,
+            ]
+        );
+
+        $builder->add('template', TextType::class,
+            [
+                'required' => true,
+            ]
+        );
+
+        $builder->add('title', TextType::class,
+            [
+                'required' => true,
+            ]
+        );
+
+        $builder->add('parent', EntityType::class,
             [
                 'required' => false,
                 'placeholder' => '-',
@@ -42,21 +64,34 @@ class ComponentType extends AbstractType
                 'choice_label' => function ($component) {
                     return $component->getTitle();
                 }
-            ])
-            ->add('icon')
-            ->add('isUnique')
-            ->add('isSearch')
-            ->add('isSitemap')
-            ->add('isActive')
-            ->add('attributesSchema')
-            ->add('submit', SubmitType::class)
-        ;
+            ]
+        );
+
+        $builder->add('icon', TextType::class,
+            [
+                'required' => true,
+            ]
+        );
+
+        $builder->add('isUnique');
+
+        $builder->add('isSearch');
+
+        $builder->add('isSitemap');
+
+        $builder->add('isActive');
+
+        $builder->add('attributesSchema');
+
+        $builder->add('submit', SubmitType::class);
     }
 
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
         foreach($view->children as $name => $child) {
-            if($name != 'submit') {
+            if($name == 'submit') {
+                $child->vars['label'] = 'actions.'.$name;
+            } else {
                 $child->vars['label'] = 'component.'.$name;
             }
         }

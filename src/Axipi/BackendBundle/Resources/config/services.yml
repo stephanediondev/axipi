@@ -12,6 +12,7 @@ services:
         parent: "axipi_core_controller_abstract"
         arguments:
             - "@axipi_backend_manager_component"
+            - "@axipi_backend_manager_zone"
 
     axipi_backend_manager_component:
         class: Axipi\BackendBundle\Manager\ComponentManager
@@ -22,12 +23,13 @@ services:
         class: Axipi\BackendBundle\Controller\PageController
         parent: "axipi_core_controller_abstract"
         arguments:
-            - "@axipi_backend_manager_page"
+            - "@axipi_backend_manager_item"
+            - "@axipi_backend_manager_language"
             - "@axipi_backend_manager_component"
             - "@axipi_search_manager_search"
 
-    axipi_backend_manager_page:
-        class: Axipi\BackendBundle\Manager\PageManager
+    axipi_backend_manager_item:
+        class: Axipi\BackendBundle\Manager\ItemManager
         parent: "axipi_core_manager_abstract"
         public: false
 
@@ -35,19 +37,17 @@ services:
         class: Axipi\BackendBundle\Controller\WidgetController
         parent: "axipi_core_controller_abstract"
         arguments:
-            - "@axipi_backend_manager_widget"
+            - "@axipi_backend_manager_item"
+            - "@axipi_backend_manager_language"
             - "@axipi_backend_manager_component"
-
-    axipi_backend_manager_widget:
-        class: Axipi\BackendBundle\Manager\WidgetManager
-        parent: "axipi_core_manager_abstract"
-        public: false
+            - "@axipi_backend_manager_relation"
+            - "@axipi_backend_manager_zone"
 
     axipi_backend_controller_relation:
         class: Axipi\BackendBundle\Controller\RelationController
         parent: "axipi_core_controller_abstract"
         arguments:
-            - "@axipi_backend_manager_widget"
+            - "@axipi_backend_manager_item"
             - "@axipi_backend_manager_relation"
 
     axipi_backend_manager_relation:

@@ -39,31 +39,50 @@ class ItemRepository extends EntityRepository {
         return $query->getQuery()->getOneOrNullResult();
     }
 
-    public function getRows($language, $parent) {
+    public function getList($parameters = []) {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
-        $query->addSelect('pge', 'cmp');
+        $query->addSelect('pge', 'cmp', 'lng');
         $query->from('AxipiCoreBundle:Item', 'pge');
         $query->leftJoin('pge.component', 'cmp');
         $query->leftJoin('pge.language', 'lng');
+        $query->leftJoin('pge.zone', 'zon');
 
-        $query->where('cmp.category = :category');
-        $query->setParameter(':category', 'page');
+        if(isset($parameters['category']) == 1) {
+            $query->andWhere('cmp.category = :category');
+            $query->setParameter(':category', $parameters['category']);
+        }
 
-        $query->andWhere('lng.code = :language');
-        $query->setParameter(':language', $language);
+        if(isset($parameters['language']) == 1) {
+            $query->andWhere('lng.code = :language');
+            $query->setParameter(':language', $parameters['language']);
+        }
 
-        if($parent) {
-            $query->andWhere('pge.parent = :parent');
-            $query->setParameter(':parent', $parent);
-        } else {
+        if(isset($parameters['zone']) == 1) {
+            $query->andWhere('zon.code = :zone');
+            $query->setParameter(':zone', $parameters['zone']);
+        }
+
+        if(isset($parameters['parent_null']) == 1 && $parameters['parent_null'] == true) {
             $query->andWhere('pge.parent IS NULL');
+        }
+
+        if(isset($parameters['active']) == 1 && $parameters['active'] == true) {
+            $query->andWhere('pge.isActive = :active');
+            $query->setParameter(':active', 1);
+        }
+
+        if(isset($parameters['component_parent']) == 1) {
+            if($parameters['component_parent']->getComponent()->getParent()) {
+                $query->andWhere('pge.component = :component_parent');
+                $query->setParameter(':component_parent', $parameters['component_parent']->getComponent()->getParent());
+            }
         }
 
         $query->orderBy('pge.slug');
 
-        return $query->getQuery();
+        return $query->getQuery()->getResult();
     }
 
     public function getConvertPages($ids) {
@@ -73,102 +92,6 @@ class ItemRepository extends EntityRepository {
         $query->addSelect('pge');
         $query->from('AxipiCoreBundle:Item', 'pge');
         $query->where('pge.id IN ('.implode(',', $ids).')');
-
-        return $query->getQuery()->getResult();
-    }
-
-    public function getLanguages() {
-        $em = $this->getEntityManager();
-
-        $query = $em->createQueryBuilder();
-        $query->addSelect('lng');
-        $query->from('AxipiCoreBundle:Language', 'lng');
-
-        return $query->getQuery()->getResult();
-    }
-
-    public function getComponents($category) {
-        $em = $this->getEntityManager();
-
-        $query = $em->createQueryBuilder();
-        $query->addSelect('cmp');
-        $query->from('AxipiCoreBundle:Component', 'cmp');
-        $query->where('cmp.category = :category');
-        $query->andWhere('cmp.isActive = :active');
-
-        $query->setParameter(':category', $category);
-        $query->setParameter(':active', 1);
-
-        $query->orderBy('cmp.title');
-
-        return $query->getQuery()->getResult();
-    }
-
-    public function getPages(Item $item) {
-        $em = $this->getEntityManager();
-
-        $query = $em->createQueryBuilder();
-        $query->addSelect('pge', 'cmp');
-        $query->from('AxipiCoreBundle:Item', 'pge');
-        $query->leftJoin('pge.component', 'cmp');
-
-        if($item->getComponent()->getParent()) {
-            $query->where('pge.component = :component_parent');
-            $query->setParameter(':component_parent', $item->getComponent()->getParent());
-        }
-
-        $query->orderBy('pge.title');
-
-        return $query->getQuery()->getResult();
-    }
-
-    public function getPagesWidgetRelated($id) {
-        $em = $this->getEntityManager();
-
-        $query = $em->createQueryBuilder();
-        $query->addSelect('wdg_pge', 'wdg', 'pge');
-        $query->from('AxipiCoreBundle:Relation', 'wdg_pge');
-        $query->leftJoin('wdg_pge.widget', 'wdg');
-        $query->leftJoin('wdg_pge.page', 'pge');
-        $query->where('wdg.id = :widget');
-
-        $query->setParameter(':widget', $id);
-
-        $query->orderBy('wdg_pge.ordering');
-
-        return $query->getQuery()->getResult();
-    }
-
-    public function getZones() {
-        $em = $this->getEntityManager();
-
-        $query = $em->createQueryBuilder();
-        $query->addSelect('zon');
-        $query->from('AxipiCoreBundle:Zone', 'zon');
-
-        $query->addOrderBy('zon.ordering');
-        $query->addOrderBy('zon.code');
-
-        return $query->getQuery()->getResult();
-    }
-
-    public function getPagesParent(Item $item) {
-        $em = $this->getEntityManager();
-
-        $query = $em->createQueryBuilder();
-        $query->addSelect('pge', 'cmp');
-        $query->from('AxipiCoreBundle:Item', 'pge');
-        $query->leftJoin('pge.component', 'cmp');
-
-        $query->where('pge.language = :language_parent');
-        $query->setParameter(':language_parent', $item->getLanguage());
-
-        if($item->getComponent()->getParent()) {
-            $query->andWhere('pge.component = :component_parent');
-            $query->setParameter(':component_parent', $item->getComponent()->getParent());
-        }
-
-        $query->orderBy('pge.title');
 
         return $query->getQuery()->getResult();
     }

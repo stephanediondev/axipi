@@ -15,19 +15,22 @@ class DeleteType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('confirm', CheckboxType::class,
-                [
-                    'required' => true,
-                    'mapped' => false,
-                ])
-            ->add('submit', SubmitType::class)
-        ;
+        $builder->add('confirm', CheckboxType::class,
+            [
+                'required' => true,
+                'mapped' => false,
+            ]
+        );
+
+        $builder->add('submit', SubmitType::class);
     }
-    
-    /**
-     * @param OptionsResolver $resolver
-     */
+
+    public function finishView(FormView $view, FormInterface $form, array $options)
+    {
+        $view->children['confirm']->vars['label'] = 'actions.confirm';
+        $view->children['submit']->vars['label'] = 'actions.submit';
+    }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(

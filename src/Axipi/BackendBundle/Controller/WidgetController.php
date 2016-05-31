@@ -7,24 +7,39 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Controller\AbstractController;
 
-use Axipi\BackendBundle\Manager\WidgetManager;
+use Axipi\BackendBundle\Manager\ItemManager;
+use Axipi\BackendBundle\Manager\LanguageManager;
 use Axipi\BackendBundle\Manager\ComponentManager;
+use Axipi\BackendBundle\Manager\RelationManager;
+use Axipi\BackendBundle\Manager\ZoneManager;
 use Axipi\BackendBundle\Form\Type\DeleteType;
-use Axipi\BackendBundle\Form\Type\WidgetType;
+use Axipi\BackendBundle\Form\Type\ItemType;
 use Axipi\CoreBundle\Entity\Item;
 
 class WidgetController extends AbstractController
 {
-    protected $widgetManager;
+    protected $itemManager;
+
+    protected $languageManager;
 
     protected $componentManager;
 
+    protected $relationManager;
+
+    protected $zoneManager;
+
     public function __construct(
-        WidgetManager $widgetManager,
-        ComponentManager $componentManager
+        ItemManager $itemManager,
+        LanguageManager $languageManager,
+        ComponentManager $componentManager,
+        RelationManager $relationManager,
+        ZoneManager $zoneManager
     ) {
-        $this->widgetManager = $widgetManager;
+        $this->itemManager = $itemManager;
+        $this->languageManager = $languageManager;
         $this->componentManager = $componentManager;
+        $this->relationManager = $relationManager;
+        $this->zoneManager = $zoneManager;
     }
 
     public function dispatchAction(Request $request, $language, $action, $id)
@@ -38,8 +53,8 @@ class WidgetController extends AbstractController
         }
 
         $parameters = new ParameterBag();
-        $parameters->set('languages', $this->widgetManager->getLanguages());
-        $parameters->set('language', $this->widgetManager->getLanguageByCode($language));
+        $parameters->set('languages', $this->languageManager->getList());
+        $parameters->set('language', $this->languageManager->getByCode($language));
 
         if($action == 'create' && null !== $id) {
             $component = $this->componentManager->getById($id);
@@ -50,7 +65,7 @@ class WidgetController extends AbstractController
                 return $this->redirectToRoute('axipi_backend_widgets', ['language' => $language]);
             }
         } else if(null !== $id) {
-            $widget = $this->widgetManager->getById($id);
+            $widget = $this->itemManager->getById($id);
             if($widget) {
                 $parameters->set('widget', $widget);
             } else {
@@ -78,8 +93,8 @@ class WidgetController extends AbstractController
 
     public function indexAction(Request $request, ParameterBag $parameters, $language)
     {
-        $parameters->set('components', $this->widgetManager->getComponents('widget'));
-        $parameters->set('zones', $this->widgetManager->getZones());
+        $parameters->set('components', $this->componentManager->getList(['category' => 'widget', 'active' => true]));
+        $parameters->set('zones', $this->zoneManager->getList());
 
         return $this->render('AxipiBackendBundle:Widget:index.html.twig', $parameters->all());
     }
@@ -92,12 +107,16 @@ class WidgetController extends AbstractController
         $widget->setZone($parameters->get('component')->getZone());
         $widget->setIsActive(true);
 
-        $form = $this->createForm(WidgetType::class, $widget, ['widget' => $widget, 'zones' => $this->widgetManager->getZones(), 'pages' => $this->widgetManager->getPagesParent($widget)]);
+        $form = $this->createForm(ItemType::class, $widget, [
+            'item' => $widget,
+            'zones' => $this->zoneManager->getList(),
+            'items' => $this->itemManager->getList(['component_parent' => $widget]),
+        ]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $id = $this->widgetManager->persist($form->getData());
+                $id = $this->itemManager->persist($form->getData());
                 $this->addFlash('success', 'created');
                 return $this->redirectToRoute('axipi_backend_widgets', ['language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
             }
@@ -110,19 +129,23 @@ class WidgetController extends AbstractController
 
     public function readAction(Request $request, ParameterBag $parameters, $id)
     {
-        $parameters->set('objects', $this->widgetManager->getPagesWidgetRelated($id));
+        $parameters->set('objects', $this->relationManager->getList(['widget' => $id]));
 
         return $this->render('AxipiBackendBundle:Widget:read.html.twig', $parameters->all());
     }
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
-        $form = $this->createForm(WidgetType::class, $parameters->get('widget'), ['widget' => $parameters->get('widget'), 'zones' => $this->widgetManager->getZones(), 'pages' => $this->widgetManager->getPagesParent($parameters->get('widget'))]);
+        $form = $this->createForm(ItemType::class, $parameters->get('widget'), [
+            'item' => $parameters->get('widget'),
+            'zones' => $this->zoneManager->getList(),
+            'items' => $this->itemManager->getList(['component_parent' => $parameters->get('widget')]),
+        ]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->widgetManager->persist($form->getData());
+                $this->itemManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
                 return $this->redirectToRoute('axipi_backend_widgets', ['language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
             }
@@ -140,7 +163,7 @@ class WidgetController extends AbstractController
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->widgetManager->remove($parameters->get('widget'));
+                $this->itemManager->remove($parameters->get('widget'));
                 $this->addFlash('success', 'deleted');
                 return $this->redirectToRoute('axipi_backend_widgets', ['language' => $parameters->get('language')->getCode()]);
             }

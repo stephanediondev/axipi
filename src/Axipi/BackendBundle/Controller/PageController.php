@@ -7,27 +7,32 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Controller\AbstractController;
 
-use Axipi\BackendBundle\Manager\PageManager;
+use Axipi\BackendBundle\Manager\ItemManager;
+use Axipi\BackendBundle\Manager\LanguageManager;
 use Axipi\BackendBundle\Manager\ComponentManager;
 use Axipi\SearchBundle\Manager\SearchManager;
 use Axipi\BackendBundle\Form\Type\DeleteType;
-use Axipi\BackendBundle\Form\Type\PageType;
+use Axipi\BackendBundle\Form\Type\ItemType;
 use Axipi\CoreBundle\Entity\Item;
 
 class PageController extends AbstractController
 {
-    protected $pageManager;
+    protected $itemManager;
+
+    protected $languageManager;
 
     protected $componentManager;
 
     protected $searchManager;
 
     public function __construct(
-        PageManager $pageManager,
+        ItemManager $itemManager,
+        LanguageManager $languageManager,
         ComponentManager $componentManager,
         SearchManager $searchManager
     ) {
-        $this->pageManager = $pageManager;
+        $this->itemManager = $itemManager;
+        $this->languageManager = $languageManager;
         $this->componentManager = $componentManager;
         $this->searchManager = $searchManager;
     }
@@ -44,8 +49,8 @@ class PageController extends AbstractController
 
         $parameters = new ParameterBag();
         $parameters->set('mode', $mode);
-        $parameters->set('languages', $this->pageManager->getLanguages());
-        $parameters->set('language', $this->pageManager->getLanguageByCode($language));
+        $parameters->set('languages', $this->languageManager->getList());
+        $parameters->set('language', $this->languageManager->getByCode($language));
 
         if($action == 'create' && null !== $id) {
             $component = $this->componentManager->getById($id);
@@ -56,7 +61,7 @@ class PageController extends AbstractController
                 return $this->redirectToRoute('axipi_backend_pages', ['mode' => $mode, 'language' => $language]);
             }
         } else if(null !== $id) {
-            $page = $this->pageManager->getById($id);
+            $page = $this->itemManager->getById($id);
             if($page) {
                 $parameters->set('page', $page);
             } else {
@@ -84,8 +89,8 @@ class PageController extends AbstractController
 
     public function indexAction(Request $request, ParameterBag $parameters, $language)
     {
-        $parameters->set('objects', $this->pageManager->getRows($language, null)->getResult());
-        $parameters->set('components', $this->pageManager->getComponents('page'));
+        $parameters->set('objects', $this->itemManager->getList(['category' => 'page', 'language' => $language, 'parent_null' => true]));
+        $parameters->set('components', $this->componentManager->getList(['category' => 'page', 'active' => true]));
 
         return $this->render('AxipiBackendBundle:Page:index.html.twig', $parameters->all());
     }
@@ -94,7 +99,7 @@ class PageController extends AbstractController
     {
         $page = new Item();
         if($request->query->get('parent')) {
-            $page_parent = $this->pageManager->getById($request->query->get('parent'));
+            $page_parent = $this->itemManager->getById($request->query->get('parent'));
             if($page_parent) {
                 $parameters->set('page_parent', $page_parent);
                 $page->setParent($page_parent);
@@ -104,12 +109,15 @@ class PageController extends AbstractController
         $page->setComponent($parameters->get('component'));
         $page->setIsActive(true);
 
-        $form = $this->createForm(PageType::class, $page, ['page' => $page, 'pages' => $this->pageManager->getPages($page)]);
+        $form = $this->createForm(ItemType::class, $page, [
+            'item' => $page,
+            'items' => $this->itemManager->getList(['component_parent' => $page]),
+        ]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $id = $this->pageManager->persist($form->getData());
+                $id = $this->itemManager->persist($form->getData());
                 $this->searchManager->indexPage($form->getData());
                 $this->addFlash('success', 'created');
                 return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
@@ -123,19 +131,22 @@ class PageController extends AbstractController
 
     public function readAction(Request $request, ParameterBag $parameters, $id)
     {
-        $parameters->set('components', $this->pageManager->getComponents('page'));
+        $parameters->set('components', $this->componentManager->getList(['category' => 'page', 'active' => true]));
 
         return $this->render('AxipiBackendBundle:Page:read.html.twig', $parameters->all());
     }
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
-        $form = $this->createForm(PageType::class, $parameters->get('page'), ['page' => $parameters->get('page'), 'pages' => $this->pageManager->getPages($parameters->get('page'))]);
+        $form = $this->createForm(ItemType::class, $parameters->get('page'), [
+            'item' => $parameters->get('page'),
+            'items' => $this->itemManager->getList(['component_parent' => $parameters->get('page')]),
+        ]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->pageManager->persist($form->getData());
+                $this->itemManager->persist($form->getData());
                 $this->searchManager->indexPage($form->getData());
                 $this->addFlash('success', 'updated');
                 return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
@@ -154,7 +165,7 @@ class PageController extends AbstractController
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->pageManager->remove($parameters->get('page'));
+                $this->itemManager->remove($parameters->get('page'));
                 $this->addFlash('success', 'deleted');
                 return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode()]);
             }

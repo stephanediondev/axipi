@@ -10,9 +10,9 @@ class RelationManager extends AbstractManager
         return $this->em->getRepository('AxipiCoreBundle:Relation')->getById($id);
     }
 
-    public function getPages()
+    public function getList($parameters = [])
     {
-        return $this->em->getRepository('AxipiCoreBundle:Relation')->getPages();
+        return $this->em->getRepository('AxipiCoreBundle:Relation')->getList($parameters);
     }
 
     public function persist($data)
@@ -31,10 +31,5 @@ class RelationManager extends AbstractManager
     {
         $this->em->remove($type);
         $this->em->flush();
-    }
-
-    public function getEntityName()
-    {
-        return Relation::class;
     }
 }

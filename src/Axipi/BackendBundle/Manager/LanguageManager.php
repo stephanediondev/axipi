@@ -10,9 +10,14 @@ class LanguageManager extends AbstractManager
         return $this->em->getRepository('AxipiCoreBundle:Language')->getById($id);
     }
 
-    public function getRows()
+    public function getByCode($code)
     {
-        return $this->em->getRepository('AxipiCoreBundle:Language')->getRows();
+        return $this->em->getRepository('AxipiCoreBundle:Language')->getByCode($code);
+    }
+
+    public function getList($parameters = [])
+    {
+        return $this->em->getRepository('AxipiCoreBundle:Language')->getList($parameters);
     }
 
     public function persist($data)

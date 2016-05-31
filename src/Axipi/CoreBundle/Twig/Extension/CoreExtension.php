@@ -48,7 +48,7 @@ class CoreExtension extends \Twig_Extension
         $request = $this->container->get('request_stack')->getMasterRequest();
         $page = $this->container->get('axipi_core_manager_core')->getPage();
 
-        $widgets = $this->em->getRepository('AxipiCoreBundle:Zone')->getWidgets($code);
+        $widgets = $this->em->getRepository('AxipiCoreBundle:Item')->getList(['category' => 'widget', 'active' => true, 'zone' => $code]);
 
         foreach($widgets as $widget) {
             if($this->container->has($widget->getComponent()->getService())) {
