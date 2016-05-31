@@ -109,10 +109,10 @@ class PageController extends AbstractController
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->pageManager->persist($form->getData());
+                $id = $this->pageManager->persist($form->getData());
                 $this->searchManager->indexPage($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode()]);
+                return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
             }
         }
 

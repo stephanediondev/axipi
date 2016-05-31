@@ -34,6 +34,7 @@ class ComponentManager extends AbstractManager
 
         $this->em->persist($data);
         $this->em->flush();
+        return $data->getId();
     }
 
     public function remove($type)

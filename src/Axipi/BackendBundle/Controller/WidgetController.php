@@ -97,9 +97,9 @@ class WidgetController extends AbstractController
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->widgetManager->persist($form->getData());
+                $id = $this->widgetManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_widgets', ['language' => $parameters->get('language')->getCode()]);
+                return $this->redirectToRoute('axipi_backend_widgets', ['language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
             }
         }
 
