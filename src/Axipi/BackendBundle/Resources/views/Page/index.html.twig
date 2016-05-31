@@ -21,7 +21,7 @@
 
             {% embed 'AxipiBackendBundle::block_title.html.twig' %}
                 {% block block_title %}
-                    <span><i class="fa fa-{{ 'icons.top_level'|trans({}, 'axipi_backend') }}"></i>{{ 'top_level'|trans({}, 'axipi_backend') }}</span>
+                    <span><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</span>
                 {% endblock %}
                 {% block block_title_actions %}
                     <li><a role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample"><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.create'|trans({}, 'axipi_backend') }}</a></li>
@@ -37,6 +37,14 @@
                     {% endfor %}
                 </div>
             </div>
+
+            {% embed 'AxipiBackendBundle::block_title.html.twig' %}
+                {% block block_title %}
+                    <span><i class="fa fa-{{ 'icons.top_level'|trans({}, 'axipi_backend') }}"></i>{{ 'top_level'|trans({}, 'axipi_backend') }}</span>
+                {% endblock %}
+                {% block block_title_actions %}
+                {% endblock %}
+            {% endembed %}
 
             <div class="block">
                 <div class="row">
