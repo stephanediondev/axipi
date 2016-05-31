@@ -10,7 +10,7 @@ class UserManager extends AbstractManager
 {
     protected $passwordEncoder;
 
-    public function __construct(EncoderFactory $passwordEncoder)
+    public function setPasswordEncoder(EncoderFactory $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;
     }
@@ -20,23 +20,9 @@ class UserManager extends AbstractManager
         return $this->em->getRepository('AxipiCoreBundle:User')->getById($id);
     }
 
-    public function getRows()
+    public function getList($parameters = [])
     {
-        return $this->em->getRepository('AxipiCoreBundle:User')->getRows();
-    }
-
-    public function getRoles()
-    {
-        $roles = [];
-        $roles[] = 'ROLE_PAGES';
-        $roles[] = 'ROLE_WIDGETS';
-        $roles[] = 'ROLE_FILES';
-        $roles[] = 'ROLE_LANGUAGES';
-        $roles[] = 'ROLE_COMPONENTS';
-        $roles[] = 'ROLE_ZONES';
-        $roles[] = 'ROLE_SEARCH';
-        $roles[] = 'ROLE_USERS';
-        return $roles;
+        return $this->em->getRepository('AxipiCoreBundle:User')->getList($parameters);
     }
 
     public function persist($data)
@@ -77,5 +63,19 @@ class UserManager extends AbstractManager
     {
         $this->em->remove($type);
         $this->em->flush();
+    }
+
+    public function getRoles()
+    {
+        $roles = [];
+        $roles[] = 'ROLE_PAGES';
+        $roles[] = 'ROLE_WIDGETS';
+        $roles[] = 'ROLE_FILES';
+        $roles[] = 'ROLE_LANGUAGES';
+        $roles[] = 'ROLE_COMPONENTS';
+        $roles[] = 'ROLE_ZONES';
+        $roles[] = 'ROLE_SEARCH';
+        $roles[] = 'ROLE_USERS';
+        return $roles;
     }
 }

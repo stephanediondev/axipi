@@ -63,7 +63,7 @@ class UserController extends AbstractController
 
     public function indexAction(Request $request, ParameterBag $parameters)
     {
-        $parameters->set('objects', $this->userManager->getRows()->getResult());
+        $parameters->set('objects', $this->userManager->getList());
 
         return $this->render('AxipiBackendBundle:User:index.html.twig', $parameters->all());
     }

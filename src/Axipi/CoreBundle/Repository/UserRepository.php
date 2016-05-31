@@ -16,7 +16,7 @@ class UserRepository extends EntityRepository {
         return $query->getQuery()->getOneOrNullResult();
     }
 
-    public function getRows() {
+    public function getList($parameters = []) {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
@@ -25,6 +25,6 @@ class UserRepository extends EntityRepository {
 
         $query->orderBy('usr.username');
 
-        return $query->getQuery();
+        return $query->getQuery()->getResult();
     }
 }

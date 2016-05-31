@@ -7,6 +7,19 @@ services:
         class: Axipi\BackendBundle\Controller\HomeController
         parent: "axipi_core_controller_abstract"
 
+    axipi_backend_controller_profile:
+        class: Axipi\BackendBundle\Controller\ProfileController
+        parent: "axipi_core_controller_abstract"
+        arguments:
+            - "@axipi_backend_manager_user"
+
+    axipi_backend_controller_search:
+        class: Axipi\BackendBundle\Controller\SearchController
+        parent: "axipi_core_controller_abstract"
+        arguments:
+            - "@axipi_search_manager_search"
+
+    #component
     axipi_backend_controller_component:
         class: Axipi\BackendBundle\Controller\ComponentController
         parent: "axipi_core_controller_abstract"
@@ -19,6 +32,7 @@ services:
         parent: "axipi_core_manager_abstract"
         public: false
 
+    #item (page/widget)
     axipi_backend_controller_page:
         class: Axipi\BackendBundle\Controller\PageController
         parent: "axipi_core_controller_abstract"
@@ -27,11 +41,6 @@ services:
             - "@axipi_backend_manager_language"
             - "@axipi_backend_manager_component"
             - "@axipi_search_manager_search"
-
-    axipi_backend_manager_item:
-        class: Axipi\BackendBundle\Manager\ItemManager
-        parent: "axipi_core_manager_abstract"
-        public: false
 
     axipi_backend_controller_widget:
         class: Axipi\BackendBundle\Controller\WidgetController
@@ -43,6 +52,12 @@ services:
             - "@axipi_backend_manager_relation"
             - "@axipi_backend_manager_zone"
 
+    axipi_backend_manager_item:
+        class: Axipi\BackendBundle\Manager\ItemManager
+        parent: "axipi_core_manager_abstract"
+        public: false
+
+    #relation
     axipi_backend_controller_relation:
         class: Axipi\BackendBundle\Controller\RelationController
         parent: "axipi_core_controller_abstract"
@@ -55,6 +70,7 @@ services:
         parent: "axipi_core_manager_abstract"
         public: false
 
+    #zone
     axipi_backend_controller_zone:
         class: Axipi\BackendBundle\Controller\ZoneController
         parent: "axipi_core_controller_abstract"
@@ -66,6 +82,7 @@ services:
         parent: "axipi_core_manager_abstract"
         public: false
 
+    #language
     axipi_backend_controller_language:
         class: Axipi\BackendBundle\Controller\LanguageController
         parent: "axipi_core_controller_abstract"
@@ -77,6 +94,7 @@ services:
         parent: "axipi_core_manager_abstract"
         public: false
 
+    #user
     axipi_backend_controller_user:
         class: Axipi\BackendBundle\Controller\UserController
         parent: "axipi_core_controller_abstract"
@@ -87,9 +105,10 @@ services:
         class: Axipi\BackendBundle\Manager\UserManager
         parent: "axipi_core_manager_abstract"
         public: false
-        arguments:
-            - "@security.encoder_factory"
+        calls:
+            - [ "setPasswordEncoder", [ "@security.encoder_factory" ] ]
 
+    #file
     axipi_backend_controller_file:
         class: Axipi\BackendBundle\Controller\FileController
         parent: "axipi_core_controller_abstract"
@@ -100,15 +119,3 @@ services:
         class: Axipi\BackendBundle\Manager\FileManager
         parent: "axipi_core_manager_abstract"
         public: false
-
-    axipi_backend_controller_profile:
-        class: Axipi\BackendBundle\Controller\ProfileController
-        parent: "axipi_core_controller_abstract"
-        arguments:
-            - "@axipi_backend_manager_user"
-
-    axipi_backend_controller_search:
-        class: Axipi\BackendBundle\Controller\SearchController
-        parent: "axipi_core_controller_abstract"
-        arguments:
-            - "@axipi_search_manager_search"
