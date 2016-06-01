@@ -170,7 +170,11 @@ class PageController extends AbstractController
             if($form->isValid()) {
                 $this->itemManager->remove($parameters->get('page'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode()]);
+                if($parameters->get('page')->getParent()) {
+                    return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $parameters->get('page')->getParent()->getId()]);
+                } else {
+                    return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode()]);
+                }
             }
         }
 
