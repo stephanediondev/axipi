@@ -7,11 +7,11 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Controller\AbstractController;
 
-use Axipi\BackendBundle\Manager\ItemManager;
-use Axipi\BackendBundle\Manager\LanguageManager;
-use Axipi\BackendBundle\Manager\ComponentManager;
-use Axipi\BackendBundle\Manager\RelationManager;
-use Axipi\BackendBundle\Manager\ZoneManager;
+use Axipi\CoreBundle\Manager\ItemManager;
+use Axipi\CoreBundle\Manager\LanguageManager;
+use Axipi\CoreBundle\Manager\ComponentManager;
+use Axipi\CoreBundle\Manager\RelationManager;
+use Axipi\CoreBundle\Manager\ZoneManager;
 use Axipi\BackendBundle\Form\Type\DeleteType;
 use Axipi\BackendBundle\Form\Type\ItemType;
 use Axipi\CoreBundle\Entity\Item;
@@ -54,10 +54,10 @@ class WidgetController extends AbstractController
 
         $parameters = new ParameterBag();
         $parameters->set('languages', $this->languageManager->getList());
-        $parameters->set('language', $this->languageManager->getByCode($language));
+        $parameters->set('language', $this->languageManager->getOne(['code' => $language]));
 
         if($action == 'create' && null !== $id) {
-            $component = $this->componentManager->getById($id);
+            $component = $this->componentManager->getOne(['id' => $id]);
             if($component) {
                 $parameters->set('component', $component);
             } else {
@@ -65,7 +65,7 @@ class WidgetController extends AbstractController
                 return $this->redirectToRoute('axipi_backend_widgets', ['language' => $language]);
             }
         } else if(null !== $id) {
-            $widget = $this->itemManager->getById($id);
+            $widget = $this->itemManager->getOne(['id' => $id]);
             if($widget) {
                 $parameters->set('widget', $widget);
             } else {

@@ -18,11 +18,8 @@ abstract class AbstractManager
         return $this->em;
     }
 
-    public function getRepository($entity = null)
+    public function getRepository($entity)
     {
-        if($entity === null) {
-            return $this->em->getRepository($this->getEntityName());
-        }
         return $this->em->getRepository($entity);
     }
 }

@@ -5,36 +5,35 @@ use Doctrine\ORM\EntityRepository;
 use Axipi\CoreBundle\Entity\Item;
 
 class ItemRepository extends EntityRepository {
-    public function getById($id) {
+    public function getOne($parameters = []) {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
         $query->addSelect('pge', 'cmp');
         $query->from('AxipiCoreBundle:Item', 'pge');
         $query->leftJoin('pge.component', 'cmp');
-        $query->where('pge.id = :id');
 
-        $query->setParameter(':id', $id);
-
-        return $query->getQuery()->getOneOrNullResult();
-    }
-
-    public function getBySlug($slug) {
-        $em = $this->getEntityManager();
-
-        $query = $em->createQueryBuilder();
-        $query->addSelect('pge', 'cmp');
-        $query->from('AxipiCoreBundle:Item', 'pge');
-        $query->leftJoin('pge.component', 'cmp');
-        if($slug == '') {
-            $query->where('pge.slug IS NULL');
-        } else {
-            $query->where('pge.slug = :slug');
-            $query->setParameter(':slug', $slug);
+        if(isset($parameters['id']) == 1) {
+            $query->andWhere('pge.id = :id');
+            $query->setParameter(':id', $parameters['id']);
         }
 
-        $query->andWhere('cmp.category = :category');
-        $query->setParameter(':category', 'page');
+        if(isset($parameters['slug']) == 1) {
+            if($parameters['slug'] == '') {
+                $query->andWhere('pge.slug IS NULL');
+            } else {
+                $query->andWhere('pge.slug = :slug');
+                $query->setParameter(':slug', $parameters['slug']);
+            }
+
+            $query->andWhere('cmp.category = :category');
+            $query->setParameter(':category', 'page');
+        }
+
+        if(isset($parameters['active']) == 1 && $parameters['active'] == true) {
+            $query->andWhere('pge.isActive = :active');
+            $query->setParameter(':active', 1);
+        }
 
         return $query->getQuery()->getOneOrNullResult();
     }
@@ -48,6 +47,10 @@ class ItemRepository extends EntityRepository {
         $query->leftJoin('pge.component', 'cmp');
         $query->leftJoin('pge.language', 'lng');
         $query->leftJoin('pge.zone', 'zon');
+
+        if(isset($parameters['ids']) == 1) {
+            $query->where('pge.id IN ('.implode(',', $parameters['ids']).')');
+        }
 
         if(isset($parameters['category']) == 1) {
             $query->andWhere('cmp.category = :category');
@@ -81,17 +84,6 @@ class ItemRepository extends EntityRepository {
         }
 
         $query->orderBy('pge.slug');
-
-        return $query->getQuery()->getResult();
-    }
-
-    public function getConvertPages($ids) {
-        $em = $this->getEntityManager();
-
-        $query = $em->createQueryBuilder();
-        $query->addSelect('pge');
-        $query->from('AxipiCoreBundle:Item', 'pge');
-        $query->where('pge.id IN ('.implode(',', $ids).')');
 
         return $query->getQuery()->getResult();
     }

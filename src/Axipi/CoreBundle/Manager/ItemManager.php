@@ -1,5 +1,5 @@
 <?php
-namespace Axipi\BackendBundle\Manager;
+namespace Axipi\CoreBundle\Manager;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -8,14 +8,9 @@ use Axipi\CoreBundle\Entity\Item;
 
 class ItemManager extends AbstractManager
 {
-    public function getById($id)
+    public function getOne($parameters = [])
     {
-        return $this->em->getRepository('AxipiCoreBundle:Item')->getById($id);
-    }
-
-    public function getBySlug($slug)
-    {
-        return $this->em->getRepository('AxipiCoreBundle:Item')->getBySlug($slug);
+        return $this->em->getRepository('AxipiCoreBundle:Item')->getOne($parameters);
     }
 
     public function getList($parameters = [])

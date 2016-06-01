@@ -1,5 +1,5 @@
 <?php
-namespace Axipi\BackendBundle\Manager;
+namespace Axipi\CoreBundle\Manager;
 
 //use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;

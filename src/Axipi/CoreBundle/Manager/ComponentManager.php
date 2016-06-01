@@ -1,23 +1,18 @@
 <?php
-namespace Axipi\BackendBundle\Manager;
+namespace Axipi\CoreBundle\Manager;
 
 use Axipi\CoreBundle\Manager\AbstractManager;
 
-class ZoneManager extends AbstractManager
+class ComponentManager extends AbstractManager
 {
-    public function getById($id)
+    public function getOne($paremeters = [])
     {
-        return $this->em->getRepository('AxipiCoreBundle:Zone')->getById($id);
-    }
-
-    public function getByCode($code)
-    {
-        return $this->em->getRepository('AxipiCoreBundle:Zone')->getByCode($code);
+        return $this->em->getRepository('AxipiCoreBundle:Component')->getOne($paremeters);
     }
 
     public function getList($parameters = [])
     {
-        return $this->em->getRepository('AxipiCoreBundle:Zone')->getList($parameters);
+        return $this->em->getRepository('AxipiCoreBundle:Component')->getList($parameters);
     }
 
     public function persist($data)

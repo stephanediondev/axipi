@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Controller\AbstractController;
 
-use Axipi\BackendBundle\Manager\LanguageManager;
+use Axipi\CoreBundle\Manager\LanguageManager;
 use Axipi\BackendBundle\Form\Type\DeleteType;
 use Axipi\BackendBundle\Form\Type\LanguageType;
 use Axipi\CoreBundle\Entity\Language;
@@ -31,7 +31,7 @@ class LanguageController extends AbstractController
         $parameters = new ParameterBag();
 
         if(null !== $id) {
-            $language = $this->languageManager->getById($id);
+            $language = $this->languageManager->getOne(['id' => $id]);
             if($language) {
                 $parameters->set('language', $language);
             } else {

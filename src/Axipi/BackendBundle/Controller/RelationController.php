@@ -7,8 +7,8 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Controller\AbstractController;
 
-use Axipi\BackendBundle\Manager\ItemManager;
-use Axipi\BackendBundle\Manager\RelationManager;
+use Axipi\CoreBundle\Manager\ItemManager;
+use Axipi\CoreBundle\Manager\RelationManager;
 use Axipi\BackendBundle\Form\Type\DeleteType;
 use Axipi\BackendBundle\Form\Type\RelationType;
 use Axipi\CoreBundle\Entity\Item;
@@ -37,7 +37,7 @@ class RelationController extends AbstractController
         $parameters = new ParameterBag();
 
         if($action == 'create' && null !== $id) {
-            $widget = $this->itemManager->getById($id);
+            $widget = $this->itemManager->getOne(['id' => $id]);
             if($widget) {
                 $parameters->set('widget', $widget);
             } else {
@@ -45,7 +45,7 @@ class RelationController extends AbstractController
                 return $this->redirectToRoute('axipi_backend_widgets', []);
             }
         } else if(null !== $id) {
-            $relation = $this->relationManager->getById($id);
+            $relation = $this->relationManager->getOne(['id' => $id]);
             if($relation) {
                 $parameters->set('relation', $relation);
             } else {

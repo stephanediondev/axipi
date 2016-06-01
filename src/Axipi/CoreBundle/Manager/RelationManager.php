@@ -1,13 +1,13 @@
 <?php
-namespace Axipi\BackendBundle\Manager;
+namespace Axipi\CoreBundle\Manager;
 
 use Axipi\CoreBundle\Manager\AbstractManager;
 
 class RelationManager extends AbstractManager
 {
-    public function getById($id)
+    public function getOne($parameters = [])
     {
-        return $this->em->getRepository('AxipiCoreBundle:Relation')->getById($id);
+        return $this->em->getRepository('AxipiCoreBundle:Relation')->getOne($parameters);
     }
 
     public function getList($parameters = [])

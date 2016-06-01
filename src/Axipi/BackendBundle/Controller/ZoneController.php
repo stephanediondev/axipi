@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Controller\AbstractController;
 
-use Axipi\BackendBundle\Manager\ZoneManager;
+use Axipi\CoreBundle\Manager\ZoneManager;
 use Axipi\BackendBundle\Form\Type\DeleteType;
 use Axipi\BackendBundle\Form\Type\ZoneType;
 use Axipi\CoreBundle\Entity\Zone;
@@ -31,7 +31,7 @@ class ZoneController extends AbstractController
         $parameters = new ParameterBag();
 
         if(null !== $id) {
-            $zone = $this->zoneManager->getById($id);
+            $zone = $this->zoneManager->getOne(['id' => $id]);
             if($zone) {
                 $parameters->set('zone', $zone);
             } else {

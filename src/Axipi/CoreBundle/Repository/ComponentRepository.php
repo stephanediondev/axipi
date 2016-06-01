@@ -4,14 +4,17 @@ namespace Axipi\CoreBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 class ComponentRepository extends EntityRepository {
-    public function getById($id) {
+    public function getOne($parameters = []) {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
         $query->addSelect('cmp');
         $query->from('AxipiCoreBundle:Component', 'cmp');
-        $query->where('cmp.id = :id');
-        $query->setParameter(':id', $id);
+
+        if(isset($parameters['id']) == 1) {
+            $query->andWhere('cmp.id = :id');
+            $query->setParameter(':id', $parameters['id']);
+        }
 
         return $query->getQuery()->getOneOrNullResult();
     }

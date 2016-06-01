@@ -4,7 +4,7 @@ namespace Axipi\CoreBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 class RelationRepository extends EntityRepository {
-    public function getById($id) {
+    public function getOne($parameters = []) {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
@@ -12,9 +12,11 @@ class RelationRepository extends EntityRepository {
         $query->from('AxipiCoreBundle:Relation', 'rel');
         $query->leftJoin('rel.widget', 'wdg');
         $query->leftJoin('rel.page', 'pge');
-        $query->where('rel.id = :id');
 
-        $query->setParameter(':id', $id);
+        if(isset($parameters['id']) == 1) {
+            $query->andWhere('rel.id = :id');
+            $query->setParameter(':id', $parameters['id']);
+        }
 
         return $query->getQuery()->getOneOrNullResult();
     }

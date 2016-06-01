@@ -4,14 +4,17 @@ namespace Axipi\CoreBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 class UserRepository extends EntityRepository {
-    public function getById($id) {
+    public function getOne($parameters = []) {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
         $query->addSelect('usr');
         $query->from('AxipiCoreBundle:User', 'usr');
-        $query->where('usr.id = :id');
-        $query->setParameter(':id', $id);
+
+        if(isset($parameters['id']) == 1) {
+            $query->andWhere('usr.id = :id');
+            $query->setParameter(':id', $parameters['id']);
+        }
 
         return $query->getQuery()->getOneOrNullResult();
     }

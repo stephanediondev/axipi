@@ -1,21 +1,10 @@
 services:
-    axipi_core_widget_abstract:
-        class: Axipi\CoreBundle\Widget\AbstractWidget
-        abstract: true
-        calls:
-            - [ "setContainer", [ "@service_container" ] ]
-
+    #abstract
     axipi_core_controller_abstract:
         class: Axipi\CoreBundle\Controller\AbstractController
         abstract: true
         calls:
             - [ "setContainer", [ "@service_container" ] ]
-
-    axipi_core_controller_default:
-        class: Axipi\CoreBundle\Controller\DefaultController
-        parent: "axipi_core_controller_abstract"
-        arguments:
-            - "@axipi_core_manager_core"
 
     axipi_core_manager_abstract:
         class: Axipi\CoreBundle\Manager\AbstractManager
@@ -23,14 +12,66 @@ services:
         calls:
             - [ "setEntityManager", [ "@doctrine.orm.entity_manager" ] ]
 
-    axipi_core_manager_core:
-        class: Axipi\CoreBundle\Manager\CoreManager
-        parent: "axipi_core_manager_abstract"
+    axipi_core_widget_abstract:
+        class: Axipi\CoreBundle\Widget\AbstractWidget
+        abstract: true
+        calls:
+            - [ "setContainer", [ "@service_container" ] ]
 
-    axipi_core_twig_extension_core:
-        class: Axipi\CoreBundle\Twig\Extension\CoreExtension
+    #manager
+    axipi_core_manager_component:
+        class: Axipi\CoreBundle\Manager\ComponentManager
+        parent: "axipi_core_manager_abstract"
+        public: false
+
+    axipi_core_manager_file:
+        class: Axipi\CoreBundle\Manager\FileManager
+        parent: "axipi_core_manager_abstract"
+        public: false
+
+    axipi_core_manager_item:
+        class: Axipi\CoreBundle\Manager\ItemManager
+        parent: "axipi_core_manager_abstract"
+        public: false
+
+    axipi_core_manager_language:
+        class: Axipi\CoreBundle\Manager\LanguageManager
+        parent: "axipi_core_manager_abstract"
+        public: false
+
+    axipi_core_manager_relation:
+        class: Axipi\CoreBundle\Manager\RelationManager
+        parent: "axipi_core_manager_abstract"
+        public: false
+
+    axipi_core_manager_user:
+        class: Axipi\CoreBundle\Manager\UserManager
+        parent: "axipi_core_manager_abstract"
+        public: false
+        calls:
+            - [ "setPasswordEncoder", [ "@security.encoder_factory" ] ]
+
+    axipi_core_manager_zone:
+        class: Axipi\CoreBundle\Manager\ZoneManager
+        parent: "axipi_core_manager_abstract"
+        public: false
+
+    #default
+    axipi_core_twig_extension_default:
+        class: Axipi\CoreBundle\Twig\Extension\DefaultExtension
         calls:
           - [ "setContainer", [ "@service_container" ] ]
           - [ "setEntityManager", [ "@doctrine.orm.entity_manager"] ]
         tags:
             -  { name: twig.extension }
+
+    axipi_core_controller_default:
+        class: Axipi\CoreBundle\Controller\DefaultController
+        parent: "axipi_core_controller_abstract"
+        arguments:
+            - "@axipi_core_manager_default"
+            - "@axipi_core_manager_item"
+
+    axipi_core_manager_default:
+        class: Axipi\CoreBundle\Manager\DefaultManager
+        parent: "axipi_core_manager_abstract"

@@ -4,26 +4,22 @@ namespace Axipi\CoreBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 class LanguageRepository extends EntityRepository {
-    public function getById($id) {
+    public function getOne($parameters) {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
         $query->addSelect('lng');
         $query->from('AxipiCoreBundle:Language', 'lng');
-        $query->where('lng.id = :id');
-        $query->setParameter(':id', $id);
 
-        return $query->getQuery()->getOneOrNullResult();
-    }
+        if(isset($parameters['id']) == 1) {
+            $query->andWhere('lng.id = :id');
+            $query->setParameter(':id', $parameters['id']);
+        }
 
-    public function getByCode($code) {
-        $em = $this->getEntityManager();
-
-        $query = $em->createQueryBuilder();
-        $query->addSelect('lng');
-        $query->from('AxipiCoreBundle:Language', 'lng');
-        $query->where('lng.code = :code');
-        $query->setParameter(':code', $code);
+        if(isset($parameters['code']) == 1) {
+            $query->andWhere('lng.code = :id');
+            $query->setParameter(':id', $parameters['code']);
+        }
 
         return $query->getQuery()->getOneOrNullResult();
     }

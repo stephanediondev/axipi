@@ -7,9 +7,9 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Controller\AbstractController;
 
-use Axipi\BackendBundle\Manager\ItemManager;
-use Axipi\BackendBundle\Manager\LanguageManager;
-use Axipi\BackendBundle\Manager\ComponentManager;
+use Axipi\CoreBundle\Manager\ItemManager;
+use Axipi\CoreBundle\Manager\LanguageManager;
+use Axipi\CoreBundle\Manager\ComponentManager;
 use Axipi\SearchBundle\Manager\SearchManager;
 use Axipi\BackendBundle\Form\Type\DeleteType;
 use Axipi\BackendBundle\Form\Type\ItemType;
@@ -50,10 +50,10 @@ class PageController extends AbstractController
         $parameters = new ParameterBag();
         $parameters->set('mode', $mode);
         $parameters->set('languages', $this->languageManager->getList());
-        $parameters->set('language', $this->languageManager->getByCode($language));
+        $parameters->set('language', $this->languageManager->getOne(['code' => $language]));
 
         if($action == 'create' && null !== $id) {
-            $component = $this->componentManager->getById($id);
+            $component = $this->componentManager->getOne(['id' => $id]);
             if($component) {
                 $parameters->set('component', $component);
             } else {
@@ -61,7 +61,7 @@ class PageController extends AbstractController
                 return $this->redirectToRoute('axipi_backend_pages', ['mode' => $mode, 'language' => $language]);
             }
         } else if(null !== $id) {
-            $page = $this->itemManager->getById($id);
+            $page = $this->itemManager->getOne(['id' => $id]);
             if($page) {
                 $parameters->set('page', $page);
             } else {
@@ -99,7 +99,7 @@ class PageController extends AbstractController
     {
         $page = new Item();
         if($request->query->get('parent')) {
-            $page_parent = $this->itemManager->getById($request->query->get('parent'));
+            $page_parent = $this->itemManager->getOne(['id' => $request->query->get('parent')]);
             if($page_parent) {
                 $parameters->set('page_parent', $page_parent);
                 $page->setParent($page_parent);

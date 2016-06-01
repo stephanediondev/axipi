@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Controller\AbstractController;
 
-use Axipi\BackendBundle\Manager\UserManager;
+use Axipi\CoreBundle\Manager\UserManager;
 use Axipi\BackendBundle\Form\Type\DeleteType;
 use Axipi\BackendBundle\Form\Type\UserType;
 use Axipi\CoreBundle\Entity\User;
@@ -31,7 +31,7 @@ class UserController extends AbstractController
         $parameters = new ParameterBag();
 
         if(null !== $id) {
-            $user = $this->userManager->getById($id);
+            $user = $this->userManager->getOne(['id' => $id]);
             if($user) {
                 $parameters->set('user', $user);
             } else {

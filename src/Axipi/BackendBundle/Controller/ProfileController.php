@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Controller\AbstractController;
 
-use Axipi\BackendBundle\Manager\UserManager;
+use Axipi\CoreBundle\Manager\UserManager;
 use Axipi\BackendBundle\Form\Type\DeleteType;
 use Axipi\BackendBundle\Form\Type\ProfileType;
 use Axipi\CoreBundle\Entity\User;

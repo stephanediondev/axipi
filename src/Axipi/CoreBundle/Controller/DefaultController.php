@@ -6,7 +6,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use Axipi\CoreBundle\Controller\AbstractController;
-use Axipi\CoreBundle\Manager\CoreManager;
+use Axipi\CoreBundle\Manager\DefaultManager;
+use Axipi\CoreBundle\Manager\ItemManager;
 
 use Axipi\CoreBundle\Entity\Language;
 use Axipi\CoreBundle\Entity\Item;
@@ -14,12 +15,16 @@ use Axipi\CoreBundle\Entity\Item;
 class DefaultController extends AbstractController
 {
 
-    protected $coreManager;
+    protected $defaultManager;
+
+    protected $itemManager;
 
     public function __construct(
-        CoreManager $coreManager
+        DefaultManager $defaultManager,
+        ItemManager $itemManager
     ) {
-        $this->coreManager = $coreManager;
+        $this->defaultManager = $defaultManager;
+        $this->itemManager = $itemManager;
     }
 
     public function indexAction(Request $request, $slug, $language = null)
@@ -27,12 +32,12 @@ class DefaultController extends AbstractController
         if(substr($slug, -1) == '/') {
             $slug = substr($slug, 0, -1);
         }
-        $page = $this->coreManager->getBySlug($slug);
+        $page = $this->itemManager->getOne(['slug' => $slug, 'active' => true]);
         if(!$page) {
-            $page = $this->coreManager->getBySlug('error404');
+            $page = $this->itemManager->getOne(['slug' => 'error404']);
         }
 
-        $this->coreManager->setPage($page);
+        $this->defaultManager->setPage($page);
 
         if($this->has($page->getComponent()->getService())) {
             $response = $this->forward($page->getComponent()->getService().':getPage', ['request' => $request, 'page' => $page]);

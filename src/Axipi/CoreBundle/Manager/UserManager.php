@@ -1,5 +1,5 @@
 <?php
-namespace Axipi\BackendBundle\Manager;
+namespace Axipi\CoreBundle\Manager;
 
 use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
@@ -15,9 +15,9 @@ class UserManager extends AbstractManager
         $this->passwordEncoder = $passwordEncoder;
     }
 
-    public function getById($id)
+    public function getOne($parameters = [])
     {
-        return $this->em->getRepository('AxipiCoreBundle:User')->getById($id);
+        return $this->em->getRepository('AxipiCoreBundle:User')->getOne($parameters);
     }
 
     public function getList($parameters = [])

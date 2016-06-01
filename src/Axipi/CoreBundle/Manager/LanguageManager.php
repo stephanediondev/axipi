@@ -1,18 +1,13 @@
 <?php
-namespace Axipi\BackendBundle\Manager;
+namespace Axipi\CoreBundle\Manager;
 
 use Axipi\CoreBundle\Manager\AbstractManager;
 
 class LanguageManager extends AbstractManager
 {
-    public function getById($id)
+    public function getOne($parameters = [])
     {
-        return $this->em->getRepository('AxipiCoreBundle:Language')->getById($id);
-    }
-
-    public function getByCode($code)
-    {
-        return $this->em->getRepository('AxipiCoreBundle:Language')->getByCode($code);
+        return $this->em->getRepository('AxipiCoreBundle:Language')->getOne($parameters);
     }
 
     public function getList($parameters = [])

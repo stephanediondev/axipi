@@ -4,26 +4,22 @@ namespace Axipi\CoreBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 class ZoneRepository extends EntityRepository {
-    public function getById($id) {
+    public function getOne($parameters = []) {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
         $query->addSelect('zon');
         $query->from('AxipiCoreBundle:Zone', 'zon');
-        $query->where('zon.id = :id');
-        $query->setParameter(':id', $id);
 
-        return $query->getQuery()->getOneOrNullResult();
-    }
+        if(isset($parameters['id']) == 1) {
+            $query->andWhere('zon.id = :id');
+            $query->setParameter(':id', $parameters['id']);
+        }
 
-    public function getByCode($code) {
-        $em = $this->getEntityManager();
-
-        $query = $em->createQueryBuilder();
-        $query->addSelect('zon');
-        $query->from('AxipiCoreBundle:Zone', 'zon');
-        $query->where('zon.code = :code');
-        $query->setParameter(':code', $code);
+        if(isset($parameters['code']) == 1) {
+            $query->andWhere('zon.code = :code');
+            $query->setParameter(':code', $parameters['code']);
+        }
 
         return $query->getQuery()->getOneOrNullResult();
     }

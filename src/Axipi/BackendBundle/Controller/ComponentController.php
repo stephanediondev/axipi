@@ -7,8 +7,8 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Controller\AbstractController;
 
-use Axipi\BackendBundle\Manager\ComponentManager;
-use Axipi\BackendBundle\Manager\ZoneManager;
+use Axipi\CoreBundle\Manager\ComponentManager;
+use Axipi\CoreBundle\Manager\ZoneManager;
 use Axipi\BackendBundle\Form\Type\DeleteType;
 use Axipi\BackendBundle\Form\Type\ComponentType;
 use Axipi\CoreBundle\Entity\Component;
@@ -38,7 +38,7 @@ class ComponentController extends AbstractController
         if($action == 'create' && null !== $id) {
             $parameters->set('category', $id);
         } else if(null !== $id) {
-            $component = $this->componentManager->getById($id);
+            $component = $this->componentManager->getOne(['id' => $id]);
             if($component) {
                 $parameters->set('component', $component);
             } else {
