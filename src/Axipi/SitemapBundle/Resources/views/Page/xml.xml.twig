@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    {% for result in results %}
     <url>
-        <loc>{{ url('axipi_core_slug', {slug: 'home'}) }}</loc>
+        <loc>{{ url('axipi_core_slug', {slug: result.slug}) }}</loc>
     </url>
+    {% endfor %}
 </urlset>

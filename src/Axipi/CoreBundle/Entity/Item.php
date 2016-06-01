@@ -109,6 +109,16 @@ class Item
     private $zone;
 
     /**
+     * @var boolean
+     */
+    private $excludeSearch = false;
+
+    /**
+     * @var boolean
+     */
+    private $excludeSitemap = false;
+
+    /**
      * Get id
      *
      * @return integer
@@ -606,5 +616,53 @@ class Item
     public function getZone()
     {
         return $this->zone;
+    }
+
+    /**
+     * Set excludeSearch
+     *
+     * @param boolean $excludeSearch
+     *
+     * @return Component
+     */
+    public function setExcludeSearch($excludeSearch)
+    {
+        $this->excludeSearch = $excludeSearch;
+
+        return $this;
+    }
+
+    /**
+     * Get excludeSearch
+     *
+     * @return boolean
+     */
+    public function getExcludeSearch()
+    {
+        return $this->excludeSearch;
+    }
+
+    /**
+     * Set excludeSitemap
+     *
+     * @param boolean $excludeSitemap
+     *
+     * @return Component
+     */
+    public function setExcludeSitemap($excludeSitemap)
+    {
+        $this->excludeSitemap = $excludeSitemap;
+
+        return $this;
+    }
+
+    /**
+     * Get excludeSitemap
+     *
+     * @return boolean
+     */
+    public function getExcludeSitemap()
+    {
+        return $this->excludeSitemap;
     }
 }

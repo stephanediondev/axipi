@@ -12,7 +12,7 @@
     </div>
 
     <div class="row">
-        {%for media in page.children %}
+        {% for media in page.children %}
             <div class="col-lg-3">
                 <a href="{{ path('axipi_core_slug', {slug: media.slug}) }}"><img src="{{ asset('uploads/' ~ media.attribute('image')) }}" class="img-responsive"></a>
             </div>

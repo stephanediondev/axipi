@@ -1,12 +1,9 @@
 <!-- Content / Menu -->
 <div id="widget-{{ widget.code }}" class="col-lg-10">
     <ul class="nav nav-pills">
-        <li{% if page.slug == '' %} class="active"{% endif %}><a href="{{ path('axipi_core_slug', {slug: ''}) }}">Home</a></li>
-        <li{% if page.slug == 'album' %} class="active"{% endif %}><a href="{{ path('axipi_core_slug', {slug: 'album'}) }}">Album</a></li>
-        <li{% if page.slug == 'map' %} class="active"{% endif %}><a href="{{ path('axipi_core_slug', {slug: 'map'}) }}">Map</a></li>
-        <li{% if page.slug == 'blog' %} class="active"{% endif %}><a href="{{ path('axipi_core_slug', {slug: 'blog'}) }}">Blog</a></li>
-        <li{% if page.slug == 'search' %} class="active"{% endif %}><a href="{{ path('axipi_core_slug', {slug: 'search'}) }}">Search</a></li>
-        <li><a href="#">TODO</a></li>
+        {% for relation in relations %}
+            <li{% if page.slug == relation.page.slug %} class="active"{% endif %}><a href="{{ path('axipi_core_slug', {slug: relation.page.slug}) }}">{{ relation.title|default(relation.page.title) }}</a></li>
+        {% endfor %}
     </ul>
 </div>
 <!-- Content / Menu (end) -->

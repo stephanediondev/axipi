@@ -28,8 +28,12 @@ class SearchManager extends AbstractManager
 
     public function indexPage($data)
     {
-        if($data->getIsActive()) {
+        if($data->getExcludeSearch() || $data->getComponent()->getExcludeSearch()) {
+            $action = 'DELETE';
+
+        } else if($data->getIsActive()) {
             $action = 'PUT';
+
         } else {
             $action = 'DELETE';
         }
@@ -80,11 +84,9 @@ class SearchManager extends AbstractManager
 
     public function indexAll()
     {
-        $pages = $this->em->getRepository('AxipiCoreBundle:Item')->findAll();
+        $pages = $this->em->getRepository('AxipiCoreBundle:Item')->getList(['category' => 'page']);
         foreach($pages as $page) {
-            if($page->getComponent()->getCategory() == 'page') {
-                $this->indexPage($page);
-            }
+            $this->indexPage($page);
         }
     }
 }

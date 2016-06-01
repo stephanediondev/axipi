@@ -104,6 +104,18 @@ Axipi\CoreBundle\Entity\Item:
             options:
                 fixed: false
             column: description_social
+        excludeSearch:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: exclude_search
+        excludeSitemap:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: exclude_sitemap
         isActive:
             type: boolean
             nullable: false

@@ -35,6 +35,11 @@ class RelationRepository extends EntityRepository {
             $query->setParameter(':widget', $parameters['widget']);
         }
 
+        if(isset($parameters['active']) == 1 && $parameters['active'] == true) {
+            $query->andWhere('pge.isActive = :active');
+            $query->setParameter(':active', 1);
+        }
+
         $query->orderBy('rel.ordering');
 
         return $query->getQuery()->getResult();

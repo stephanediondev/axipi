@@ -36,8 +36,8 @@
                     </div>
                     <div class="col-lg-4">
                         {{ macro.read_field('component.isUnique'|trans({}, 'axipi_backend'), component.isUnique) }}
-                        {{ macro.read_field('component.isSitemap'|trans({}, 'axipi_backend'), component.isSitemap) }}
-                        {{ macro.read_field('component.isSearch'|trans({}, 'axipi_backend'), component.isSearch) }}
+                        {{ macro.read_field('component.excludeSitemap'|trans({}, 'axipi_backend'), component.excludeSitemap) }}
+                        {{ macro.read_field('component.excludeSearch'|trans({}, 'axipi_backend'), component.excludeSearch) }}
                         {{ macro.read_field('component.isActive'|trans({}, 'axipi_backend'), component.isActive) }}
                         {% set attributes = component.attributesSchema|jsonDecode %}
                         {% for k, v in attributes %}

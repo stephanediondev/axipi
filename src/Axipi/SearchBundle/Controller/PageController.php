@@ -19,7 +19,6 @@ class PageController extends AbstractController
 
     public function getPage(Request $request, $page)
     {
-
         $parameters = new ParameterBag();
         $parameters->set('request', $request);
         $parameters->set('page', $page);
@@ -116,6 +115,7 @@ class PageController extends AbstractController
         } else {
             $template = $page->getComponent()->getTemplate();
         }
-        return $this->render($template, $parameters->all());
+        $response = $this->render($template, $parameters->all());
+        return $response;
     }
 }

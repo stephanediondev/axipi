@@ -52,6 +52,18 @@ class ItemRepository extends EntityRepository {
             $query->where('pge.id IN ('.implode(',', $parameters['ids']).')');
         }
 
+        if(isset($parameters['exclude_search']) == 1 && $parameters['exclude_search'] == true) {
+            $query->andWhere('pge.excludeSearch = :exclude_search');
+            $query->andWhere('cmp.excludeSearch = :exclude_search');
+            $query->setParameter(':exclude_search', false);
+        }
+
+        if(isset($parameters['exclude_sitemap']) == 1 && $parameters['exclude_sitemap'] == true) {
+            $query->andWhere('pge.excludeSitemap = :exclude_sitemap');
+            $query->andWhere('cmp.excludeSitemap = :exclude_sitemap');
+            $query->setParameter(':exclude_sitemap', false);
+        }
+
         if(isset($parameters['category']) == 1) {
             $query->andWhere('cmp.category = :category');
             $query->setParameter(':category', $parameters['category']);
@@ -65,6 +77,11 @@ class ItemRepository extends EntityRepository {
         if(isset($parameters['zone']) == 1) {
             $query->andWhere('zon.code = :zone');
             $query->setParameter(':zone', $parameters['zone']);
+        }
+
+        if(isset($parameters['parent']) == 1) {
+            $query->andWhere('pge.parent = :parent');
+            $query->setParameter(':parent', $parameters['parent']);
         }
 
         if(isset($parameters['parent_null']) == 1 && $parameters['parent_null'] == true) {

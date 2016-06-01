@@ -55,12 +55,12 @@ class Component
     /**
      * @var boolean
      */
-    private $isSearch = false;
+    private $excludeSearch = false;
 
     /**
      * @var boolean
      */
-    private $isSitemap = false;
+    private $excludeSitemap = false;
 
     /**
      * @var boolean
@@ -275,51 +275,51 @@ class Component
     }
 
     /**
-     * Set isSearch
+     * Set excludeSearch
      *
-     * @param boolean $isSearch
+     * @param boolean $excludeSearch
      *
      * @return Component
      */
-    public function setIsSearch($isSearch)
+    public function setExcludeSearch($excludeSearch)
     {
-        $this->isSearch = $isSearch;
+        $this->excludeSearch = $excludeSearch;
 
         return $this;
     }
 
     /**
-     * Get isSearch
+     * Get excludeSearch
      *
      * @return boolean
      */
-    public function getIsSearch()
+    public function getExcludeSearch()
     {
-        return $this->isSearch;
+        return $this->excludeSearch;
     }
 
     /**
-     * Set isSitemap
+     * Set excludeSitemap
      *
-     * @param boolean $isSitemap
+     * @param boolean $excludeSitemap
      *
      * @return Component
      */
-    public function setIsSitemap($isSitemap)
+    public function setExcludeSitemap($excludeSitemap)
     {
-        $this->isSitemap = $isSitemap;
+        $this->excludeSitemap = $excludeSitemap;
 
         return $this;
     }
 
     /**
-     * Get isSitemap
+     * Get excludeSitemap
      *
      * @return boolean
      */
-    public function getIsSitemap()
+    public function getExcludeSitemap()
     {
-        return $this->isSitemap;
+        return $this->excludeSitemap;
     }
 
     /**

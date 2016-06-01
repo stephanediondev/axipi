@@ -99,6 +99,10 @@ class ItemType extends AbstractType
                     'required' => false,
                 ]
             );
+
+            $builder->add('excludeSearch');
+
+            $builder->add('excludeSitemap');
         }
 
         if($options['item']->getComponent()->getCategory() == 'widget') {

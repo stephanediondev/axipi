@@ -59,18 +59,18 @@ Axipi\CoreBundle\Entity\Component:
             options:
                 default: '0'
             column: is_unique
-        isSearch:
+        excludeSearch:
             type: boolean
             nullable: false
             options:
                 default: '0'
-            column: is_search
-        isSitemap:
+            column: exclude_search
+        excludeSitemap:
             type: boolean
             nullable: false
             options:
                 default: '0'
-            column: is_sitemap
+            column: exclude_sitemap
         isActive:
             type: boolean
             nullable: false
