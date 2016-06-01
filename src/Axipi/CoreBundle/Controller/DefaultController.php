@@ -9,9 +9,6 @@ use Axipi\CoreBundle\Controller\AbstractController;
 use Axipi\CoreBundle\Manager\DefaultManager;
 use Axipi\CoreBundle\Manager\ItemManager;
 
-use Axipi\CoreBundle\Entity\Language;
-use Axipi\CoreBundle\Entity\Item;
-
 class DefaultController extends AbstractController
 {
 
