@@ -187,7 +187,7 @@ class PageController extends AbstractController
     {
         $data = [];
 
-        $component = $this->componentManager->getOne(['id' => 6]);
+        $component = $this->componentManager->getOne(['id' => $request->request->get('component')]);
 
         foreach($request->files->get('files', []) as $key => $uploadedFile) {
             $title = uniqid('', true);

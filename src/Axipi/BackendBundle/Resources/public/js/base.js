@@ -89,7 +89,8 @@ $(document).ready(function() {
             },
             submit: function(e, data) {
                 data.formData = {
-                    parent: $ajaxUploader.data('parent')
+                    parent: $ajaxUploader.data('parent'),
+                    component: $ajaxUploader.data('component')
                 };
             },
             done: function(e, data) {

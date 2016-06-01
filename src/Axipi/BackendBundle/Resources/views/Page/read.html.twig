@@ -105,7 +105,7 @@
 
             {% embed 'AxipiBackendBundle::block_title.html.twig' %}
                 {% block block_title %}
-                    <span><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'drag_drop'|trans({}, 'axipi_backend') }}</span>
+                    <span><i class="fa fa-download"></i>{{ 'drag_drop'|trans({}, 'axipi_backend') }} <small>Drop file(s) over icon</small></span>
                 {% endblock %}
                 {% block block_title_actions %}
                 {% endblock %}
@@ -114,9 +114,9 @@
             <div class="block">
                 <div class="row">
                     {% if page.component.id == 5 %}
-                        <div class="col-lg-2 col-sm-3 col-xs-6 text-center" data-url="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'upload'}) }}" id="ajax-uploader" data-parent="{{ page.id }}">
+                        <div class="col-lg-2 col-sm-3 col-xs-6 text-center" data-url="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'upload'}) }}" id="ajax-uploader" data-parent="{{ page.id }}" data-component="6">
                             <a class="thumbnail fileinput-button attachment-upload" href="#">
-                                <i class="fa fa-4x fa-upload"></i><br>Gallery / Media
+                                <i class="fa fa-4x fa-picture-o"></i><br>Gallery / Media
                             </a>
                         </div>
                     {% endif %}
