@@ -103,21 +103,25 @@
                 </div>
             </div>
 
-            {% if page.component.id == 5 %}
-                <form action="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'upload'}) }}" id="ajax-uploader" enctype="multipart/form-data" data-parent="{{ page.id }}">
-                    <ul class="fileupload-buttonbar unstyled actions">
-                    <li>
-                        <div class="fileinput-button attachment-upload">
-                            <span class="btn-upload">&nbsp;</span>Drop files to attach, or browse.
-                            <input name="files[]" multiple="" type="file">
+            {% embed 'AxipiBackendBundle::block_title.html.twig' %}
+                {% block block_title %}
+                    <span><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'drag_drop'|trans({}, 'axipi_backend') }}</span>
+                {% endblock %}
+                {% block block_title_actions %}
+                {% endblock %}
+            {% endembed %}
+
+            <div class="block">
+                <div class="row">
+                    {% if page.component.id == 5 %}
+                        <div class="col-lg-2 col-sm-3 col-xs-6 text-center" data-url="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'upload'}) }}" id="ajax-uploader" data-parent="{{ page.id }}">
+                            <a class="thumbnail fileinput-button attachment-upload" href="#">
+                                <i class="fa fa-4x fa-upload"></i><br>Gallery / Media
+                            </a>
                         </div>
-                    </li>
-                    </ul>
-                    <span class="fileupload-process"></span>
-                    <div class="uploads">
-                    </div>
-                </form>
-            {% endif %}
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 </div>

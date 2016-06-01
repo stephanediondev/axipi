@@ -80,7 +80,7 @@ $(document).ready(function() {
 
     if($ajaxUploader) {
         $ajaxUploader.fileupload({
-            url: $ajaxUploader.attr('action'),
+            url: $ajaxUploader.data('url'),
             singleFileUploads: true,
             autoUpload: true,
             maxFileSize: 20000000,
