@@ -3,6 +3,7 @@ namespace Axipi\BackendBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Controller\AbstractController;
@@ -81,6 +82,8 @@ class PageController extends AbstractController
                 return $this->updateAction($request, $parameters, $id);
             case 'delete':
                 return $this->deleteAction($request, $parameters, $id);
+            case 'upload':
+                return $this->uploadAction($request, $parameters);
         }
 
         $this->addFlash('danger', 'not found');
@@ -174,5 +177,43 @@ class PageController extends AbstractController
         $parameters->set('form', $form->createView());
 
         return $this->render('AxipiBackendBundle:Page:delete.html.twig', $parameters->all());
+    }
+
+    public function uploadAction(Request $request, ParameterBag $parameters)
+    {
+        $data = [];
+
+        $component = $this->componentManager->getOne(['id' => 6]);
+
+        foreach($request->files->get('files', []) as $key => $uploadedFile) {
+            $title = uniqid('', true);
+
+            $page = new Item();
+            if($request->request->get('parent')) {
+                $page_parent = $this->itemManager->getOne(['id' => $request->request->get('parent')]);
+                if($page_parent) {
+                    $page->setParent($page_parent);
+                    $page->setSlug($page_parent->getSlug().'/'.$title);
+                }
+            }
+
+            $page->setTitle($title);
+            $page->setAttributesChange(['image' => $uploadedFile]);
+
+            $page->setLanguage($parameters->get('language'));
+            $page->setComponent($component);
+            $page->setIsActive(true);
+
+            $id = $this->itemManager->persist($page);
+
+            $data[] = [
+                'id' => $id,
+                'title' => $title,
+                'icon' => $component->geticon(),
+                'href' => $this->generateUrl('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]),
+            ];
+        }
+
+        return new JsonResponse($data);
     }
 }

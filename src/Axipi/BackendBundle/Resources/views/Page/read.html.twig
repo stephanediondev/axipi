@@ -91,16 +91,32 @@
                 </div>
             </div>
 
-            {% if page.children|length %}
-                <div class="block">
-                    <div class="row">
+            <div class="block">
+                <div class="row" id="ajax-upload-result">
+                    {% if page.children|length %}
                         {% for object in page.children if object.component.category == 'page' %}
                             <div class="col-lg-2 col-sm-3 col-xs-6 text-center">
                                 <a class="thumbnail" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
                             </div>
                         {% endfor %}
-                    </div>
+                    {% endif %}
                 </div>
+            </div>
+
+            {% if page.component.id == 5 %}
+                <form action="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'upload'}) }}" id="ajax-uploader" enctype="multipart/form-data" data-parent="{{ page.id }}">
+                    <ul class="fileupload-buttonbar unstyled actions">
+                    <li>
+                        <div class="fileinput-button attachment-upload">
+                            <span class="btn-upload">&nbsp;</span>Drop files to attach, or browse.
+                            <input name="files[]" multiple="" type="file">
+                        </div>
+                    </li>
+                    </ul>
+                    <span class="fileupload-process"></span>
+                    <div class="uploads">
+                    </div>
+                </form>
             {% endif %}
         </div>
     </div>

@@ -3,8 +3,10 @@
     "private": true,
     "dependencies": {
         "jquery": "*",
+        "jquery-ui": "*",
         "bootstrap": "*",
         "FortAwesome/Font-Awesome": "*",
+        "blueimp-file-upload-node": "*",
         "tinymce-dist": "*"
     }
 }

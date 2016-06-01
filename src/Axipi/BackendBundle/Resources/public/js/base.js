@@ -75,4 +75,31 @@ $(document).ready(function() {
         event.preventDefault();
         window.parent.update_file($(this).data('field_name'), $(this).attr('href'));
     });
+
+    var $ajaxUploader = $('#ajax-uploader');
+
+    if($ajaxUploader) {
+        $ajaxUploader.fileupload({
+            url: $ajaxUploader.attr('action'),
+            singleFileUploads: true,
+            autoUpload: true,
+            maxFileSize: 20000000,
+            getFilesFromResponse: function(data) {
+                return data.result;
+            },
+            submit: function(e, data) {
+                data.formData = {
+                    parent: $ajaxUploader.data('parent')
+                };
+            },
+            done: function(e, data) {
+                for(var i in data.result) {
+                    content = '<div class="col-lg-2 col-sm-3 col-xs-6 text-center">';
+                    content += '<a class="thumbnail" href="' + data.result[i]['href'] + '"><i class="fa fa-4x fa-' + data.result[i]['icon'] + '"></i><br>' + data.result[i]['title'] + '</a>';
+                    content += '</div>';
+                    $('#ajax-upload-result').append(content);
+                }
+            }
+        });
+    }
 });
