@@ -82,7 +82,19 @@ class ItemType extends AbstractType
                 ]
             );
 
-            $builder->add('metaRobots', TextType::class,
+            $builder->add('style', TextareaType::class,
+                [
+                    'required' => false,
+                ]
+            );
+
+            $builder->add('meta', TextareaType::class,
+                [
+                    'required' => false,
+                ]
+            );
+
+            $builder->add('script', TextareaType::class,
                 [
                     'required' => false,
                 ]

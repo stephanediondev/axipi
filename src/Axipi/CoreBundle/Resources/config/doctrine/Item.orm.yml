@@ -72,13 +72,24 @@ Axipi\CoreBundle\Entity\Item:
             options:
                 fixed: false
             column: description_seo
-        metaRobots:
-            type: string
+        style:
+            type: text
             nullable: true
-            length: 255
+            length: 65535
             options:
                 fixed: false
-            column: meta_robots
+        meta:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        script:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
         titleSocial:
             type: string
             nullable: true
@@ -93,13 +104,6 @@ Axipi\CoreBundle\Entity\Item:
             options:
                 fixed: false
             column: description_social
-        metaRobots:
-            type: string
-            nullable: true
-            length: 255
-            options:
-                fixed: false
-            column: meta_robots
         isActive:
             type: boolean
             nullable: false

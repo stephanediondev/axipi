@@ -39,7 +39,10 @@
                         {{ macro.read_field('component.isSitemap'|trans({}, 'axipi_backend'), component.isSitemap) }}
                         {{ macro.read_field('component.isSearch'|trans({}, 'axipi_backend'), component.isSearch) }}
                         {{ macro.read_field('component.isActive'|trans({}, 'axipi_backend'), component.isActive) }}
-                        {{ macro.read_field('component.attributesSchema'|trans({}, 'axipi_backend'), component.attributesSchema) }}
+                        {% set attributes = component.attributesSchema|jsonDecode %}
+                        {% for k, v in attributes %}
+                            {{ macro.read_field(k, v.type) }}
+                        {% endfor %}
                     </div>
                 </div>
             </div>

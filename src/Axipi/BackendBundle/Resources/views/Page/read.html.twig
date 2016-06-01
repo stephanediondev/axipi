@@ -58,11 +58,13 @@
                     <div class="col-lg-4">
                         {{ macro.read_field('item.titleSeo'|trans({}, 'axipi_backend'), page.titleSeo) }}
                         {{ macro.read_field('item.descriptionSeo'|trans({}, 'axipi_backend'), page.descriptionSeo) }}
-                        {{ macro.read_field('item.metaRobots'|trans({}, 'axipi_backend'), page.metaRobots) }}
-                    </div>
-                    <div class="col-lg-4">
                         {{ macro.read_field('item.titleSocial'|trans({}, 'axipi_backend'), page.titleSocial) }}
                         {{ macro.read_field('item.descriptionSocial'|trans({}, 'axipi_backend'), page.descriptionSocial) }}
+                    </div>
+                    <div class="col-lg-4">
+                        {%if page.meta %}{{ macro.read_field('item.meta'|trans({}, 'axipi_backend'), true) }}{% endif %}
+                        {%if page.style %}{{ macro.read_field('item.style'|trans({}, 'axipi_backend'), true) }}{% endif %}
+                        {%if page.script %}{{ macro.read_field('item.script'|trans({}, 'axipi_backend'), true) }}{% endif %}
                         {{ macro.read_field('item.isActive'|trans({}, 'axipi_backend'), page.isActive) }}
                     </div>
                 </div>

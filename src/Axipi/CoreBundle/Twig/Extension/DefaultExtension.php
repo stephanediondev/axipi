@@ -39,6 +39,7 @@ class DefaultExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
+            new \Twig_SimpleFilter('jsonDecode', [$this, 'jsonDecode']),
         ];
     }
 
@@ -94,5 +95,10 @@ class DefaultExtension extends \Twig_Extension
         }
 
         return $text;
+    }
+
+    public function jsonDecode($data)
+    {
+        return json_decode($data, true);
     }
 }

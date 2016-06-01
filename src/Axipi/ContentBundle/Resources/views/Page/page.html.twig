@@ -10,10 +10,17 @@
     <!-- Content / Page (end) -->
 {% endblock %}
 
+{% block meta %}
+    {{ parent() }}
+    {{ page.meta|raw }}
+{% endblock %}
+
 {% block style %}
     {{ parent() }}
+    {{ page.style|raw }}
 {% endblock %}
 
 {% block script %}
     {{ parent() }}
+    {{ page.script|raw }}
 {% endblock %}

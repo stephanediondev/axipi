@@ -53,10 +53,11 @@ class Item
      */
     private $descriptionSocial;
 
-    /**
-     * @var string
-     */
-    private $metaRobots;
+    private $style;
+
+    private $meta;
+
+    private $script;
 
     /**
      * @var boolean
@@ -298,27 +299,75 @@ class Item
     }
 
     /**
-     * Set metaRobots
+     * Set meta
      *
-     * @param string $metaRobots
+     * @param string $meta
      *
      * @return Page
      */
-    public function setMetaRobots($metaRobots)
+    public function setStyle($style)
     {
-        $this->metaRobots = $metaRobots;
+        $this->style = $style;
 
         return $this;
     }
 
     /**
-     * Get metaRobots
+     * Get meta
      *
      * @return string
      */
-    public function getMetaRobots()
+    public function getStyle()
     {
-        return $this->metaRobots;
+        return $this->style;
+    }
+
+    /**
+     * Set meta
+     *
+     * @param string $meta
+     *
+     * @return Page
+     */
+    public function setMeta($meta)
+    {
+        $this->meta = $meta;
+
+        return $this;
+    }
+
+    /**
+     * Get meta
+     *
+     * @return string
+     */
+    public function getMeta()
+    {
+        return $this->meta;
+    }
+
+    /**
+     * Set meta
+     *
+     * @param string $meta
+     *
+     * @return Page
+     */
+    public function setScript($script)
+    {
+        $this->script = $script;
+
+        return $script;
+    }
+
+    /**
+     * Get meta
+     *
+     * @return string
+     */
+    public function getScript()
+    {
+        return $this->script;
     }
 
     /**

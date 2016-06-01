@@ -11,8 +11,14 @@
     <!-- Google / Map (end) -->
 {% endblock %}
 
+{% block meta %}
+    {{ parent() }}
+    {{ page.meta|raw }}
+{% endblock %}
+
 {% block style %}
     {{ parent() }}
+    {{ page.style|raw }}
 {% endblock %}
 
 {% block script %}
@@ -62,4 +68,5 @@
     }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ page.attribute('api_key') }}&amp;callback=initMap"></script>
+    {{ page.script }}
 {% endblock %}

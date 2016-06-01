@@ -2,29 +2,30 @@
 <html lang="{{ page.language.code }}">
 <head>
 <title>{% block title %}{{ page.titleSeo|default(page.title) }}{% endblock %}</title>
-{% block style %}
-<link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('bundles/axipicore/css/base.css') }}">
-{% endblock %}
+
 {% block meta %}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% if page.descriptionSeo %}
 <meta name="description" content="{{ page.descriptionSeo }}">
 {% endif %}
-{% if page.metaRobots %}
-<meta name="robots" content="{{ page.metaRobots }}">
-{% endif %}
 {% endblock %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/axipicore/css/base.css') }}">
+{% endblock %}
+
 {{ getWidgets('head') }}
 </head>
+
 <body id="page-{{ page.code }}">
 
 {% block header %}
-    <div class="container">
+    <header class="container">
         <div class="row">
             {{ getWidgets('header') }}
         </div>
-    </div>
+    </header>
 {% endblock %}
 
 {% block before_content %}
@@ -35,17 +36,17 @@
     </div>
 {% endblock %}
 
-<div class="container">
+<main class="container">
     {% block content %}
     {% endblock %}
-</div>
+</main>
 
 {% block footer %}
-    <div class="container">
+    <footer class="container">
         <div class="row">
             {{ getWidgets('footer') }}
         </div>
-    </div>
+    </footer>
 {% endblock %}
 
 {% block script %}

@@ -4,16 +4,19 @@
 <html>
 <head>
 <title>{% block title %}Welcome!{% endblock %}</title>
+
+{% block meta %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+{% endblock %}
+
 {% block style %}
 <link rel="stylesheet" type="text/css" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/axipibackend/css/base.css') }}">
 {% endblock %}
-{% block meta %}
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow, noarchive">
-{% endblock %}
 </head>
+
 <body>
 
 {% block navbar %}
