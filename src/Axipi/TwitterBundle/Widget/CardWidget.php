@@ -20,6 +20,6 @@ class CardWidget extends AbstractWidget
         } else {
             $template = $widget->getComponent()->getTemplate();
         }
-        return $this->render($template, $parameters->all());
+        return $this->renderWidget($template, $parameters->all());
     }
 }

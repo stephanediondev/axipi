@@ -53,6 +53,7 @@ a:hover {
 .navbar-default .navbar-nav > li > a:link, .navbar-default .navbar-nav > li > a:visited, .navbar-default .navbar-nav > li > strong {
 	color: #aeb2b7;
 	display: block;
+	font-size: 13px;
 	padding: 5px 10px;
 }
 .navbar-default .navbar-nav > li > a:hover {

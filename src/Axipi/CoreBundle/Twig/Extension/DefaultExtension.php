@@ -1,5 +1,4 @@
 <?php
-
 namespace Axipi\CoreBundle\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
