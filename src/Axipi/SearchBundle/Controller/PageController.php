@@ -91,7 +91,7 @@ class PageController extends AbstractController
                 );
             }*/
 
-            $result = $this->searchManager->search('GET', $path, $body);
+            $result = $this->searchManager->query('GET', $path, $body);
 
             if(isset($result->error) == 0) {
                 $parameters->set('hits', $result['hits']);

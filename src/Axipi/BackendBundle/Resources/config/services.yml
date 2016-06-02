@@ -33,7 +33,6 @@ services:
             - "@axipi_core_manager_item"
             - "@axipi_core_manager_language"
             - "@axipi_core_manager_component"
-            - "@axipi_search_manager_search"
 
     axipi_backend_controller_widget:
         class: Axipi\BackendBundle\Controller\WidgetController

@@ -15,3 +15,11 @@ services:
         public: false
         calls:
             - [ "setElasticSearch", [ "%elasticsearch_enabled%", "%elasticsearch_index%", "%elasticsearch_url%" ] ]
+
+    axipi_search_eventlistener_item:
+        class: Axipi\SearchBundle\EventListener\ItemListener
+        arguments:
+            - "@axipi_search_manager_search"
+        tags:
+            - { name: "kernel.event_listener", event: "item.after_persist", method: "persist" }
+            - { name: "kernel.event_listener", event: "item.before_remove", method: "remove" }

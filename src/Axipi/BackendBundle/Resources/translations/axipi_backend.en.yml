@@ -2,6 +2,8 @@ category:
     page: "Page"
     widget: "Widget"
 icons:
+    initialize: "bolt"
+    refresh: "refresh"
     top_level: "level-up"
     search: "search"
     profile: "user"
@@ -29,6 +31,8 @@ actions:
     delete: "Delete"
     confirm: "Confirm"
     submit: "Submit"
+    initialize: "Initialize"
+    refresh: "Refresh"
 search: "Search"
 login: "Login"
 logout: "Logout"

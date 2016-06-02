@@ -11,7 +11,6 @@ use Axipi\CoreBundle\Controller\AbstractController;
 use Axipi\CoreBundle\Manager\ItemManager;
 use Axipi\CoreBundle\Manager\LanguageManager;
 use Axipi\CoreBundle\Manager\ComponentManager;
-use Axipi\SearchBundle\Manager\SearchManager;
 use Axipi\BackendBundle\Form\Type\DeleteType;
 use Axipi\BackendBundle\Form\Type\ItemType;
 use Axipi\CoreBundle\Entity\Item;
@@ -24,18 +23,14 @@ class PageController extends AbstractController
 
     protected $componentManager;
 
-    protected $searchManager;
-
     public function __construct(
         ItemManager $itemManager,
         LanguageManager $languageManager,
-        ComponentManager $componentManager,
-        SearchManager $searchManager
+        ComponentManager $componentManager
     ) {
         $this->itemManager = $itemManager;
         $this->languageManager = $languageManager;
         $this->componentManager = $componentManager;
-        $this->searchManager = $searchManager;
     }
 
     public function dispatchAction(Request $request, $mode, $language, $action, $id)
@@ -121,7 +116,6 @@ class PageController extends AbstractController
         if($form->isSubmitted()) {
             if($form->isValid()) {
                 $id = $this->itemManager->persist($form->getData());
-                $this->searchManager->indexPage($form->getData());
                 $this->addFlash('success', 'created');
                 return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
             }
@@ -150,7 +144,6 @@ class PageController extends AbstractController
         if($form->isSubmitted()) {
             if($form->isValid()) {
                 $this->itemManager->persist($form->getData());
-                $this->searchManager->indexPage($form->getData());
                 $this->addFlash('success', 'updated');
                 return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
             }

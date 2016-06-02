@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use Axipi\CoreBundle\Manager\AbstractManager;
 use Axipi\CoreBundle\Entity\Item;
+use Axipi\CoreBundle\Event\ItemEvent;
 
 class ItemManager extends AbstractManager
 {
@@ -56,16 +57,23 @@ class ItemManager extends AbstractManager
 
         $this->em->persist($data);
         $this->em->flush();
+
+        $event = new ItemEvent($data);
+        $this->eventDispatcher->dispatch('item.after_persist', $event);
+
         return $data->getId();
     }
 
-    public function remove($type)
+    public function remove($data)
     {
-        if(file_exists('uploads/'.$type->getAttribute('image'))) {
-            @unlink('uploads/'.$type->getAttribute('image'));
+        $event = new ItemEvent($data);
+        $this->eventDispatcher->dispatch('item.before_remove', $event);
+
+        if(file_exists('uploads/'.$data->getAttribute('image'))) {
+            @unlink('uploads/'.$data->getAttribute('image'));
         }
 
-        $this->em->remove($type);
+        $this->em->remove($data);
         $this->em->flush();
     }
 }

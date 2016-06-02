@@ -43,19 +43,19 @@ class SearchController extends AbstractController
     public function indexAction(Request $request, ParameterBag $parameters)
     {
         $path = '/'.$this->searchManager->getSearchIndex().'/_stats';
-        $result = $this->searchManager->search('GET', $path);
+        $result = $this->searchManager->query('GET', $path);
         if(isset($result->error) == 0) {
             $parameters->set('stats', $result);
         }
 
         $path = '/_cluster/health';
-        $result = $this->searchManager->search('GET', $path);
+        $result = $this->searchManager->query('GET', $path);
         if(isset($result->error) == 0) {
             $parameters->set('health', $result);
         }
 
         $path = '/_nodes';
-        $result = $this->searchManager->search('GET', $path);
+        $result = $this->searchManager->query('GET', $path);
         if(isset($result->error) == 0) {
             $parameters->set('nodes', $result);
         }
@@ -66,15 +66,15 @@ class SearchController extends AbstractController
     public function initAction(Request $request, ParameterBag $parameters)
     {
         $path = '/'.$this->searchManager->getSearchIndex();
-        $result = $this->searchManager->search('HEAD', $path);
+        $result = $this->searchManager->query('HEAD', $path);
 
         if($result == 404) {
             $path = '/'.$this->searchManager->getSearchIndex();
-            $result = $this->searchManager->search('PUT', $path);
+            $result = $this->searchManager->query('PUT', $path);
         }
 
         $path = '/'.$this->searchManager->getSearchIndex().'/_close';
-        $result = $this->searchManager->search('POST', $path);
+        $result = $this->searchManager->query('POST', $path);
 
         $path = '/'.$this->searchManager->getSearchIndex().'/_settings';
         $body = array(
@@ -94,10 +94,10 @@ class SearchController extends AbstractController
                 ),
             ),
         );
-        $result = $this->searchManager->search('PUT', $path, $body);
+        $result = $this->searchManager->query('PUT', $path, $body);
 
         $path = '/'.$this->searchManager->getSearchIndex().'/_open';
-        $result = $this->searchManager->search('POST', $path);
+        $result = $this->searchManager->query('POST', $path);
 
         $path = '/'.$this->searchManager->getSearchIndex().'/_mapping/page';
         $body = array(
@@ -124,7 +124,7 @@ class SearchController extends AbstractController
                 ),
             ),
         );
-        $result = $this->searchManager->search('PUT', $path, $body);
+        $result = $this->searchManager->query('PUT', $path, $body);
 
         return $this->redirectToRoute('axipi_backend_search', []);
     }

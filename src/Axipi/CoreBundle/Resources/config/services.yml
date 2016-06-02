@@ -11,6 +11,7 @@ services:
         abstract: true
         calls:
             - [ "setEntityManager", [ "@doctrine.orm.entity_manager" ] ]
+            - [ "setEventDispatcher", [ "@event_dispatcher" ] ]
 
     axipi_core_widget_abstract:
         class: Axipi\CoreBundle\Widget\AbstractWidget
