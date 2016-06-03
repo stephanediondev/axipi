@@ -10,5 +10,3 @@ bower install
 http://example.com/backend
 - Email: example@example.com
 - Password: example
-
-![Backend home](home.png)
