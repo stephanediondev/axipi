@@ -31,7 +31,7 @@ class DefaultController extends AbstractController
         }
         $page = $this->itemManager->getOne(['slug' => $slug, 'active' => true]);
         if(!$page) {
-            $page = $this->itemManager->getOne(['slug' => 'error404']);
+            $page = $this->itemManager->getOne(['component_service' => 'axipi_content_controller_error404', 'category' => 'page', 'active' => true]);
         }
 
         $this->defaultManager->setPage($page);

@@ -19,7 +19,7 @@
             {% endembed %}
 
             {% if enabled %}
-                {% if stats is defined %}
+                {% if stats is defined and stats.indices is defined %}
                     {% for key, stats in stats.indices %}
                         {% embed 'AxipiBackendBundle::block_title.html.twig' %}
                             {% block block_title %}

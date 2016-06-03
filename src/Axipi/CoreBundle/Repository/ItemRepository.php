@@ -30,6 +30,11 @@ class ItemRepository extends EntityRepository {
             $query->setParameter(':category', 'page');
         }
 
+        if(isset($parameters['component_service']) == 1) {
+            $query->andWhere('cmp.service = :component_service');
+            $query->setParameter(':component_service', $parameters['component_service']);
+        }
+
         if(isset($parameters['active']) == 1 && $parameters['active'] == true) {
             $query->andWhere('pge.isActive = :active');
             $query->setParameter(':active', 1);

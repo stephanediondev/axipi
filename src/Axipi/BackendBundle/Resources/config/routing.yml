@@ -5,8 +5,6 @@ axipi_backend_login:
 
 axipi_backend_login_check:
     path: /login_check
-    defaults:
-        _locale: "en"
 
 axipi_backend_logout:
     path: /logout

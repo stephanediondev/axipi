@@ -6,12 +6,8 @@ security:
                 property: username
 
     firewalls:
-        axipi_backend_login:
-            pattern: ^/backend/login$
-            anonymous: ~
-
         axipi_backend:
-            pattern:   ^/backend
+            pattern:   ^/
             provider: axipi_core_provider
             form_login:
                 username_parameter: username
@@ -24,9 +20,13 @@ security:
             logout:
                 path: axipi_backend_logout
                 target: axipi_backend_login
+            security: true
+            anonymous: true
 
-        axipi_frontend:
-            anonymous: ~
+    access_control:
+        - { path: "^/backend/login", roles: "IS_AUTHENTICATED_ANONYMOUSLY" }
+        - { path: "^/backend", roles: "IS_AUTHENTICATED_FULLY" }
+        - { path: "^/.*", roles: "IS_AUTHENTICATED_ANONYMOUSLY" }
 
     encoders:
         Axipi\CoreBundle\Entity\User:
