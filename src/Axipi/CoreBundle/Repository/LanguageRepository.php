@@ -2,8 +2,10 @@
 namespace Axipi\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Axipi\CoreBundle\Entity\Language;
 
-class LanguageRepository extends EntityRepository {
+class LanguageRepository extends EntityRepository
+{
     public function getOne($parameters) {
         $em = $this->getEntityManager();
 

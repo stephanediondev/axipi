@@ -2,6 +2,8 @@
 namespace Axipi\CoreBundle\Manager;
 
 use Axipi\CoreBundle\Manager\AbstractManager;
+use Axipi\CoreBundle\Entity\Relation;
+use Axipi\CoreBundle\Event\RelationEvent;
 
 class RelationManager extends AbstractManager
 {

@@ -2,6 +2,8 @@
 namespace Axipi\CoreBundle\Manager;
 
 use Axipi\CoreBundle\Manager\AbstractManager;
+use Axipi\CoreBundle\Entity\Language;
+use Axipi\CoreBundle\Event\LanguageEvent;
 
 class LanguageManager extends AbstractManager
 {

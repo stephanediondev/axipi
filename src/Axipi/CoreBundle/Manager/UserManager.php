@@ -5,6 +5,7 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
 use Axipi\CoreBundle\Manager\AbstractManager;
 use Axipi\CoreBundle\Entity\User;
+use Axipi\CoreBundle\Event\UserEvent;
 
 class UserManager extends AbstractManager
 {

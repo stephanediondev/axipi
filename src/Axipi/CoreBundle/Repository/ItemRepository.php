@@ -4,7 +4,8 @@ namespace Axipi\CoreBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Axipi\CoreBundle\Entity\Item;
 
-class ItemRepository extends EntityRepository {
+class ItemRepository extends EntityRepository
+{
     public function getOne($parameters = []) {
         $em = $this->getEntityManager();
 

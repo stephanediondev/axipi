@@ -2,6 +2,8 @@
 namespace Axipi\CoreBundle\Manager;
 
 use Axipi\CoreBundle\Manager\AbstractManager;
+use Axipi\CoreBundle\Entity\Component;
+use Axipi\CoreBundle\Event\ComponentEvent;
 
 class ComponentManager extends AbstractManager
 {

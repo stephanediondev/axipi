@@ -34,10 +34,20 @@ class ItemManager extends AbstractManager
                             if(file_exists('uploads/'.$data->getAttribute($key))) {
                                 @unlink('uploads/'.$data->getAttribute($key));
                             }
-                            $data->setAttribute($key, $attribute->getClientOriginalName());
+                            $year = date('Y');
+                            if(!is_dir('uploads/'.$year)) {
+                                mkdir('uploads/'.$year);
+                            }
+                            $month = date('m');
+                            if(!is_dir('uploads/'.$year.'/'.$month)) {
+                                mkdir('uploads/'.$year.'/'.$month);
+                            }
+                            $dir = $year.'/'.$month;
+                            $filename = $this->cleanString($attribute->getClientOriginalName());
+                            $data->setAttribute($key, $dir.'/'.$filename);
                             $data->setAttribute($key.'_mime', $attribute->getMimeType());
                             $data->setAttribute($key.'_size', $attribute->getClientSize());
-                            $attribute->move('uploads', $attribute->getClientOriginalName());
+                            $attribute->move('uploads/'.$dir, $filename);
                         }
                     }
                 } else {

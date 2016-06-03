@@ -1,2 +1,7 @@
+backend:
+    index: "Index"
+    cluster: "Cluster"
+    node: "Node"
+
 widget:
     placeholder: "Search"

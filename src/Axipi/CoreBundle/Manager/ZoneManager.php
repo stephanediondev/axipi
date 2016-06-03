@@ -2,6 +2,8 @@
 namespace Axipi\CoreBundle\Manager;
 
 use Axipi\CoreBundle\Manager\AbstractManager;
+use Axipi\CoreBundle\Entity\Zone;
+use Axipi\CoreBundle\Event\ZoneEvent;
 
 class ZoneManager extends AbstractManager
 {

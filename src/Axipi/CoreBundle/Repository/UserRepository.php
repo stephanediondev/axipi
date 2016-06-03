@@ -2,8 +2,10 @@
 namespace Axipi\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Axipi\CoreBundle\Entity\User;
 
-class UserRepository extends EntityRepository {
+class UserRepository extends EntityRepository
+{
     public function getOne($parameters = []) {
         $em = $this->getEntityManager();
 

@@ -136,7 +136,7 @@ class SearchController extends AbstractController
 
     public function scanAction(Request $request, ParameterBag $parameters)
     {
-        $this->searchManager->indexAll();
+        $this->searchManager->scan();
 
         return $this->redirectToRoute('axipi_backend_search', []);
     }

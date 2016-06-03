@@ -103,7 +103,7 @@ class SearchManager extends AbstractManager
         }
     }
 
-    public function indexAll()
+    public function scan()
     {
         $pages = $this->em->getRepository('AxipiCoreBundle:Item')->getList(['category' => 'page']);
         foreach($pages as $page) {
