@@ -71,6 +71,7 @@ services:
         parent: "axipi_core_controller_abstract"
         arguments:
             - "@axipi_core_manager_default"
+            - "@axipi_core_manager_language"
             - "@axipi_core_manager_item"
 
     axipi_core_manager_default:

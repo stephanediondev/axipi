@@ -17,7 +17,7 @@
                 {% for result in hits.hits %}
                     <div class="media">
                         <div class="media-body">
-                            <h4 class="media-heading"><a href="{{ path('axipi_core_slug', {slug: result._source.slug}) }}">{{ result._source.title }}</a></h4>
+                            <h4 class="media-heading"><a href="{{ buildLink({language: result._source.language.code, slug: result._source.slug}) }}">{{ result._source.title }}</a></h4>
                             {% if result._score is defined %}
                                 <p><em>{{ result._score }}</em></p>
                             {% endif %}

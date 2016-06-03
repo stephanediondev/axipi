@@ -3,7 +3,7 @@
     <h3>Categories</h3>
     <ul class="nav nav-pills nav-stacked">
         {% for child in children %}
-            <li{% if page.slug == child.slug %} class="active"{% endif %}><a href="{{ path('axipi_core_slug', {slug: child.slug}) }}">{{ child.title }}</a></li>
+            <li{% if page.slug == child.slug %} class="active"{% endif %}><a href="{{ buildLink(child) }}">{{ child.title }}</a></li>
         {% endfor %}
     </ul>
 </div>

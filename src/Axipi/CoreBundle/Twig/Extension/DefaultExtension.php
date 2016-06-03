@@ -31,6 +31,7 @@ class DefaultExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFunction('getWidgets', [$this, 'getWidgets'], array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('buildLink', [$this, 'buildLink'], array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('convertText', [$this, 'convertText'], array('is_safe' => array('html'))),
         ];
     }
@@ -48,7 +49,7 @@ class DefaultExtension extends \Twig_Extension
         $request = $this->container->get('request_stack')->getMasterRequest();
         $page = $this->container->get('axipi_core_manager_default')->getPage();
 
-        $widgets = $this->em->getRepository('AxipiCoreBundle:Item')->getList(['category' => 'widget', 'active' => true, 'zone' => $code]);
+        $widgets = $this->em->getRepository('AxipiCoreBundle:Item')->getList(['category' => 'widget', 'active' => true, 'zone' => $code, 'language_code' => $page->getLanguage()->getCode()]);
 
         foreach($widgets as $widget) {
             if($this->container->has($widget->getComponent()->getService())) {
@@ -56,6 +57,29 @@ class DefaultExtension extends \Twig_Extension
             }
         }
         return $content;
+    }
+
+    public function buildLink($page)
+    {
+        if($page instanceof Item) {
+            $language = $page->getLanguage()->getCode();
+            $slug = $page->getSlug();
+        } else if(is_array($page)) {
+            $language = $page['language'];
+            $slug = $page['slug'];
+        } else {
+            $language = '';
+            $slug = '';
+        }
+
+        $languages = $this->container->get('axipi_core_manager_default')->getLanguages();
+        if(count($languages) > 1) {
+            $url = $this->container->get('router')->generate('axipi_core_slug', array('slug' => $language.'/'.$slug), 0);
+        } else {
+            $url = $this->container->get('router')->generate('axipi_core_slug', array('slug' => $slug), 0);
+        }
+
+        return $url;
     }
 
     public function convertText($text)
@@ -75,7 +99,7 @@ class DefaultExtension extends \Twig_Extension
             $pages = $this->em->getRepository('AxipiCoreBundle:Item')->getList(['ids' => array_keys($ids)]);
             if($pages) {
                 foreach($pages as $page) {
-                    $url = $this->container->get('router')->generate('axipi_core_slug', array('slug' => $page->getSlug()), 0);
+                    $url = $this->buildLink($page);
                     $text = str_replace($ids[$page->getId()], $url, $text);
                 }
             }

@@ -4,11 +4,11 @@
         <ol class="breadcrumb">
             {% if page.parent.parent %}
                 {% if page.parent.parent.parent %}
-                    <li><a href="{{ path('axipi_core_slug', {slug: page.parent.parent.parent.slug}) }}">{{ page.parent.parent.parent.title }}</a></li>
+                    <li><a href="{{ buildLink(page.parent.parent.parent) }}">{{ page.parent.parent.parent.title }}</a></li>
                 {% endif %}
-                <li><a href="{{ path('axipi_core_slug', {slug: page.parent.parent.slug}) }}">{{ page.parent.parent.title }}</a></li>
+                <li><a href="{{ buildLink(page.parent.parent) }}">{{ page.parent.parent.title }}</a></li>
             {% endif %}
-            <li><a href="{{ path('axipi_core_slug', {slug: page.parent.slug}) }}">{{ page.parent.title }}</a></li>
+            <li><a href="{{ buildLink(page.parent) }}">{{ page.parent.title }}</a></li>
             <li>{{ page.title }}</li>
         </ol>
     </div>
@@ -25,7 +25,7 @@
                 "@type": "ListItem",
                 "position": {{ position }},
                 "item": {
-                    "@id": "{{ url('axipi_core_slug', {slug: page.parent.parent.parent.slug}) }}",
+                    "@id": "{{ buildLink(page.parent.parent.parent) }}",
                     "name": "{{ page.parent.parent.parent.title }}"
                 }
             },
@@ -35,7 +35,7 @@
                 "@type": "ListItem",
                 "position": {{ position }},
                 "item": {
-                    "@id": "{{ url('axipi_core_slug', {slug: page.parent.parent.slug}) }}",
+                    "@id": "{{ buildLink(page.parent.parent) }}",
                     "name": "{{ page.parent.parent.title }}"
                 }
             },
@@ -45,7 +45,7 @@
                 "@type": "ListItem",
                 "position": {{ position }},
                 "item": {
-                    "@id": "{{ url('axipi_core_slug', {slug: page.parent.slug}) }}",
+                    "@id": "{{ buildLink(page.parent) }}",
                     "name": "{{ page.parent.title }}"
                 }
             },
@@ -54,7 +54,7 @@
                 "@type": "ListItem",
                 "position": {{ position }},
                 "item": {
-                    "@id": "{{ url('axipi_core_slug', {slug: page.slug}) }}",
+                    "@id": "{{ buildLink(page) }}",
                     "name": "{{ page.title }}"
                 }
             }
@@ -73,7 +73,7 @@
                 "@type": "ListItem",
                 "position": {{ position }},
                 "item": {
-                    "@id": "{{ url('axipi_core_slug', {slug: page.slug}) }}",
+                    "@id": "{{ buildLink(page) }}",
                     "name": "{{ page.title }}"
                 }
             }

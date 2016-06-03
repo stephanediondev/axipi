@@ -2,7 +2,7 @@
 <div id="widget-{{ widget.code }}" class="col-lg-10">
     <ul class="nav nav-pills">
         {% for relation in relations %}
-            <li{% if page.slug == relation.page.slug %} class="active"{% endif %}><a href="{{ path('axipi_core_slug', {slug: relation.page.slug}) }}">{{ relation.title|default(relation.page.title) }}</a></li>
+            <li{% if page.slug == relation.page.slug %} class="active"{% endif %}><a href="{{ buildLink(relation.page) }}">{{ relation.title|default(relation.page.title) }}</a></li>
         {% endfor %}
     </ul>
 </div>

@@ -3,7 +3,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{{ page.titleSocial|default(page.title) }}">
 <meta name="twitter:description" content="{{ page.descriptionSocial }}">
-<meta name="twitter:url" content="{{ url('axipi_core_slug', {slug: page.slug}) }}">
+<meta name="twitter:url" content="{{ buildLink(page) }}">
 {% if page.attribute('thumbnail') %}
 <meta name="twitter:image" content="{{ absolute_url(asset('uploads/' ~ page.attribute('thumbnail'))) }}">
 {% endif %}

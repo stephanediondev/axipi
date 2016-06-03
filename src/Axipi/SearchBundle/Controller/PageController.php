@@ -17,30 +17,26 @@ class PageController extends AbstractController
         $this->searchManager = $searchManager;
     }
 
-    public function getPage(Request $request, $page)
+    public function getPage($parameters)
     {
-        $parameters = new ParameterBag();
-        $parameters->set('request', $request);
-        $parameters->set('page', $page);
-
         $data = [];
         $data['sort_field'] = array('date.sort' => 'Date', '_score' => 'Score', 'title.sort' => 'Title');
         $data['sort_direction'] = array('asc' => 'Asc.', 'desc' => 'Desc.',);
 
-        if($request->query->get('q')) {
-            if(!array_key_exists($request->query->get('sort_field'), $data['sort_field'])) {
+        if($parameters->get('request')->query->get('q')) {
+            if(!array_key_exists($parameters->get('request')->query->get('sort_field'), $data['sort_field'])) {
                 $sort_field = '_score';
             } else {
-                $sort_field = $request->query->get('sort_field');
+                $sort_field = $parameters->get('request')->query->get('sort_field');
             }
-            if(!array_key_exists($request->query->get('sort_direction'), $data['sort_direction'])) {
+            if(!array_key_exists($parameters->get('request')->query->get('sort_direction'), $data['sort_direction'])) {
                 $sort_direction = 'desc';
             } else {
-                $sort_direction = $request->query->get('sort_direction');
+                $sort_direction = $parameters->get('request')->query->get('sort_direction');
             }
 
             $size = 20;
-            $from = $request->query->get('from', 0);
+            $from = $parameters->get('request')->query->get('from', 0);
             $path = '/'.$this->searchManager->getIndex().'/_search?size='.intval($size).'&type=page&from='.intval($from);
 
             $body = array();
@@ -52,7 +48,7 @@ class PageController extends AbstractController
             $body['query'] = array(
                 'query_string' => array(
                     'fields' => array('title', 'description'),
-                    'query' => $request->query->get('q'),
+                    'query' => $parameters->get('request')->query->get('q'),
                 ),
             );
             $body['highlight'] = array(
@@ -71,20 +67,20 @@ class PageController extends AbstractController
                 ),
             );
 
-            if(!$page->getAttribute('all_languages')) {
+            if(!$parameters->get('page')->getAttribute('all_languages')) {
                 $body['filter'] = array(
                     'term' => array(
-                        'language.code' => $page->getLanguage()->getCode(),
+                        'language.code' => $parameters->get('page')->getLanguage()->getCode(),
                     ),
                 );
             }
 
-            /*if($request->query->get('date_from') && $request->query->get('date_to')) {
+            /*if($parameters->get('request')->query->get('date_from') && $parameters->get('request')->query->get('date_to')) {
                 $body['filter'] = array(
                     'range' => array(
                         'date.sort' => array(
-                            'gte' => $request->query->get('date_from'),
-                            'lte' => $request->query->get('date_to'),
+                            'gte' => $parameters->get('request')->query->get('date_from'),
+                            'lte' => $parameters->get('request')->query->get('date_to'),
                             'format' => 'YYYY-MM-DD',
                         ),
                     ),
@@ -99,10 +95,10 @@ class PageController extends AbstractController
                 $pagination = [];
                 if($result['hits']['total'] > $size) {
                     $total = $result['hits']['total'] - 1;
-                    $page = 1;
+                    $start = 1;
                     for($i=0;$i<=$total;$i = $i + $size) {
-                        $pagination[$page] = $i;
-                        $page++;
+                        $pagination[$start] = $i;
+                        $start++;
                     }
                     $data['current_from'] = intval($from);
                 }
@@ -110,10 +106,10 @@ class PageController extends AbstractController
             }
         }
 
-        if($page->getTemplate()) {
-            $template = $page->getTemplate();
+        if($parameters->get('page')->getTemplate()) {
+            $template = $parameters->get('page')->getTemplate();
         } else {
-            $template = $page->getComponent()->getTemplate();
+            $template = $parameters->get('page')->getComponent()->getTemplate();
         }
         $response = $this->render($template, $parameters->all());
         return $response;

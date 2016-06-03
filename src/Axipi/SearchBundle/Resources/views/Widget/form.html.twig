@@ -1,6 +1,6 @@
 <!-- Content / Menu -->
 <div id="widget-{{ widget.code }}" class="col-lg-2">
-    <form method="get" class="form-inline" action="{{ path('axipi_core_slug', {slug: widget.parent.slug}) }}">
+    <form method="get" class="form-inline" action="{{ buildLink(widget.parent) }}">
         <div class="form-group">
             <input class="form-control" type="text" name="q" value="{{ request.get('q') }}" placeholder="{{ 'widget.placeholder'|trans({}, 'axipi_search') }}">
         </div>
@@ -11,10 +11,10 @@
 {
     "@context": "http://schema.org",
     "@type": "WebSite",
-    "url": "{{ url('axipi_core_slug', {slug: ''}) }}",
+    "url": "{{ buildLink({language: widget.parent.language.code, slug: ''}) }}",
     "potentialAction": {
         "@type": "SearchAction",
-        "target": "{{ url('axipi_core_slug', {slug: widget.parent.slug}) }}?q={query}",
+        "target": "{{ buildLink(widget.parent) }}?q={query}",
         "query-input": "required name=query"
     }
 }

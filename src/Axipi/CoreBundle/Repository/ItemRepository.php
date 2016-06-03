@@ -10,9 +10,10 @@ class ItemRepository extends EntityRepository
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
-        $query->addSelect('pge', 'cmp');
+        $query->addSelect('pge', 'cmp', 'lng');
         $query->from('AxipiCoreBundle:Item', 'pge');
         $query->leftJoin('pge.component', 'cmp');
+        $query->leftJoin('pge.language', 'lng');
 
         if(isset($parameters['id']) == 1) {
             $query->andWhere('pge.id = :id');
@@ -29,6 +30,11 @@ class ItemRepository extends EntityRepository
 
             $query->andWhere('cmp.category = :category');
             $query->setParameter(':category', 'page');
+        }
+
+        if(isset($parameters['language_code']) == 1) {
+            $query->andWhere('lng.code = :language');
+            $query->setParameter(':language', $parameters['language_code']);
         }
 
         if(isset($parameters['component_service']) == 1) {
@@ -75,9 +81,9 @@ class ItemRepository extends EntityRepository
             $query->setParameter(':category', $parameters['category']);
         }
 
-        if(isset($parameters['language']) == 1) {
+        if(isset($parameters['language_code']) == 1) {
             $query->andWhere('lng.code = :language');
-            $query->setParameter(':language', $parameters['language']);
+            $query->setParameter(':language', $parameters['language_code']);
         }
 
         if(isset($parameters['zone']) == 1) {

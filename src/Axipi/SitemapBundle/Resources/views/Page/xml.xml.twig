@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     {% for result in results %}
     <url>
-        <loc>{{ url('axipi_core_slug', {slug: result.slug}) }}</loc>
+        <loc>{{ buildLink(result) }}</loc>
     </url>
     {% endfor %}
 </urlset>

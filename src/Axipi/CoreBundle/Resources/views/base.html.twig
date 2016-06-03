@@ -7,7 +7,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 {% if page.descriptionSeo %}
-<meta name="description" content="{{ page.descriptionSeo }}">
+    <meta name="description" content="{{ page.descriptionSeo }}">
+{% endif %}
+{% if languages|length > 1 %}
+    {% for language in languages %}
+        <link rel="alternate" hreflang="{{ language.code }}" href="{{ path('axipi_core_slug', {language: language.code}) }}">
+    {% endfor %}
 {% endif %}
 {% endblock %}
 
