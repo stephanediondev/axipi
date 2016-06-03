@@ -63,6 +63,8 @@ class DefaultController extends AbstractController
             $page = $this->itemManager->getOne(['component_service' => 'axipi_content_controller_error404', 'category' => 'page', 'active' => true]);
         }
 
+        $request->setLocale($page->getLanguage()->getCode());
+
         $this->defaultManager->setPage($page);
         $parameters->set('page', $page);
 
