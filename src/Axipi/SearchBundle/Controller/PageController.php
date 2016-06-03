@@ -41,7 +41,7 @@ class PageController extends AbstractController
 
             $size = 20;
             $from = $request->query->get('from', 0);
-            $path = '/'.$this->searchManager->getSearchIndex().'/_search?size='.intval($size).'&type=page&from='.intval($from);
+            $path = '/'.$this->searchManager->getIndex().'/_search?size='.intval($size).'&type=page&from='.intval($from);
 
             $body = array();
             $body['sort'] = array(

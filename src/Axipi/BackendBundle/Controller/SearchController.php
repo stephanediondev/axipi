@@ -42,22 +42,27 @@ class SearchController extends AbstractController
 
     public function indexAction(Request $request, ParameterBag $parameters)
     {
-        $path = '/'.$this->searchManager->getSearchIndex().'/_stats';
-        $result = $this->searchManager->query('GET', $path);
-        if(isset($result->error) == 0) {
-            $parameters->set('stats', $result);
-        }
 
-        $path = '/_cluster/health';
-        $result = $this->searchManager->query('GET', $path);
-        if(isset($result->error) == 0) {
-            $parameters->set('health', $result);
-        }
+        $parameters->set('enabled', $this->searchManager->getEnabled());
 
-        $path = '/_nodes';
-        $result = $this->searchManager->query('GET', $path);
-        if(isset($result->error) == 0) {
-            $parameters->set('nodes', $result);
+        if($this->searchManager->getEnabled()) {
+            $path = '/'.$this->searchManager->getIndex().'/_stats';
+            $result = $this->searchManager->query('GET', $path);
+            if(isset($result->error) == 0) {
+                $parameters->set('stats', $result);
+            }
+
+            $path = '/_cluster/health';
+            $result = $this->searchManager->query('GET', $path);
+            if(isset($result->error) == 0) {
+                $parameters->set('health', $result);
+            }
+
+            $path = '/_nodes';
+            $result = $this->searchManager->query('GET', $path);
+            if(isset($result->error) == 0) {
+                $parameters->set('nodes', $result);
+            }
         }
 
         return $this->render('AxipiBackendBundle:Search:index.html.twig', $parameters->all());
@@ -65,18 +70,18 @@ class SearchController extends AbstractController
 
     public function initAction(Request $request, ParameterBag $parameters)
     {
-        $path = '/'.$this->searchManager->getSearchIndex();
+        $path = '/'.$this->searchManager->getIndex();
         $result = $this->searchManager->query('HEAD', $path);
 
         if($result == 404) {
-            $path = '/'.$this->searchManager->getSearchIndex();
+            $path = '/'.$this->searchManager->getIndex();
             $result = $this->searchManager->query('PUT', $path);
         }
 
-        $path = '/'.$this->searchManager->getSearchIndex().'/_close';
+        $path = '/'.$this->searchManager->getIndex().'/_close';
         $result = $this->searchManager->query('POST', $path);
 
-        $path = '/'.$this->searchManager->getSearchIndex().'/_settings';
+        $path = '/'.$this->searchManager->getIndex().'/_settings';
         $body = array(
             'settings' => array(
                 'index' => array(
@@ -96,10 +101,10 @@ class SearchController extends AbstractController
         );
         $result = $this->searchManager->query('PUT', $path, $body);
 
-        $path = '/'.$this->searchManager->getSearchIndex().'/_open';
+        $path = '/'.$this->searchManager->getIndex().'/_open';
         $result = $this->searchManager->query('POST', $path);
 
-        $path = '/'.$this->searchManager->getSearchIndex().'/_mapping/page';
+        $path = '/'.$this->searchManager->getIndex().'/_mapping/page';
         $body = array(
             'page' => array(
                 'properties' => array( 

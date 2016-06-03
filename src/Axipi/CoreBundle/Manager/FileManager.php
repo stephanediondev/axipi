@@ -139,9 +139,9 @@ class FileManager extends AbstractManager
         $this->em->flush();
     }
 
-    public function remove($type)
+    public function remove($data)
     {
-        $this->em->remove($type);
+        $this->em->remove($data);
         $this->em->flush();
     }
 }

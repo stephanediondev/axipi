@@ -27,9 +27,9 @@ class ZoneManager extends AbstractManager
         return $data->getId();
     }
 
-    public function remove($type)
+    public function remove($data)
     {
-        $this->em->remove($type);
+        $this->em->remove($data);
         $this->em->flush();
     }
 }

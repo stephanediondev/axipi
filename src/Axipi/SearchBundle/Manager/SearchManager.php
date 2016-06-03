@@ -16,14 +16,24 @@ class SearchManager extends AbstractManager
 
     public function setElasticSearch($enabled, $index, $url)
     {
-        $this->elasticsearchEnabled = $enabled;
-        $this->elasticsearchIndex = $index;
-        $this->elasticsearchUrl = $url;
+        $this->enabled = $enabled;
+        $this->index = $index;
+        $this->url = $url;
     }
 
-    public function getSearchIndex()
+    public function getEnabled()
     {
-        return $this->elasticsearchIndex;
+        return $this->enabled;
+    }
+
+    public function getIndex()
+    {
+        return $this->index;
+    }
+
+    public function getUrl()
+    {
+        return $this->url;
     }
 
     public function persist($data)
@@ -39,7 +49,7 @@ class SearchManager extends AbstractManager
                 $action = 'DELETE';
             }
 
-            $path = '/'.$this->elasticsearchIndex.'/page/'.$data->getId();
+            $path = '/'.$this->getIndex().'/page/'.$data->getId();
 
             $body = array(
                 'language' => array(
@@ -68,15 +78,15 @@ class SearchManager extends AbstractManager
     {
         if($data->getComponent()->getCategory() == 'page') {
             $action = 'DELETE';
-            $path = '/'.$this->elasticsearchIndex.'/page/'.$data->getId();
+            $path = '/'.$this->getIndex().'/page/'.$data->getId();
             $this->query($action, $path);
         }
     }
 
     public function query($action, $path, $body = false)
     {
-        if($this->elasticsearchEnabled) {
-            $path = $this->elasticsearchUrl.$path;
+        if($this->getEnabled()) {
+            $path = $this->getUrl().$path;
 
             $ci = curl_init();
             curl_setopt($ci, CURLOPT_RETURNTRANSFER, 1);
