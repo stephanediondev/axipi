@@ -18,7 +18,7 @@ class RelationRepository extends EntityRepository {
             $query->setParameter(':id', $parameters['id']);
         }
 
-        return $query->getQuery()->getOneOrNullResult();
+        return $query->getQuery()->setMaxResults(1)->getOneOrNullResult();
     }
 
     public function getList($parameters = []) {

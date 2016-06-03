@@ -21,7 +21,7 @@ class LanguageRepository extends EntityRepository {
             $query->setParameter(':id', $parameters['code']);
         }
 
-        return $query->getQuery()->getOneOrNullResult();
+        return $query->getQuery()->setMaxResults(1)->getOneOrNullResult();
     }
 
     public function getList($parameters = []) {

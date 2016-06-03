@@ -40,7 +40,7 @@ class ItemRepository extends EntityRepository {
             $query->setParameter(':active', 1);
         }
 
-        return $query->getQuery()->getOneOrNullResult();
+        return $query->getQuery()->setMaxResults(1)->getOneOrNullResult();
     }
 
     public function getList($parameters = []) {
@@ -108,5 +108,49 @@ class ItemRepository extends EntityRepository {
         $query->orderBy('pge.slug');
 
         return $query->getQuery()->getResult();
+    }
+
+    public function testSlug($data) {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQueryBuilder();
+        $query->addSelect('pge', 'cmp');
+        $query->from('AxipiCoreBundle:Item', 'pge');
+        $query->leftJoin('pge.component', 'cmp');
+
+        $query->andWhere('pge.slug = :slug');
+        $query->setParameter(':slug', $data->getSlug());
+
+        $query->andWhere('pge.language = :language');
+        $query->setParameter(':language', $data->getLanguage());
+
+        if($data->getId()) {
+            $query->andWhere('pge.id != :id');
+            $query->setParameter(':id', $data->getId());
+        }
+
+        return $query->getQuery()->setMaxResults(1)->getOneOrNullResult();
+    }
+
+    public function testCode($data) {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQueryBuilder();
+        $query->addSelect('pge', 'cmp');
+        $query->from('AxipiCoreBundle:Item', 'pge');
+        $query->leftJoin('pge.component', 'cmp');
+
+        $query->andWhere('pge.code = :code');
+        $query->setParameter(':code', $data->getCode());
+
+        $query->andWhere('pge.language = :language');
+        $query->setParameter(':language', $data->getLanguage());
+
+        if($data->getId()) {
+            $query->andWhere('pge.id != :id');
+            $query->setParameter(':id', $data->getId());
+        }
+
+        return $query->getQuery()->setMaxResults(1)->getOneOrNullResult();
     }
 }
