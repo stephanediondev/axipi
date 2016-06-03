@@ -112,7 +112,14 @@ class ItemRepository extends EntityRepository
             }
         }
 
-        $query->orderBy('pge.slug');
+        if(isset($parameters['category']) == 1) {
+            if($parameters['category'] == 'page') {
+                $query->orderBy('pge.slug');
+            }
+            if($parameters['category'] == 'widget') {
+                $query->orderBy('pge.ordering');
+            }
+        }
 
         return $query->getQuery()->getResult();
     }

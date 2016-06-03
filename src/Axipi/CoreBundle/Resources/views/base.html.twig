@@ -11,7 +11,7 @@
 {% endif %}
 {% if languages|length > 1 %}
     {% for language in languages %}
-        <link rel="alternate" hreflang="{{ language.code }}" href="{{ path('axipi_core_slug', {language: language.code}) }}">
+        <link rel="alternate" hreflang="{{ language.code }}" href="{{ buildLink({language: language.code, 'slug': ''}) }}">
     {% endfor %}
 {% endif %}
 {% endblock %}
