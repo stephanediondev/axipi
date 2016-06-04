@@ -26,11 +26,18 @@ class ComponentManager extends AbstractManager
 
         $this->em->persist($data);
         $this->em->flush();
+
+        $event = new ComponentEvent($data);
+        $this->eventDispatcher->dispatch('component.after_persist', $event);
+
         return $data->getId();
     }
 
     public function remove($data)
     {
+        $event = new ComponentEvent($data);
+        $this->eventDispatcher->dispatch('component.before_remove', $event);
+
         $this->em->remove($data);
         $this->em->flush();
     }

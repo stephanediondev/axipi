@@ -26,11 +26,18 @@ class LanguageManager extends AbstractManager
 
         $this->em->persist($data);
         $this->em->flush();
+
+        $event = new LanguageEvent($data);
+        $this->eventDispatcher->dispatch('language.after_persist', $event);
+
         return $data->getId();
     }
 
     public function remove($data)
     {
+        $event = new LanguageEvent($data);
+        $this->eventDispatcher->dispatch('language.before_remove', $event);
+
         $this->em->remove($data);
         $this->em->flush();
     }

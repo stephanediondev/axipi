@@ -57,11 +57,18 @@ class UserManager extends AbstractManager
 
         $this->em->persist($data);
         $this->em->flush();
+
+        $event = new UserEvent($data);
+        $this->eventDispatcher->dispatch('user.after_persist', $event);
+
         return $data->getId();
     }
 
     public function remove($data)
     {
+        $event = new UserEvent($data);
+        $this->eventDispatcher->dispatch('user.before_remove', $event);
+
         $this->em->remove($data);
         $this->em->flush();
     }

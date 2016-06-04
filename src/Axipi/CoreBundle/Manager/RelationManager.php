@@ -26,11 +26,18 @@ class RelationManager extends AbstractManager
 
         $this->em->persist($data);
         $this->em->flush();
+
+        $event = new RelationEvent($data);
+        $this->eventDispatcher->dispatch('relation.after_persist', $event);
+
         return $data->getId();
     }
 
     public function remove($data)
     {
+        $event = new RelationEvent($data);
+        $this->eventDispatcher->dispatch('relation.before_remove', $event);
+
         $this->em->remove($data);
         $this->em->flush();
     }

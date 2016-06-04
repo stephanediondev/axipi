@@ -26,11 +26,18 @@ class ZoneManager extends AbstractManager
 
         $this->em->persist($data);
         $this->em->flush();
+
+        $event = new ZoneEvent($data);
+        $this->eventDispatcher->dispatch('zone.after_persist', $event);
+
         return $data->getId();
     }
 
     public function remove($data)
     {
+        $event = new ZoneEvent($data);
+        $this->eventDispatcher->dispatch('zone.before_remove', $event);
+
         $this->em->remove($data);
         $this->em->flush();
     }
