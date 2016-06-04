@@ -1,7 +1,7 @@
 <!-- Content / Language Selector -->
-<div id="widget-{{ widget.code }}" class="col-lg-2 pull-right">
+<div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('col-lg-2 pull-right') }}">
     <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="{{ widget.attribute('button_class')|default('btn btn-default dropdown-toggle') }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Language <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">

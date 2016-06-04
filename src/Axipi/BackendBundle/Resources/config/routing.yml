@@ -88,3 +88,9 @@ axipi_backend_search:
     defaults:
         _controller: "axipi_backend_controller_search:dispatchAction"
         action: "index"
+
+axipi_backend_info:
+    path:  /info/{action}
+    defaults:
+        _controller: "axipi_backend_controller_info:dispatchAction"
+        action: "index"

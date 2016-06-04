@@ -32,11 +32,15 @@
                         {% if widget.parent %}{{ macro.read_field('item.parent'|trans({}, 'axipi_backend'), widget.parent.title) }}{% endif %}
                         {{ macro.read_field('item.code'|trans({}, 'axipi_backend'), widget.code) }}
                         {{ macro.read_field('item.ordering'|trans({}, 'axipi_backend'), widget.ordering) }}
-                    </div>
-                    <div class="col-lg-4">
                         {{ macro.read_field('item.title'|trans({}, 'axipi_backend'), widget.title) }}
                         {{ macro.read_field('item.zone'|trans({}, 'axipi_backend'), widget.zone.code) }}
                         {{ macro.read_field('item.isActive'|trans({}, 'axipi_backend'), widget.isActive) }}
+                    </div>
+                    <div class="col-lg-8">
+                        {% set attributes = widget.component.attributesSchema|jsonDecode %}
+                        {% for k, v in attributes %}
+                            {{ macro.read_field(k, widget.attribute(k)) }}
+                        {% endfor %}
                     </div>
                 </div>
             </div>

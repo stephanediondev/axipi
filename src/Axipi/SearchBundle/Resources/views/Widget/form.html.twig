@@ -1,8 +1,8 @@
 <!-- Content / Menu -->
-<div id="widget-{{ widget.code }}" class="col-lg-2">
+<div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('col-lg-2') }}">
     <form method="get" class="form-inline" action="{{ buildLink(widget.parent) }}">
         <div class="form-group">
-            <input class="form-control" type="text" name="q" value="{{ request.get('q') }}" placeholder="{{ 'widget.placeholder'|trans({}, 'axipi_search') }}">
+            <input class="form-control" type="text" name="q" value="{{ request.get('q') }}" placeholder="{{ widget.attribute('placeholder')|default('widget.placeholder'|trans({}, 'axipi_search')) }}">
         </div>
     </form>
 </div>
