@@ -130,6 +130,10 @@ class PageController extends AbstractController
     {
         $parameters->set('components', $this->componentManager->getList(['category' => 'page', 'active' => true]));
 
+        $languages = $this->languageManager->getList(['active' => true]);
+        $this->container->get('axipi_core_manager_default')->setLanguages($languages);
+        $parameters->set('languages', $languages);
+
         return $this->render('AxipiBackendBundle:Page:read.html.twig', $parameters->all());
     }
 

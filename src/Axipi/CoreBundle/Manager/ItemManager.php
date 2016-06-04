@@ -31,6 +31,9 @@ class ItemManager extends AbstractManager
                 if(isset($attributes[$key]) == 1 && $attributes[$key]['type'] == 'Symfony\Component\Form\Extension\Core\Type\FileType') {
                     if(is_object($attribute) && $attribute instanceof UploadedFile) {
                         if($attribute->isValid()) {
+                            if(strstr($attribute->getClientOriginalName(), '.php')) {
+                                continue;
+                            }
                             if(file_exists('uploads/'.$data->getAttribute($key))) {
                                 @unlink('uploads/'.$data->getAttribute($key));
                             }
