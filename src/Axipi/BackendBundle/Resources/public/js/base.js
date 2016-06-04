@@ -35,6 +35,24 @@ tinymce.init({
     relative_urls: true,
     document_base_url: axipi_core_home,
     visualblocks_default_state: true,
+    content_css : '../vendor/bootstrap/dist/css/bootstrap.min.css',
+    style_formats: [
+      { title: 'Headers', items: [
+        { title: 'h1', block: 'h1' },
+        { title: 'h2', block: 'h2' },
+        { title: 'h3', block: 'h3' },
+        { title: 'h4', block: 'h4' },
+        { title: 'h5', block: 'h5' },
+        { title: 'h6', block: 'h6' }
+      ] },
+
+      { title: 'Blocks', items: [
+        { title: 'p', block: 'p' },
+        { title: 'p.lead', block: 'p', classes: 'lead' },
+        { title: 'div', block: 'div' },
+        { title: 'pre', block: 'pre' }
+      ] }
+    ],
     plugins: 'advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker searchreplace wordcount visualblocks visualchars code fullscreen media nonbreaking table contextmenu directionality template paste',
     toolbar1: 'bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect',
     toolbar2: 'cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code',
