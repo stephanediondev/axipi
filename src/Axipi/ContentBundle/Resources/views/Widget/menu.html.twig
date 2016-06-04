@@ -1,9 +1,9 @@
 <!-- Content / Menu -->
-<div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('col-lg-8') }}">
+<div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('col-lg-8 pull-left') }}">
     {% if widget.attribute('display_title')|default(false) %}
         <{{ widget.attribute('title_tag')|default('h3') }}>{{ widget.title }}</{{ widget.attribute('title_tag')|default('h3') }}>
     {% endif %}
-    <ul class="{{ widget.attribute('ul_class')|default('nav nav-pills') }}">
+    <ul class="{{ widget.attribute('ul_class')|default('nav navbar-nav') }}">
         {% for relation in relations %}
             <li{% if page.slug == relation.page.slug %} class="active"{% endif %}><a href="{{ buildLink(relation.page) }}">{{ relation.title|default(relation.page.title) }}</a></li>
         {% endfor %}

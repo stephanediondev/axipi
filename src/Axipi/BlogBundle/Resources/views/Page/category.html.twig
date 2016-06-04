@@ -13,7 +13,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <h2><a href="{{ buildLink(post) }}">{{ post.title }}</a></h2>
-                {{ post.attribute('description')|raw }}
+                {% set content = post.attribute('description')|split('<p><!-- pagebreak --></p>') %}
+                {{ convertText(content|first|raw) }}
+                {% if content|length > 1 %}
+                    <p><a class="btn btn-primary" href="{{ buildLink(post) }}">Read More <i class="fa fa-angle-right"></i></a></p>
+                {% endif %}
                 <hr>
             </div>
         </div>

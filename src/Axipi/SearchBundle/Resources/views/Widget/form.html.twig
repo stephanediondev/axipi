@@ -1,6 +1,6 @@
 <!-- Content / Menu -->
-<div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('col-lg-2') }}">
-    <form method="get" class="form-inline" action="{{ buildLink(widget.parent) }}">
+<div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('col-lg-2 pull-right text-right') }}">
+    <form method="get" class="{{ widget.attribute('form_class')|default('navbar-form navbar-left') }}" action="{{ buildLink(widget.parent) }}">
         <div class="form-group">
             <input class="form-control" type="text" name="q" value="{{ request.get('q') }}" placeholder="{{ widget.attribute('placeholder')|default('widget.placeholder'|trans({}, 'axipi_search')) }}">
         </div>

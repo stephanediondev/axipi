@@ -8,14 +8,6 @@
         <div class="col-lg-12">
             {% embed 'AxipiBackendBundle::block_title.html.twig' %}
                 {% block block_title %}
-                    <span><i class="fa fa-{{ 'icons.info'|trans({}, 'axipi_backend') }}"></i>{{ 'info'|trans({}, 'axipi_backend') }}</span>
-                {% endblock %}
-                {% block block_title_actions %}
-                {% endblock %}
-            {% endembed %}
-
-            {% embed 'AxipiBackendBundle::block_title.html.twig' %}
-                {% block block_title %}
                     <span><i class="fa fa-{{ 'icons.info'|trans({}, 'axipi_backend') }}"></i>{{ 'info_server'|trans({}, 'axipi_backend') }}</span>
                 {% endblock %}
                 {% block block_title_actions %}

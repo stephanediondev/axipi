@@ -117,7 +117,7 @@ class PageController extends AbstractController
             if($form->isValid()) {
                 $id = $this->itemManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language_code' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
             }
         }
 
@@ -145,7 +145,7 @@ class PageController extends AbstractController
             if($form->isValid()) {
                 $this->itemManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language_code' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
             }
         }
 
@@ -164,9 +164,9 @@ class PageController extends AbstractController
                 $this->itemManager->remove($parameters->get('page'));
                 $this->addFlash('success', 'deleted');
                 if($parameters->get('page')->getParent()) {
-                    return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language_code' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $parameters->get('page')->getParent()->getId()]);
+                    return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $parameters->get('page')->getParent()->getId()]);
                 } else {
-                    return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language_code' => $parameters->get('language')->getCode()]);
+                    return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode()]);
                 }
             }
         }
@@ -207,7 +207,7 @@ class PageController extends AbstractController
                 'id' => $id,
                 'title' => $title,
                 'icon' => $component->geticon(),
-                'href' => $this->generateUrl('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language_code' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]),
+                'href' => $this->generateUrl('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]),
             ];
         }
 

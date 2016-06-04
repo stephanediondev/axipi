@@ -8,17 +8,21 @@ use Axipi\CoreBundle\Controller\AbstractController;
 
 class XmlController extends AbstractController
 {
-    public function getPage(Request $request, $page)
+    public function getPage($parameters)
     {
-        $parameters = new ParameterBag();
-        $parameters->set('request', $request);
-        $parameters->set('page', $page);
-        $parameters->set('results', $this->get('axipi_core_manager_item')->getList(['category' => 'page', 'exclude_sitemap' => true, 'active' => true]));
+        $filters = [];
+        $filters['category'] = 'page';
+        $filters['exclude_sitemap'] = true;
+        $filters['active'] = true;
+        if(count($parameters->get('languages')) > 1) {
+            $filters['language_code'] = $parameters->get('page')->getLanguage()->getCode();
+        }
+        $parameters->set('results', $this->get('axipi_core_manager_item')->getList($filters));
 
-        if($page->getTemplate()) {
-            $template = $page->getTemplate();
+        if($parameters->get('page')->getTemplate()) {
+            $template = $parameters->get('page')->getTemplate();
         } else {
-            $template = $page->getComponent()->getTemplate();
+            $template = $parameters->get('page')->getComponent()->getTemplate();
         }
         $response = $this->render($template, $parameters->all());
         $response->headers->set('Content-Type', 'text/xml');
