@@ -27,6 +27,12 @@ class LanguageManager extends AbstractManager
         $this->em->persist($data);
         $this->em->flush();
 
+        $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
+        $cache_id = 'axipi/languages';
+        if($cacheDriver->contains($cache_id)) {
+            $cacheDriver->delete($cache_id);
+        }
+
         $event = new LanguageEvent($data);
         $this->eventDispatcher->dispatch('language.after_persist', $event);
 
@@ -35,6 +41,12 @@ class LanguageManager extends AbstractManager
 
     public function remove($data)
     {
+        $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
+        $cache_id = 'axipi/languages';
+        if($cacheDriver->contains($cache_id)) {
+            $cacheDriver->delete($cache_id);
+        }
+
         $event = new LanguageEvent($data);
         $this->eventDispatcher->dispatch('language.before_remove', $event);
 

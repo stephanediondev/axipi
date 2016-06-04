@@ -69,11 +69,12 @@ class ItemRepository extends EntityRepository
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
-        $query->addSelect('pge', 'cmp', 'lng');
+        $query->addSelect('pge', 'cmp', 'lng', 'pge_parent');
         $query->from('AxipiCoreBundle:Item', 'pge');
         $query->leftJoin('pge.component', 'cmp');
         $query->leftJoin('pge.language', 'lng');
         $query->leftJoin('pge.zone', 'zon');
+        $query->leftJoin('pge.parent', 'pge_parent');
 
         if(isset($parameters['ids']) == 1) {
             $query->where('pge.id IN ('.implode(',', $parameters['ids']).')');

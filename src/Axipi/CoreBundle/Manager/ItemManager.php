@@ -22,11 +22,11 @@ class ItemManager extends AbstractManager
     public function persist($data)
     {
         //remove from cache
-        $cacheDriver = new \Doctrine\Common\Cache\ApcCache();
+        /*$cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
         $cache_id = 'axipi/'.$data->getLanguage()->getCode().'/'.$data->getSlug();
         if($cacheDriver->contains($cache_id)) {
             $cacheDriver->delete($cache_id);
-        }
+        }*/
 
         //manage attributes
         $attributes = json_decode($data->getComponent()->getAttributesSchema(), true);

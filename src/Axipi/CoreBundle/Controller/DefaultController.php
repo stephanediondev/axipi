@@ -35,7 +35,19 @@ class DefaultController extends AbstractController
         $parameters = new ParameterBag();
         $parameters->set('request', $request);
 
-        $languages = $this->languageManager->getList(['active' => true]);
+        //$redis = new \Redis();
+        //$redis->connect('localhost', 6379);
+        $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
+        //$cacheDriver->setRedis($redis);
+
+        $cache_id = 'axipi/languages';
+        if($cacheDriver->contains($cache_id)) {
+            $languages = $cacheDriver->fetch($cache_id);
+        } else {
+            $languages = $this->languageManager->getList(['active' => true]);
+            $cacheDriver->save($cache_id, $languages);
+        }
+
         $this->defaultManager->setLanguages($languages);
         $parameters->set('languages', $languages);
 
