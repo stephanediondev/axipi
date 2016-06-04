@@ -24,6 +24,9 @@ class ItemType extends AbstractType
         $builder->add('template', TextType::class,
             [
                 'required' => false,
+                'attr' => [
+                    'data-default' => $options['item']->getComponent()->getTemplate(),
+                ],
             ]
         );
 
@@ -35,7 +38,7 @@ class ItemType extends AbstractType
                 'choices' => $options['items'],
                 'choice_label' => function ($item) {
                     return $item->getTitle();
-                }
+                },
             ]
         );
 
