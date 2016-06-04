@@ -7,6 +7,17 @@ use Axipi\CoreBundle\Entity\Item;
 class ItemRepository extends EntityRepository
 {
     public function getOne($parameters = []) {
+        $cacheDriver = new \Doctrine\Common\Cache\ApcCache();
+
+        $cache_id = false;
+        /*if(isset($parameters['slug']) == 1 && isset($parameters['language_code']) == 1) {
+            $cache_id = 'axipi/'.$parameters['language_code'].'/'.$parameters['slug'];
+        }
+
+        if($cache_id && $cacheDriver->contains($cache_id)) {
+            return $cacheDriver->fetch($cache_id);
+        }*/
+
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
@@ -47,7 +58,11 @@ class ItemRepository extends EntityRepository
             $query->setParameter(':active', 1);
         }
 
-        return $query->getQuery()->setMaxResults(1)->getOneOrNullResult();
+        $result = $query->getQuery()->setMaxResults(1)->getOneOrNullResult();
+        if($cache_id) {
+            $cacheDriver->save($cache_id, $result);
+        }
+        return $result;
     }
 
     public function getList($parameters = []) {

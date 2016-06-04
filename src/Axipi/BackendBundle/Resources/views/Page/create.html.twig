@@ -45,13 +45,6 @@
                         {{ form_row(form.code) }}
                         {{ form_row(form.title) }}
                         {{ form_row(form.slug) }}
-                        {{ form_row(form.titleSeo) }}
-                        {{ form_row(form.descriptionSeo) }}
-                        {{ form_row(form.titleSocial) }}
-                        {{ form_row(form.descriptionSocial) }}
-                        {{ form_row(form.meta) }}
-                        {{ form_row(form.style) }}
-                        {{ form_row(form.script) }}
                         {{ form_row(form.excludeSitemap) }}
                         {{ form_row(form.excludeSearch) }}
                         {{ form_row(form.isActive) }}
@@ -59,6 +52,19 @@
                     </div>
                     <div class="col-lg-8">
                         {{ form_row(form.attributesChange) }}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                {{ form_row(form.titleSeo) }}
+                                {{ form_row(form.descriptionSeo) }}
+                                {{ form_row(form.titleSocial) }}
+                                {{ form_row(form.descriptionSocial) }}
+                            </div>
+                            <div class="col-lg-6">
+                                {{ form_row(form.meta) }}
+                                {{ form_row(form.style) }}
+                                {{ form_row(form.script) }}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {{ form_end(form) }}
