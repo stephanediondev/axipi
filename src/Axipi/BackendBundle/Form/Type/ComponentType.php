@@ -45,7 +45,7 @@ class ComponentType extends AbstractType
 
         $builder->add('template', TextType::class,
             [
-                'required' => true,
+                'required' => false,
             ]
         );
 

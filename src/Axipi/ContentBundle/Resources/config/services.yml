@@ -7,6 +7,10 @@ services:
         class: Axipi\ContentBundle\Controller\LinkController
         parent: "axipi_core_controller_abstract"
 
+    axipi_content_controller_file:
+        class: Axipi\ContentBundle\Controller\FileController
+        parent: "axipi_core_controller_abstract"
+
     axipi_content_controller_home:
         class: Axipi\ContentBundle\Controller\HomeController
         parent: "axipi_core_controller_abstract"
