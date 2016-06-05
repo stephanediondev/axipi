@@ -5,6 +5,41 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `comment`
+--
+
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE IF NOT EXISTS `comment` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `author` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `website` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `message` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
+  `date_created` datetime NOT NULL,
+  `date_modified` datetime DEFAULT NULL,
+  `item_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_9474526C126F525E` (`item_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`id`, `author`, `email`, `website`, `message`, `is_active`, `date_created`, `date_modified`, `item_id`) VALUES
+(1, 'author', 'email', 'website', 'message', 1, '2016-06-05 06:56:03', '2016-06-05 06:56:03', 7),
+(2, 'author', 'email', 'website', 'message', 1, '2016-06-05 06:56:29', '2016-06-05 06:56:29', 7),
+(3, 'test', 'test', 'test', 'test', 1, '2016-06-05 06:58:57', '2016-06-05 06:58:57', 7),
+(4, 'test', 'test', 'test', 'test', 1, '2016-06-05 06:59:25', '2016-06-05 06:59:25', 7),
+(5, 'test', 'test', 'test', 'test', 1, '2016-06-05 07:51:05', '2016-06-05 07:51:05', 7),
+(6, 'a', 'a', 'a', 'a', 1, '2016-06-05 07:53:29', '2016-06-05 07:53:29', 7),
+(7, 'b', 'ba@sdion.net', 'b', 'b', 1, '2016-06-05 08:02:57', '2016-06-05 08:02:57', 7),
+(8, 'a', 'ba@sdion.net', 'a', 'ert', 1, '2016-06-05 08:06:50', '2016-06-05 08:06:50', 7);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `component`
 --
 
@@ -54,7 +89,7 @@ INSERT INTO `component` (`id`, `zone_id`, `parent`, `category`, `service`, `temp
 (18, 4, NULL, 'widget', 'axipi_content_widget_icon', 'AxipiContentBundle:Widget:icon.html.twig', 'Content / Favicon', 'star-o', 0, '{\r\n    "image": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\FileType",\r\n        "options": {\r\n            "required": "true"\r\n        }\r\n    }\r\n}', 0, 0, 1, '2016-05-23 20:06:34', '2016-05-31 19:05:27'),
 (19, 4, NULL, 'widget', 'axipi_twitter_widget_card', 'AxipiTwitterBundle:Widget:card.html.twig', 'Twitter / Card', 'twitter', 0, '{\r\n    "site": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "true"\r\n        }\r\n    }\r\n}', 0, 0, 1, '2016-05-25 17:11:49', '2016-05-25 17:26:48'),
 (20, 4, NULL, 'widget', 'axipi_facebook_widget_opengraph', 'AxipiFacebookBundle:Widget:opengraph.html.twig', 'Facebook / Opengraph', 'facebook', 0, '{\r\n    "site": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "true"\r\n        }\r\n    }\r\n}', 0, 0, 1, '2016-05-25 17:13:13', '2016-05-25 17:23:30'),
-(21, NULL, NULL, 'page', 'axipi_contact_controller_form', 'AxipiContactBundle:Page:form.html.twig', 'Contact / Form', 'envelope-o', 0, NULL, 0, 0, 1, '2016-05-25 17:48:30', '2016-05-25 17:48:30'),
+(21, NULL, NULL, 'page', 'axipi_contact_controller_form', 'AxipiContactBundle:Page:form.html.twig', 'Contact / Form', 'envelope-o', 0, '{\r\n    "recipient_name": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "true"\r\n        }\r\n    },\r\n    "recipient_email": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "true"\r\n        }\r\n    },\r\n    "description": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextareaType",\r\n        "options": {\r\n            "required": "false",\r\n            "attr": {\r\n                "class":"wysiwyg"\r\n            }\r\n        }\r\n    }\r\n}', 0, 0, 1, '2016-05-25 17:48:30', '2016-06-05 08:42:39'),
 (22, NULL, NULL, 'page', 'axipi_google_controller_map', 'AxipiGoogleBundle:Page:map.html.twig', 'Google / Map', 'map-o', 0, '{\r\n    "api_key": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "true"\r\n        }\r\n    },\r\n    "latitude": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "true"\r\n        }\r\n    },\r\n    "longitude": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "true"\r\n        }\r\n    },\r\n    "zoom": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "false",\r\n            "attr": {\r\n                "data-default": "15"\r\n            }\r\n        }\r\n    },\r\n    "height": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "false",\r\n            "attr": {\r\n                "data-default": "400"\r\n            }\r\n        }\r\n    },\r\n    "infowindow": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextareaType",\r\n        "options": {\r\n            "required": "false",\r\n"attr": {"class":"wysiwyg"}\r\n        }\r\n    }\r\n}', 0, 0, 1, '2016-05-25 20:19:27', '2016-06-04 07:41:57'),
 (23, 5, 10, 'widget', 'axipi_blog_widget_categories', 'AxipiBlogBundle:Widget:categories.html.twig', 'Blog / Categories', 'bars', 0, '{\r\n    "display_title": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\CheckboxType",\r\n        "options": {\r\n            "required": "false"\r\n        }\r\n    },\r\n    "title_tag": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "false"\r\n        }\r\n    },\r\n    "div_class": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "false"\r\n        }\r\n    },\r\n    "ul_class": {\r\n        "type": "Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\TextType",\r\n        "options": {\r\n            "required": "false"\r\n        }\r\n    }\r\n}', 0, 0, 1, '2016-05-26 20:01:00', '2016-06-04 03:33:34'),
 (24, NULL, NULL, 'page', 'axipi_sitemap_controller_xml', 'AxipiSitemapBundle:Page:xml.xml.twig', 'Sitemap / Xml', 'code', 0, NULL, 1, 1, 1, '2016-05-27 09:53:41', '2016-06-01 18:44:38'),
@@ -120,7 +155,7 @@ INSERT INTO `item` (`id`, `language_id`, `component_id`, `zone_id`, `parent`, `t
 (9, 1, 13, NULL, NULL, NULL, 'Home', 'home', 0, NULL, NULL, NULL, NULL, NULL, '{"description":"<p>test update<\\/p>\\r\\n<p>Nunc ante enim, consectetur ac elit in, maximus blandit turpis. Praesent facilisis venenatis urna, non porta felis rutrum nec. Fusce at arcu at dui <a href=\\"[page:17:map]\\">lobortis<\\/a> tristique in eu leo. Donec rhoncus pharetra lectus id accumsan. Vivamus viverra magna leo, quis hendrerit nisl feugiat eget. Duis ornare justo et mi convallis, vitae ultrices elit ornare. Mauris dignissim, nisi a pretium vehicula, leo neque accumsan sem, non faucibus purus nulla posuere leo.<\\/p>\\r\\n<p>Nunc bibendum hendrerit felis id volutpat. Praesent cursus libero eget tellus convallis, vel iaculis lacus <a href=\\"[page:5:blog]\\">commodo<\\/a>. Vestibulum turpis orci, ultrices eu felis ut, rutrum mollis odio. Maecenas eget ex et elit <a href=\\"[page:18:sitemap.xml]\\">rhoncus<\\/a> eleifend. Aliquam non felis metus. Aenean rutrum, leo eu ultricies molestie, ex felis sodales magna, sed ullamcorper felis ligula gravida quam. Proin at dui leo. Proin iaculis ornare odio non porta.<\\/p>\\r\\n<p>[widgets:footer]<\\/p>\\r\\n<p><img src=\\"..\\/files\\/test1\\/3759312.jpg\\" width=\\"850\\" height=\\"565\\" \\/><\\/p>"}', 0, 0, 1, '2016-05-20 23:46:13', '2016-06-04 08:39:41', NULL, NULL, NULL),
 (10, 1, 3, NULL, NULL, NULL, 'a', 'a', 0, 'a', NULL, NULL, NULL, NULL, '{"description":"<p>yopla<\\/p>"}', 0, 0, 1, '2016-05-21 00:08:48', '2016-06-03 16:11:52', NULL, NULL, NULL),
 (11, 1, 3, NULL, 10, NULL, 'b', 'b', 0, 'a/b', NULL, NULL, NULL, NULL, '{"description":"<p><strong>test<\\/strong><\\/p>\\r\\n<p><em>test<\\/em> esr<\\/p>"}', 0, 0, 1, '2016-05-21 00:09:01', '2016-05-21 18:50:25', NULL, NULL, NULL),
-(12, 1, 3, NULL, 11, NULL, 'c', 'c', 0, 'a/b/c', NULL, NULL, NULL, NULL, '{"description":"<p>Nunc bibendum hendrerit felis id volutpat. Praesent cursus libero eget tellus convallis, vel iaculis lacus <a href=\\"[page:11:a\\/b]\\">commodo<\\/a>. Vestibulum turpis orci, ultrices eu felis ut, rutrum mollis odio. Maecenas eget ex et elit <a href=\\"[page:14:album\\/media]\\">rhoncus<\\/a> eleifend. Aliquam non felis metus. Aenean rutrum, leo eu ultricies molestie, ex felis sodales magna, sed ullamcorper felis ligula gravida quam. Proin at dui leo. Proin iaculis ornare odio non porta.<\\/p>\\r\\n<p><img style=\\"background-color: transparent;\\" src=\\"..\\/files\\/1260524.jpg\\" alt=\\"\\" width=\\"850\\" height=\\"565\\" \\/><\\/p>","test":"test"}', 0, 0, 1, '2016-05-21 00:09:16', '2016-05-29 14:46:42', NULL, NULL, NULL),
+(12, 1, 3, NULL, 11, NULL, 'c', 'c', 0, 'a/b/c', NULL, NULL, NULL, NULL, '{"description":"<p>Nunc bibendum hendrerit felis id volutpat. Praesent cursus libero eget tellus convallis, vel iaculis lacus <a href=\\"[page:11:a\\/b]\\">commodo<\\/a>. Vestibulum turpis orci, ultrices eu felis ut, rutrum mollis odio. Maecenas eget ex et elit <a href=\\"[page:123:contact-form]\\">rhoncus<\\/a> eleifend. Aliquam non felis metus. Aenean rutrum, leo eu ultricies molestie, ex felis sodales magna, sed ullamcorper felis ligula gravida quam. Proin at dui leo. Proin iaculis ornare odio non porta.<\\/p>\\r\\n<p><img style=\\"background-color: transparent;\\" src=\\"..\\/files\\/1260524.jpg\\" alt=\\"\\" width=\\"850\\" height=\\"565\\" \\/><\\/p>","test":"test"}', 0, 0, 1, '2016-05-21 00:09:16', '2016-06-05 15:47:17', NULL, NULL, NULL),
 (13, 1, 9, NULL, NULL, NULL, 'Site perso', 'sdion.net', 0, 'sdion', NULL, NULL, NULL, NULL, '{"url":"https:\\/\\/sdion.net"}', 0, 0, 1, '2016-05-21 08:37:22', '2016-05-21 08:37:22', NULL, NULL, NULL),
 (17, 1, 22, NULL, NULL, NULL, 'Map', 'map', 0, 'map', NULL, NULL, NULL, NULL, '{"api_key":"AIzaSyA6iB9JEQ4XiEez_dgv3hoJWlAj4DOCGWo","latitude":"48.8236679","longitude":"2.3761298","zoom":"15","infowindow":"<p><strong>test<\\/strong> test<\\/p>\\r\\n<p><strong>test<\\/strong> <a href=\\"[page:6:blog\\/category]\\">test<\\/a><\\/p>","height":null}', 0, 0, 1, '2016-05-25 20:20:05', '2016-06-04 07:42:31', NULL, NULL, NULL),
 (18, 1, 24, NULL, NULL, NULL, 'test sitemap.xml', 'sitemap.xml', 0, 'sitemap.xml', NULL, NULL, NULL, NULL, NULL, 0, 0, 1, '2016-05-27 09:53:57', '2016-06-01 18:44:12', NULL, NULL, NULL),
@@ -153,7 +188,8 @@ INSERT INTO `item` (`id`, `language_id`, `component_id`, `zone_id`, `parent`, `t
 (119, 1, 28, 3, NULL, NULL, 'Select language', 'en-5751e5d70da2a', 0, NULL, NULL, NULL, NULL, NULL, '{"div_class":null,"button_class":null}', 0, 0, 1, '2016-06-03 20:17:27', '2016-06-04 03:38:52', NULL, NULL, NULL),
 (120, 2, 28, 3, NULL, NULL, 'Langue switch', 'fr-5751e70d4c0eb', 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 1, '2016-06-03 20:22:37', '2016-06-03 20:22:37', NULL, NULL, NULL),
 (121, 1, 5, NULL, 3, NULL, 'test', 'en-57526c0defa6e', 0, 'album/test', NULL, NULL, NULL, NULL, '{"description":null,"thumbnail":"2016\\/06\\/1260524.jpg","thumbnail_mime":"text\\/x-php","thumbnail_size":12719}', 0, 0, 1, '2016-06-04 05:50:05', '2016-06-04 05:52:02', NULL, NULL, NULL),
-(122, 1, 25, NULL, NULL, NULL, 'Test file protected', 'en-57539c2b4a2f6', 0, 'test-file-protected', NULL, NULL, NULL, NULL, '{"file":"2016\\/06\\/lipsum.pdf","file_mime":"application\\/pdf","file_size":22888,"authentication_enabled":false,"authentication_user":"test","authentication_password":"yopla"}', 0, 0, 1, '2016-06-05 03:27:39', '2016-06-05 03:36:21', NULL, NULL, NULL);
+(122, 1, 25, NULL, NULL, NULL, 'Test file protected', 'en-57539c2b4a2f6', 0, 'test-file-protected', NULL, NULL, NULL, NULL, '{"file":"2016\\/06\\/lipsum.pdf","file_mime":"application\\/pdf","file_size":22888,"authentication_enabled":false,"authentication_user":"test","authentication_password":"yopla"}', 0, 0, 1, '2016-06-05 03:27:39', '2016-06-05 03:36:21', NULL, NULL, NULL),
+(123, 1, 21, NULL, NULL, NULL, 'Contact form', 'en-5753e58a7bd75', 0, 'contact-form', NULL, NULL, NULL, NULL, '{"recipient_name":"Test recipient name","recipient_email":"ba@sdion.net","description":"<p>Duis ipsum ligula, malesuada ac nibh a, luctus porttitor leo. Nunc ut pharetra quam. Praesent laoreet quam ullamcorper ultricies posuere. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi aliquet mauris non nulla elementum cursus. In sit amet lacinia risus, non congue ipsum. Proin ornare arcu in sapien molestie, volutpat sollicitudin orci auctor.<\\/p>\\r\\n<p>Mauris aliquet, odio sit amet euismod placerat, tellus nulla vestibulum augue, vitae dignissim orci orci quis odio. Cras eget fringilla ex. Suspendisse interdum nibh eget odio ultrices, ornare sodales risus elementum.<\\/p>"}', 0, 0, 1, '2016-06-05 08:40:42', '2016-06-05 08:50:58', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -216,7 +252,8 @@ INSERT INTO `relation` (`id`, `widget_id`, `page_id`, `title`, `ordering`, `is_a
 (8, 38, 5, NULL, 0, 1, '2016-06-01 18:06:12', '2016-06-01 18:06:12'),
 (9, 117, 116, NULL, -10, 1, '2016-06-03 19:11:07', '2016-06-03 19:11:41'),
 (10, 117, 19, NULL, 0, 1, '2016-06-03 19:11:22', '2016-06-03 19:11:22'),
-(11, 38, 122, NULL, 0, 1, '2016-06-05 03:32:26', '2016-06-05 03:32:26');
+(11, 38, 122, NULL, 0, 1, '2016-06-05 03:32:26', '2016-06-05 03:32:26'),
+(12, 38, 123, NULL, 0, 1, '2016-06-05 09:08:16', '2016-06-05 09:08:16');
 
 -- --------------------------------------------------------
 
@@ -279,6 +316,12 @@ INSERT INTO `zone` (`id`, `code`, `ordering`, `is_active`, `date_created`, `date
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `comment`
+--
+ALTER TABLE `comment`
+  ADD CONSTRAINT `FK_9474526C126F525E` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `component`

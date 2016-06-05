@@ -72,7 +72,7 @@
                     <div class="col-lg-8">
                         {% set attributes = page.component.attributesSchema|jsonDecode %}
                         {% for k, v in attributes %}
-                            {{ macro.read_field(k, page.attribute(k)) }}
+                            {{ macro.read_field(k, convertText(page.attribute(k))) }}
                         {% endfor %}
                     </div>
                 </div>
