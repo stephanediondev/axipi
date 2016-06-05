@@ -13,9 +13,13 @@ class RecaptchaType extends AbstractType
 {
     private $sitekey;
 
-    public function __construct($sitekey)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $this->sitekey = $sitekey;
+    }
+
+    public function finishView(FormView $view, FormInterface $form, array $options)
+    {
+        $child->vars['attr']['data-sitekey'] = $options['googleRecaptchaSiteKey'];
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -24,12 +28,13 @@ class RecaptchaType extends AbstractType
             'mapped' => false,
             'compound' => false,
             'attr' => array(
-                'data-sitekey' => $this->sitekey,
+                'data-sitekey' => '',//$this->sitekey,
                 'class' => 'g-recaptcha'
             ),
             'constraints' => array(
                 new Recaptcha(),
-            )
+            ),
+            'googleRecaptchaSiteKey' => '',
         ));
     }
 

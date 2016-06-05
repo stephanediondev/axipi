@@ -42,7 +42,7 @@ class CommentType extends AbstractType
             ]
         );
 
-        //$builder->add('recaptcha', RecaptchaType::class, []);
+        $builder->add('recaptcha', RecaptchaType::class, ['googleRecaptchaSiteKey' => $options['googleRecaptchaSiteKey']]);
 
         $builder->add('submit', SubmitType::class);
     }
@@ -63,6 +63,7 @@ class CommentType extends AbstractType
         $resolver->setDefaults(array(
             'translation_domain' => 'axipi_blog',
             'data_class' => Comment::class,
+            'googleRecaptchaSiteKey' => '',
         ));
     }
 }

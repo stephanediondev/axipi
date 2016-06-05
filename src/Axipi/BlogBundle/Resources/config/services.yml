@@ -12,6 +12,7 @@ services:
         parent: "axipi_core_controller_abstract"
         arguments:
             - "@axipi_core_manager_comment"
+            - "%google_recaptcha_sitekey%"
 
     axipi_blog_widget_categories:
         class: Axipi\BlogBundle\Widget\CategoriesWidget
