@@ -2,3 +2,11 @@ services:
     axipi_facebook_widget_opengraph:
         class: Axipi\FacebookBundle\Widget\OpengraphWidget
         parent: "axipi_core_controller_abstract"
+
+    axipi_facebook_widget_pageplugin:
+        class: Axipi\FacebookBundle\Widget\PagepluginWidget
+        parent: "axipi_core_controller_abstract"
+
+    axipi_facebook_widget_sdk:
+        class: Axipi\FacebookBundle\Widget\SdkWidget
+        parent: "axipi_core_controller_abstract"
