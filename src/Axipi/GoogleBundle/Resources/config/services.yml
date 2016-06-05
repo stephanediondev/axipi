@@ -14,3 +14,11 @@ services:
     axipi_google_widget_tagmanager:
         class: Axipi\GoogleBundle\Widget\TagmanagerWidget
         parent: "axipi_core_controller_abstract"
+
+    axipi_google_validator_constraints_recaptcha:
+        class: Axipi\GoogleBundle\Validator\Constraints\RecaptchaValidator
+        arguments:
+            - "%google_recaptcha_secretkey%"
+            - "@request_stack"
+        tags:
+            - { name: validator.constraint_validator, alias: axipi_google_validator_constraints_recaptcha }

@@ -10,6 +10,8 @@ services:
     axipi_blog_controller_post:
         class: Axipi\BlogBundle\Controller\PostController
         parent: "axipi_core_controller_abstract"
+        arguments:
+            - "@axipi_core_manager_comment"
 
     axipi_blog_widget_categories:
         class: Axipi\BlogBundle\Widget\CategoriesWidget

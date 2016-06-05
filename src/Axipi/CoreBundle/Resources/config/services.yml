@@ -20,6 +20,11 @@ services:
             - [ "setContainer", [ "@service_container" ] ]
 
     #manager
+    axipi_core_manager_comment:
+        class: Axipi\CoreBundle\Manager\CommentManager
+        parent: "axipi_core_manager_abstract"
+        public: false
+
     axipi_core_manager_component:
         class: Axipi\CoreBundle\Manager\ComponentManager
         parent: "axipi_core_manager_abstract"

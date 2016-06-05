@@ -21,3 +21,6 @@ parameters:
     elasticsearch_enabled: false
     elasticsearch_index:   axipi
     elasticsearch_url:     http://127.0.0.1:9200
+
+    google_recaptcha_sitekey: ~
+    google_recaptcha_secretkey: ~
