@@ -1,0 +1,4 @@
+services:
+    axipi_contact_controller_form:
+        class: Axipi\ContactBundle\Controller\FormController
+        parent: "axipi_core_controller_abstract"
