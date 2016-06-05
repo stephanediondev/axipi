@@ -13,14 +13,10 @@ class PostController extends AbstractController
 {
     protected $commentManager;
 
-    protected $googleRecaptchaSiteKey;
-
     public function __construct(
-        CommentManager $commentManager,
-        $googleRecaptchaSiteKey
+        CommentManager $commentManager
     ) {
         $this->commentManager = $commentManager;
-        $this->googleRecaptchaSiteKey = $googleRecaptchaSiteKey;
     }
 
     public function getPage($parameters)
@@ -29,7 +25,7 @@ class PostController extends AbstractController
         $comment->setItem($parameters->get('page'));
         $comment->setIsActive(true);
 
-        $form = $this->createForm(CommentType::class, $comment, ['googleRecaptchaSiteKey' => $this->googleRecaptchaSiteKey]);
+        $form = $this->createForm(CommentType::class, $comment, []);
         $form->handleRequest($parameters->get('request'));
 
         if($form->isSubmitted()) {

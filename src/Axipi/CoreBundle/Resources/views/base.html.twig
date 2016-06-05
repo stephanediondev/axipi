@@ -45,6 +45,16 @@
     </header>
 {% endblock %}
 
+<div class="container">
+    {% for type, flashes in app.session.flashbag.all() %}
+        {% for flash in flashes %}
+            <div class="alert alert-{{ type }}" role="alert">
+                <p>{{ flash }}</p>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+
 {% block before_content %}
     <div class="container">
         <div class="row">
@@ -75,6 +85,7 @@ var app_request_uri = '{{ app.request.uri }}';
 <script type="text/javascript" src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/axipicore/js/base.js') }}"></script>
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl={{ app.request.locale }}"></script>
 {% endblock %}
 
 </body>

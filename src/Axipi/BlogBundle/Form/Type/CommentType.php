@@ -11,6 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Email;
+
 use Axipi\GoogleBundle\Form\Type\RecaptchaType;
 use Axipi\CoreBundle\Entity\Comment;
 
@@ -21,28 +24,49 @@ class CommentType extends AbstractType
         $builder->add('author', TextType::class,
             [
                 'required' => true,
+                'constraints' => [
+                    new NotBlank(),
+                ],
+                'attr' => [
+                    'class' => 'form-control',
+                ],
             ]
         );
 
         $builder->add('email', TextType::class,
             [
                 'required' => false,
+                'constraints' => [
+                    new Email(),
+                ],
+                'attr' => [
+                    'class' => 'form-control',
+                ],
             ]
         );
 
         $builder->add('website', TextType::class,
             [
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                ],
             ]
         );
 
         $builder->add('message', TextareaType::class,
             [
                 'required' => true,
+                'constraints' => [
+                    new NotBlank(),
+                ],
+                'attr' => [
+                    'class' => 'form-control',
+                ],
             ]
         );
 
-        $builder->add('recaptcha', RecaptchaType::class, ['googleRecaptchaSiteKey' => $options['googleRecaptchaSiteKey']]);
+        $builder->add('recaptcha', RecaptchaType::class, []);
 
         $builder->add('submit', SubmitType::class);
     }
@@ -63,7 +87,6 @@ class CommentType extends AbstractType
         $resolver->setDefaults(array(
             'translation_domain' => 'axipi_blog',
             'data_class' => Comment::class,
-            'googleRecaptchaSiteKey' => '',
         ));
     }
 }
