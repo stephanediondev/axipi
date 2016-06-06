@@ -18,6 +18,11 @@ class ComponentRepository extends EntityRepository
             $query->setParameter(':id', $parameters['id']);
         }
 
+        if(isset($parameters['service']) == 1) {
+            $query->andWhere('cmp.service = :service');
+            $query->setParameter(':service', $parameters['service']);
+        }
+
         return $query->getQuery()->setMaxResults(1)->getOneOrNullResult();
     }
 
