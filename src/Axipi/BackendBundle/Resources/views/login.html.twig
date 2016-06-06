@@ -26,7 +26,7 @@
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     <p>
                         <label for="username" class="required">{{ 'user.username'|trans({}, 'axipi_backend') }}</label>
-                        <input type="text" id="username" name="username" required="required">
+                        <input type="email" id="username" name="username" required="required">
                     </p>
                     <p>
                         <label for="password" class="required">{{ 'user.password'|trans({}, 'axipi_backend') }}</label>
