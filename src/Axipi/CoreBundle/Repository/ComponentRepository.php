@@ -23,6 +23,16 @@ class ComponentRepository extends EntityRepository
             $query->setParameter(':service', $parameters['service']);
         }
 
+        if(isset($parameters['is_home']) == 1 && $parameters['is_home'] == true) {
+            $query->andWhere('cmp.isHome = :is_home');
+            $query->setParameter(':is_home', true);
+        }
+
+        if(isset($parameters['active']) == 1 && $parameters['active'] == true) {
+            $query->andWhere('cmp.isActive = :active');
+            $query->setParameter(':active', true);
+        }
+
         return $query->getQuery()->setMaxResults(1)->getOneOrNullResult();
     }
 
@@ -40,7 +50,7 @@ class ComponentRepository extends EntityRepository
 
         if(isset($parameters['active']) == 1 && $parameters['active'] == true) {
             $query->andWhere('cmp.isActive = :active');
-            $query->setParameter(':active', 1);
+            $query->setParameter(':active', true);
         }
 
         $query->orderBy('cmp.title');

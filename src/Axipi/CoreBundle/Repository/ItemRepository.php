@@ -55,7 +55,7 @@ class ItemRepository extends EntityRepository
 
         if(isset($parameters['active']) == 1 && $parameters['active'] == true) {
             $query->andWhere('pge.isActive = :active');
-            $query->setParameter(':active', 1);
+            $query->setParameter(':active', true);
         }
 
         $result = $query->getQuery()->setMaxResults(1)->getOneOrNullResult();
@@ -118,7 +118,7 @@ class ItemRepository extends EntityRepository
 
         if(isset($parameters['active']) == 1 && $parameters['active'] == true) {
             $query->andWhere('pge.isActive = :active');
-            $query->setParameter(':active', 1);
+            $query->setParameter(':active', true);
         }
 
         if(isset($parameters['component_parent']) == 1) {

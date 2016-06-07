@@ -65,6 +65,7 @@
                         {%if page.meta %}{{ macro.read_field('item.meta'|trans({}, 'axipi_backend'), true) }}{% endif %}
                         {%if page.style %}{{ macro.read_field('item.style'|trans({}, 'axipi_backend'), true) }}{% endif %}
                         {%if page.script %}{{ macro.read_field('item.script'|trans({}, 'axipi_backend'), true) }}{% endif %}
+                        {{ macro.read_field('item.isHome'|trans({}, 'axipi_backend'), page.isHome) }}
                         {{ macro.read_field('item.excludeSitemap'|trans({}, 'axipi_backend'), page.excludeSitemap) }}
                         {{ macro.read_field('item.excludeSearch'|trans({}, 'axipi_backend'), page.excludeSearch) }}
                         {{ macro.read_field('item.isActive'|trans({}, 'axipi_backend'), page.isActive) }}

@@ -75,6 +75,8 @@ class ComponentType extends AbstractType
 
         $builder->add('isUnique');
 
+        $builder->add('isHome');
+
         $builder->add('excludeSearch');
 
         $builder->add('excludeSitemap');

@@ -78,3 +78,11 @@ services:
     axipi_backend_controller_info:
         class: Axipi\BackendBundle\Controller\InfoController
         parent: "axipi_core_controller_abstract"
+
+    axipi_backend_eventlistener_language:
+        class: Axipi\BackendBundle\EventListener\LanguageListener
+        arguments:
+            - "@axipi_core_manager_item"
+            - "@axipi_core_manager_component"
+        tags:
+            - { name: "kernel.event_listener", event: "language.after_persist", method: "persist" }

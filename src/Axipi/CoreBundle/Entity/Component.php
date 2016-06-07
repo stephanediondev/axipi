@@ -55,6 +55,11 @@ class Component
     /**
      * @var boolean
      */
+    protected $isHome = false;
+
+    /**
+     * @var boolean
+     */
     private $excludeSearch = false;
 
     /**
@@ -272,6 +277,30 @@ class Component
     public function getIsUnique()
     {
         return $this->isUnique;
+    }
+
+    /**
+     * Set isHome
+     *
+     * @param boolean $isHome
+     *
+     * @return Component
+     */
+    public function setIsHome($isHome)
+    {
+        $this->isHome = $isHome;
+
+        return $this;
+    }
+
+    /**
+     * Get isHome
+     *
+     * @return boolean
+     */
+    public function getIsHome()
+    {
+        return $this->isHome;
     }
 
     /**

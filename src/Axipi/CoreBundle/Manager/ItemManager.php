@@ -69,7 +69,7 @@ class ItemManager extends AbstractManager
 
         //manage slug
         if($data->getComponent()->getCategory() == 'page') {
-            if($data->getSlug() == null && $data->getComponent()->getService() != 'axipi_content_controller_home') {
+            if($data->getSlug() == null && !$data->getIsHome()) {
                 if($data->getParent()) {
                     $slug = $data->getParent()->getSlug().'/'.$this->cleanString($data->getTitle());
                 } else {
@@ -77,7 +77,7 @@ class ItemManager extends AbstractManager
                 }
                 $data->setSlug($slug);
 
-            } if($data->getSlug() != null && $data->getComponent()->getService() == 'axipi_content_controller_home') {
+            } if($data->getSlug() != null && $data->getIsHome()) {
                 $data->setSlug(null);
             }
         }

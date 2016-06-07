@@ -35,7 +35,7 @@ class ZoneRepository extends EntityRepository
 
         if(isset($parameters['active']) == 1 && $parameters['active'] == true) {
             $query->andWhere('zon.isActive = :active');
-            $query->setParameter(':active', 1);
+            $query->setParameter(':active', true);
         }
 
         $query->addOrderBy('zon.ordering');

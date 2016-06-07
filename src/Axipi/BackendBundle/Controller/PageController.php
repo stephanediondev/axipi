@@ -105,6 +105,7 @@ class PageController extends AbstractController
         }
         $page->setLanguage($parameters->get('language'));
         $page->setComponent($parameters->get('component'));
+        $page->setIsHome($parameters->get('component')->getIshome());
         $page->setIsActive(true);
 
         $form = $this->createForm(ItemType::class, $page, [

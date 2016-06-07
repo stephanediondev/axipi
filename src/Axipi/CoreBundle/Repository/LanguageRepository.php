@@ -35,7 +35,7 @@ class LanguageRepository extends EntityRepository
 
         if(isset($parameters['active']) == 1 && $parameters['active'] == true) {
             $query->andWhere('lng.isActive = :active');
-            $query->setParameter(':active', 1);
+            $query->setParameter(':active', true);
         }
 
         $query->addOrderBy('lng.title');

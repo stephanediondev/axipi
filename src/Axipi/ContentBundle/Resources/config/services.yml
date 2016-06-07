@@ -38,3 +38,7 @@ services:
     axipi_content_widget_languageselector:
         class: Axipi\ContentBundle\Widget\LanguageselectorWidget
         parent: "axipi_core_controller_abstract"
+
+    axipi_content_widget_slideshow:
+        class: Axipi\ContentBundle\Widget\SlideshowWidget
+        parent: "axipi_core_controller_abstract"

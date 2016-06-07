@@ -103,6 +103,8 @@ class ItemType extends AbstractType
                 ]
             );
 
+            $builder->add('isHome');
+
             $builder->add('excludeSearch');
 
             $builder->add('excludeSitemap');

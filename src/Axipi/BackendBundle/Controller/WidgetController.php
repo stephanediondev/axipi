@@ -85,6 +85,8 @@ class WidgetController extends AbstractController
                 return $this->updateAction($request, $parameters, $id);
             case 'delete':
                 return $this->deleteAction($request, $parameters, $id);
+            case 'upload':
+                return $this->uploadAction($request, $parameters);
         }
 
         $this->addFlash('danger', 'not found');
@@ -172,5 +174,42 @@ class WidgetController extends AbstractController
         $parameters->set('form', $form->createView());
 
         return $this->render('AxipiBackendBundle:Widget:delete.html.twig', $parameters->all());
+    }
+
+    public function uploadAction(Request $request, ParameterBag $parameters)
+    {
+        $data = [];
+
+        $component = $this->componentManager->getOne(['id' => $request->request->get('component')]);
+
+        foreach($request->files->get('files', []) as $key => $uploadedFile) {
+            $title = uniqid('', true);
+
+            $widget = new Item();
+            if($request->request->get('parent')) {
+                $widget_parent = $this->itemManager->getOne(['id' => $request->request->get('parent')]);
+                if($widget_parent) {
+                    $widget->setParent($widget_parent);
+                }
+            }
+
+            $widget->setTitle($title);
+            $widget->setAttributesChange(['image' => $uploadedFile]);
+
+            $widget->setLanguage($parameters->get('language'));
+            $widget->setComponent($component);
+            $widget->setIsActive(true);
+
+            $id = $this->itemManager->persist($widget);
+
+            $data[] = [
+                'id' => $id,
+                'title' => $title,
+                'icon' => $component->geticon(),
+                'href' => $this->generateUrl('axipi_backend_widgets', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]),
+            ];
+        }
+
+        return new JsonResponse($data);
     }
 }

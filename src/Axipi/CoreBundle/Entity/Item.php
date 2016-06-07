@@ -62,6 +62,11 @@ class Item
     /**
      * @var boolean
      */
+    private $isHome = false;
+
+    /**
+     * @var boolean
+     */
     private $isActive = false;
 
     /**
@@ -616,6 +621,30 @@ class Item
     public function getZone()
     {
         return $this->zone;
+    }
+
+    /**
+     * Set isHome
+     *
+     * @param boolean $isHome
+     *
+     * @return Component
+     */
+    public function setIsHome($isHome)
+    {
+        $this->isHome = $isHome;
+
+        return $this;
+    }
+
+    /**
+     * Get isHome
+     *
+     * @return boolean
+     */
+    public function getIsHome()
+    {
+        return $this->isHome;
     }
 
     /**
