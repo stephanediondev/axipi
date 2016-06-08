@@ -1,0 +1,107 @@
+{% import 'AxipiBackendBundle:Bootstrap:macro.html.twig' as macro %}
+{% if form is defined %}{% form_theme form 'AxipiBackendBundle:Bootstrap:form.html.twig' %}{% endif %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>{% block title %}Welcome!{% endblock %}</title>
+
+{% block meta %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="HandheldFriendly" content="true">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#30353b">
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/axipibackend/css/base.css') }}">
+{% endblock %}
+</head>
+
+<body>
+
+{% block navbar %}
+<nav class="navbar navbar-default small" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {% if is_granted('ROLE_PAGES') %}
+                    <li><a href="{{ path('axipi_backend_pages', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></li>
+                {% endif %}
+                {% if is_granted('ROLE_WIDGETS') %}
+                    <li><a href="{{ path('axipi_backend_widgets', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></li>
+                {% endif %}
+                {% if is_granted('ROLE_FILES') %}
+                    <li><a href="{{ path('axipi_backend_files', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.file'|trans({}, 'axipi_backend') }}"></i>{{ 'files'|trans({}, 'axipi_backend') }}</a></li>
+                {% endif %}
+                {% if is_granted('ROLE_LANGUAGES') %}
+                    <li><a href="{{ path('axipi_backend_languages', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.language'|trans({}, 'axipi_backend') }}"></i>{{ 'languages'|trans({}, 'axipi_backend') }}</a></li>
+                {% endif %}
+                {% if is_granted('ROLE_COMPONENTS') %}
+                    <li><a href="{{ path('axipi_backend_components', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.component'|trans({}, 'axipi_backend') }}"></i>{{ 'components'|trans({}, 'axipi_backend') }}</a></li>
+                {% endif %}
+                {% if is_granted('ROLE_ZONES') %}
+                    <li><a href="{{ path('axipi_backend_zones', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'zones'|trans({}, 'axipi_backend') }}</a></li>
+                {% endif %}
+                {% if is_granted('ROLE_SEARCH') %}
+                    <li><a href="{{ path('axipi_backend_search', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.search'|trans({}, 'axipi_backend') }}"></i>{{ 'search'|trans({}, 'axipi_backend') }}</a></li>
+                {% endif %}
+                {% if is_granted('ROLE_USERS') %}
+                    <li><a href="{{ path('axipi_backend_users', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ 'users'|trans({}, 'axipi_backend') }}</a></li>
+                {% endif %}
+                {% if is_granted('ROLE_INFO') %}
+                    <li><a href="{{ path('axipi_backend_info', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.info'|trans({}, 'axipi_backend') }}"></i>{{ 'info'|trans({}, 'axipi_backend') }}</a></li>
+                {% endif %}
+                <li><a href="{{ path('axipi_backend_profile', {action: 'read'}) }}"><i class="fa-lg fa fa-{{ 'icons.profile'|trans({}, 'axipi_backend') }}"></i>{{ app.user.firstname }}{% if app.user.lastname %} {{ app.user.lastname }}{% endif %}</a></li>
+                <li><a href="{{ logout_path('axipi_backend') }}"><i class="fa-lg fa fa-{{ 'icons.logout'|trans({}, 'axipi_backend') }}"></i>{{ 'logout'|trans({}, 'axipi_backend') }}</a></li>
+            {% endif %}
+            <li><a target="_blank" href="{{ path('axipi_core_home', {}) }}"><i class="fa-lg fa fa-{{ 'icons.frontend'|trans({}, 'axipi_backend') }}"></i>{{ 'frontend'|trans({}, 'axipi_backend') }}</a></li>
+        </ul>
+    </div>
+</nav>
+{% endblock %}
+
+<div class="container-fluid">
+    {% for type, flashes in app.session.flashbag.all() %}
+        {% for flash in flashes %}
+            <div class="alert alert-{{ type }}" role="alert">
+                <p>{{ flash }}</p>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+
+{% block body %}
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+var app_environment = '{{ app.environment }}';
+var app_request_locale = '{{ app.request.locale }}';
+var app_request_uri = '{{ app.request.uri }}';
+var axipi_core_home = '{{ url('axipi_core_home') }}';
+var axipi_backend_home = '{{ url('axipi_backend_home') }}';
+</script>
+<script type="text/javascript" src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/jquery-ui/ui/minified/widget.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/blueimp-file-upload-node/js/jquery.iframe-transport.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/blueimp-file-upload-node/js/jquery.fileupload.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/tinymce-dist/tinymce.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/axipibackend/js/base.js') }}"></script>
+{% endblock %}
+
+</body>
+</html>

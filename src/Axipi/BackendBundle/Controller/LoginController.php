@@ -18,6 +18,6 @@ class LoginController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('AxipiBackendBundle::login.html.twig', $parameters);
+        return $this->render('AxipiBackendBundle:MaterialDesignLite:login.html.twig', $parameters);
     }
 }

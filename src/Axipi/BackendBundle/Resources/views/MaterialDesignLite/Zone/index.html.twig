@@ -1,0 +1,32 @@
+{% extends 'AxipiBackendBundle:MaterialDesignLite:base.html.twig' %}
+
+{% block title %}{{ 'zones'|trans({}, 'axipi_backend') }}{% endblock %}
+
+{% block body %}
+    <div class="mdl-grid">
+        {% embed 'AxipiBackendBundle:MaterialDesignLite:block_title.html.twig' %}
+            {% block block_title %}
+                <span><i class="fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'zones'|trans({}, 'axipi_backend') }} ({{ objects|length }})</span>
+            {% endblock %}
+            {% block block_title_actions %}
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="{{ path('axipi_backend_zones', {action: 'create'}) }}"><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.create'|trans({}, 'axipi_backend') }}</a>
+            {% endblock %}
+        {% endembed %}
+
+        {% for object in objects %}
+            <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--2-col">
+                <div class="mdl-card__supporting-text mdl-color-text--black">
+                    <a href="{{ path('axipi_backend_zones', {action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i><br>{{ object.code }}</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+{% endblock %}

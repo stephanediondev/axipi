@@ -1,0 +1,57 @@
+{% extends 'AxipiBackendBundle:Bootstrap:base.html.twig' %}
+
+{% block title %}{{ 'widgets'|trans({}, 'axipi_backend') }}{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <ul class="nav nav-tabs">
+                {% for language in languages %}
+                    <li role="presentation"{% if app.request.get('language') == language.code %} class="active"{% endif %}><a href="{{ path('axipi_backend_widgets', {language: language.code, action: 'index'}) }}">{{ language.title }}</a></li>
+                {% endfor %}
+            </ul>
+
+            {% embed 'AxipiBackendBundle:Bootstrap:block_title.html.twig' %}
+                {% block block_title %}
+                    <span><a href="{{ path('axipi_backend_widgets', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></span>
+                    <span><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.create'|trans({}, 'axipi_backend') }}</span>
+                {% endblock %}
+                {% block block_title_actions %}
+                {% endblock %}
+            {% endembed %}
+
+            <div class="block">
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+                <div class="row">
+                    <div class="col-lg-4">
+                        {{ macro.read_field('item.language'|trans({}, 'axipi_backend'), language.title) }}
+                        {{ macro.read_field('item.component'|trans({}, 'axipi_backend'), component.title) }}
+                        {{ form_row(form.template) }}
+                        {{ form_row(form.parent) }}
+                        {{ form_row(form.code) }}
+                        {{ form_row(form.ordering) }}
+                        {{ form_row(form.title) }}
+                        {{ form_row(form.zone) }}
+                        {{ form_row(form.isActive) }}
+                        {{ form_row(form.submit) }}
+                    </div>
+                    <div class="col-lg-8">
+                        {{ form_row(form.attributesChange) }}
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+{% endblock %}

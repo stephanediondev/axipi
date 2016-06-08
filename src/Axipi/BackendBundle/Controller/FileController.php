@@ -78,7 +78,7 @@ class FileController extends AbstractController
     {
         $parameters->set('objects', $this->fileManager->getRows($slug));
 
-        return $this->render('AxipiBackendBundle:File:index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/File:index.html.twig', $parameters->all());
     }
 
     public function createAction(Request $request, ParameterBag $parameters, $slug)
@@ -99,12 +99,12 @@ class FileController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:File:create.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/File:create.html.twig', $parameters->all());
     }
 
     public function readAction(Request $request, ParameterBag $parameters, $slug)
     {
-        return $this->render('AxipiBackendBundle:File:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/File:read.html.twig', $parameters->all());
     }
 
     public function updateAction(Request $request, ParameterBag $parameters, $slug)
@@ -122,7 +122,7 @@ class FileController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:File:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/File:update.html.twig', $parameters->all());
     }
 
     public function deleteAction(Request $request, ParameterBag $parameters, $slug)
@@ -140,6 +140,6 @@ class FileController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:File:delete.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/File:delete.html.twig', $parameters->all());
     }
 }

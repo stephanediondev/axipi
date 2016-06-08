@@ -90,7 +90,7 @@ class PageController extends AbstractController
         $parameters->set('objects', $this->itemManager->getList(['category' => 'page', 'language_code' => $language, 'parent_null' => true]));
         $parameters->set('components', $this->componentManager->getList(['category' => 'page', 'active' => true]));
 
-        return $this->render('AxipiBackendBundle:Page:index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/Page:index.html.twig', $parameters->all());
     }
 
     public function createAction(Request $request, ParameterBag $parameters)
@@ -124,7 +124,7 @@ class PageController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Page:create.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/Page:create.html.twig', $parameters->all());
     }
 
     public function readAction(Request $request, ParameterBag $parameters, $id)
@@ -135,7 +135,7 @@ class PageController extends AbstractController
         $this->container->get('axipi_core_manager_default')->setLanguages($languages);
         $parameters->set('languages', $languages);
 
-        return $this->render('AxipiBackendBundle:Page:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/Page:read.html.twig', $parameters->all());
     }
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
@@ -156,7 +156,7 @@ class PageController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Page:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/Page:update.html.twig', $parameters->all());
     }
 
     public function deleteAction(Request $request, ParameterBag $parameters, $id)
@@ -178,7 +178,7 @@ class PageController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Page:delete.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/Page:delete.html.twig', $parameters->all());
     }
 
     public function uploadAction(Request $request, ParameterBag $parameters)

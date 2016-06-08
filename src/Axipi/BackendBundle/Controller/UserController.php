@@ -65,7 +65,7 @@ class UserController extends AbstractController
     {
         $parameters->set('objects', $this->userManager->getList());
 
-        return $this->render('AxipiBackendBundle:User:index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/User:index.html.twig', $parameters->all());
     }
 
     public function createAction(Request $request, ParameterBag $parameters, $id)
@@ -90,12 +90,12 @@ class UserController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:User:create.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/User:create.html.twig', $parameters->all());
     }
 
     public function readAction(Request $request, ParameterBag $parameters, $id)
     {
-        return $this->render('AxipiBackendBundle:User:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/User:read.html.twig', $parameters->all());
     }
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
@@ -118,7 +118,7 @@ class UserController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:User:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/User:update.html.twig', $parameters->all());
     }
 
     public function deleteAction(Request $request, ParameterBag $parameters, $id)
@@ -136,6 +136,6 @@ class UserController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:User:delete.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/User:delete.html.twig', $parameters->all());
     }
 }

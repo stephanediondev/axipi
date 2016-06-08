@@ -61,7 +61,7 @@ class ZoneController extends AbstractController
     {
         $parameters->set('objects', $this->zoneManager->getList());
 
-        return $this->render('AxipiBackendBundle:Zone:index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/Zone:index.html.twig', $parameters->all());
     }
 
     public function createAction(Request $request, ParameterBag $parameters, $id)
@@ -82,12 +82,12 @@ class ZoneController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Zone:create.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/Zone:create.html.twig', $parameters->all());
     }
 
     public function readAction(Request $request, ParameterBag $parameters, $id)
     {
-        return $this->render('AxipiBackendBundle:Zone:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/Zone:read.html.twig', $parameters->all());
     }
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
@@ -105,7 +105,7 @@ class ZoneController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Zone:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/Zone:update.html.twig', $parameters->all());
     }
 
     public function deleteAction(Request $request, ParameterBag $parameters, $id)
@@ -123,6 +123,6 @@ class ZoneController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Zone:delete.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/Zone:delete.html.twig', $parameters->all());
     }
 }

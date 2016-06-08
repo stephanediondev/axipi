@@ -1,0 +1,33 @@
+{% extends 'AxipiBackendBundle:Bootstrap:base.html.twig' %}
+
+{% block title %}{{ 'home'|trans({}, 'axipi_backend') }}{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            {% embed 'AxipiBackendBundle:Bootstrap:block_title.html.twig' %}
+                {% block block_title %}
+                    <span><i class="fa fa-{{ 'icons.home'|trans({}, 'axipi_backend') }}"></i>{{ 'home'|trans({}, 'axipi_backend') }}</span>
+                {% endblock %}
+                {% block block_title_actions %}
+                {% endblock %}
+            {% endembed %}
+
+            <div class="block">
+                <div class="row" id="dynamic_home">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/axipibackend/js/home.js') }}"></script>
+{% endblock %}

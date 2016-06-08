@@ -1,0 +1,48 @@
+a:link, a:visited {
+	color: #757575;
+	text-decoration: none;
+}
+.mdl-layout__header-row a {
+	margin-left: 10px;
+}
+.mdl-layout__header-row a:first-child {
+	margin-left: 10px;
+}
+.mdl-card {
+	min-height: auto;
+}
+.mdl-card__title {
+	padding: 8px;
+}
+.mdl-card__title-text {
+	font-size: 18px;
+}
+.mdl-card__title-text span {
+	margin-right: 15px;
+}
+.mdl-card__title-text a:link, .mdl-card__title-text a:visited {
+	text-decoration: underline;
+}
+.mdl-card__title-text span:last-child {
+	margin-right: 0px;
+}
+.mdl-tabs__tab i.fa, .mdl-list__item i.fa, .mdl-card__title-text i.fa {
+	margin-right: 5px;
+}
+.mdl-card__supporting-text {
+	padding: 0px 8px;
+}
+.mdl-cell--2-col .mdl-card__supporting-text {
+	text-align: center;
+}
+.mdl-tabs__panel {
+	display: none;
+}
+
+p {
+	margin: 8px 0px;
+}
+.label {
+	display: block;
+	font-weight: bold;
+}

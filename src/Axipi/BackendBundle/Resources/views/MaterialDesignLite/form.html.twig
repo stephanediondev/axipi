@@ -1,0 +1,32 @@
+{% block form_row %}
+{% spaceless %}
+    {% if not compound -%}
+        <p>
+            {{ form_label(form) }}
+            {{ form_widget(form) }}
+            {% if form.vars.attr['data-default'] is defined %}
+                <br><em>{{ form.vars.attr['data-default'] }}</em>
+            {% endif %}
+            {{ form_errors(form) }}
+        </p>
+    {% else %}
+        {{ form_widget(form) }}
+    {% endif %}
+{% endspaceless %}
+{% endblock form_row %}
+
+{% block button_row %}
+    <p>
+        {{ form_widget(form) }}
+    </p>
+{% endblock button_row %}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        {%- for error in errors -%}
+            <div class="alert alert-danger" role="alert">
+                <p>{{ error.message }}</p>
+            </div>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endblock form_errors -%}

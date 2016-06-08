@@ -65,7 +65,7 @@ class SearchController extends AbstractController
             }
         }
 
-        return $this->render('AxipiBackendBundle:Search:index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/Search:index.html.twig', $parameters->all());
     }
 
     public function initAction(Request $request, ParameterBag $parameters)

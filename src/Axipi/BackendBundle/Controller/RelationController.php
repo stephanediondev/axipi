@@ -90,12 +90,12 @@ class RelationController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Relation:create.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/Relation:create.html.twig', $parameters->all());
     }
 
     public function readAction(Request $request, ParameterBag $parameters, $id)
     {
-        return $this->render('AxipiBackendBundle:Relation:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/Relation:read.html.twig', $parameters->all());
     }
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
@@ -115,7 +115,7 @@ class RelationController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Relation:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/Relation:update.html.twig', $parameters->all());
     }
 
     public function deleteAction(Request $request, ParameterBag $parameters, $id)
@@ -133,6 +133,6 @@ class RelationController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Relation:delete.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:MaterialDesignLite/Relation:delete.html.twig', $parameters->all());
     }
 }
