@@ -33,7 +33,14 @@ a:link, a:visited {
 	padding: 0px 8px;
 }
 .mdl-cell--2-col .mdl-card__supporting-text {
+	padding: 0px;
 	text-align: center;
+	width: 100%;
+}
+.mdl-cell--2-col .mdl-card__supporting-text a {
+	display: block;
+	line-height: 1.9;
+	padding: 8px;
 }
 .mdl-tabs__panel {
 	display: none;
