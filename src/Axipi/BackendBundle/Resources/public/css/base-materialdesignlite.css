@@ -8,6 +8,9 @@ a:link, a:visited {
 .mdl-layout__header-row a:first-child {
 	margin-left: 10px;
 }
+.mdl-grid {
+	width: inherit;
+}
 .mdl-card {
 	min-height: auto;
 }
@@ -26,8 +29,18 @@ a:link, a:visited {
 .mdl-card__title-text span:last-child {
 	margin-right: 0px;
 }
-.mdl-tabs__tab i.fa, .mdl-list__item i.fa, .mdl-card__title-text i.fa {
+.mdl-card .mdl-card__actions {
+	position: absolute;
+	right: 0px;
+	top: -4px;
+	width: auto;
+}
+.mdl-card .mdl-card__actions a {
+	font-size: 20px;
+}
+.mdl-tabs__tab i.fa, .mdl-list__item i.fa, .mdl-card__title-text i.fa, .mdl-card__actions i.fa {
 	margin-right: 5px;
+	vertical-align: bottom;
 }
 .mdl-card__supporting-text {
 	padding: 0px 8px;
@@ -40,7 +53,10 @@ a:link, a:visited {
 .mdl-cell--2-col .mdl-card__supporting-text a {
 	display: block;
 	line-height: 1.9;
+	overflow: hidden;
 	padding: 8px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 .mdl-tabs__panel {
 	display: none;
