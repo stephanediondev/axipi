@@ -11,11 +11,11 @@
                 </h1>
             </div>
             <div class="mdl-card__actions mdl-card--border mdl-color-text--black">
-                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="#">{{ 'actions.create'|trans({}, 'axipi_backend') }}</a>
+                <a class="mdl-button mdl-color--pink mdl-color-text--white toggle" href="#components-create">{{ 'actions.create'|trans({}, 'axipi_backend') }}</a>
             </div>
         </div>
 
-        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col toggle" id="components-create">
             <div class="mdl-card__supporting-text mdl-grid">
                 <div class="mdl-cell mdl-cell--2-col">
                     <a href="{{ path('axipi_backend_components', {action: 'create', id: 'page'}) }}"><i class="fa fa-4x fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i><br>{{ 'page'|trans({}, 'axipi_backend') }}</a>

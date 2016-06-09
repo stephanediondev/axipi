@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+    <div class="mdl-tabs">
         <div class="mdl-tabs__tab-bar">
             {% for language in languages %}
                 <a href="{{ path('axipi_backend_pages', {mode: mode, language: language.code, action: 'index'}) }}" class="mdl-tabs__tab{% if app.request.get('language') == language.code %} is-active{% endif %}">{{ language.title }}</a>
@@ -66,7 +66,7 @@
                         {{ macro.read_field('item.isActive'|trans({}, 'axipi_backend'), page.isActive) }}
                     </div>
                     <div class="mdl-cell mdl-cell--8-col">
-                    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                    <div class="mdl-tabs">
                         <div class="mdl-tabs__tab-bar">
                             <a href="#attributes-panel" class="mdl-tabs__tab is-active">{{ 'item.attributes'|trans({}, 'axipi_backend') }}</a>
                             <a href="#seo_social-panel" class="mdl-tabs__tab">{{ 'seo_social'|trans({}, 'axipi_backend') }}</a>
@@ -120,7 +120,7 @@
         </div>
     </div>
 
-    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+    <div class="mdl-tabs">
         <div class="mdl-tabs__tab-bar">
             <a href="#create-panel" class="mdl-tabs__tab"><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.create'|trans({}, 'axipi_backend') }}</a>
             <a href="#draganddrop-panel" class="mdl-tabs__tab"><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.drag_drop'|trans({}, 'axipi_backend') }}</a>

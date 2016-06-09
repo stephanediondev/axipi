@@ -1,64 +1,69 @@
 var current_popup;
 
-tinymce.init({
-    file_browser_callback : function(field_name, url, type, win) {
-        if(type == 'image') {
-            var file = axipi_backend_home + 'files/wysiwyg' + field_name;
-            var title = 'Files';
+document.addEventListener('mdl-componentupgraded', function(e){
+    //In case other element are upgraded before the layout  
+    if (typeof e.target.MaterialLayout !== 'undefined') {
+        tinymce.init({
+            file_browser_callback : function(field_name, url, type, win) {
+                if(type == 'image') {
+                    var file = axipi_backend_home + 'files/wysiwyg' + field_name;
+                    var title = 'Files';
 
-        } else if(type == 'file') {
-            var file = axipi_backend_home + 'pages/wysiwyg' + field_name;
-            var title = 'Pages';
+                } else if(type == 'file') {
+                    var file = axipi_backend_home + 'pages/wysiwyg' + field_name;
+                    var title = 'Pages';
 
-        } else {
-            return false;
-        }
+                } else {
+                    return false;
+                }
 
-        current_popup = win;
+                current_popup = win;
 
-        tinyMCE.activeEditor.windowManager.open({
-            file : file,
-            title : title,
-            width : 960,
-            height : 500,
-            resizable : 'yes',
-            window : win,
-            input : field_name
+                tinyMCE.activeEditor.windowManager.open({
+                    file : file,
+                    title : title,
+                    width : 960,
+                    height : 500,
+                    resizable : 'yes',
+                    window : win,
+                    input : field_name
+                });
+                window.inputSrc = field_name
+                return false;
+            },
+            height: 500,
+            selector: '.wysiwyg',
+            entity_encoding : 'raw',
+            remove_script_host: true,
+            relative_urls: true,
+            document_base_url: axipi_core_home,
+            visualblocks_default_state: true,
+            content_css : '../vendor/bootstrap/dist/css/bootstrap.min.css',
+            style_formats: [
+              { title: 'Headers', items: [
+                { title: 'h1', block: 'h1' },
+                { title: 'h2', block: 'h2' },
+                { title: 'h3', block: 'h3' },
+                { title: 'h4', block: 'h4' },
+                { title: 'h5', block: 'h5' },
+                { title: 'h6', block: 'h6' }
+              ] },
+
+              { title: 'Blocks', items: [
+                { title: 'p', block: 'p' },
+                { title: 'p.lead', block: 'p', classes: 'lead' },
+                { title: 'div', block: 'div' },
+                { title: 'pre', block: 'pre' }
+              ] }
+            ],
+            plugins: 'advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker searchreplace wordcount visualblocks visualchars code fullscreen media nonbreaking table contextmenu directionality template paste',
+            toolbar1: 'bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect',
+            toolbar2: 'cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code',
+            toolbar3: 'table | hr removeformat | subscript superscript | charmap | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft',
+            menubar: false,
+            toolbar_items_size: 'small'
         });
-        window.inputSrc = field_name
-        return false;
-    },
-    height: 500,
-    selector: '.wysiwyg',
-    entity_encoding : 'raw',
-    remove_script_host: true,
-    relative_urls: true,
-    document_base_url: axipi_core_home,
-    visualblocks_default_state: true,
-    content_css : '../vendor/bootstrap/dist/css/bootstrap.min.css',
-    style_formats: [
-      { title: 'Headers', items: [
-        { title: 'h1', block: 'h1' },
-        { title: 'h2', block: 'h2' },
-        { title: 'h3', block: 'h3' },
-        { title: 'h4', block: 'h4' },
-        { title: 'h5', block: 'h5' },
-        { title: 'h6', block: 'h6' }
-      ] },
-
-      { title: 'Blocks', items: [
-        { title: 'p', block: 'p' },
-        { title: 'p.lead', block: 'p', classes: 'lead' },
-        { title: 'div', block: 'div' },
-        { title: 'pre', block: 'pre' }
-      ] }
-    ],
-    plugins: 'advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker searchreplace wordcount visualblocks visualchars code fullscreen media nonbreaking table contextmenu directionality template paste',
-    toolbar1: 'bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect',
-    toolbar2: 'cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code',
-    toolbar3: 'table | hr removeformat | subscript superscript | charmap | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft',
-    menubar: false,
-    toolbar_items_size: 'small'
+    }
 });
 
 function update_image(field_name, src) {
@@ -74,6 +79,31 @@ function update_file(field_name, href) {
 }
 
 $(document).ready(function() {
+    $('.mdl-tabs__tab').bind('click', function(event) {
+        var href = $(this).attr('href');
+        if(href.indexOf('#') != -1) {
+            event.preventDefault();
+            var parent = $(this).parent().parent();
+
+            parent.find('.mdl-tabs__tab').removeClass('is-active');
+            $(this).addClass('is-active');
+
+            parent.find('.mdl-tabs__panel').removeClass('is-active');
+            $(href).addClass('is-active');
+        }
+    });
+
+    $('.mdl-button.toggle').bind('click', function(event) {
+        event.preventDefault();
+
+        var href = $(this).attr('href');
+        if($(href).is(':visible')) {
+            $(href).hide();
+        } else {
+            $(href).show();
+        }
+    });
+
     // Prevent Bootstrap dialog from blocking focusin
     $(document).on('focusin', function(e) {
         if ($(e.target).closest('.mce-window').length) {

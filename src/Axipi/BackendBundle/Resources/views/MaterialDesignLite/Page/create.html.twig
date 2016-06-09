@@ -3,7 +3,7 @@
 {% block title %}{{ 'pages'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
-    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+    <div class="mdl-tabs">
         <div class="mdl-tabs__tab-bar">
             {% for language in languages %}
                 <a href="{{ path('axipi_backend_pages', {mode: mode, language: language.code, action: 'index'}) }}" class="mdl-tabs__tab{% if app.request.get('language') == language.code %} is-active{% endif %}">{{ language.title }}</a>
@@ -49,7 +49,7 @@
                     {{ form_row(form.submit) }}
                 </div>
                 <div class="mdl-cell mdl-cell--8-col">
-                    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                    <div class="mdl-tabs">
                         <div class="mdl-tabs__tab-bar">
                             <a href="#attributes-panel" class="mdl-tabs__tab is-active">{{ 'item.attributes'|trans({}, 'axipi_backend') }}</a>
                             <a href="#seo_social-panel" class="mdl-tabs__tab">{{ 'seo_social'|trans({}, 'axipi_backend') }}</a>

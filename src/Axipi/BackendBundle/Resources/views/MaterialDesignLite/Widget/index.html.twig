@@ -3,10 +3,10 @@
 {% block title %}{{ 'widgets'|trans({}, 'axipi_backend') }} ({{ app.request.get('language') }}){% endblock %}
 
 {% block body %}
-    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+    <div class="mdl-tabs">
         <div class="mdl-tabs__tab-bar">
             {% for language in languages %}
-                <li role="presentation"{% if app.request.get('language') == language.code %} class="active"{% endif %}><a href="{{ path('axipi_backend_widgets', {language: language.code, action: 'index'}) }}">{{ language.title }}</a></li>
+                <a href="{{ path('axipi_backend_widgets', {language: language.code, action: 'index'}) }}" class="mdl-tabs__tab{% if app.request.get('language') == language.code %} is-active{% endif %}">{{ language.title }}</a>
             {% endfor %}
         </div>
     </div>
@@ -19,11 +19,11 @@
                 </h1>
             </div>
             <div class="mdl-card__actions mdl-card--border mdl-color-text--black">
-                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="#">{{ 'actions.create'|trans({}, 'axipi_backend') }}</a>
+                <a class="mdl-button mdl-color--pink mdl-color-text--white toggle" href="#widgets-create">{{ 'actions.create'|trans({}, 'axipi_backend') }}</a>
             </div>
         </div>
 
-        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col toggle" id="widgets-create">
             <div class="mdl-card__supporting-text mdl-grid">
                 {% for component in components %}
                     <div class="mdl-cell mdl-cell--2-col">

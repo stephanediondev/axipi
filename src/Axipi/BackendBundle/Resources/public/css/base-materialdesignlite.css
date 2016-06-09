@@ -55,10 +55,15 @@ a:link, a:visited {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
-.mdl-tabs__panel {
+.mdl-tabs__panel, .mdl-card.toggle {
 	display: none;
 }
-
+.mdl-tabs__panel.is-active {
+	display: block;
+}
+.mdl-tabs__tab.is-active {
+	border-bottom: 1px solid #000000;
+}
 p {
 	margin: 8px 0px;
 }
@@ -85,4 +90,10 @@ input[type="text"][required="required"], input[type="email"][required="required"
 }
 input:-webkit-autofill {
 	-webkit-box-shadow: 0px 0px 0px 1000px #FFFFFF inset;
+}
+textarea.wysiwyg {
+	height: 450px;
+	min-height: 450px;
+	resize: vertical;
+	width:100%;
 }
