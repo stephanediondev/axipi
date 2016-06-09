@@ -1,3 +1,17 @@
+{%- block button_widget -%}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <button class="mdl-button mdl-color--pink mdl-color-text--white" type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}</button>
+{%- endblock button_widget -%}
+
 {% block form_row %}
 {% spaceless %}
     {% if not compound -%}

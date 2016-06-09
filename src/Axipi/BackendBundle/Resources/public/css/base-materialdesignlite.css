@@ -9,7 +9,7 @@ a:link, a:visited {
 	margin-left: 10px;
 }
 .mdl-grid {
-	width: inherit;
+	width: inherit
 }
 .mdl-card {
 	min-height: auto;
@@ -62,7 +62,7 @@ a:link, a:visited {
 p {
 	margin: 8px 0px;
 }
-.label {
+label, .label {
 	display: block;
 	font-weight: bold;
 }
