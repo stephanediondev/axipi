@@ -30,29 +30,24 @@ a:link, a:visited {
 	margin-right: 0px;
 }
 .mdl-card .mdl-card__actions {
-	position: absolute;
-	right: 0px;
-	top: -4px;
-	width: auto;
+	text-align: right;
 }
-.mdl-card .mdl-card__actions a {
-	font-size: 20px;
+.mdl-button {
+	padding: 0px 8px;
 }
+
+
 .mdl-tabs__tab i.fa, .mdl-list__item i.fa, .mdl-card__title-text i.fa, .mdl-card__actions i.fa {
 	margin-right: 5px;
-}
-.mdl-card__actions i.fa {
-	vertical-align: bottom;
 }
 .mdl-card__supporting-text {
 	padding: 0px 8px;
 }
-.mdl-cell--2-col .mdl-card__supporting-text {
+.mdl-card__supporting-text.mdl-grid .mdl-cell--2-col {
 	padding: 0px;
 	text-align: center;
-	width: 100%;
 }
-.mdl-cell--2-col .mdl-card__supporting-text a {
+.mdl-card__supporting-text.mdl-grid .mdl-cell--2-col a {
 	display: block;
 	line-height: 1.9;
 	overflow: hidden;
