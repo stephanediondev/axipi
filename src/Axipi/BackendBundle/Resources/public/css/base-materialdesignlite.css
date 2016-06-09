@@ -40,6 +40,8 @@ a:link, a:visited {
 }
 .mdl-tabs__tab i.fa, .mdl-list__item i.fa, .mdl-card__title-text i.fa, .mdl-card__actions i.fa {
 	margin-right: 5px;
+}
+.mdl-card__actions i.fa {
 	vertical-align: bottom;
 }
 .mdl-card__supporting-text {

@@ -86,6 +86,7 @@
                 <div class="mdl-tabs__tab-bar">
                     <a href="#children-panel" class="mdl-tabs__tab is-active"><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'item.children'|trans({}, 'axipi_backend') }}</a>
                     <a href="#create-panel" class="mdl-tabs__tab"><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.create'|trans({}, 'axipi_backend') }}</a>
+                    <a href="#draganddrop-panel" class="mdl-tabs__tab"><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.drag_drop'|trans({}, 'axipi_backend') }}</a>
                 </div>
 
                 <div class="mdl-tabs__panel is-active" id="children-panel">
@@ -113,24 +114,18 @@
                         {% endfor %}
                     </div>
                 </div>
-            </div>
 
-            <div class="mdl-grid">
-                {% embed 'AxipiBackendBundle:MaterialDesignLite:block_title.html.twig' %}
-                    {% block block_title %}
-                        <span><i class="fa fa-download"></i>{{ 'drag_drop'|trans({}, 'axipi_backend') }} <small>Drop file(s) over icon</small></span>
-                    {% endblock %}
-                    {% block block_title_actions %}
-                    {% endblock %}
-                {% endembed %}
-
-                {% if page.component.id == 5 %}
-                    <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--2-col" data-url="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'upload'}) }}" id="ajax-uploader" data-parent="{{ page.id }}" data-component="6">
-                        <div class="mdl-card__supporting-text mdl-color-text--black">
-                            <a class="fileinput-button attachment-upload" href="#"><i class="fa fa-4x fa-picture-o"></i><br>Gallery / Media</a>
-                        </div>
+                <div class="mdl-tabs__panel" id="draganddrop-panel">
+                    <div class="mdl-grid">
+                        {% if page.component.id == 5 %}
+                            <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--2-col" data-url="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'upload'}) }}" id="ajax-uploader" data-parent="{{ page.id }}" data-component="6">
+                                <div class="mdl-card__supporting-text mdl-color-text--black">
+                                    <a class="fileinput-button attachment-upload" href="#"><i class="fa fa-4x fa-picture-o"></i><br>Gallery / Media</a>
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
-                {% endif %}
+                </div>
             </div>
         </div>
     </div>
