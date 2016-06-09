@@ -1,78 +1,80 @@
-{% extends 'AxipiBackendBundle:Bootstrap:base.html.twig' %}
+{% extends 'AxipiBackendBundle:MaterialDesignLite:base.html.twig' %}
 
 {% block title %}{{ 'pages'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            <ul class="nav nav-tabs">
-                {% for language in languages %}
-                    <li role="presentation"{% if app.request.get('language') == language.code %} class="active"{% endif %}><a href="{{ path('axipi_backend_pages', {language: language.code, action: 'index'}) }}">{{ language.title }}</a></li>
-                {% endfor %}
-            </ul>
+    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+        <div class="mdl-tabs__tab-bar">
+            {% for language in languages %}
+                <a href="{{ path('axipi_backend_pages', {mode: mode, language: language.code, action: 'index'}) }}" class="mdl-tabs__tab{% if app.request.get('language') == language.code %} is-active{% endif %}">{{ language.title }}</a>
+            {% endfor %}
+        </div>
+    </div>
 
-            {% embed 'AxipiBackendBundle:Bootstrap:block_title.html.twig' %}
-                {% block block_title %}
-                    <span><a href="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.top_level'|trans({}, 'axipi_backend') }}"></i>{{ 'top_level'|trans({}, 'axipi_backend') }}</a></span>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="mdl-grid">
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__title mdl-color-text--white mdl-color--teal">
+                <h1 class="mdl-card__title-text">
+                    <span><a class="mdl-color-text--white" href="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.top_level'|trans({}, 'axipi_backend') }}"></i>{{ 'top_level'|trans({}, 'axipi_backend') }}</a></span>
                     {% if page_parent is defined %}
                         {% if page_parent.parent %}
                             {% if page_parent.parent.parent %}
                                 {% if page_parent.parent.parent.parent %}
-                                    <span><a href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.parent.parent.parent.id}) }}"><i class="fa fa-{{ page_parent.parent.parent.parent.component.icon }}"></i>{{ page_parent.parent.parent.parent.title }}</a></span>
+                                    <span><a class="mdl-color-text--white" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.parent.parent.parent.id}) }}"><i class="fa fa-{{ page_parent.parent.parent.parent.component.icon }}"></i>{{ page_parent.parent.parent.parent.title }}</a></span>
                                 {% endif %}
-                                <span><a href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.parent.parent.id}) }}"><i class="fa fa-{{ page_parent.parent.parent.component.icon }}"></i>{{ page_parent.parent.parent.title }}</a></span>
+                                <span><a class="mdl-color-text--white" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.parent.parent.id}) }}"><i class="fa fa-{{ page_parent.parent.parent.component.icon }}"></i>{{ page_parent.parent.parent.title }}</a></span>
                             {% endif %}
-                            <span><a href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.parent.id}) }}"><i class="fa fa-{{ page_parent.parent.component.icon }}"></i>{{ page_parent.parent.title }}</a></span>
+                            <span><a class="mdl-color-text--white" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.parent.id}) }}"><i class="fa fa-{{ page_parent.parent.component.icon }}"></i>{{ page_parent.parent.title }}</a></span>
                         {% endif %}
-                        <span><a href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.id}) }}"><i class="fa fa-{{ page_parent.component.icon }}"></i>{{ page_parent.title }}</a></span>
+                        <span><a class="mdl-color-text--white" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.id}) }}"><i class="fa fa-{{ page_parent.component.icon }}"></i>{{ page_parent.title }}</a></span>
                     {% endif %}
                     <span><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.create'|trans({}, 'axipi_backend') }}</span>
-                {% endblock %}
-                {% block block_title_actions %}
-                {% endblock %}
-            {% endembed %}
-
-            <div class="block">
-                {{ form_start(form) }}
-                {{ form_errors(form) }}
-                <div class="row">
-                    <div class="col-lg-4">
-                        {{ macro.read_field('item.language'|trans({}, 'axipi_backend'), language.title) }}
-                        {{ macro.read_field('item.component'|trans({}, 'axipi_backend'), component.title) }}
-                        {{ form_row(form.template) }}
-                        {{ form_row(form.parent) }}
-                        {{ form_row(form.code) }}
-                        {{ form_row(form.title) }}
-                        {{ form_row(form.slug) }}
-                        {{ form_row(form.isHome) }}
-                        {{ form_row(form.excludeSitemap) }}
-                        {{ form_row(form.excludeSearch) }}
-                        {{ form_row(form.isActive) }}
-                        {{ form_row(form.submit) }}
-                    </div>
-                    <div class="col-lg-8">
-                        {{ form_row(form.attributesChange) }}
-                        <div class="row">
-                            <div class="col-lg-6">
-                                {{ form_row(form.titleSeo) }}
-                                {{ form_row(form.descriptionSeo) }}
-                                {{ form_row(form.titleSocial) }}
-                                {{ form_row(form.descriptionSocial) }}
-                            </div>
-                            <div class="col-lg-6">
-                                {{ form_row(form.meta) }}
-                                {{ form_row(form.style) }}
-                                {{ form_row(form.script) }}
-                            </div>
+                </h1>
+            </div>
+            <div class="mdl-card__supporting-text mdl-grid">
+                <div class="mdl-cell mdl-cell--4-col">
+                    {{ macro.read_field('item.language'|trans({}, 'axipi_backend'), language.title) }}
+                    {{ macro.read_field('item.component'|trans({}, 'axipi_backend'), component.title) }}
+                    {{ form_row(form.template) }}
+                    {{ form_row(form.parent) }}
+                    {{ form_row(form.code) }}
+                    {{ form_row(form.title) }}
+                    {{ form_row(form.slug) }}
+                    {{ form_row(form.isHome) }}
+                    {{ form_row(form.excludeSitemap) }}
+                    {{ form_row(form.excludeSearch) }}
+                    {{ form_row(form.isActive) }}
+                    {{ form_row(form.submit) }}
+                </div>
+                <div class="mdl-cell mdl-cell--8-col">
+                    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                        <div class="mdl-tabs__tab-bar">
+                            <a href="#attributes-panel" class="mdl-tabs__tab is-active">{{ 'item.attributes'|trans({}, 'axipi_backend') }}</a>
+                            <a href="#seo_social-panel" class="mdl-tabs__tab">{{ 'seo_social'|trans({}, 'axipi_backend') }}</a>
+                            <a href="#extra-panel" class="mdl-tabs__tab">{{ 'extra'|trans({}, 'axipi_backend') }}</a>
+                        </div>
+                        <div class="mdl-tabs__panel is-active" id="attributes-panel">
+                            {{ form_row(form.attributesChange) }}
+                        </div>
+                        <div class="mdl-tabs__panel" id="seo_social-panel">
+                            {{ form_row(form.titleSeo) }}
+                            {{ form_row(form.descriptionSeo) }}
+                            {{ form_row(form.titleSocial) }}
+                            {{ form_row(form.descriptionSocial) }}
+                        </div>
+                        <div class="mdl-tabs__panel" id="extra-panel">
+                            {{ form_row(form.meta) }}
+                            {{ form_row(form.style) }}
+                            {{ form_row(form.script) }}
                         </div>
                     </div>
                 </div>
-                {{ form_end(form) }}
             </div>
         </div>
     </div>
-</div>
+    {{ form_end(form) }}
 {% endblock %}
 
 {% block style %}

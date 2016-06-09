@@ -66,3 +66,23 @@ label, .label {
 	display: block;
 	font-weight: bold;
 }
+
+input[type="text"], input[type="email"], input[type="password"], textarea {
+	border: none;
+	border-bottom: 1px solid rgba(0,0,0,.12);
+	color: inherit;
+	display: block;
+	font-size: inherit;
+	padding: 4px 0;
+	text-align: left;
+	width: 100%;
+}
+textarea {
+	min-height: 100px;
+}
+input[type="text"][required="required"], input[type="email"][required="required"], input[type="password"][required="required"], textarea[required="required"] {
+	border-color: #d50000;
+}
+input:-webkit-autofill {
+	-webkit-box-shadow: 0px 0px 0px 1000px #FFFFFF inset;
+}

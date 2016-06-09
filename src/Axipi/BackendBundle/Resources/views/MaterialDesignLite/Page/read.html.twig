@@ -60,23 +60,36 @@
                         {{ macro.read_field('item.template'|trans({}, 'axipi_backend'), page.template) }}
                         {{ macro.read_field('item.title'|trans({}, 'axipi_backend'), page.title) }}
                         {{ macro.read_field('item.slug'|trans({}, 'axipi_backend'), page.slug) }}
-                        {{ macro.read_field('item.titleSeo'|trans({}, 'axipi_backend'), page.titleSeo) }}
-                        {{ macro.read_field('item.descriptionSeo'|trans({}, 'axipi_backend'), page.descriptionSeo) }}
-                        {{ macro.read_field('item.titleSocial'|trans({}, 'axipi_backend'), page.titleSocial) }}
-                        {{ macro.read_field('item.descriptionSocial'|trans({}, 'axipi_backend'), page.descriptionSocial) }}
-                        {%if page.meta %}{{ macro.read_field('item.meta'|trans({}, 'axipi_backend'), true) }}{% endif %}
-                        {%if page.style %}{{ macro.read_field('item.style'|trans({}, 'axipi_backend'), true) }}{% endif %}
-                        {%if page.script %}{{ macro.read_field('item.script'|trans({}, 'axipi_backend'), true) }}{% endif %}
                         {{ macro.read_field('item.isHome'|trans({}, 'axipi_backend'), page.isHome) }}
                         {{ macro.read_field('item.excludeSitemap'|trans({}, 'axipi_backend'), page.excludeSitemap) }}
                         {{ macro.read_field('item.excludeSearch'|trans({}, 'axipi_backend'), page.excludeSearch) }}
                         {{ macro.read_field('item.isActive'|trans({}, 'axipi_backend'), page.isActive) }}
                     </div>
                     <div class="mdl-cell mdl-cell--8-col">
-                        {% set attributes = page.component.attributesSchema|jsonDecode %}
-                        {% for k, v in attributes %}
-                            {{ macro.read_field(k, page.attribute(k)) }}
-                        {% endfor %}
+                    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                        <div class="mdl-tabs__tab-bar">
+                            <a href="#attributes-panel" class="mdl-tabs__tab is-active">{{ 'item.attributes'|trans({}, 'axipi_backend') }}</a>
+                            <a href="#seo_social-panel" class="mdl-tabs__tab">{{ 'seo_social'|trans({}, 'axipi_backend') }}</a>
+                            <a href="#extra-panel" class="mdl-tabs__tab">{{ 'extra'|trans({}, 'axipi_backend') }}</a>
+                        </div>
+                        <div class="mdl-tabs__panel is-active" id="attributes-panel">
+                            {% set attributes = page.component.attributesSchema|jsonDecode %}
+                            {% for k, v in attributes %}
+                                {{ macro.read_field(k, page.attribute(k)) }}
+                            {% endfor %}
+                        </div>
+                        <div class="mdl-tabs__panel" id="seo_social-panel">
+                            {{ macro.read_field('item.titleSeo'|trans({}, 'axipi_backend'), page.titleSeo) }}
+                            {{ macro.read_field('item.descriptionSeo'|trans({}, 'axipi_backend'), page.descriptionSeo) }}
+                            {{ macro.read_field('item.titleSocial'|trans({}, 'axipi_backend'), page.titleSocial) }}
+                            {{ macro.read_field('item.descriptionSocial'|trans({}, 'axipi_backend'), page.descriptionSocial) }}
+                        </div>
+                        <div class="mdl-tabs__panel" id="extra-panel">
+                            {%if page.meta %}{{ macro.read_field('item.meta'|trans({}, 'axipi_backend'), true) }}{% endif %}
+                            {%if page.style %}{{ macro.read_field('item.style'|trans({}, 'axipi_backend'), true) }}{% endif %}
+                            {%if page.script %}{{ macro.read_field('item.script'|trans({}, 'axipi_backend'), true) }}{% endif %}
+                        </div>
+                    </div>
                     </div>
             </div>
         </div>

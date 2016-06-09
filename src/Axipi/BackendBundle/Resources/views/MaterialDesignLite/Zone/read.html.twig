@@ -1,53 +1,57 @@
-{% extends 'AxipiBackendBundle:Bootstrap:base.html.twig' %}
+{% extends 'AxipiBackendBundle:MaterialDesignLite:base.html.twig' %}
 
 {% block title %}{{ zone.code }} - {{ 'zones'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            {% embed 'AxipiBackendBundle:Bootstrap:block_title.html.twig' %}
-                {% block block_title %}
-                    <span><a href="{{ path('axipi_backend_zones', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'zones'|trans({}, 'axipi_backend') }}</a></span>
+    <div class="mdl-grid">
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__title mdl-color-text--white mdl-color--teal">
+                <h1 class="mdl-card__title-text">
+                    <span><a class="mdl-color-text--white" href="{{ path('axipi_backend_zones', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'zones'|trans({}, 'axipi_backend') }}</a></span>
                     <span><i class="fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ zone.code }}</span>
-                {% endblock %}
-                {% block block_title_actions %}
-                    <li><a href="{{ path('axipi_backend_zones', {action: 'update', 'id': zone.id}) }}"><i class="fa fa-{{ 'icons.update'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.update'|trans({}, 'axipi_backend') }}</a></li>
-                    <li><a href="{{ path('axipi_backend_zones', {action: 'delete', 'id': zone.id}) }}"><i class="fa fa-{{ 'icons.delete'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a></li>
-                {% endblock %}
-            {% endembed %}
+                </h1>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_zones', {action: 'update', 'id': zone.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
+                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_zones', {action: 'delete', 'id': zone.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
+            </div>
+        </div>
 
-            <div class="block">
-                <div class="row">
-                    <div class="col-lg-4">
-                        {{ macro.read_field('zone.code'|trans({}, 'axipi_backend'), zone.code) }}
-                    </div>
-                    <div class="col-lg-4">
-                        {{ macro.read_field('zone.isActive'|trans({}, 'axipi_backend'), zone.isActive) }}
-                    </div>
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__supporting-text mdl-grid">
+                <div class="mdl-cell mdl-cell--4-col">
+                    {{ macro.read_field('zone.code'|trans({}, 'axipi_backend'), zone.code) }}
+                </div>
+                <div class="mdl-cell mdl-cell--4-col">
+                    {{ macro.read_field('zone.isActive'|trans({}, 'axipi_backend'), zone.isActive) }}
                 </div>
             </div>
+        </div>
 
-            {% embed 'AxipiBackendBundle:Bootstrap:block_title.html.twig' %}
-                {% block block_title %}
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__title mdl-color-text--white mdl-color--teal">
+                <h1 class="mdl-card__title-text">
                     <span><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</span>
-                {% endblock %}
-                {% block block_title_actions %}
-                {% endblock %}
-            {% endembed %}
+                </h1>
+            </div>
+            <div class="mdl-card__actions mdl-card--border mdl-color-text--black">
+                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="#">{{ 'actions.create'|trans({}, 'axipi_backend') }}</a>
+            </div>
+        </div>
 
-            <div class="block">
-                <div class="row">
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__supporting-text mdl-grid">
                     {% for object in zone.widgets %}
-                        <div class="col-lg-2 col-sm-3 col-xs-6 text-center">
-                            <a class="thumbnail" href="{{ path('axipi_backend_widgets', {language: object.language.code, action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
+                        <div class="mdl-cell mdl-cell--2-col">
+                            <div class="mdl-card__supporting-text mdl-color-text--black">
+                                <a href="{{ path('axipi_backend_widgets', {language: object.language.code, action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
+                            </div>
                         </div>
                     {% endfor %}
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 {% block style %}
