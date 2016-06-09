@@ -1,55 +1,58 @@
-{% extends 'AxipiBackendBundle:Bootstrap:base.html.twig' %}
+{% extends 'AxipiBackendBundle:MaterialDesignLite:base.html.twig' %}
 
 {% block title %}{{ 'components'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            {% embed 'AxipiBackendBundle:Bootstrap:block_title.html.twig' %}
-                {% block block_title %}
+    <div class="mdl-grid">
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__title mdl-color-text--white mdl-color--teal">
+                <h1 class="mdl-card__title-text">
                     <span><i class="fa fa-{{ 'icons.component'|trans({}, 'axipi_backend') }}"></i>{{ 'components'|trans({}, 'axipi_backend') }}</span>
-                {% endblock %}
-                {% block block_title_actions %}
-                {% endblock %}
-            {% endembed %}
+                </h1>
+            </div>
+            <div class="mdl-card__actions mdl-card--border mdl-color-text--black">
+                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="#">{{ 'actions.create'|trans({}, 'axipi_backend') }}</a>
+            </div>
+        </div>
 
-            {% embed 'AxipiBackendBundle:Bootstrap:block_title.html.twig' %}
-                {% block block_title %}
-                    <span><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'category.page'|trans({}, 'axipi_backend') }} ({{ pages|length }})</span>
-                {% endblock %}
-                {% block block_title_actions %}
-                    <li><a href="{{ path('axipi_backend_components', {action: 'create', 'id': 'page'}) }}"><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.create'|trans({}, 'axipi_backend') }}</a></li>
-                {% endblock %}
-            {% endembed %}
-
-            <div class="block">
-                <div class="row">
-                    {% for object in pages %}
-                        <div class="col-lg-2 col-sm-3 col-xs-6 text-center">
-                            <a class="thumbnail" href="{{ path('axipi_backend_components', {action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ object.icon }}"></i><br>{{ object.title }}</a>
-                        </div>
-                    {% endfor %}
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__supporting-text mdl-grid">
+                <div class="mdl-cell mdl-cell--2-col">
+                    <a href="{{ path('axipi_backend_components', {action: 'create', id: 'page'}) }}"><i class="fa fa-4x fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i><br>{{ 'page'|trans({}, 'axipi_backend') }}</a>
+                </div>
+                <div class="mdl-cell mdl-cell--2-col">
+                    <a href="{{ path('axipi_backend_components', {action: 'create', id: 'widget'}) }}"><i class="fa fa-4x fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i><br>{{ 'widget'|trans({}, 'axipi_backend') }}</a>
                 </div>
             </div>
+        </div>
 
-            {% embed 'AxipiBackendBundle:Bootstrap:block_title.html.twig' %}
-                {% block block_title %}
-                    <span><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'category.widget'|trans({}, 'axipi_backend') }} ({{ widgets|length }})</span>
-                {% endblock %}
-                {% block block_title_actions %}
-                    <li><a href="{{ path('axipi_backend_components', {action: 'create', 'id': 'widget'}) }}"><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.create'|trans({}, 'axipi_backend') }}</a></li>
-                {% endblock %}
-            {% endembed %}
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__title mdl-color-text--white mdl-color--teal">
+                <h1 class="mdl-card__title-text">
+                    <span><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'page'|trans({}, 'axipi_backend') }}</span>
+                </h1>
+            </div>
+            <div class="mdl-card__supporting-text mdl-grid">
+                {% for object in pages %}
+                    <div class="mdl-cell mdl-cell--2-col">
+                        <a href="{{ path('axipi_backend_components', {action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ object.icon }}"></i><br>{{ object.title }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
 
-            <div class="block">
-                <div class="row">
-                    {% for object in widgets %}
-                        <div class="col-lg-2 col-sm-3 col-xs-6 text-center">
-                            <a class="thumbnail" href="{{ path('axipi_backend_components', {action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ object.icon }}"></i><br>{{ object.title }}</a>
-                        </div>
-                    {% endfor %}
-                </div>
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__title mdl-color-text--white mdl-color--teal">
+                <h1 class="mdl-card__title-text">
+                    <span><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widget'|trans({}, 'axipi_backend') }}</span>
+                </h1>
+            </div>
+            <div class="mdl-card__supporting-text mdl-grid">
+                {% for object in widgets %}
+                    <div class="mdl-cell mdl-cell--2-col">
+                        <a href="{{ path('axipi_backend_components', {action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ object.icon }}"></i><br>{{ object.title }}</a>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
