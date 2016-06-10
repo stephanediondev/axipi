@@ -44,6 +44,16 @@ class RelationRepository extends EntityRepository
 
         $query->orderBy('rel.ordering');
 
-        return $query->getQuery()->getResult();
+        $getQuery = $query->getQuery();
+
+        $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
+        if(isset($parameters['active']) == 1 && $parameters['active'] == true && isset($parameters['widget']) == 1) {
+            $cacheId = 'axipi/relations/'.$parameters['widget']->getId();
+            $getQuery->setResultCacheDriver($cacheDriver);
+            $getQuery->setResultCacheId($cacheId);
+            $getQuery->setResultCacheLifetime(86400);
+        }
+
+        return $getQuery->getResult();
     }
 }

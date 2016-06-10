@@ -7,24 +7,14 @@ use Axipi\CoreBundle\Entity\Item;
 class ItemRepository extends EntityRepository
 {
     public function getOne($parameters = []) {
-        $cacheDriver = new \Doctrine\Common\Cache\ApcCache();
-
-        $cache_id = false;
-        /*if(isset($parameters['slug']) == 1 && isset($parameters['language_code']) == 1) {
-            $cache_id = 'axipi/'.$parameters['language_code'].'/'.$parameters['slug'];
-        }
-
-        if($cache_id && $cacheDriver->contains($cache_id)) {
-            return $cacheDriver->fetch($cache_id);
-        }*/
-
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
-        $query->addSelect('pge', 'cmp', 'lng');
+        $query->addSelect('pge', 'cmp', 'lng', 'pge_parent');
         $query->from('AxipiCoreBundle:Item', 'pge');
         $query->leftJoin('pge.component', 'cmp');
         $query->leftJoin('pge.language', 'lng');
+        $query->leftJoin('pge.parent', 'pge_parent');
 
         if(isset($parameters['id']) == 1) {
             $query->andWhere('pge.id = :id');
@@ -58,11 +48,18 @@ class ItemRepository extends EntityRepository
             $query->setParameter(':active', true);
         }
 
-        $result = $query->getQuery()->setMaxResults(1)->getOneOrNullResult();
-        if($cache_id) {
-            $cacheDriver->save($cache_id, $result);
+        $getQuery = $query->getQuery();
+        $getQuery->setMaxResults(1);
+
+        $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
+        if(isset($parameters['active']) == 1 && isset($parameters['active']) == true && isset($parameters['slug']) == 1 && isset($parameters['language_code']) == 1) {
+            $cacheId = 'axipi/page/'.$parameters['language_code'].'/'.$parameters['slug'];
+            $getQuery->setResultCacheDriver($cacheDriver);
+            $getQuery->setResultCacheId($cacheId);
+            $getQuery->setResultCacheLifetime(86400);
         }
-        return $result;
+
+        return $getQuery->getOneOrNullResult();
     }
 
     public function getList($parameters = []) {
@@ -102,9 +99,9 @@ class ItemRepository extends EntityRepository
             $query->setParameter(':language', $parameters['language_code']);
         }
 
-        if(isset($parameters['zone']) == 1) {
+        if(isset($parameters['zone_code']) == 1) {
             $query->andWhere('zon.code = :zone');
-            $query->setParameter(':zone', $parameters['zone']);
+            $query->setParameter(':zone', $parameters['zone_code']);
         }
 
         if(isset($parameters['parent']) == 1) {
@@ -137,7 +134,23 @@ class ItemRepository extends EntityRepository
             }
         }
 
-        return $query->getQuery()->getResult();
+        $getQuery = $query->getQuery();
+
+        $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
+        if(isset($parameters['active']) == 1 && isset($parameters['active']) == true && isset($parameters['zone_code']) == 1) {
+            $cacheId = 'axipi/widgets/'.$parameters['zone_code'];
+            $getQuery->setResultCacheDriver($cacheDriver);
+            $getQuery->setResultCacheId($cacheId);
+            $getQuery->setResultCacheLifetime(86400);
+        }
+        if(isset($parameters['active']) == 1 && isset($parameters['active']) == true && isset($parameters['parent']) == 1) {
+            $cacheId = 'axipi/children/'.$parameters['parent']->getId();
+            $getQuery->setResultCacheDriver($cacheDriver);
+            $getQuery->setResultCacheId($cacheId);
+            $getQuery->setResultCacheLifetime(86400);
+        }
+
+        return $getQuery->getResult();
     }
 
     public function testSlug($data) {

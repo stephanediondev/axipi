@@ -21,14 +21,8 @@ class ItemManager extends AbstractManager
 
     public function persist($data)
     {
-        //remove from cache
-        /*$cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
-        $cache_id = 'axipi/'.$data->getLanguage()->getCode().'/'.$data->getSlug();
-        if($cacheDriver->contains($cache_id)) {
-            $cacheDriver->delete($cache_id);
-        }*/
+        $this->removeCache($data);
 
-        //manage attributes
         $attributes = json_decode($data->getComponent()->getAttributesSchema(), true);
         if($attributes) {
             foreach($attributes as $key => $attribute) {
@@ -67,7 +61,6 @@ class ItemManager extends AbstractManager
             $data->setAttributesChange([]);
         }
 
-        //manage slug
         if($data->getComponent()->getCategory() == 'page') {
             if($data->getSlug() == null && !$data->getIsHome()) {
                 if($data->getParent()) {
@@ -87,7 +80,6 @@ class ItemManager extends AbstractManager
             $data->setSlug($slug);
         }
 
-        //manage code
         if($data->getCode() == null) {
             $data->setCode(uniqid($data->getLanguage()->getCode().'-', false));
         }
@@ -97,7 +89,6 @@ class ItemManager extends AbstractManager
             $data->setCode($code);
         }
 
-        //manage dates
         if($data->getDateCreated() == null) {
             $data->setDateCreated(new \Datetime());
         }
@@ -114,6 +105,8 @@ class ItemManager extends AbstractManager
 
     public function remove($data)
     {
+        $this->removeCache($data);
+
         $event = new ItemEvent($data);
         $this->eventDispatcher->dispatch('item.before_remove', $event);
 
@@ -123,6 +116,37 @@ class ItemManager extends AbstractManager
 
         $this->em->remove($data);
         $this->em->flush();
+    }
+
+    public function removeCache($data)
+    {
+        $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
+
+        if($data->getParent()) {
+            $cacheId = 'axipi/children/'.$data->getParent()->getId();
+            if($cacheDriver->contains($cacheId)) {
+                $cacheDriver->delete($cacheId);
+            }
+        }
+
+        if($data->getComponent()->getCategory() == 'page') {
+            $cacheId = 'axipi/page/'.$data->getLanguage()->getCode().'/'.$data->getSlug();
+            if($cacheDriver->contains($cacheId)) {
+                $cacheDriver->delete($cacheId);
+            }
+        }
+
+        if($data->getComponent()->getCategory() == 'widget') {
+            $cacheId = 'axipi/relations/'.$data->getId();
+            if($cacheDriver->contains($cacheId)) {
+                $cacheDriver->delete($cacheId);
+            }
+
+            $cacheId = 'axipi/widgets/'.$data->getZone()->getCode();
+            if($cacheDriver->contains($cacheId)) {
+                $cacheDriver->delete($cacheId);
+            }
+        }
     }
 
     public function testSlug($data)

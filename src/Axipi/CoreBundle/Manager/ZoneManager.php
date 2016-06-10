@@ -19,6 +19,8 @@ class ZoneManager extends AbstractManager
 
     public function persist($data)
     {
+        $this->removeCache($data);
+
         if($data->getDateCreated() == null) {
             $data->setDateCreated(new \Datetime());
         }
@@ -35,10 +37,22 @@ class ZoneManager extends AbstractManager
 
     public function remove($data)
     {
+        $this->removeCache($data);
+
         $event = new ZoneEvent($data);
         $this->eventDispatcher->dispatch('zone.before_remove', $event);
 
         $this->em->remove($data);
         $this->em->flush();
+    }
+
+    public function removeCache($data)
+    {
+        $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
+
+        $cacheId = 'axipi/widgets/'.$data->getCode();
+        if($cacheDriver->contains($cacheId)) {
+            $cacheDriver->delete($cacheId);
+        }
     }
 }

@@ -19,6 +19,14 @@ class RelationManager extends AbstractManager
 
     public function persist($data)
     {
+        $this->removeCache($data);
+
+        $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
+        $cacheId = 'axipi/relations/'.$data->getWidget()->getId();
+        if($cacheDriver->contains($cacheId)) {
+            $cacheDriver->delete($cacheId);
+        }
+
         if($data->getDateCreated() == null) {
             $data->setDateCreated(new \Datetime());
         }
@@ -35,10 +43,22 @@ class RelationManager extends AbstractManager
 
     public function remove($data)
     {
+        $this->removeCache($data);
+
         $event = new RelationEvent($data);
         $this->eventDispatcher->dispatch('relation.before_remove', $event);
 
         $this->em->remove($data);
         $this->em->flush();
+    }
+
+    public function removeCache($data)
+    {
+        $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
+
+        $cacheId = 'axipi/relations/'.$data->getWidget()->getId();
+        if($cacheDriver->contains($cacheId)) {
+            $cacheDriver->delete($cacheId);
+        }
     }
 }
