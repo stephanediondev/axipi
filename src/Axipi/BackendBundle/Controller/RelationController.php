@@ -76,6 +76,7 @@ class RelationController extends AbstractController
         $relation->setIsActive(true);
 
         $form = $this->createForm(RelationType::class, $relation, [
+            'relation' => $relation,
             'items' => $this->itemManager->getList(),
         ]);
         $form->handleRequest($request);
@@ -101,6 +102,7 @@ class RelationController extends AbstractController
     public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
         $form = $this->createForm(RelationType::class, $parameters->get('relation'), [
+            'relation' => $parameters->get('relation'),
             'items' => $this->itemManager->getList(),
         ]);
         $form->handleRequest($request);

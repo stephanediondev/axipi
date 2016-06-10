@@ -5,15 +5,20 @@ a:link, a:visited {
 .mdl-layout__header {
 	min-height: auto;
 }
+.mdl-layout__drawer-button {
+	height: auto;
+	line-height: 1;
+	padding: 5px 5px 5px 5px;
+	width: auto;
+}
 .mdl-layout__header-row {
 	height: auto;
 }
-.mdl-layout__header-row .mdl-button--icon {
-	font-size: 20px;
-	margin: 5px 0px 5px 10px;
+.mdl-layout__header-row .mdl-button {
+	margin: 5px 0px 5px 5px;
 }
 .mdl-layout__header-row a:first-child {
-	margin-left: 10px;
+	margin-left: 0px;
 }
 .mdl-grid {
 	width: inherit
@@ -94,7 +99,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea {
 	width: 100%;
 }
 textarea {
-	min-height: 100px;
+	min-height: 250px;
 }
 input[type="text"][required="required"], input[type="email"][required="required"], input[type="password"][required="required"], textarea[required="required"] {
 	border-color: #d50000;

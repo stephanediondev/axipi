@@ -69,7 +69,9 @@ class ZoneController extends AbstractController
         $zone = new Zone();
         $zone->setIsActive(true);
 
-        $form = $this->createForm(ZoneType::class, $zone, []);
+        $form = $this->createForm(ZoneType::class, $zone, [
+            'zone' => $zone,
+        ]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
@@ -92,7 +94,9 @@ class ZoneController extends AbstractController
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
-        $form = $this->createForm(ZoneType::class, $parameters->get('zone'), []);
+        $form = $this->createForm(ZoneType::class, $parameters->get('zone'), [
+            'zone' => $parameters->get('zone'),
+        ]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {

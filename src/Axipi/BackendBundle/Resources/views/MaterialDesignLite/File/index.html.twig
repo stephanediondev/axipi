@@ -12,11 +12,11 @@
 {% block body %}
     <div class="mdl-grid">
         <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-            <div class="mdl-card__title mdl-color-text--white mdl-color--teal">
+            <div class="mdl-card__title">
                 <h1 class="mdl-card__title-text">
                     {% for tree in tree %}
                         {% if tree.slug != slug %}
-                            <span><a class="mdl-color-text--white" href="{{ path('axipi_backend_files', {mode: mode, action: 'index', 'slug': tree.slug}) }}"><i class="fa fa-{{ tree.icon }}"></i>{{ tree.name }}</a></span>
+                            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_files', {mode: mode, action: 'index', 'slug': tree.slug}) }}"><i class="fa fa-{{ tree.icon }}"></i>{{ tree.name }}</a></span>
                         {% else %}
                             <span><i class="fa fa-{{ tree.icon }}"></i>{{ tree.name }}</span>
                         {% endif %}

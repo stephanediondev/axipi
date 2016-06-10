@@ -79,6 +79,7 @@ class ComponentController extends AbstractController
         $component->setIsActive(true);
 
         $form = $this->createForm(ComponentType::class, $component, [
+            'component' => $component,
             'components' => $this->componentManager->getList(),
             'zones' => $this->zoneManager->getList(),
         ]);
@@ -105,6 +106,7 @@ class ComponentController extends AbstractController
     public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
         $form = $this->createForm(ComponentType::class, $parameters->get('component'), [
+            'component' => $parameters->get('component'),
             'components' => $this->componentManager->getList(),
             'zones' => $this->zoneManager->getList(),
         ]);

@@ -1,4 +1,4 @@
-{% extends 'AxipiBackendBundle:Bootstrap:base.html.twig' %}
+{% extends 'AxipiBackendBundle:MaterialDesignLite:base.html.twig' %}
 
 {% block title %}{{ 'widgets'|trans({}, 'axipi_backend') }}{% endblock %}
 
@@ -25,7 +25,7 @@
                 {{ form_start(form) }}
                 {{ form_errors(form) }}
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="mdl-cell mdl-cell--4-col">
                         {{ macro.read_field('item.language'|trans({}, 'axipi_backend'), language.title) }}
                         {{ macro.read_field('item.component'|trans({}, 'axipi_backend'), component.title) }}
                         {{ form_row(form.template) }}
@@ -37,7 +37,7 @@
                         {{ form_row(form.isActive) }}
                         {{ form_row(form.submit) }}
                     </div>
-                    <div class="col-lg-8">
+                    <div class="mdl-cell mdl-cell--8-col">
                         {{ form_row(form.attributesChange) }}
                     </div>
                 </div>

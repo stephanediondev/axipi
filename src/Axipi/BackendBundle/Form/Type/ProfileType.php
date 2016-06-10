@@ -49,14 +49,18 @@ class ProfileType extends AbstractType
 
         $builder->add('lastname', TextType::class, ['required' => false]);
 
-        $builder->add('submit', SubmitType::class);
+        $builder->add('submit', SubmitType::class,
+            [
+                'label' => 'actions.update',
+            ]
+        );
+
     }
 
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
         foreach($view->children as $name => $child) {
             if($name == 'submit') {
-                $child->vars['label'] = 'actions.'.$name;
             } else {
                 $child->vars['label'] = 'user.'.$name;
             }

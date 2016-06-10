@@ -69,7 +69,9 @@ class LanguageController extends AbstractController
         $language = new Language();
         $language->setIsActive(true);
 
-        $form = $this->createForm(LanguageType::class, $language, []);
+        $form = $this->createForm(LanguageType::class, $language, [
+            'language' => $language,
+        ]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
@@ -92,7 +94,9 @@ class LanguageController extends AbstractController
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
     {
-        $form = $this->createForm(LanguageType::class, $parameters->get('language'), []);
+        $form = $this->createForm(LanguageType::class, $parameters->get('language'), [
+            'language' => $parameters->get('language'),
+        ]);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {

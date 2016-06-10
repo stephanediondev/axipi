@@ -1,42 +1,39 @@
-{% extends 'AxipiBackendBundle:Bootstrap:base.html.twig' %}
+{% extends 'AxipiBackendBundle:MaterialDesignLite:base.html.twig' %}
 
 {% block title %}{{ component.title }} - {{ 'components'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            {% embed 'AxipiBackendBundle:Bootstrap:block_title.html.twig' %}
-                {% block block_title %}
-                    <span><a href="{{ path('axipi_backend_components', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.component'|trans({}, 'axipi_backend') }}"></i>{{ 'components'|trans({}, 'axipi_backend') }}</a></span>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="mdl-grid">
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__title">
+                <h1 class="mdl-card__title-text">
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.component'|trans({}, 'axipi_backend') }}"></i>{{ 'components'|trans({}, 'axipi_backend') }}</a></span>
                     {% if component.parent %}
                         {% if component.parent.parent %}
-                            <span><a href="{{ path('axipi_backend_components', {action: 'read', id: component.parent.parent.id}) }}"><i class="fa fa-{{ component.parent.parent.icon }}"></i>{{ component.parent.parent.title }}</a></span>
+                            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'read', id: component.parent.parent.id}) }}">{{ component.parent.parent.title }}</a></span>
                         {% endif %}
-                        <span><a href="{{ path('axipi_backend_components', {action: 'read', id: component.parent.id}) }}"><i class="fa fa-{{ component.parent.icon }}"></i>{{ component.parent.title }}</a></span>
+                        <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'read', id: component.parent.id}) }}">{{ component.parent.title }}</a></span>
                     {% endif %}
-                    <span><a href="{{ path('axipi_backend_components', {action: 'read', 'id': component.id}) }}"><i class="fa fa-{{ component.icon }}"></i>{{ component.title }}</a></span>
-                    <span><i class="fa fa-{{ 'icons.delete'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.delete'|trans({}, 'axipi_backend') }}</span>
-                {% endblock %}
-                {% block block_title_actions %}
-                    <li><a href="{{ path('axipi_backend_components', {action: 'update', 'id': component.id}) }}"><i class="fa fa-{{ 'icons.update'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.update'|trans({}, 'axipi_backend') }}</a></li>
-                {% endblock %}
-            {% endembed %}
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'read', 'id': component.id}) }}">{{ component.title }}</a></span>
+                </h1>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_components', {action: 'update', 'id': component.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
+            </div>
+        </div>
 
-            <div class="block">
-                {{ form_start(form) }}
-                {{ form_errors(form) }}
-                <div class="row">
-                    <div class="col-lg-4">
-                        {{ form_row(form.confirm) }}
-                        {{ form_row(form.submit) }}
-                    </div>
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__supporting-text mdl-grid">
+                <div class="mdl-cell mdl-cell--4-col">
+                    {{ form_row(form.confirm) }}
+                    {{ form_row(form.submit) }}
                 </div>
-                {{ form_end(form) }}
             </div>
         </div>
     </div>
-</div>
+    {{ form_end(form) }}
 {% endblock %}
 
 {% block style %}

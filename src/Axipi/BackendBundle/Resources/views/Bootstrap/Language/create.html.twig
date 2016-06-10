@@ -1,4 +1,4 @@
-{% extends 'AxipiBackendBundle:Bootstrap:base.html.twig' %}
+{% extends 'AxipiBackendBundle:MaterialDesignLite:base.html.twig' %}
 
 {% block title %}{{ 'languages'|trans({}, 'axipi_backend') }}{% endblock %}
 
@@ -19,11 +19,11 @@
                 {{ form_start(form) }}
                 {{ form_errors(form) }}
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="mdl-cell mdl-cell--4-col">
                         {{ form_row(form.code) }}
                         {{ form_row(form.title) }}
                     </div>
-                    <div class="col-lg-4">
+                    <div class="mdl-cell mdl-cell--4-col">
                         {{ form_row(form.isActive) }}
                         {{ form_row(form.submit) }}
                     </div>

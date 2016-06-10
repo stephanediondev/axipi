@@ -1,4 +1,4 @@
-{% extends 'AxipiBackendBundle:Bootstrap:base.html.twig' %}
+{% extends 'AxipiBackendBundle:MaterialDesignLite:base.html.twig' %}
 
 {% block title %}{{ relation.widget.title }} - {{ 'widgets'|trans({}, 'axipi_backend') }}{% endblock %}
 
@@ -8,13 +8,13 @@
         <div class="col-lg-12">
             {% embed 'AxipiBackendBundle:Bootstrap:block_title.html.twig' %}
                 {% block block_title %}
-                    <span><a href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></span>
-                    <span><a href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', 'id': relation.widget.id}) }}"><i class="fa fa-{{ relation.widget.component.icon }}"></i>{{ relation.widget.title }}</a></span>
-                    <span><a href="{{ path('axipi_backend_relations', {language: app.request.get('language'), action: 'read', 'id': relation.id}) }}"><i class="fa fa-{{ relation.page.component.icon }}"></i>{{ relation.page.title }}</a></span>
-                    <span><i class="fa fa-{{ 'icons.update'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.update'|trans({}, 'axipi_backend') }}</span>
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></span>
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', 'id': relation.widget.id}) }}"><i class="fa fa-{{ relation.widget.component.icon }}"></i>{{ relation.widget.title }}</a></span>
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_relations', {language: app.request.get('language'), action: 'read', 'id': relation.id}) }}"><i class="fa fa-{{ relation.page.component.icon }}"></i>{{ relation.page.title }}</a></span>
+                    <span>{{ 'actions.update'|trans({}, 'axipi_backend') }}</span>
                 {% endblock %}
                 {% block block_title_actions %}
-                    <li><a href="{{ path('axipi_backend_relations', {language: app.request.get('language'), action: 'delete', 'id': relation.id}) }}"><i class="fa fa-trash"></i>{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a></li>
+                    <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_relations', {language: app.request.get('language'), action: 'delete', 'id': relation.id}) }}"><i class="fa fa-trash"></i>{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
                 {% endblock %}
             {% endembed %}
 
@@ -22,12 +22,12 @@
                 {{ form_start(form) }}
                 {{ form_errors(form) }}
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="mdl-cell mdl-cell--4-col">
                         {{ form_row(form.page) }}
                         {{ form_row(form.title) }}
                         {{ form_row(form.ordering) }}
                     </div>
-                    <div class="col-lg-4">
+                    <div class="mdl-cell mdl-cell--4-col">
                         {{ form_row(form.isActive) }}
                         {{ form_row(form.submit) }}
                     </div>

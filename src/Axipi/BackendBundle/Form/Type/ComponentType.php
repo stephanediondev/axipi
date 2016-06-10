@@ -85,14 +85,17 @@ class ComponentType extends AbstractType
 
         $builder->add('attributesSchema');
 
-        $builder->add('submit', SubmitType::class);
+        $builder->add('submit', SubmitType::class,
+            [
+                'label' => $options['component']->getId() ? 'actions.update' : 'actions.create',
+            ]
+        );
     }
 
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
         foreach($view->children as $name => $child) {
             if($name == 'submit') {
-                $child->vars['label'] = 'actions.'.$name;
             } else {
                 $child->vars['label'] = 'component.'.$name;
             }
@@ -104,6 +107,7 @@ class ComponentType extends AbstractType
         $resolver->setDefaults(array(
             'translation_domain' => 'axipi_backend',
             'data_class' => Component::class,
+            'component' => null,
             'components' => [],
             'zones' => [],
         ));

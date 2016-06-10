@@ -32,10 +32,10 @@ class UserType extends AbstractType
             ],
         ]);
 
-        if($options['controller'] == 'create') {
-            $required = true;
-        } else {
+        if($options['user']->getId()) {
             $required = false;
+        } else {
+            $required = true;
         }
         $builder->add('passwordChange', RepeatedType::class, [
             'type' => PasswordType::class,
@@ -70,14 +70,17 @@ class UserType extends AbstractType
             $builder->add('isActive');
         }
 
-        $builder->add('submit', SubmitType::class);
+        $builder->add('submit', SubmitType::class,
+            [
+                'label' => $options['user']->getId() ? 'actions.update' : 'actions.create',
+            ]
+        );
     }
 
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
         foreach($view->children as $name => $child) {
             if($name == 'submit') {
-                $child->vars['label'] = 'actions.'.$name;
             } else {
                 $child->vars['label'] = 'user.'.$name;
             }
@@ -89,9 +92,8 @@ class UserType extends AbstractType
         $resolver->setDefaults(array(
             'translation_domain' => 'axipi_backend',
             'data_class' => User::class,
-            'controller' => null,
-            'user_connected' => null,
             'user' => null,
+            'user_connected' => null,
             'roles' => [],
         ));
     }

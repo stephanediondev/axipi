@@ -13,14 +13,14 @@
 
     <div class="mdl-grid">
         <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-            <div class="mdl-card__title mdl-color-text--white mdl-color--teal">
+            <div class="mdl-card__title">
                 <h1 class="mdl-card__title-text">
-                    <span><a class="mdl-color-text--white" href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></span>
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></span>
                     {% if widget.parent %}
                         {% if widget.parent.component.category == 'widget' %}
-                            <span><a class="mdl-color-text--white" href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: widget.parent.id}) }}"><i class="fa fa-{{ widget.parent.component.icon }}"></i>{{ widget.parent.title }}</a></span>
+                            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: widget.parent.id}) }}"><i class="fa fa-{{ widget.parent.component.icon }}"></i>{{ widget.parent.title }}</a></span>
                         {% else %}
-                            <span><a class="mdl-color-text--white" href="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'read', id: widget.parent.id}) }}"><i class="fa fa-{{ widget.parent.component.icon }}"></i>{{ widget.parent.title }}</a></span>
+                            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'read', id: widget.parent.id}) }}"><i class="fa fa-{{ widget.parent.component.icon }}"></i>{{ widget.parent.title }}</a></span>
                         {% endif %}
                     {% endif %}
                     <span><i class="fa fa-{{ widget.component.icon }}"></i>{{ widget.title }}</span>
@@ -55,7 +55,7 @@
         </div>
 
         <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-            <div class="mdl-card__title mdl-color-text--white mdl-color--teal">
+            <div class="mdl-card__title">
                 <h1 class="mdl-card__title-text">
                     <span><i class="fa fa-{{ 'icons.relation'|trans({}, 'axipi_backend') }}"></i>{{ 'relations'|trans({}, 'axipi_backend') }}</span>
                 </h1>
@@ -78,7 +78,7 @@
         </div>
 
         <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-            <div class="mdl-card__title mdl-color-text--white mdl-color--teal">
+            <div class="mdl-card__title">
                 <h1 class="mdl-card__title-text">
                     <span><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'item.children'|trans({}, 'axipi_backend') }}</span>
             </div>
@@ -103,7 +103,7 @@
         </div>
 
         <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-            <div class="mdl-card__title mdl-color-text--white mdl-color--teal">
+            <div class="mdl-card__title">
                 <h1 class="mdl-card__title-text">
                     <span><i class="fa fa-download"></i>{{ 'drag_drop'|trans({}, 'axipi_backend') }} <small>Drop file(s) over icon</small></span>
                 </h1>

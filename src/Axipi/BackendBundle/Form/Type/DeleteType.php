@@ -22,13 +22,16 @@ class DeleteType extends AbstractType
             ]
         );
 
-        $builder->add('submit', SubmitType::class);
+        $builder->add('submit', SubmitType::class,
+            [
+                'label' => 'actions.delete',
+            ]
+        );
     }
 
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
         $view->children['confirm']->vars['label'] = 'actions.confirm';
-        $view->children['submit']->vars['label'] = 'actions.submit';
     }
 
     public function configureOptions(OptionsResolver $resolver)
