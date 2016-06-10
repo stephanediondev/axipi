@@ -134,6 +134,11 @@ class ItemManager extends AbstractManager
             if($cacheDriver->contains($cacheId)) {
                 $cacheDriver->delete($cacheId);
             }
+
+            $cacheId = 'axipi/page/'.$data->getId();
+            if($cacheDriver->contains($cacheId)) {
+                $cacheDriver->delete($cacheId);
+            }
         }
 
         if($data->getComponent()->getCategory() == 'widget') {

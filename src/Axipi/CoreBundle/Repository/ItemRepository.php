@@ -58,6 +58,12 @@ class ItemRepository extends EntityRepository
             $getQuery->setResultCacheId($cacheId);
             $getQuery->setResultCacheLifetime(86400);
         }
+        if(isset($parameters['active']) == 1 && isset($parameters['active']) == true && isset($parameters['id']) == 1) {
+            $cacheId = 'axipi/page/'.$parameters['id'];
+            $getQuery->setResultCacheDriver($cacheDriver);
+            $getQuery->setResultCacheId($cacheId);
+            $getQuery->setResultCacheLifetime(86400);
+        }
 
         return $getQuery->getOneOrNullResult();
     }

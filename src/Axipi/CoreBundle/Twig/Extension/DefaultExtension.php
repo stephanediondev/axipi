@@ -96,12 +96,10 @@ class DefaultExtension extends \Twig_Extension
         }
 
         if(count($ids) > 0) {
-            $pages = $this->em->getRepository('AxipiCoreBundle:Item')->getList(['ids' => array_keys($ids)]);
-            if($pages) {
-                foreach($pages as $page) {
-                    $url = $this->buildLink($page);
-                    $text = str_replace($ids[$page->getId()], $url, $text);
-                }
+            foreach($ids as $id => $tag) {
+                $page = $this->em->getRepository('AxipiCoreBundle:Item')->getOne(['active' => true, 'id' => $id]);
+                $url = $this->buildLink($page);
+                $text = str_replace($ids[$id], $url, $text);
             }
         }
 
