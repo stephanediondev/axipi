@@ -49,6 +49,10 @@ class InfoController extends AbstractController
         $info['ini_get']['safe_mode'] = ini_get('safe_mode');
         $info['ini_get']['open_basedir'] = ini_get('open_basedir');
 
+        $info['connection'] = $this->container->get('doctrine')->getConnection();
+
+        $info['symfony'] = \Symfony\Component\HttpKernel\Kernel::VERSION;
+
         $parameters->set('info', $info);
 
         return $this->render('AxipiBackendBundle:MaterialDesignLite:info.html.twig', $parameters->all());

@@ -1,26 +1,19 @@
-{% extends 'AxipiBackendBundle:Bootstrap:base.html.twig' %}
+{% extends 'AxipiBackendBundle:MaterialDesignLite:base.html.twig' %}
 
 {% block title %}{{ 'home'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            {% embed 'AxipiBackendBundle:Bootstrap:block_title.html.twig' %}
-                {% block block_title %}
+    <div class="mdl-grid">
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__title mdl-color-text--white mdl-color--teal">
+                <h1 class="mdl-card__title-text">
                     <span><i class="fa fa-{{ 'icons.home'|trans({}, 'axipi_backend') }}"></i>{{ 'home'|trans({}, 'axipi_backend') }}</span>
-                {% endblock %}
-                {% block block_title_actions %}
-                {% endblock %}
-            {% endembed %}
-
-            <div class="block">
-                <div class="row" id="dynamic_home">
-                </div>
+                </h1>
+            </div>
+            <div class="mdl-card__supporting-text mdl-grid" id="dynamic_home">
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 {% block style %}

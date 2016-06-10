@@ -32,10 +32,10 @@
             <div class="mdl-layout-spacer">
             </div>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white" href="{{ path('axipi_backend_profile', {action: 'read'}) }}"><i class="fa-lg fa fa-{{ 'icons.profile'|trans({}, 'axipi_backend') }}"></i>{{ app.user.firstname }}{% if app.user.lastname %} {{ app.user.lastname }}{% endif %}</a>
-                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white" href="{{ logout_path('axipi_backend') }}"><i class="fa-lg fa fa-{{ 'icons.logout'|trans({}, 'axipi_backend') }}"></i>{{ 'logout'|trans({}, 'axipi_backend') }}</a>
+                <a class="mdl-button mdl-button--icon mdl-color-text--white" href="{{ path('axipi_backend_profile', {action: 'read'}) }}"><i class="fa-lg fa fa-{{ 'icons.profile'|trans({}, 'axipi_backend') }}"></i></a>
+                <a class="mdl-button mdl-button--icon mdl-color-text--white" href="{{ logout_path('axipi_backend') }}"><i class="fa-lg fa fa-{{ 'icons.logout'|trans({}, 'axipi_backend') }}"></i></a>
             {% endif %}
-            <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--white" target="_blank" href="{{ path('axipi_core_home', {}) }}"><i class="fa-lg fa fa-{{ 'icons.frontend'|trans({}, 'axipi_backend') }}"></i>{{ 'frontend'|trans({}, 'axipi_backend') }}</a>
+            <a class="mdl-button mdl-button--icon mdl-color-text--white" target="_blank" href="{{ path('axipi_core_home', {}) }}"><i class="fa-lg fa fa-{{ 'icons.frontend'|trans({}, 'axipi_backend') }}"></i></a>
         </div>
     </header>
     <div class="mdl-layout__drawer">

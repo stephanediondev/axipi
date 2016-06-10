@@ -2,8 +2,15 @@ a:link, a:visited {
 	color: #757575;
 	text-decoration: none;
 }
-.mdl-layout__header-row a {
-	margin-left: 10px;
+.mdl-layout__header {
+	min-height: auto;
+}
+.mdl-layout__header-row {
+	height: auto;
+}
+.mdl-layout__header-row .mdl-button--icon {
+	font-size: 20px;
+	margin: 5px 0px 5px 10px;
 }
 .mdl-layout__header-row a:first-child {
 	margin-left: 10px;
@@ -54,6 +61,9 @@ a:link, a:visited {
 	padding: 8px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+.mdl-card__supporting-text.mdl-grid .mdl-cell--2-col a img {
+	max-height: 90px;
 }
 .mdl-tabs__panel, .mdl-card.toggle {
 	display: none;

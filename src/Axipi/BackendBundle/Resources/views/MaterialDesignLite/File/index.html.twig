@@ -1,4 +1,4 @@
-{% extends 'AxipiBackendBundle:Bootstrap:base.html.twig' %}
+{% extends 'AxipiBackendBundle:MaterialDesignLite:base.html.twig' %}
 
 {% block title %}{{ 'files'|trans({}, 'axipi_backend') }}{% endblock %}
 
@@ -10,46 +10,46 @@
 {% endblock %}
 
 {% block body %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            {% embed 'AxipiBackendBundle:Bootstrap:block_title.html.twig' %}
-                {% block block_title %}
+    <div class="mdl-grid">
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__title mdl-color-text--white mdl-color--teal">
+                <h1 class="mdl-card__title-text">
                     {% for tree in tree %}
                         {% if tree.slug != slug %}
-                            <span><a href="{{ path('axipi_backend_files', {mode: mode, action: 'index', 'slug': tree.slug}) }}"><i class="fa fa-{{ tree.icon }}"></i>{{ tree.name }}</a></span>
+                            <span><a class="mdl-color-text--white" href="{{ path('axipi_backend_files', {mode: mode, action: 'index', 'slug': tree.slug}) }}"><i class="fa fa-{{ tree.icon }}"></i>{{ tree.name }}</a></span>
                         {% else %}
                             <span><i class="fa fa-{{ tree.icon }}"></i>{{ tree.name }}</span>
                         {% endif %}
                     {% endfor %}
-                {% endblock %}
-                {% block block_title_actions %}
-                    <li><a role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample"><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.create'|trans({}, 'axipi_backend') }}</a></li>
-                {% endblock %}
-            {% endembed %}
+                </h1>
+            </div>
+            <div class="mdl-card__actions mdl-card--border mdl-color-text--black">
+                <a class="mdl-button mdl-color--pink mdl-color-text--white toggle" href="#files-create">{{ 'actions.create'|trans({}, 'axipi_backend') }}</a>
+            </div>
+        </div>
 
-            <div class="block collapse" id="collapseExample">
-                <div class="row">
-                    <div class="col-lg-2 col-sm-3 col-xs-6 text-center">
-                        <a class="thumbnail" href="{{ path('axipi_backend_files', {mode: mode, action: 'create', id: 'folder'}) }}"><i class="fa fa-4x fa-folder-o"></i><br>{{ 'folder'|trans({}, 'axipi_backend') }}</a>
-                    </div>
-                    <div class="col-lg-2 col-sm-3 col-xs-6 text-center">
-                        <a class="thumbnail" href="{{ path('axipi_backend_files', {mode: mode, action: 'create', id: 'file'}) }}"><i class="fa fa-4x fa-file-o"></i><br>{{ 'file'|trans({}, 'axipi_backend') }}</a>
-                    </div>
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col toggle" id="files-create">
+            <div class="mdl-card__supporting-text mdl-grid">
+                <div class="mdl-cell mdl-cell--2-col">
+                    <a href="{{ path('axipi_backend_files', {mode: mode, action: 'create', id: 'folder'}) }}"><i class="fa fa-4x fa-folder-o"></i><br>{{ 'folder'|trans({}, 'axipi_backend') }}</a>
+                </div>
+                <div class="mdl-cell mdl-cell--2-col">
+                    <a href="{{ path('axipi_backend_files', {mode: mode, action: 'create', id: 'file'}) }}"><i class="fa fa-4x fa-file-o"></i><br>{{ 'file'|trans({}, 'axipi_backend') }}</a>
                 </div>
             </div>
+        </div>
 
-            <div class="block">
-                <div class="row">
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__supporting-text mdl-grid">
                     {% for object in objects %}
-                        <div class="col-lg-2 col-sm-3 col-xs-6 text-center">
+                        <div class="mdl-cell mdl-cell--2-col">
                             {% if object.type == 'folder' %}
-                                <a class="thumbnail" href="{{ path('axipi_backend_files', {mode: mode, action: 'index', slug: object.slug}) }}"><i class="fa fa-4x fa-{{ object.icon }}"></i><br>{{ object.name }}</a>
+                                <a href="{{ path('axipi_backend_files', {mode: mode, action: 'index', slug: object.slug}) }}"><i class="fa fa-4x fa-{{ object.icon }}"></i><br>{{ object.name }}</a>
                             {% else %}
                                 {% if 'image/' in object.mime %}
-                                    <a class="thumbnail{% if 'wysiwyg' in mode %} wysiwyg_image{% endif %}" {% if 'wysiwyg' in mode %}data-field_name="{{ mode|replace({'wysiwyg': ''}) }}" {% endif %}href="{{ path('axipi_backend_files', {mode: mode, action: 'read', slug: object.slug}) }}"><img src="{{ asset('files/' ~ object.slug) }}" class="img-responsive">{{ object.name }}</a>
+                                    <a{% if 'wysiwyg' in mode %} class="wysiwyg_image"{% endif %} {% if 'wysiwyg' in mode %}data-field_name="{{ mode|replace({'wysiwyg': ''}) }}" {% endif %}href="{{ path('axipi_backend_files', {mode: mode, action: 'read', slug: object.slug}) }}"><img src="{{ asset('files/' ~ object.slug) }}"><br>{{ object.name }}</a>
                                 {% else %}
-                                    <a class="thumbnail" href="{{ path('axipi_backend_files', {mode: mode, action: 'read', slug: object.slug}) }}"><i class="fa fa-4x fa-{{ object.icon }}"></i><br>{{ object.name }}</a>
+                                    <a href="{{ path('axipi_backend_files', {mode: mode, action: 'read', slug: object.slug}) }}"><i class="fa fa-4x fa-{{ object.icon }}"></i><br>{{ object.name }}</a>
                                 {% endif %}
                             {% endif %}
                         </div>
@@ -58,7 +58,6 @@
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 {% block style %}
