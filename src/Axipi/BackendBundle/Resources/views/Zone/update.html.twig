@@ -1,0 +1,35 @@
+{% extends 'AxipiBackendBundle::base.html.twig' %}
+
+{% block title %}{{ zone.code }} - {{ 'zones'|trans({}, 'axipi_backend') }}{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="mdl-grid">
+        {% embed 'AxipiBackendBundle::card.html.twig' %}
+            {% block card__actions %}
+                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_zones', {action: 'delete', 'id': zone.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
+            {% endblock %}
+            {% block card__title %}
+                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_zones', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'zones'|trans({}, 'axipi_backend') }}</a></span>
+                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_zones', {action: 'read', 'id': zone.id}) }}">{{ zone.code }}</a></span>
+            {% endblock %}
+            {% block card__supporting %}
+                <div class="mdl-cell mdl-cell--4-col">
+                    {{ form_row(form.code) }}
+                    {{ form_row(form.isActive) }}
+                    {{ form_row(form.submit) }}
+                </div>
+            {% endblock %}
+        {% endembed %}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+{% endblock %}

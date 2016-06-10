@@ -61,7 +61,7 @@ class LanguageController extends AbstractController
     {
         $parameters->set('objects', $this->languageManager->getList());
 
-        return $this->render('AxipiBackendBundle:MaterialDesignLite/Language:index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Language:index.html.twig', $parameters->all());
     }
 
     public function createAction(Request $request, ParameterBag $parameters, $id)
@@ -84,12 +84,12 @@ class LanguageController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:MaterialDesignLite/Language:create.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Language:create.html.twig', $parameters->all());
     }
 
     public function readAction(Request $request, ParameterBag $parameters, $id)
     {
-        return $this->render('AxipiBackendBundle:MaterialDesignLite/Language:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Language:read.html.twig', $parameters->all());
     }
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
@@ -109,7 +109,7 @@ class LanguageController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:MaterialDesignLite/Language:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Language:update.html.twig', $parameters->all());
     }
 
     public function deleteAction(Request $request, ParameterBag $parameters, $id)
@@ -127,6 +127,6 @@ class LanguageController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:MaterialDesignLite/Language:delete.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Language:delete.html.twig', $parameters->all());
     }
 }

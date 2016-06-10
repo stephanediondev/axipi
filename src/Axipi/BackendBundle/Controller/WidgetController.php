@@ -98,7 +98,7 @@ class WidgetController extends AbstractController
         $parameters->set('components', $this->componentManager->getList(['category' => 'widget', 'active' => true]));
         $parameters->set('zones', $this->zoneManager->getList());
 
-        return $this->render('AxipiBackendBundle:MaterialDesignLite/Widget:index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Widget:index.html.twig', $parameters->all());
     }
 
     public function createAction(Request $request, ParameterBag $parameters)
@@ -133,7 +133,7 @@ class WidgetController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:MaterialDesignLite/Widget:create.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Widget:create.html.twig', $parameters->all());
     }
 
     public function readAction(Request $request, ParameterBag $parameters, $id)
@@ -141,7 +141,7 @@ class WidgetController extends AbstractController
         $parameters->set('objects', $this->relationManager->getList(['widget' => $id]));
         $parameters->set('components', $this->componentManager->getList(['category' => 'widget', 'active' => true]));
 
-        return $this->render('AxipiBackendBundle:MaterialDesignLite/Widget:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Widget:read.html.twig', $parameters->all());
     }
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
@@ -163,7 +163,7 @@ class WidgetController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:MaterialDesignLite/Widget:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Widget:update.html.twig', $parameters->all());
     }
 
     public function deleteAction(Request $request, ParameterBag $parameters, $id)
@@ -181,7 +181,7 @@ class WidgetController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:MaterialDesignLite/Widget:delete.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Widget:delete.html.twig', $parameters->all());
     }
 
     public function uploadAction(Request $request, ParameterBag $parameters)

@@ -1,0 +1,39 @@
+{% extends 'AxipiBackendBundle::base.html.twig' %}
+
+{% block title %}{{ relation.widget.title }} - {{ 'widgets'|trans({}, 'axipi_backend') }}{% endblock %}
+
+{% block body %}
+    <div class="mdl-grid">
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__actions">
+                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_relations', {language: app.request.get('language'), action: 'update', 'id': relation.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
+                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_relations', {language: app.request.get('language'), action: 'delete', 'id': relation.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
+            </div>
+            <div class="mdl-card__title">
+                <h1 class="mdl-card__title-text">
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></span>
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', 'id': relation.widget.id}) }}">{{ relation.widget.title }}</a></span>
+                    <span>{{ relation.page.title }}</span>
+                </h1>
+            </div>
+            <div class="mdl-card__supporting-text mdl-grid">
+                <div class="mdl-cell mdl-cell--4-col">
+                    {{ macro.read_field('relation.page'|trans({}, 'axipi_backend'), relation.page.title) }}
+                    {{ macro.read_field('relation.title'|trans({}, 'axipi_backend'), relation.title) }}
+                    {{ macro.read_field('relation.ordering'|trans({}, 'axipi_backend'), relation.ordering) }}
+                </div>
+                <div class="mdl-cell mdl-cell--4-col">
+                    {{ macro.read_field('relation.isActive'|trans({}, 'axipi_backend'), relation.isActive) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+{% endblock %}

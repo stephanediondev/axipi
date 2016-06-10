@@ -1,0 +1,33 @@
+{% extends 'AxipiBackendBundle::base.html.twig' %}
+
+{% block title %}{{ user.username }} - {{ 'users'|trans({}, 'axipi_backend') }}{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="mdl-grid">
+        {% embed 'AxipiBackendBundle::card.html.twig' %}
+            {% block card__title %}
+                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_profile', {action: 'read'}) }}"><i class="fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ user.username }}</a></span>
+            {% endblock %}
+            {% block card__supporting %}
+                <div class="mdl-cell mdl-cell--4-col">
+                    {{ form_row(form.username) }}
+                    {{ form_row(form.passwordChange) }}
+                    {{ form_row(form.firstname) }}
+                    {{ form_row(form.lastname) }}
+                    {{ form_row(form.submit) }}
+                </div>
+            {% endblock %}
+        {% endembed %}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+{% endblock %}

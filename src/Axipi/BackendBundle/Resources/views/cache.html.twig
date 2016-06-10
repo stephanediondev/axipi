@@ -1,0 +1,33 @@
+{% extends 'AxipiBackendBundle::base.html.twig' %}
+
+{% block title %}{{ 'cache'|trans({}, 'axipi_backend') }}{% endblock %}
+
+{% block body %}
+    <div class="mdl-grid">
+        {% embed 'AxipiBackendBundle::card.html.twig' %}
+            {% block card__actions %}
+                {% if apcu %}
+                    <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_cache', {action: 'apcu'}) }}">{{ 'reset_apcu'|trans({}, 'axipi_backend') }}</a>
+                {% endif %}
+                {% if opcache %}
+                    <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_cache', {action: 'opcache'}) }}">{{ 'reset_opcache'|trans({}, 'axipi_backend') }}</a>
+                {% endif %}
+            {% endblock %}
+            {% block card__title %}
+                <span><i class="fa fa-{{ 'icons.cache'|trans({}, 'axipi_backend') }}"></i>{{ 'cache'|trans({}, 'axipi_backend') }}</span>
+            {% endblock %}
+            {% block card__supporting %}
+                <div class="mdl-cell mdl-cell--4-col">
+                </div>
+            {% endblock %}
+        {% endembed %}
+    </div>
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+{% endblock %}

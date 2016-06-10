@@ -19,6 +19,12 @@ services:
         arguments:
             - "@axipi_search_manager_search"
 
+    axipi_backend_controller_cache:
+        class: Axipi\BackendBundle\Controller\CacheController
+        parent: "axipi_core_controller_abstract"
+        arguments:
+            - "@axipi_core_manager_cache"
+
     axipi_backend_controller_component:
         class: Axipi\BackendBundle\Controller\ComponentController
         parent: "axipi_core_controller_abstract"

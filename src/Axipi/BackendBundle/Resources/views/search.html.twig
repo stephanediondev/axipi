@@ -1,0 +1,107 @@
+{% extends 'AxipiBackendBundle::base.html.twig' %}
+
+{% block title %}{{ 'search'|trans({}, 'axipi_backend') }}{% endblock %}
+
+{% block body %}
+    <div class="mdl-grid">
+        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            {% if enabled %}
+                <div class="mdl-card__actions mdl-color-text--black">
+                    <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_search', {action: 'init'}) }}">{{ 'actions.initialize'|trans({}, 'axipi_backend') }}</a>
+                    <a class="mdl-button mdl-color--pink mdl-color-text--white"  href="{{ path('axipi_backend_search', {action: 'scan'}) }}">{{ 'actions.refresh'|trans({}, 'axipi_backend') }}</a>
+                </div>
+            {% endif %}
+            <div class="mdl-card__title">
+                <h1 class="mdl-card__title-text">
+                    <span><i class="fa fa-{{ 'icons.search'|trans({}, 'axipi_backend') }}"></i>{{ 'search'|trans({}, 'axipi_backend') }}</span>
+                </h1>
+            </div>
+            {% if enabled %}
+            {% else %}
+                <div class="mdl-card__supporting-text">
+                    <p>Disabled</p>
+                </div>
+            {% endif %}
+        </div>
+
+        {% if enabled %}
+            {% if stats is defined and stats.indices is defined %}
+                {% for key, stats in stats.indices %}
+                    <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+                        <div class="mdl-card__title">
+                            <h1 class="mdl-card__title-text">
+                                <span><i class="fa fa-bolt"></i>{{ 'backend.index'|trans({}, 'axipi_search') }}</span>
+                                <span>{{ key }}</span>
+                            </h1>
+                        </div>
+                        <div class="mdl-card__supporting-text mdl-grid">
+                            <div class="mdl-cell mdl-cell--4-col">
+                                {{ macro.read_field('total.store.size_in_bytes', stats.total.store.size_in_bytes) }}
+                                {{ macro.read_field('total.docs.count', stats.total.docs.count) }}
+                                {{ macro.read_field('total.docs.deleted', stats.total.docs.deleted) }}
+                            </div>
+                            <div class="mdl-cell mdl-cell--4-col">
+                                {{ macro.read_field('total.search.query_total', stats.total.search.query_total) }}
+                                {{ macro.read_field('total.search.fetch_total', stats.total.search.fetch_total) }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            {% if health is defined %}
+                <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+                    <div class="mdl-card__title">
+                        <h1 class="mdl-card__title-text">
+                            <span><i class="fa fa-database"></i>{{ 'backend.cluster'|trans({}, 'axipi_search') }}</span>
+                            <span>{{ health.cluster_name }}</span>
+                        </h1>
+                    </div>
+                    <div class="mdl-card__supporting-text mdl-grid">
+                        <div class="mdl-cell mdl-cell--4-col">
+                            {{ macro.read_field('status', health.status) }}
+                            {{ macro.read_field('number_of_nodes', health.number_of_nodes) }}
+                        </div>
+                        <div class="mdl-cell mdl-cell--4-col">
+                            {{ macro.read_field('active_primary_shards', health.active_primary_shards) }}
+                            {{ macro.read_field('active_shards', health.active_shards) }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if nodes is defined %}
+                {% for key, node in nodes.nodes %}
+                    <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+                        <div class="mdl-card__title">
+                            <h1 class="mdl-card__title-text">
+                                <span><i class="fa fa-server"></i>{{ 'backend.node'|trans({}, 'axipi_search') }}</span>
+                                <span>{{ node.name }}</span>
+                            </h1>
+                        </div>
+                        <div class="mdl-card__supporting-text mdl-grid">
+                            <div class="mdl-cell mdl-cell--4-col">
+                                {{ macro.read_field('attributes.master', node.attributes.master) }}
+                                {{ macro.read_field('ip', node.ip) }}
+                                {{ macro.read_field('version', node.version) }}
+                            </div>
+                            <div class="mdl-cell mdl-cell--4-col">
+                                {{ macro.read_field('os.name', node.os.name) }}
+                                {{ macro.read_field('os.arch', node.os.arch) }}
+                                {{ macro.read_field('os.version', node.os.version) }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+{% endblock %}

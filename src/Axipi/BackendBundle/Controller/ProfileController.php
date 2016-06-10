@@ -42,7 +42,7 @@ class ProfileController extends AbstractController
 
     public function readAction(Request $request, ParameterBag $parameters)
     {
-        return $this->render('AxipiBackendBundle:MaterialDesignLite/Profile:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Profile:read.html.twig', $parameters->all());
     }
 
     public function updateAction(Request $request, ParameterBag $parameters)
@@ -60,6 +60,6 @@ class ProfileController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:MaterialDesignLite/Profile:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Profile:update.html.twig', $parameters->all());
     }
 }

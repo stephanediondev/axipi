@@ -62,6 +62,11 @@ services:
         parent: "axipi_core_manager_abstract"
         public: false
 
+    axipi_core_manager_cache:
+        class: Axipi\CoreBundle\Manager\CacheManager
+        parent: "axipi_core_manager_abstract"
+        public: false
+
     #default
     axipi_core_twig_extension_default:
         class: Axipi\CoreBundle\Twig\Extension\DefaultExtension

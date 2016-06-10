@@ -69,7 +69,7 @@ class ComponentController extends AbstractController
         $parameters->set('pages', $this->componentManager->getList(['category' => 'page']));
         $parameters->set('widgets', $this->componentManager->getList(['category' => 'widget']));
 
-        return $this->render('AxipiBackendBundle:MaterialDesignLite/Component:index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Component:index.html.twig', $parameters->all());
     }
 
     public function createAction(Request $request, ParameterBag $parameters, $id)
@@ -95,12 +95,12 @@ class ComponentController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:MaterialDesignLite/Component:create.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Component:create.html.twig', $parameters->all());
     }
 
     public function readAction(Request $request, ParameterBag $parameters, $id)
     {
-        return $this->render('AxipiBackendBundle:MaterialDesignLite/Component:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Component:read.html.twig', $parameters->all());
     }
 
     public function updateAction(Request $request, ParameterBag $parameters, $id)
@@ -122,7 +122,7 @@ class ComponentController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:MaterialDesignLite/Component:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Component:update.html.twig', $parameters->all());
     }
 
     public function deleteAction(Request $request, ParameterBag $parameters, $id)
@@ -140,6 +140,6 @@ class ComponentController extends AbstractController
 
         $parameters->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:MaterialDesignLite/Component:delete.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Component:delete.html.twig', $parameters->all());
     }
 }

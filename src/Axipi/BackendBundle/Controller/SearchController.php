@@ -21,7 +21,7 @@ class SearchController extends AbstractController
 
     public function dispatchAction(Request $request, $action)
     {
-        if(!$this->isGranted('ROLE_PAGES')) {
+        if(!$this->isGranted('ROLE_SEARCH')) {
             return $this->redirectToRoute('axipi_backend_home', []);
         }
 
@@ -65,7 +65,7 @@ class SearchController extends AbstractController
             }
         }
 
-        return $this->render('AxipiBackendBundle:MaterialDesignLite/Search:index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle::search.html.twig', $parameters->all());
     }
 
     public function initAction(Request $request, ParameterBag $parameters)
