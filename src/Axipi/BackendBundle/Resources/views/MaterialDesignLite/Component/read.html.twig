@@ -5,25 +5,22 @@
 {% block body %}
     <div class="mdl-grid">
         <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__actions">
+                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_components', {action: 'update', 'id': component.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
+                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_components', {action: 'delete', 'id': component.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
+            </div>
             <div class="mdl-card__title">
                 <h1 class="mdl-card__title-text">
                     <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.component'|trans({}, 'axipi_backend') }}"></i>{{ 'components'|trans({}, 'axipi_backend') }}</a></span>
                     {% if component.parent %}
                         {% if component.parent.parent %}
-                            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'read', id: component.parent.parent.id}) }}"><i class="fa fa-{{ component.parent.parent.icon }}"></i>{{ component.parent.parent.title }}</a></span>
+                            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'read', id: component.parent.parent.id}) }}">{{ component.parent.parent.title }}</a></span>
                         {% endif %}
-                        <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'read', id: component.parent.id}) }}"><i class="fa fa-{{ component.parent.icon }}"></i>{{ component.parent.title }}</a></span>
+                        <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'read', id: component.parent.id}) }}">{{ component.parent.title }}</a></span>
                     {% endif %}
-                    <span><i class="fa fa-{{ component.icon }}"></i>{{ component.title }}</span>
+                    <span>{{ component.title }}</span>
                 </h1>
             </div>
-            <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_components', {action: 'update', 'id': component.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
-                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_components', {action: 'delete', 'id': component.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
-            </div>
-        </div>
-
-        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
             <div class="mdl-card__supporting-text mdl-grid">
                 <div class="mdl-cell mdl-cell--4-col">
                     {{ macro.read_field('component.category'|trans({}, 'axipi_backend'), component.category) }}

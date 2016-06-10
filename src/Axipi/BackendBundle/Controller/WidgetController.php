@@ -104,6 +104,13 @@ class WidgetController extends AbstractController
     public function createAction(Request $request, ParameterBag $parameters)
     {
         $widget = new Item();
+        if($request->query->get('parent')) {
+            $widget_parent = $this->itemManager->getOne(['id' => $request->query->get('parent')]);
+            if($widget_parent) {
+                $parameters->set('widget_parent', $widget_parent);
+                $widget->setParent($widget_parent);
+            }
+        }
         $widget->setLanguage($parameters->get('language'));
         $widget->setComponent($parameters->get('component'));
         $widget->setZone($parameters->get('component')->getZone());
@@ -132,6 +139,7 @@ class WidgetController extends AbstractController
     public function readAction(Request $request, ParameterBag $parameters, $id)
     {
         $parameters->set('objects', $this->relationManager->getList(['widget' => $id]));
+        $parameters->set('components', $this->componentManager->getList(['category' => 'widget', 'active' => true]));
 
         return $this->render('AxipiBackendBundle:MaterialDesignLite/Widget:read.html.twig', $parameters->all());
     }

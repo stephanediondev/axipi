@@ -6,13 +6,11 @@
     {{ form_start(form) }}
     {{ form_errors(form) }}
     <div class="mdl-grid">
-        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-            <div class="mdl-card__title">
-                <h1 class="mdl-card__title-text">
-                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.component'|trans({}, 'axipi_backend') }}"></i>{{ 'components'|trans({}, 'axipi_backend') }}</a></span>
-                </h1>
-            </div>
-            <div class="mdl-card__supporting-text mdl-grid">
+        {% embed 'AxipiBackendBundle:MaterialDesignLite:card.html.twig' %}
+            {% block card__title %}
+                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.component'|trans({}, 'axipi_backend') }}"></i>{{ 'components'|trans({}, 'axipi_backend') }}</a></span>
+            {% endblock %}
+            {% block card__supporting %}
                 <div class="mdl-cell mdl-cell--4-col">
                     {{ form_row(form.category) }}
                     {{ form_row(form.service) }}
@@ -21,6 +19,7 @@
                     {{ form_row(form.zone) }}
                     {{ form_row(form.parent) }}
                     {{ form_row(form.icon) }}
+                    {{ form_row(form.submit) }}
                 </div>
                 <div class="mdl-cell mdl-cell--8-col">
                     {{ form_row(form.isUnique) }}
@@ -29,10 +28,9 @@
                     {{ form_row(form.excludeSearch) }}
                     {{ form_row(form.isActive) }}
                     {{ form_row(form.attributesSchema) }}
-                    {{ form_row(form.submit) }}
                 </div>
-            </div>
-        </div>
+            {% endblock %}
+        {% endembed %}
     </div>
     {{ form_end(form) }}
 {% endblock %}

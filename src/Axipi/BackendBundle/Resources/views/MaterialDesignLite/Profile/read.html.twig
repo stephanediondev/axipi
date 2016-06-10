@@ -4,19 +4,14 @@
 
 {% block body %}
     <div class="mdl-grid">
-        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-            <div class="mdl-card__title">
-                <h1 class="mdl-card__title-text">
-                    <span><i class="fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ user.username }}</span>
-                </h1>
-            </div>
-            <div class="mdl-card__actions mdl-card--border">
+        {% embed 'AxipiBackendBundle:MaterialDesignLite:card.html.twig' %}
+            {% block card__actions %}
                 <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_profile', {action: 'update'}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
-            </div>
-        </div>
-
-        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-            <div class="mdl-card__supporting-text mdl-grid">
+            {% endblock %}
+            {% block card__title %}
+                <span><i class="fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ user.username }}</span>
+            {% endblock %}
+            {% block card__supporting %}
                 <div class="mdl-cell mdl-cell--4-col">
                     {{ macro.read_field('user.username'|trans({}, 'axipi_backend'), user.username) }}
                     {{ macro.read_field('user.firstname'|trans({}, 'axipi_backend'), user.firstname) }}
@@ -26,8 +21,8 @@
                     {{ macro.read_field('user.roles'|trans({}, 'axipi_backend'), user.roles|join('<br>')) }}
                     {{ macro.read_field('user.isActive'|trans({}, 'axipi_backend'), user.isActive) }}
                 </div>
-            </div>
-        </div>
+            {% endblock %}
+        {% endembed %}
     </div>
 {% endblock %}
 

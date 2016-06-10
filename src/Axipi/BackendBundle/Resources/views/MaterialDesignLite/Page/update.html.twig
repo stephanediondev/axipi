@@ -3,40 +3,27 @@
 {% block title %}{{ page.title }} - {{ 'pages'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
-    <div class="mdl-tabs">
-        <div class="mdl-tabs__tab-bar">
-            {% for language in languages %}
-                <a href="{{ path('axipi_backend_pages', {mode: mode, language: language.code, action: 'index'}) }}" class="mdl-tabs__tab{% if app.request.get('language') == language.code %} is-active{% endif %}">{{ language.title }}</a>
-            {% endfor %}
-        </div>
-    </div>
-
     {{ form_start(form) }}
     {{ form_errors(form) }}
     <div class="mdl-grid">
-        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-            <div class="mdl-card__title">
-                <h1 class="mdl-card__title-text">
-                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></span>
-                    {% if page.parent %}
-                        {% if page.parent.parent %}
-                            {% if page.parent.parent.parent %}
-                                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page.parent.parent.parent.id}) }}">{{ page.parent.parent.parent.title }}</a></span>
-                            {% endif %}
-                            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page.parent.parent.id}) }}">{{ page.parent.parent.title }}</a></span>
-                        {% endif %}
-                        <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page.parent.id}) }}">{{ page.parent.title }}</a></span>
-                    {% endif %}
-                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'read', 'id': page.id}) }}">{{ page.title }}</a></span>
-                </h1>
-            </div>
-            <div class="mdl-card__actions mdl-card--border">
+        {% embed 'AxipiBackendBundle:MaterialDesignLite:card.html.twig' %}
+            {% block card__actions %}
                 <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'delete', 'id': page.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
-            </div>
-        </div>
-
-        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-            <div class="mdl-card__supporting-text mdl-grid">
+            {% endblock %}
+            {% block card__title %}
+                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></span>
+                {% if page.parent %}
+                    {% if page.parent.parent %}
+                        {% if page.parent.parent.parent %}
+                            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page.parent.parent.parent.id}) }}">{{ page.parent.parent.parent.title }}</a></span>
+                        {% endif %}
+                        <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page.parent.parent.id}) }}">{{ page.parent.parent.title }}</a></span>
+                    {% endif %}
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page.parent.id}) }}">{{ page.parent.title }}</a></span>
+                {% endif %}
+                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'read', 'id': page.id}) }}">{{ page.title }}</a></span>
+            {% endblock %}
+            {% block card__supporting %}
                 <div class="mdl-cell mdl-cell--4-col">
                     {{ macro.read_field('item.language'|trans({}, 'axipi_backend'), page.language.title) }}
                     {{ macro.read_field('item.component'|trans({}, 'axipi_backend'), page.component.title) }}
@@ -74,8 +61,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            {% endblock %}
+        {% endembed %}
     </div>
     {{ form_end(form) }}
 {% endblock %}

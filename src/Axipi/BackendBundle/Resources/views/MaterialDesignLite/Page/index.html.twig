@@ -10,27 +10,19 @@
 {% endblock %}
 
 {% block body %}
-    <div class="mdl-tabs">
-        <div class="mdl-tabs__tab-bar">
-            {% for language in languages %}
-                <a href="{{ path('axipi_backend_pages', {mode: mode, language: language.code, action: 'index'}) }}" class="mdl-tabs__tab{% if app.request.get('language') == language.code %} is-active{% endif %}">{{ language.title }}</a>
-            {% endfor %}
-        </div>
-    </div>
-
     <div class="mdl-grid">
-        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-            <div class="mdl-card__title">
-                <h1 class="mdl-card__title-text">
-                    <span><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</span>
-                </h1>
-            </div>
-            <div class="mdl-card__actions mdl-card--border mdl-color-text--black">
-                <a class="mdl-button mdl-color--pink mdl-color-text--white toggle" href="#pages-create">{{ 'actions.create'|trans({}, 'axipi_backend') }}</a>
+        <div class="mdl-tabs">
+            <div class="mdl-tabs__tab-bar">
+                {% for language in languages %}
+                    <a href="{{ path('axipi_backend_pages', {mode: mode, language: language.code, action: 'index'}) }}" class="mdl-tabs__tab{% if app.request.get('language') == language.code %} is-active{% endif %}">{{ language.title }}</a>
+                {% endfor %}
             </div>
         </div>
 
         <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col toggle" id="pages-create">
+            <div class="mdl-card__actions mdl-color-text--black">
+                <a class="mdl-button mdl-color--pink mdl-color-text--white toggle" href="#pages-create">{{ 'actions.close'|trans({}, 'axipi_backend') }}</a>
+            </div>
             <div class="mdl-card__supporting-text mdl-grid">
                 {% for component in components %}
                     <div class="mdl-cell mdl-cell--2-col">
@@ -41,6 +33,14 @@
         </div>
 
         <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__actions mdl-color-text--black">
+                <a class="mdl-button mdl-color--pink mdl-color-text--white toggle" href="#pages-create">{{ 'actions.create'|trans({}, 'axipi_backend') }}</a>
+            </div>
+            <div class="mdl-card__title">
+                <h1 class="mdl-card__title-text">
+                    <span><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</span>
+                </h1>
+            </div>
             <div class="mdl-card__supporting-text mdl-grid">
                 {% for object in objects %}
                     <div class="mdl-cell mdl-cell--2-col">

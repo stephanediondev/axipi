@@ -5,16 +5,18 @@
 {% block body %}
     <div class="mdl-grid">
         <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+            {% if enabled %}
+                <div class="mdl-card__actions mdl-color-text--black">
+                    <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_search', {action: 'init'}) }}">{{ 'actions.initialize'|trans({}, 'axipi_backend') }}</a>
+                    <a class="mdl-button mdl-color--pink mdl-color-text--white"  href="{{ path('axipi_backend_search', {action: 'scan'}) }}">{{ 'actions.refresh'|trans({}, 'axipi_backend') }}</a>
+                </div>
+            {% endif %}
             <div class="mdl-card__title">
                 <h1 class="mdl-card__title-text">
                     <span><i class="fa fa-{{ 'icons.search'|trans({}, 'axipi_backend') }}"></i>{{ 'search'|trans({}, 'axipi_backend') }}</span>
                 </h1>
             </div>
             {% if enabled %}
-                <div class="mdl-card__actions mdl-card--border mdl-color-text--black">
-                    <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_search', {action: 'init'}) }}">{{ 'actions.initialize'|trans({}, 'axipi_backend') }}</a>
-                    <a class="mdl-button mdl-color--pink mdl-color-text--white"  href="{{ path('axipi_backend_search', {action: 'scan'}) }}">{{ 'actions.refresh'|trans({}, 'axipi_backend') }}</a>
-                </div>
             {% else %}
                 <div class="mdl-card__supporting-text">
                     <p>Disabled</p>

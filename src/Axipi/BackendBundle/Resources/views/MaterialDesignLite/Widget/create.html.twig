@@ -3,49 +3,45 @@
 {% block title %}{{ 'widgets'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            <ul class="nav nav-tabs">
-                {% for language in languages %}
-                    <li role="presentation"{% if app.request.get('language') == language.code %} class="active"{% endif %}><a href="{{ path('axipi_backend_widgets', {language: language.code, action: 'index'}) }}">{{ language.title }}</a></li>
-                {% endfor %}
-            </ul>
-
-            {% embed 'AxipiBackendBundle:Bootstrap:block_title.html.twig' %}
-                {% block block_title %}
-                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_widgets', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></span>
-                    <span><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.create'|trans({}, 'axipi_backend') }}</span>
-                {% endblock %}
-                {% block block_title_actions %}
-                {% endblock %}
-            {% endembed %}
-
-            <div class="block">
-                {{ form_start(form) }}
-                {{ form_errors(form) }}
-                <div class="row">
-                    <div class="mdl-cell mdl-cell--4-col">
-                        {{ macro.read_field('item.language'|trans({}, 'axipi_backend'), language.title) }}
-                        {{ macro.read_field('item.component'|trans({}, 'axipi_backend'), component.title) }}
-                        {{ form_row(form.template) }}
-                        {{ form_row(form.parent) }}
-                        {{ form_row(form.code) }}
-                        {{ form_row(form.ordering) }}
-                        {{ form_row(form.title) }}
-                        {{ form_row(form.zone) }}
-                        {{ form_row(form.isActive) }}
-                        {{ form_row(form.submit) }}
-                    </div>
-                    <div class="mdl-cell mdl-cell--8-col">
-                        {{ form_row(form.attributesChange) }}
-                    </div>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="mdl-grid">
+        {% embed 'AxipiBackendBundle:MaterialDesignLite:card.html.twig' %}
+            {% block card__title %}
+                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_widgets', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></span>
+                {% if widget_parent is defined %}
+                    {% if widget_parent.parent %}
+                        {% if widget_parent.parent.parent %}
+                            {% if widget_parent.parent.parent.parent %}
+                                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: widget_parent.parent.parent.parent.id}) }}">{{ widget_parent.parent.parent.parent.title }}</a></span>
+                            {% endif %}
+                            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: widget_parent.parent.parent.id}) }}">{{ widget_parent.parent.parent.title }}</a></span>
+                        {% endif %}
+                        <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: widget_parent.parent.id}) }}">{{ widget_parent.parent.title }}</a></span>
+                    {% endif %}
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: widget_parent.id}) }}">{{ widget_parent.title }}</a></span>
+                {% endif %}
+            {% endblock %}
+            {% block card__supporting %}
+                <div class="mdl-cell mdl-cell--4-col">
+                    {{ macro.read_field('item.language'|trans({}, 'axipi_backend'), language.title) }}
+                    {{ macro.read_field('item.component'|trans({}, 'axipi_backend'), component.title) }}
+                    {{ form_row(form.template) }}
+                    {{ form_row(form.parent) }}
+                    {{ form_row(form.code) }}
+                    {{ form_row(form.ordering) }}
+                    {{ form_row(form.title) }}
+                    {{ form_row(form.zone) }}
+                    {{ form_row(form.isActive) }}
+                    {{ form_row(form.submit) }}
                 </div>
-                {{ form_end(form) }}
-            </div>
-        </div>
+                <div class="mdl-cell mdl-cell--8-col">
+                    {{ form_row(form.attributesChange) }}
+                </div>
+            {% endblock %}
+        {% endembed %}
     </div>
-</div>
+    {{ form_end(form) }}
 {% endblock %}
 
 {% block style %}

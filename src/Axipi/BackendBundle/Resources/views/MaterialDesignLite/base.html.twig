@@ -27,15 +27,15 @@
 <body>
 
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer">
-    <header class="mdl-layout__header mdl-color--teal">
+    <header class="mdl-layout__header mdl-color--indigo">
         <div class="mdl-layout__header-row">
             <div class="mdl-layout-spacer">
             </div>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a class="mdl-button mdl-color--teal mdl-color-text--white" href="{{ path('axipi_backend_profile', {action: 'read'}) }}">{{ 'profile'|trans({}, 'axipi_backend') }}</a>
-                <a class="mdl-button mdl-color--teal mdl-color-text--white" href="{{ logout_path('axipi_backend') }}">{{ 'logout'|trans({}, 'axipi_backend') }}</a>
+                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_profile', {action: 'read'}) }}">{{ 'profile'|trans({}, 'axipi_backend') }}</a>
+                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ logout_path('axipi_backend') }}">{{ 'logout'|trans({}, 'axipi_backend') }}</a>
             {% endif %}
-            <a class="mdl-button mdl-color--teal mdl-color-text--white" target="_blank" href="{{ path('axipi_core_home', {}) }}">{{ 'frontend'|trans({}, 'axipi_backend') }}</a>
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" target="_blank" href="{{ path('axipi_core_home', {}) }}">{{ 'frontend'|trans({}, 'axipi_backend') }}</a>
         </div>
     </header>
     <div class="mdl-layout__drawer">
