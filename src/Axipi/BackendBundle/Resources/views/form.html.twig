@@ -23,6 +23,11 @@
             {% endif %}
             {{ form_errors(form) }}
         </p>
+        {% if form.vars.name == 'longitude' %}
+            <p>
+                <a class="mdl-button mdl-color--pink mdl-color-text--white get_location" href="#">{{ 'actions.get_location'|trans({}, 'axipi_backend') }}</a>
+            </p>
+        {% endif %}
     {% else %}
         {{ form_widget(form) }}
     {% endif %}

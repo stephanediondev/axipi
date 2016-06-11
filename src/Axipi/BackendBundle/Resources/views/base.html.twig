@@ -79,6 +79,11 @@
 
     <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid">
+            <div class="mdl-snackbar mdl-js-snackbar">
+                <div class="mdl-snackbar__text"></div>
+                <button type="button" class="mdl-snackbar__action"></button>
+            </div>
+
             {% for type, flashes in app.session.flashbag.all() %}
                 {% for flash in flashes %}
                     {% embed 'AxipiBackendBundle::card.html.twig' %}

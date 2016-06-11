@@ -79,6 +79,8 @@ function update_file(field_name, href) {
 }
 
 $(document).ready(function() {
+    var notification = document.querySelector('.mdl-js-snackbar');
+
     $('.mdl-tabs__tab').bind('click', function(event) {
         var href = $(this).attr('href');
         if(href.indexOf('#') != -1) {
@@ -104,13 +106,6 @@ $(document).ready(function() {
         }
     });
 
-    // Prevent Bootstrap dialog from blocking focusin
-    $(document).on('focusin', function(e) {
-        if ($(e.target).closest('.mce-window').length) {
-            e.stopImmediatePropagation();
-        }
-    });
-
     $('.wysiwyg_image').bind('click', function(event) {
         event.preventDefault();
         var img_reference = $(this).find('img');
@@ -122,6 +117,41 @@ $(document).ready(function() {
     $('.wysiwyg_link').bind('click', function(event) {
         event.preventDefault();
         window.parent.update_file($(this).data('field_name'), $(this).attr('href'));
+    });
+
+    $('.get_location').bind('click', function(event) {
+        event.preventDefault();
+        if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    $('input[name="item[attributesChange][latitude]"]').val(position.coords.latitude);
+                    $('input[name="item[attributesChange][longitude]"]').val(position.coords.longitude);
+                    notification.MaterialSnackbar.showSnackbar({
+                        message: 'Done'
+                    });
+                },
+                function(error) {
+                    if(error.code == 1) {
+                        notification.MaterialSnackbar.showSnackbar({
+                            message: 'Permission denied'
+                        });
+                    } else if(error.code == 2) {
+                        notification.MaterialSnackbar.showSnackbar({
+                            message: 'Position unavailable'
+                        });
+                    } else if(error.code == 3) {
+                        notification.MaterialSnackbar.showSnackbar({
+                            message: 'Timeout'
+                        });
+                    } else {
+                        notification.MaterialSnackbar.showSnackbar({
+                            message: 'Unknown error'
+                        });
+                    }
+                },
+                {'enableHighAccuracy': true, 'timeout': 30000}
+            );
+        }
     });
 
     var $ajaxUploader = $('#ajax-uploader');

@@ -131,8 +131,6 @@ class ItemType extends AbstractType
 
         $builder->add('attributesChange', AttributesType::class,
             [
-                'mapped' => true,
-                'required' => false,
                 'object' => $options['item'],
                 'data' => $options['item']->getAttributes()
             ]
