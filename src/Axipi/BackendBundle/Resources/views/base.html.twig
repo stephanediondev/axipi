@@ -27,64 +27,65 @@
 <body>
 
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer">
-    <header class="mdl-layout__header mdl-color--indigo">
-        <div class="mdl-layout__header-row">
-            <div class="mdl-layout-spacer">
+    {% block header %}
+        <header class="mdl-layout__header mdl-color--indigo">
+            <div class="mdl-layout__header-row">
+                <div class="mdl-layout-spacer">
+                </div>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_profile', {action: 'read'}) }}">{{ 'profile'|trans({}, 'axipi_backend') }}</a>
+                    <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ logout_path('axipi_backend') }}">{{ 'logout'|trans({}, 'axipi_backend') }}</a>
+                {% endif %}
+                <a class="mdl-button mdl-color--pink mdl-color-text--white" target="_blank" href="{{ path('axipi_core_home', {}) }}">{{ 'frontend'|trans({}, 'axipi_backend') }}</a>
             </div>
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_profile', {action: 'read'}) }}">{{ 'profile'|trans({}, 'axipi_backend') }}</a>
-                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ logout_path('axipi_backend') }}">{{ 'logout'|trans({}, 'axipi_backend') }}</a>
-            {% endif %}
-            <a class="mdl-button mdl-color--pink mdl-color-text--white" target="_blank" href="{{ path('axipi_core_home', {}) }}">{{ 'frontend'|trans({}, 'axipi_backend') }}</a>
+        </header>
+        <div class="mdl-layout__drawer">
+            <ul class="mdl-list">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% if is_granted('ROLE_PAGES') %}
+                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_pages', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></li>
+                    {% endif %}
+                    {% if is_granted('ROLE_WIDGETS') %}
+                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_widgets', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></li>
+                    {% endif %}
+                    {% if is_granted('ROLE_FILES') %}
+                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_files', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.file'|trans({}, 'axipi_backend') }}"></i>{{ 'files'|trans({}, 'axipi_backend') }}</a></li>
+                    {% endif %}
+                    {% if is_granted('ROLE_LANGUAGES') %}
+                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_languages', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.language'|trans({}, 'axipi_backend') }}"></i>{{ 'languages'|trans({}, 'axipi_backend') }}</a></li>
+                    {% endif %}
+                    {% if is_granted('ROLE_COMPONENTS') %}
+                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_components', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.component'|trans({}, 'axipi_backend') }}"></i>{{ 'components'|trans({}, 'axipi_backend') }}</a></li>
+                    {% endif %}
+                    {% if is_granted('ROLE_ZONES') %}
+                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_zones', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'zones'|trans({}, 'axipi_backend') }}</a></li>
+                    {% endif %}
+                    {% if is_granted('ROLE_SEARCH') %}
+                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_search', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.search'|trans({}, 'axipi_backend') }}"></i>{{ 'search'|trans({}, 'axipi_backend') }}</a></li>
+                    {% endif %}
+                    {% if is_granted('ROLE_CACHE') %}
+                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_cache', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.cache'|trans({}, 'axipi_backend') }}"></i>{{ 'cache'|trans({}, 'axipi_backend') }}</a></li>
+                    {% endif %}
+                    {% if is_granted('ROLE_USERS') %}
+                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_users', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ 'users'|trans({}, 'axipi_backend') }}</a></li>
+                    {% endif %}
+                    {% if is_granted('ROLE_INFO') %}
+                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_info', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.info'|trans({}, 'axipi_backend') }}"></i>{{ 'info'|trans({}, 'axipi_backend') }}</a></li>
+                    {% endif %}
+                {% endif %}
+            </ul>
         </div>
-    </header>
-    <div class="mdl-layout__drawer">
-        <ul class="mdl-list">
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                {% if is_granted('ROLE_PAGES') %}
-                    <li class="mdl-list__item"><a href="{{ path('axipi_backend_pages', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></li>
-                {% endif %}
-                {% if is_granted('ROLE_WIDGETS') %}
-                    <li class="mdl-list__item"><a href="{{ path('axipi_backend_widgets', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></li>
-                {% endif %}
-                {% if is_granted('ROLE_FILES') %}
-                    <li class="mdl-list__item"><a href="{{ path('axipi_backend_files', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.file'|trans({}, 'axipi_backend') }}"></i>{{ 'files'|trans({}, 'axipi_backend') }}</a></li>
-                {% endif %}
-                {% if is_granted('ROLE_LANGUAGES') %}
-                    <li class="mdl-list__item"><a href="{{ path('axipi_backend_languages', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.language'|trans({}, 'axipi_backend') }}"></i>{{ 'languages'|trans({}, 'axipi_backend') }}</a></li>
-                {% endif %}
-                {% if is_granted('ROLE_COMPONENTS') %}
-                    <li class="mdl-list__item"><a href="{{ path('axipi_backend_components', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.component'|trans({}, 'axipi_backend') }}"></i>{{ 'components'|trans({}, 'axipi_backend') }}</a></li>
-                {% endif %}
-                {% if is_granted('ROLE_ZONES') %}
-                    <li class="mdl-list__item"><a href="{{ path('axipi_backend_zones', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'zones'|trans({}, 'axipi_backend') }}</a></li>
-                {% endif %}
-                {% if is_granted('ROLE_SEARCH') %}
-                    <li class="mdl-list__item"><a href="{{ path('axipi_backend_search', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.search'|trans({}, 'axipi_backend') }}"></i>{{ 'search'|trans({}, 'axipi_backend') }}</a></li>
-                {% endif %}
-                {% if is_granted('ROLE_CACHE') %}
-                    <li class="mdl-list__item"><a href="{{ path('axipi_backend_cache', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.cache'|trans({}, 'axipi_backend') }}"></i>{{ 'cache'|trans({}, 'axipi_backend') }}</a></li>
-                {% endif %}
-                {% if is_granted('ROLE_USERS') %}
-                    <li class="mdl-list__item"><a href="{{ path('axipi_backend_users', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ 'users'|trans({}, 'axipi_backend') }}</a></li>
-                {% endif %}
-                {% if is_granted('ROLE_INFO') %}
-                    <li class="mdl-list__item"><a href="{{ path('axipi_backend_info', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.info'|trans({}, 'axipi_backend') }}"></i>{{ 'info'|trans({}, 'axipi_backend') }}</a></li>
-                {% endif %}
-            {% endif %}
-        </ul>
-    </div>
-
-    {% block navbar %}
     {% endblock %}
 
     <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid">
             {% for type, flashes in app.session.flashbag.all() %}
                 {% for flash in flashes %}
-                    <div class="alert alert-{{ type }}" role="alert">
-                        <p>{{ flash }}</p>
-                    </div>
+                    {% embed 'AxipiBackendBundle::card.html.twig' %}
+                        {% block card__supporting %}
+                            <p>{{ flash }}</p>
+                        {% endblock %}
+                    {% endembed %}
                 {% endfor %}
             {% endfor %}
         </div>

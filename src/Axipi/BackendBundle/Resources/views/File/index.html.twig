@@ -2,7 +2,7 @@
 
 {% block title %}{{ 'files'|trans({}, 'axipi_backend') }}{% endblock %}
 
-{% block navbar %}
+{% block header %}
     {% if 'wysiwyg' in mode %}
     {% else %}
         {{ parent() }}

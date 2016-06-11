@@ -2,7 +2,7 @@
 
 {% block title %}{{ 'pages'|trans({}, 'axipi_backend') }} ({{ app.request.get('language') }}){% endblock %}
 
-{% block navbar %}
+{% block header %}
     {% if 'wysiwyg' in mode %}
     {% else %}
         {{ parent() }}
