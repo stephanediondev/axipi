@@ -4,25 +4,23 @@
 
 {% block body %}
     <div class="mdl-grid">
-        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-            <div class="mdl-card__actions">
+        {% embed 'AxipiBackendBundle::card.html.twig' %}
+            {% block card__actions %}
                 <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_languages', {action: 'update', 'id': language.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
                 <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_languages', {action: 'delete', 'id': language.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
-            </div>
-            <div class="mdl-card__title">
-                <h1 class="mdl-card__title-text">
-                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_languages', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.language'|trans({}, 'axipi_backend') }}"></i>{{ 'languages'|trans({}, 'axipi_backend') }}</a></span>
-                    <span>{{ language.title }}</span>
-                </h1>
-            </div>
-            <div class="mdl-card__supporting-text mdl-grid">
+            {% endblock %}
+            {% block card__title %}
+                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_languages', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.language'|trans({}, 'axipi_backend') }}"></i>{{ 'languages'|trans({}, 'axipi_backend') }}</a></span>
+                <span>{{ language.title }}</span>
+            {% endblock %}
+            {% block card__supporting %}
                 <div class="mdl-cell mdl-cell--4-col">
                     {{ macro.read_field('language.code'|trans({}, 'axipi_backend'), language.code) }}
                     {{ macro.read_field('language.title'|trans({}, 'axipi_backend'), language.title) }}
                     {{ macro.read_field('language.isActive'|trans({}, 'axipi_backend'), language.isActive) }}
                 </div>
-            </div>
-        </div>
+            {% endblock %}
+        {% endembed %}
     </div>
 {% endblock %}
 

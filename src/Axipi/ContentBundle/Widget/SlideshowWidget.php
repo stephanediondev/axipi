@@ -15,6 +15,8 @@ class SlideshowWidget extends AbstractWidget
         $parameters->set('widget', $widget);
         $parameters->set('page', $page);
 
+        $parameters->set('children', $this->get('axipi_core_manager_item')->getList(['parent' => $parameters->get('widget'), 'active' => true]));
+
         if($widget->getTemplate()) {
             $template = $widget->getTemplate();
         } else {

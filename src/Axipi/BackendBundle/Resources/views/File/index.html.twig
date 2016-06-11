@@ -11,36 +11,34 @@
 
 {% block body %}
     <div class="mdl-grid">
-        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col toggle" id="files-create">
-            <div class="mdl-card__actions mdl-color-text--black">
+        {% embed 'AxipiBackendBundle::card.html.twig' with {toggle: true, id: 'files-create'} %}
+            {% block card__actions %}
                 <a class="mdl-button mdl-color--pink mdl-color-text--white toggle" href="#files-create">{{ 'actions.close'|trans({}, 'axipi_backend') }}</a>
-            </div>
-            <div class="mdl-card__supporting-text mdl-grid">
+            {% endblock %}
+            {% block card__supporting %}
                 <div class="mdl-cell mdl-cell--2-col">
                     <a href="{{ path('axipi_backend_files', {mode: mode, action: 'create', id: 'folder'}) }}"><i class="fa fa-4x fa-folder-o"></i><br>{{ 'folder'|trans({}, 'axipi_backend') }}</a>
                 </div>
                 <div class="mdl-cell mdl-cell--2-col">
                     <a href="{{ path('axipi_backend_files', {mode: mode, action: 'create', id: 'file'}) }}"><i class="fa fa-4x fa-file-o"></i><br>{{ 'file'|trans({}, 'axipi_backend') }}</a>
                 </div>
-            </div>
-        </div>
+            {% endblock %}
+        {% endembed %}
 
-        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-            <div class="mdl-card__actions mdl-color-text--black">
+        {% embed 'AxipiBackendBundle::card.html.twig' %}
+            {% block card__actions %}
                 <a class="mdl-button mdl-color--pink mdl-color-text--white toggle" href="#files-create">{{ 'actions.create'|trans({}, 'axipi_backend') }}</a>
-            </div>
-            <div class="mdl-card__title">
-                <h1 class="mdl-card__title-text">
-                    {% for tree in tree %}
-                        {% if tree.slug != slug %}
-                            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_files', {mode: mode, action: 'index', 'slug': tree.slug}) }}"><i class="fa fa-{{ tree.icon }}"></i>{{ tree.name }}</a></span>
-                        {% else %}
-                            <span><i class="fa fa-{{ tree.icon }}"></i>{{ tree.name }}</span>
-                        {% endif %}
-                    {% endfor %}
-                </h1>
-            </div>
-            <div class="mdl-card__supporting-text mdl-grid">
+            {% endblock %}
+            {% block card__title %}
+                {% for tree in tree %}
+                    {% if tree.slug != slug %}
+                        <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_files', {mode: mode, action: 'index', 'slug': tree.slug}) }}"><i class="fa fa-{{ tree.icon }}"></i>{{ tree.name }}</a></span>
+                    {% else %}
+                        <span><i class="fa fa-{{ tree.icon }}"></i>{{ tree.name }}</span>
+                    {% endif %}
+                {% endfor %}
+            {% endblock %}
+            {% block card__supporting %}
                 {% for object in objects %}
                     <div class="mdl-cell mdl-cell--2-col">
                         {% if object.type == 'folder' %}
@@ -54,8 +52,8 @@
                         {% endif %}
                     </div>
                 {% endfor %}
-            </div>
-        </div>
+            {% endblock %}
+        {% endembed %}
     </div>
 {% endblock %}
 

@@ -9,7 +9,7 @@
     </div>
 
     <div class="row">
-        {% for media in page.children %}
+        {% for media in children %}
             <div class="col-lg-2">
                 <a class="thumbnail" href="{{ buildLink(media) }}"><img src="{{ asset('uploads/' ~ media.attribute('image')) }}" class="img-responsive"></a>
             </div>

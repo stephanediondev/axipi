@@ -43,6 +43,12 @@ Axipi\CoreBundle\Entity\Zone:
             nullable: true
             column: date_modified
     oneToMany:
+        components:
+            targetEntity: Axipi\CoreBundle\Entity\Component
+            mappedBy: "zone"
+            cascade: [ "persist" ]
+            orderBy:
+                title: ASC
         widgets:
             targetEntity: Axipi\CoreBundle\Entity\Item
             mappedBy: "zone"

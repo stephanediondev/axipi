@@ -110,8 +110,16 @@ class ItemManager extends AbstractManager
         $event = new ItemEvent($data);
         $this->eventDispatcher->dispatch('item.before_remove', $event);
 
-        if(file_exists('uploads/'.$data->getAttribute('image'))) {
-            @unlink('uploads/'.$data->getAttribute('image'));
+        $attributes = json_decode($data->getComponent()->getAttributesSchema(), true);
+
+        if(is_array($attributes)) {
+            foreach($attributes as $key => $attribute) {
+                if($attribute['type'] == 'Symfony\Component\Form\Extension\Core\Type\FileType') {
+                    if(file_exists('uploads/'.$data->getAttribute($key))) {
+                        @unlink('uploads/'.$data->getAttribute($key));
+                    }
+                }
+            }
         }
 
         $this->em->remove($data);
@@ -147,9 +155,11 @@ class ItemManager extends AbstractManager
                 $cacheDriver->delete($cacheId);
             }
 
-            $cacheId = 'axipi/widgets/'.$data->getZone()->getCode();
-            if($cacheDriver->contains($cacheId)) {
-                $cacheDriver->delete($cacheId);
+            if($data->getZone()) {
+                $cacheId = 'axipi/widgets/'.$data->getZone()->getCode();
+                if($cacheDriver->contains($cacheId)) {
+                    $cacheDriver->delete($cacheId);
+                }
             }
         }
     }

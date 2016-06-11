@@ -115,7 +115,7 @@ Axipi\CoreBundle\Entity\Component:
             cascade: {  }
             fetch: LAZY
             mappedBy: null
-            inversedBy: null
+            inversedBy: components
             joinColumns:
                 zone_id:
                     referencedColumnName: id

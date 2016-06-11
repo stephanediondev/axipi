@@ -11,8 +11,8 @@
 
 {% block body %}
     <div class="mdl-grid">
-        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-            <div class="mdl-card__actions">
+        {% embed 'AxipiBackendBundle::card.html.twig' %}
+            {% block card__actions %}
                 {% if 'wysiwyg' in mode %}
                     <a class="wysiwyg_link mdl-button mdl-color--pink mdl-color-text--white" data-field_name="{{ mode|replace({'wysiwyg': ''}) }}" href="[page:{{ page.id}}:{{ page.slug }}]"><i class="fa fa-{{ 'icons.select'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.select'|trans({}, 'axipi_backend') }}</a>
                 {% else %}
@@ -24,37 +24,35 @@
                     <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'update', 'id': page.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
                     <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'delete', 'id': page.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
                 {% endif %}
-            </div>
-            <div class="mdl-card__title">
-                <h1 class="mdl-card__title-text">
-                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></span>
-                    {% if page.parent %}
-                        {% if page.parent.parent %}
-                            {% if page.parent.parent.parent %}
-                                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page.parent.parent.parent.id}) }}">{{ page.parent.parent.parent.title }}</a></span>
-                            {% endif %}
-                            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page.parent.parent.id}) }}">{{ page.parent.parent.title }}</a></span>
+            {% endblock %}
+            {% block card__title %}
+                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></span>
+                {% if page.parent %}
+                    {% if page.parent.parent %}
+                        {% if page.parent.parent.parent %}
+                            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page.parent.parent.parent.id}) }}">{{ page.parent.parent.parent.title }}</a></span>
                         {% endif %}
-                        <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page.parent.id}) }}">{{ page.parent.title }}</a></span>
+                        <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page.parent.parent.id}) }}">{{ page.parent.parent.title }}</a></span>
                     {% endif %}
-                    <span>{{ page.title }}</span>
-                </h1>
-            </div>
-            <div class="mdl-card__supporting-text mdl-grid">
-                    <div class="mdl-cell mdl-cell--4-col">
-                        {{ macro.read_field('item.language'|trans({}, 'axipi_backend'), page.language.title) }}
-                        {{ macro.read_field('item.component'|trans({}, 'axipi_backend'), page.component.title) }}
-                        {% if page.parent %}{{ macro.read_field('item.parent'|trans({}, 'axipi_backend'), page.parent.title) }}{% endif %}
-                        {{ macro.read_field('item.code'|trans({}, 'axipi_backend'), page.code) }}
-                        {{ macro.read_field('item.template'|trans({}, 'axipi_backend'), page.template) }}
-                        {{ macro.read_field('item.title'|trans({}, 'axipi_backend'), page.title) }}
-                        {{ macro.read_field('item.slug'|trans({}, 'axipi_backend'), page.slug) }}
-                        {{ macro.read_field('item.isHome'|trans({}, 'axipi_backend'), page.isHome) }}
-                        {{ macro.read_field('item.excludeSitemap'|trans({}, 'axipi_backend'), page.excludeSitemap) }}
-                        {{ macro.read_field('item.excludeSearch'|trans({}, 'axipi_backend'), page.excludeSearch) }}
-                        {{ macro.read_field('item.isActive'|trans({}, 'axipi_backend'), page.isActive) }}
-                    </div>
-                    <div class="mdl-cell mdl-cell--8-col">
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page.parent.id}) }}">{{ page.parent.title }}</a></span>
+                {% endif %}
+                <span>{{ page.title }}</span>
+            {% endblock %}
+            {% block card__supporting %}
+                <div class="mdl-cell mdl-cell--4-col">
+                    {{ macro.read_field('item.language'|trans({}, 'axipi_backend'), page.language.title) }}
+                    {{ macro.read_field('item.component'|trans({}, 'axipi_backend'), page.component.title) }}
+                    {% if page.parent %}{{ macro.read_field('item.parent'|trans({}, 'axipi_backend'), page.parent.title) }}{% endif %}
+                    {{ macro.read_field('item.code'|trans({}, 'axipi_backend'), page.code) }}
+                    {{ macro.read_field('item.template'|trans({}, 'axipi_backend'), page.template) }}
+                    {{ macro.read_field('item.title'|trans({}, 'axipi_backend'), page.title) }}
+                    {{ macro.read_field('item.slug'|trans({}, 'axipi_backend'), page.slug) }}
+                    {{ macro.read_field('item.isHome'|trans({}, 'axipi_backend'), page.isHome) }}
+                    {{ macro.read_field('item.excludeSitemap'|trans({}, 'axipi_backend'), page.excludeSitemap) }}
+                    {{ macro.read_field('item.excludeSearch'|trans({}, 'axipi_backend'), page.excludeSearch) }}
+                    {{ macro.read_field('item.isActive'|trans({}, 'axipi_backend'), page.isActive) }}
+                </div>
+                <div class="mdl-cell mdl-cell--8-col">
                     <div class="mdl-tabs">
                         <div class="mdl-tabs__tab-bar">
                             <a href="#attributes-panel" class="mdl-tabs__tab is-active">{{ 'item.attributes'|trans({}, 'axipi_backend') }}</a>
@@ -79,33 +77,31 @@
                             {%if page.script %}{{ macro.read_field('item.script'|trans({}, 'axipi_backend'), true) }}{% endif %}
                         </div>
                     </div>
-                    </div>
-            </div>
-        </div>
+                </div>
+            {% endblock %}
+        {% endembed %}
 
-        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col toggle" id="pages-create">
-            <div class="mdl-card__actions mdl-color-text--black">
+        {% embed 'AxipiBackendBundle::card.html.twig' with {toggle: true, id: 'pages-create'} %}
+            {% block card__actions %}
                 <a class="mdl-button mdl-color--pink mdl-color-text--white toggle" href="#pages-create">{{ 'actions.close'|trans({}, 'axipi_backend') }}</a>
-            </div>
-            <div class="mdl-card__supporting-text mdl-grid">
+            {% endblock %}
+            {% block card__supporting %}
                 {% for component in components %}
                     <div class="mdl-cell mdl-cell--2-col">
                         <a href="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'create', id: component.id, parent: page.id}) }}"><i class="fa fa-4x fa-{{ component.icon }}"></i><br>{{ component.title }}</a>
                     </div>
                 {% endfor %}
-            </div>
-        </div>
+            {% endblock %}
+        {% endembed %}
 
-        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-            <div class="mdl-card__actions mdl-color-text--black">
+        {% embed 'AxipiBackendBundle::card.html.twig' with {id: 'ajax-upload-result'} %}
+            {% block card__actions %}
                 <a class="mdl-button mdl-color--pink mdl-color-text--white toggle" href="#pages-create">{{ 'actions.create'|trans({}, 'axipi_backend') }}</a>
-            </div>
-            <div class="mdl-card__title">
-                <h1 class="mdl-card__title-text">
-                    <span>{{ 'item.children'|trans({}, 'axipi_backend') }}</span>
-                </h1>
-            </div>
-            <div class="mdl-card__supporting-text mdl-grid">
+            {% endblock %}
+            {% block card__title %}
+                <span>{{ 'item.children'|trans({}, 'axipi_backend') }}</span>
+            {% endblock %}
+            {% block card__supporting %}
                 {% if page.children|length %}
                     {% for object in page.children %}
                         <div class="mdl-cell mdl-cell--2-col">
@@ -117,28 +113,22 @@
                         </div>
                     {% endfor %}
                 {% endif %}
-            </div>
-        </div>
-    </div>
+            {% endblock %}
+        {% endembed %}
 
-    <div class="mdl-tabs">
-        <div class="mdl-tabs__tab-bar">
-            <a href="#draganddrop-panel" class="mdl-tabs__tab"><i class="fa fa-{{ 'icons.create'|trans({}, 'axipi_backend') }}"></i>{{ 'actions.drag_drop'|trans({}, 'axipi_backend') }}</a>
-        </div>
-
-        <div class="mdl-tabs__panel" id="draganddrop-panel">
-            <div class="mdl-grid">
+        {% embed 'AxipiBackendBundle::card.html.twig' %}
+            {% block card__title %}
+                <span><i class="fa fa-download"></i>{{ 'drag_drop'|trans({}, 'axipi_backend') }} <small>Drop file(s) over icon</small></span>
+            {% endblock %}
+            {% block card__supporting %}
                 {% if page.component.id == 5 %}
-                    <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--2-col" data-url="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'upload'}) }}" id="ajax-uploader" data-parent="{{ page.id }}" data-component="6">
-                        <div class="mdl-card__supporting-text mdl-color-text--black">
-                            <a class="fileinput-button attachment-upload" href="#"><i class="fa fa-4x fa-picture-o"></i><br>Gallery / Media</a>
-                        </div>
+                    <div class="mdl-cell mdl-cell--2-col" data-url="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'upload'}) }}" id="ajax-uploader" data-parent="{{ page.id }}" data-component="6">
+                        <a fileinput-button attachment-upload" href="#"><i class="fa fa-4x fa-picture-o"></i><br>Gallery / Media</a>
                     </div>
                 {% endif %}
-            </div>
-        </div>
+            {% endblock %}
+        {% endembed %}
     </div>
-</div>
 {% endblock %}
 
 {% block style %}

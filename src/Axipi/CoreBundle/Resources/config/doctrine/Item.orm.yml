@@ -149,17 +149,6 @@ Axipi\CoreBundle\Entity\Item:
             nullable: true
             column: date_modified
     manyToOne:
-        parent:
-            targetEntity: Item
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: "children"
-            joinColumns:
-                parent:
-                    referencedColumnName: id
-                    onDelete: "cascade"
-            orphanRemoval: false
         component:
             targetEntity: Component
             cascade: {  }
@@ -181,6 +170,17 @@ Axipi\CoreBundle\Entity\Item:
             joinColumns:
                 language_id:
                     nullable: false
+                    referencedColumnName: id
+                    onDelete: "cascade"
+            orphanRemoval: false
+        parent:
+            targetEntity: Item
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: "children"
+            joinColumns:
+                parent:
                     referencedColumnName: id
                     onDelete: "cascade"
             orphanRemoval: false

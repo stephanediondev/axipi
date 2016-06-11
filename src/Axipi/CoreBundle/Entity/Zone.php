@@ -38,6 +38,8 @@ class Zone
      */
     private $dateModified;
 
+    private $components;
+
     private $widgets;
 
     /**
@@ -168,6 +170,11 @@ class Zone
     public function getDateModified()
     {
         return $this->dateModified;
+    }
+
+    public function getComponents()
+    {
+        return $this->components;
     }
 
     public function getWidgets()
