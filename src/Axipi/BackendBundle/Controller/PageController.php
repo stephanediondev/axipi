@@ -87,7 +87,9 @@ class PageController extends AbstractController
 
     public function indexAction(Request $request, ParameterBag $parameters, $language)
     {
-        $parameters->set('objects', $this->itemManager->getList(['category' => 'page', 'language_code' => $language, 'parent_null' => true]));
+        $parameters->set('is_home', $this->itemManager->getList(['category' => 'page', 'language_code' => $language, 'is_home' => true]));
+        $parameters->set('with_no_parent', $this->itemManager->getList(['category' => 'page', 'language_code' => $language, 'parent_null' => true]));
+        $parameters->set('with_parent', $this->itemManager->getList(['category' => 'page', 'language_code' => $language, 'parent_not_null' => true]));
         $parameters->set('components', $this->componentManager->getList(['category' => 'page', 'active' => true]));
 
         return $this->render('AxipiBackendBundle:Page:index.html.twig', $parameters->all());

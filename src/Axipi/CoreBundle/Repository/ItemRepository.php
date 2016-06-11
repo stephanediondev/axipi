@@ -95,6 +95,11 @@ class ItemRepository extends EntityRepository
             $query->setParameter(':exclude_sitemap', false);
         }
 
+        if(isset($parameters['is_home']) == 1 && $parameters['is_home'] == true) {
+            $query->andWhere('pge.isHome = :is_home');
+            $query->setParameter(':is_home', true);
+        }
+
         if(isset($parameters['category']) == 1) {
             $query->andWhere('cmp.category = :category');
             $query->setParameter(':category', $parameters['category']);
@@ -117,6 +122,15 @@ class ItemRepository extends EntityRepository
 
         if(isset($parameters['parent_null']) == 1 && $parameters['parent_null'] == true) {
             $query->andWhere('pge.parent IS NULL');
+        }
+
+        if(isset($parameters['parent_not_null']) == 1 && $parameters['parent_not_null'] == true) {
+            $query->andWhere('pge.parent IS NOT NULL');
+        }
+
+        if(isset($parameters['component_service']) == 1) {
+            $query->andWhere('cmp.service = :component_service');
+            $query->setParameter(':component_service', $parameters['component_service']);
         }
 
         if(isset($parameters['active']) == 1 && $parameters['active'] == true) {
@@ -150,7 +164,11 @@ class ItemRepository extends EntityRepository
             $getQuery->setResultCacheLifetime(86400);
         }
         if(isset($parameters['active']) == 1 && isset($parameters['active']) == true && isset($parameters['parent']) == 1) {
-            $cacheId = 'axipi/children/'.$parameters['parent']->getId();
+            if(isset($parameters['component_service']) == 1) {
+                $cacheId = 'axipi/children/'.$parameters['parent']->getId().'/'.$parameters['component_service'];
+            } else {
+                $cacheId = 'axipi/children/'.$parameters['parent']->getId();
+            }
             $getQuery->setResultCacheDriver($cacheDriver);
             $getQuery->setResultCacheId($cacheId);
             $getQuery->setResultCacheLifetime(86400);

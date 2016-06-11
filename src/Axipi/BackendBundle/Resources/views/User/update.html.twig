@@ -9,7 +9,7 @@
         {% endblock %}
         {% block card__title %}
             <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_users', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ 'users'|trans({}, 'axipi_backend') }}</a></span>
-            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_users', {action: 'read', 'id': user.id}) }}"><i class="fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ user.username }}</a></span>
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_users', {action: 'read', 'id': user.id}) }}">{{ user.username }}</a></span>
         {% endblock %}
         {% block card__supporting %}
             <div class="mdl-cell mdl-cell--4-col">
@@ -17,11 +17,11 @@
                 {{ form_row(form.passwordChange) }}
                 {{ form_row(form.firstname) }}
                 {{ form_row(form.lastname) }}
+                {% if app.user.id != user.id %}{{ form_row(form.isActive) }}{% endif %}
                 {{ form_row(form.submit) }}
             </div>
             <div class="mdl-cell mdl-cell--4-col">
                 {{ form_row(form.rolesChange) }}
-                {% if app.user.id != user.id %}{{ form_row(form.isActive) }}{% endif %}
             </div>
         {% endblock %}
     {% endembed %}

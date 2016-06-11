@@ -17,10 +17,10 @@
                 {{ macro.read_field('user.username'|trans({}, 'axipi_backend'), user.username) }}
                 {{ macro.read_field('user.firstname'|trans({}, 'axipi_backend'), user.firstname) }}
                 {{ macro.read_field('user.lastname'|trans({}, 'axipi_backend'), user.lastname) }}
+                {{ macro.read_field('user.isActive'|trans({}, 'axipi_backend'), user.isActive) }}
             </div>
             <div class="mdl-cell mdl-cell--4-col">
                 {{ macro.read_field('user.roles'|trans({}, 'axipi_backend'), user.roles|join('<br>')) }}
-                {{ macro.read_field('user.isActive'|trans({}, 'axipi_backend'), user.isActive) }}
             </div>
         {% endblock %}
     {% endembed %}
