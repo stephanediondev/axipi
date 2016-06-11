@@ -8,18 +8,14 @@ use Axipi\CoreBundle\Widget\AbstractWidget;
 
 class LanguageselectorWidget extends AbstractWidget
 {
-    public function getWidget(Request $request, $widget, $page)
+    public function getWidget($parameters)
     {
-        $parameters = new ParameterBag();
-        $parameters->set('request', $request);
-        $parameters->set('widget', $widget);
-        $parameters->set('page', $page);
         $parameters->set('languages', $this->get('axipi_core_manager_default')->getLanguages());
 
-        if($widget->getTemplate()) {
-            $template = $widget->getTemplate();
+        if($parameters->get('widget')->getTemplate()) {
+            $template = $parameters->get('widget')->getTemplate();
         } else {
-            $template = $widget->getComponent()->getTemplate();
+            $template = $parameters->get('widget')->getComponent()->getTemplate();
         }
         return $this->renderWidget($template, $parameters->all());
     }

@@ -3,6 +3,7 @@ namespace Axipi\CoreBundle\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Entity\Item;
 
@@ -53,7 +54,11 @@ class DefaultExtension extends \Twig_Extension
 
         foreach($widgets as $widget) {
             if($this->container->has($widget->getComponent()->getService())) {
-                $content .= $this->container->get($widget->getComponent()->getService())->getWidget($request, $widget, $page);
+                $parameters = new ParameterBag();
+                $parameters->set('request', $request);
+                $parameters->set('widget', $widget);
+                $parameters->set('page', $page);
+                $content .= $this->container->get($widget->getComponent()->getService())->getWidget($parameters);
             }
         }
         return $content;

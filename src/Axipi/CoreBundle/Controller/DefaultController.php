@@ -13,7 +13,6 @@ use Axipi\CoreBundle\Manager\ItemManager;
 
 class DefaultController extends AbstractController
 {
-
     protected $defaultManager;
 
     protected $languageManager;
