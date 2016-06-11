@@ -75,6 +75,7 @@
             {% block card__supporting %}
                 <div class="mdl-cell mdl-cell--6-col">
                     {% if info.symfony is defined %}{{ macro.read_field('Symfony', info.symfony) }}{% endif %}
+                    {{ macro.read_field('Environment', app.environment) }}
                     {% if info.function.phpversion is defined %}{{ macro.read_field('phpversion', info.function.phpversion) }}{% endif %}
                     {% if info.function.php_sapi_name is defined %}{{ macro.read_field('php_sapi_name', info.function.php_sapi_name) }}{% endif %}
                     {% if info.function.get_current_user is defined %}{{ macro.read_field('get_current_user', info.function.get_current_user) }}{% endif %}

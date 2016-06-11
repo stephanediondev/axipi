@@ -20,6 +20,14 @@ a:link, a:visited {
 .mdl-layout__header-row a:first-child {
     margin-left: 0px;
 }
+.mdl-list__item {
+    padding: 8px;
+}
+.mdl-list__item a:link, .mdl-list__item a:visited {
+    display: block;
+    padding: 8px;
+    width: 100%;
+}
 .mdl-grid {
     width: inherit
 }
