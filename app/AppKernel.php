@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Axipi\CoreBundle\AxipiCoreBundle(),
             new Axipi\BackendBundle\AxipiBackendBundle(),
             new Axipi\ContentBundle\AxipiContentBundle(),
+            new Axipi\SchemaBundle\AxipiSchemaBundle(),
             new Axipi\ContactBundle\AxipiContactBundle(),
             new Axipi\SearchBundle\AxipiSearchBundle(),
             new Axipi\SitemapBundle\AxipiSitemapBundle(),

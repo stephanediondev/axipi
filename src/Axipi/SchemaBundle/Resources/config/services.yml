@@ -1,0 +1,12 @@
+services:
+    axipi_schema_widget_organization:
+        class: Axipi\SchemaBundle\Widget\OrganizationWidget
+        parent: "axipi_core_widget_abstract"
+
+    axipi_schema_widget_website:
+        class: Axipi\SchemaBundle\Widget\WebsiteWidget
+        parent: "axipi_core_widget_abstract"
+
+    axipi_schema_widget_breadcrumblist:
+        class: Axipi\SchemaBundle\Widget\BreadcrumblistWidget
+        parent: "axipi_core_widget_abstract"

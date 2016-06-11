@@ -1,0 +1,70 @@
+<!-- Schema / BreadcrumbList -->
+{% if page.parent %}
+{% set position = 1 %}
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+{% if page.parent.parent %}
+{% if page.parent.parent.parent %}
+    {
+        "@type": "ListItem",
+        "position": {{ position }},
+        "item": {
+            "@id": "{{ buildLink(page.parent.parent.parent) }}",
+            "name": "{{ page.parent.parent.parent.title }}"
+        }
+    },
+{% set position = position + 1 %}
+{% endif %}
+    {
+        "@type": "ListItem",
+        "position": {{ position }},
+        "item": {
+            "@id": "{{ buildLink(page.parent.parent) }}",
+            "name": "{{ page.parent.parent.title }}"
+        }
+    },
+{% set position = position + 1 %}
+{% endif %}
+    {
+        "@type": "ListItem",
+        "position": {{ position }},
+        "item": {
+            "@id": "{{ buildLink(page.parent) }}",
+            "name": "{{ page.parent.title }}"
+        }
+    },
+{% set position = position + 1 %}
+        {
+            "@type": "ListItem",
+            "position": {{ position }},
+            "item": {
+                "@id": "{{ buildLink(page) }}",
+                "name": "{{ page.title }}"
+            }
+        }
+    ]
+}
+</script>
+{% else %}
+    {% set position = 1 %}
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": {{ position }},
+            "item": {
+                "@id": "{{ buildLink(page) }}",
+                "name": "{{ page.title }}"
+            }
+        }
+    ]
+}
+</script>
+{% endif %}
+<!-- Schema / BreadcrumbList (end) -->

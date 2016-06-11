@@ -1,0 +1,10 @@
+<!-- Schema / Organization -->
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "{{ widget.attribute('url') }}",
+    "logo": "{{ absolute_url(asset('uploads/' ~ widget.attribute('logo'))) }}"
+}
+</script>
+<!-- Schema / Organization (end) -->

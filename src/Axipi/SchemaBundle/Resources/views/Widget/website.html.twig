@@ -1,0 +1,11 @@
+<!-- Schema / WebSite -->
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "{{ widget.attribute('name') }}",
+{% if widget.attribute('alternateName') %}    "alternateName": "{{ widget.attribute('alternateName') }}",
+{% endif %}    "url": "{{ widget.attribute('url') }}"
+}
+</script>
+<!-- Schema / WebSite (end) -->
