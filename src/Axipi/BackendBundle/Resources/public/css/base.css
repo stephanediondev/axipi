@@ -94,7 +94,7 @@ a:link, a:visited {
     border-bottom: 1px solid #000000;
 }
 p {
-    line-height: 1.3;
+    line-height: 1.4;
     margin: 8px 0px;
 }
 label, .label {
@@ -126,4 +126,7 @@ textarea.wysiwyg {
     min-height: 450px;
     resize: vertical;
     width:100%;
+}
+em.default {
+    display: block;
 }

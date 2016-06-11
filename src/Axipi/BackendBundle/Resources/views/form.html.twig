@@ -19,7 +19,7 @@
             {{ form_label(form) }}
             {{ form_widget(form) }}
             {% if form.vars.attr['data-default'] is defined %}
-                <em>Default: {{ form.vars.attr['data-default'] }}</em>
+                <em class="default">Default: {{ form.vars.attr['data-default'] }}</em>
             {% endif %}
             {{ form_errors(form) }}
         </p>
