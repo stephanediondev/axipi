@@ -7,7 +7,14 @@
             {% block card__title %}{% endblock %}
         </h1>
     </div>
+    {% if form is defined %}
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+    {% endif %}
     <div class="mdl-card__supporting-text mdl-grid">
         {% block card__supporting %}{% endblock %}
     </div>
+    {% if form is defined %}
+        {{ form_end(form) }}
+    {% endif %}
 </div>

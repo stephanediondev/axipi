@@ -3,34 +3,32 @@
 {% block title %}{{ file.name }} - {{ 'files'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
-    <div class="mdl-grid">
-        {% embed 'AxipiBackendBundle::card.html.twig' %}
-            {% block card__actions %}
-                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_files', {action: 'update', 'slug': file.slug}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
-                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_files', {action: 'delete', 'slug': file.slug}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
-            {% endblock %}
-            {% block card__title %}
-                {% for tree in tree %}
-                    {% if tree.slug != file.slug %}
-                        <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_files', {action: 'index', 'slug': tree.slug}) }}"><i class="fa fa-folder"></i>{{ tree.name }}</a></span>
-                    {% endif %}
-                {% endfor %}
-                <span><i class="fa fa-{{ file.icon }}"></i>{{ file.name }}</span>
-            {% endblock %}
-            {% block card__supporting %}
-                <div class="mdl-cell mdl-cell--4-col">
-                    {{ macro.read_field('file.name'|trans({}, 'axipi_backend'), file.name) }}
-                    {{ macro.read_field('file.size'|trans({}, 'axipi_backend'), file.size) }}
-                    {{ macro.read_field('file.mime'|trans({}, 'axipi_backend'), file.mime) }}
-                </div>
-                <div class="mdl-cell mdl-cell--4-col">
-                    {% if 'image/' in file.mime %}
-                        <img src="{{ asset('files/' ~ file.slug) }}" class="img-responsive">
-                    {% endif %}
-                </div>
-            {% endblock %}
-        {% endembed %}
-    </div>
+    {% embed 'AxipiBackendBundle::card.html.twig' %}
+        {% block card__actions %}
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_files', {action: 'update', 'slug': file.slug}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_files', {action: 'delete', 'slug': file.slug}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
+        {% endblock %}
+        {% block card__title %}
+            {% for tree in tree %}
+                {% if tree.slug != file.slug %}
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_files', {action: 'index', 'slug': tree.slug}) }}"><i class="fa fa-folder"></i>{{ tree.name }}</a></span>
+                {% endif %}
+            {% endfor %}
+            <span><i class="fa fa-{{ file.icon }}"></i>{{ file.name }}</span>
+        {% endblock %}
+        {% block card__supporting %}
+            <div class="mdl-cell mdl-cell--4-col">
+                {{ macro.read_field('file.name'|trans({}, 'axipi_backend'), file.name) }}
+                {{ macro.read_field('file.size'|trans({}, 'axipi_backend'), file.size) }}
+                {{ macro.read_field('file.mime'|trans({}, 'axipi_backend'), file.mime) }}
+            </div>
+            <div class="mdl-cell mdl-cell--4-col">
+                {% if 'image/' in file.mime %}
+                    <img src="{{ asset('files/' ~ file.slug) }}" class="img-responsive">
+                {% endif %}
+            </div>
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
 
 {% block style %}

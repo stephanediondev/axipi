@@ -3,29 +3,27 @@
 {% block title %}{{ user.username }} - {{ 'users'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
-    <div class="mdl-grid">
-        {% embed 'AxipiBackendBundle::card.html.twig' %}
-            {% block card__actions %}
-                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_users', {action: 'update', 'id': user.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
-                {% if app.user.id != user.id %}<a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_users', {action: 'delete', 'id': user.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>{% endif %}
-            {% endblock %}
-            {% block card__title %}
-                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_users', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ 'users'|trans({}, 'axipi_backend') }}</a></span>
-                <span>{{ user.username }}</span>
-            {% endblock %}
-            {% block card__supporting %}
-                <div class="mdl-cell mdl-cell--4-col">
-                    {{ macro.read_field('user.username'|trans({}, 'axipi_backend'), user.username) }}
-                    {{ macro.read_field('user.firstname'|trans({}, 'axipi_backend'), user.firstname) }}
-                    {{ macro.read_field('user.lastname'|trans({}, 'axipi_backend'), user.lastname) }}
-                </div>
-                <div class="mdl-cell mdl-cell--4-col">
-                    {{ macro.read_field('user.roles'|trans({}, 'axipi_backend'), user.roles|join('<br>')) }}
-                    {{ macro.read_field('user.isActive'|trans({}, 'axipi_backend'), user.isActive) }}
-                </div>
-            {% endblock %}
-        {% endembed %}
-    </div>
+    {% embed 'AxipiBackendBundle::card.html.twig' %}
+        {% block card__actions %}
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_users', {action: 'update', 'id': user.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
+            {% if app.user.id != user.id %}<a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_users', {action: 'delete', 'id': user.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>{% endif %}
+        {% endblock %}
+        {% block card__title %}
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_users', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ 'users'|trans({}, 'axipi_backend') }}</a></span>
+            <span>{{ user.username }}</span>
+        {% endblock %}
+        {% block card__supporting %}
+            <div class="mdl-cell mdl-cell--4-col">
+                {{ macro.read_field('user.username'|trans({}, 'axipi_backend'), user.username) }}
+                {{ macro.read_field('user.firstname'|trans({}, 'axipi_backend'), user.firstname) }}
+                {{ macro.read_field('user.lastname'|trans({}, 'axipi_backend'), user.lastname) }}
+            </div>
+            <div class="mdl-cell mdl-cell--4-col">
+                {{ macro.read_field('user.roles'|trans({}, 'axipi_backend'), user.roles|join('<br>')) }}
+                {{ macro.read_field('user.isActive'|trans({}, 'axipi_backend'), user.isActive) }}
+            </div>
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
 
 {% block style %}

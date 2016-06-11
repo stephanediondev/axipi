@@ -3,24 +3,19 @@
 {% block title %}{{ 'languages'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_errors(form) }}
-    <div class="mdl-grid">
-        {% embed 'AxipiBackendBundle::card.html.twig' %}
-            {% block card__title %}
-                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_languages', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.language'|trans({}, 'axipi_backend') }}"></i>{{ 'languages'|trans({}, 'axipi_backend') }}</a></span>
-            {% endblock %}
-            {% block card__supporting %}
-                <div class="mdl-cell mdl-cell--4-col">
-                    {{ form_row(form.code) }}
-                    {{ form_row(form.title) }}
-                    {{ form_row(form.isActive) }}
-                    {{ form_row(form.submit) }}
-                </div>
-            {% endblock %}
-        {% endembed %}
-    </div>
-    {{ form_end(form) }}
+    {% embed 'AxipiBackendBundle::card.html.twig' with {form: form} %}
+        {% block card__title %}
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_languages', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.language'|trans({}, 'axipi_backend') }}"></i>{{ 'languages'|trans({}, 'axipi_backend') }}</a></span>
+        {% endblock %}
+        {% block card__supporting %}
+            <div class="mdl-cell mdl-cell--4-col">
+                {{ form_row(form.code) }}
+                {{ form_row(form.title) }}
+                {{ form_row(form.isActive) }}
+                {{ form_row(form.submit) }}
+            </div>
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
 
 {% block style %}

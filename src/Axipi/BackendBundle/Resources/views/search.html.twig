@@ -3,91 +3,89 @@
 {% block title %}{{ 'search'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
-    <div class="mdl-grid">
-        {% embed 'AxipiBackendBundle::card.html.twig' %}
-            {% block card__actions %}
-                {% if enabled %}
-                    <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_search', {action: 'init'}) }}">{{ 'actions.initialize'|trans({}, 'axipi_backend') }}</a>
-                    <a class="mdl-button mdl-color--pink mdl-color-text--white"  href="{{ path('axipi_backend_search', {action: 'scan'}) }}">{{ 'actions.refresh'|trans({}, 'axipi_backend') }}</a>
-                {% endif %}
-            {% endblock %}
-            {% block card__title %}
-                <span><i class="fa fa-{{ 'icons.search'|trans({}, 'axipi_backend') }}"></i>{{ 'search'|trans({}, 'axipi_backend') }}</span>
-            {% endblock %}
-            {% block card__supporting %}
-                {% if enabled %}
-                {% else %}
-                    <p>Disabled</p>
-                {% endif %}
-            {% endblock %}
-        {% endembed %}
-
-        {% if enabled %}
-            {% if stats is defined and stats.indices is defined %}
-                {% for key, stats in stats.indices %}
-                    {% embed 'AxipiBackendBundle::card.html.twig' %}
-                        {% block card__title %}
-                            <span><i class="fa fa-bolt"></i>{{ 'backend.index'|trans({}, 'axipi_search') }}</span>
-                            <span>{{ key }}</span>
-                        {% endblock %}
-                        {% block card__supporting %}
-                            <div class="mdl-cell mdl-cell--4-col">
-                                {{ macro.read_field('total.store.size_in_bytes', stats.total.store.size_in_bytes) }}
-                                {{ macro.read_field('total.docs.count', stats.total.docs.count) }}
-                                {{ macro.read_field('total.docs.deleted', stats.total.docs.deleted) }}
-                            </div>
-                            <div class="mdl-cell mdl-cell--4-col">
-                                {{ macro.read_field('total.search.query_total', stats.total.search.query_total) }}
-                                {{ macro.read_field('total.search.fetch_total', stats.total.search.fetch_total) }}
-                            </div>
-                        {% endblock %}
-                    {% endembed %}
-                {% endfor %}
+    {% embed 'AxipiBackendBundle::card.html.twig' %}
+        {% block card__actions %}
+            {% if enabled %}
+                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_search', {action: 'init'}) }}">{{ 'actions.initialize'|trans({}, 'axipi_backend') }}</a>
+                <a class="mdl-button mdl-color--pink mdl-color-text--white"  href="{{ path('axipi_backend_search', {action: 'scan'}) }}">{{ 'actions.refresh'|trans({}, 'axipi_backend') }}</a>
             {% endif %}
+        {% endblock %}
+        {% block card__title %}
+            <span><i class="fa fa-{{ 'icons.search'|trans({}, 'axipi_backend') }}"></i>{{ 'search'|trans({}, 'axipi_backend') }}</span>
+        {% endblock %}
+        {% block card__supporting %}
+            {% if enabled %}
+            {% else %}
+                <p>Disabled</p>
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
 
-            {% if health is defined %}
+    {% if enabled %}
+        {% if stats is defined and stats.indices is defined %}
+            {% for key, stats in stats.indices %}
                 {% embed 'AxipiBackendBundle::card.html.twig' %}
                     {% block card__title %}
-                        <span><i class="fa fa-database"></i>{{ 'backend.cluster'|trans({}, 'axipi_search') }}</span>
-                        <span>{{ health.cluster_name }}</span>
+                        <span><i class="fa fa-bolt"></i>{{ 'backend.index'|trans({}, 'axipi_search') }}</span>
+                        <span>{{ key }}</span>
                     {% endblock %}
                     {% block card__supporting %}
                         <div class="mdl-cell mdl-cell--4-col">
-                            {{ macro.read_field('status', health.status) }}
-                            {{ macro.read_field('number_of_nodes', health.number_of_nodes) }}
+                            {{ macro.read_field('total.store.size_in_bytes', stats.total.store.size_in_bytes) }}
+                            {{ macro.read_field('total.docs.count', stats.total.docs.count) }}
+                            {{ macro.read_field('total.docs.deleted', stats.total.docs.deleted) }}
                         </div>
                         <div class="mdl-cell mdl-cell--4-col">
-                            {{ macro.read_field('active_primary_shards', health.active_primary_shards) }}
-                            {{ macro.read_field('active_shards', health.active_shards) }}
+                            {{ macro.read_field('total.search.query_total', stats.total.search.query_total) }}
+                            {{ macro.read_field('total.search.fetch_total', stats.total.search.fetch_total) }}
                         </div>
                     {% endblock %}
                 {% endembed %}
-            {% endif %}
-
-            {% if nodes is defined %}
-                {% for key, node in nodes.nodes %}
-                    {% embed 'AxipiBackendBundle::card.html.twig' %}
-                        {% block card__title %}
-                            <span><i class="fa fa-server"></i>{{ 'backend.node'|trans({}, 'axipi_search') }}</span>
-                            <span>{{ node.name }}</span>
-                        {% endblock %}
-                        {% block card__supporting %}
-                            <div class="mdl-cell mdl-cell--4-col">
-                                {{ macro.read_field('attributes.master', node.attributes.master) }}
-                                {{ macro.read_field('ip', node.ip) }}
-                                {{ macro.read_field('version', node.version) }}
-                            </div>
-                            <div class="mdl-cell mdl-cell--4-col">
-                                {{ macro.read_field('os.name', node.os.name) }}
-                                {{ macro.read_field('os.arch', node.os.arch) }}
-                                {{ macro.read_field('os.version', node.os.version) }}
-                            </div>
-                        {% endblock %}
-                    {% endembed %}
-                {% endfor %}
-            {% endif %}
+            {% endfor %}
         {% endif %}
-    </div>
+
+        {% if health is defined %}
+            {% embed 'AxipiBackendBundle::card.html.twig' %}
+                {% block card__title %}
+                    <span><i class="fa fa-database"></i>{{ 'backend.cluster'|trans({}, 'axipi_search') }}</span>
+                    <span>{{ health.cluster_name }}</span>
+                {% endblock %}
+                {% block card__supporting %}
+                    <div class="mdl-cell mdl-cell--4-col">
+                        {{ macro.read_field('status', health.status) }}
+                        {{ macro.read_field('number_of_nodes', health.number_of_nodes) }}
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col">
+                        {{ macro.read_field('active_primary_shards', health.active_primary_shards) }}
+                        {{ macro.read_field('active_shards', health.active_shards) }}
+                    </div>
+                {% endblock %}
+            {% endembed %}
+        {% endif %}
+
+        {% if nodes is defined %}
+            {% for key, node in nodes.nodes %}
+                {% embed 'AxipiBackendBundle::card.html.twig' %}
+                    {% block card__title %}
+                        <span><i class="fa fa-server"></i>{{ 'backend.node'|trans({}, 'axipi_search') }}</span>
+                        <span>{{ node.name }}</span>
+                    {% endblock %}
+                    {% block card__supporting %}
+                        <div class="mdl-cell mdl-cell--4-col">
+                            {{ macro.read_field('attributes.master', node.attributes.master) }}
+                            {{ macro.read_field('ip', node.ip) }}
+                            {{ macro.read_field('version', node.version) }}
+                        </div>
+                        <div class="mdl-cell mdl-cell--4-col">
+                            {{ macro.read_field('os.name', node.os.name) }}
+                            {{ macro.read_field('os.arch', node.os.arch) }}
+                            {{ macro.read_field('os.version', node.os.version) }}
+                        </div>
+                    {% endblock %}
+                {% endembed %}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
 {% endblock %}
 
 {% block style %}

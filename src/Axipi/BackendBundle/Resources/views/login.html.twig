@@ -3,37 +3,37 @@
 {% block title %}{{ 'login'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
-{% if error %}
-    <div class="alert alert-danger" role="alert">
-        <p>{{ error.message }}</p>
-    </div>
-{% endif %}
+    {% if error %}
+        {% embed 'AxipiBackendBundle::card.html.twig' %}
+            {% block card__supporting %}
+                <p>{{ error.message }}</p>
+            {% endblock %}
+        {% endembed %}
+    {% endif %}
 
-<form action="{{ path('axipi_backend_login_check') }}" method="post">
-<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-    <div class="mdl-grid">
-        <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-            <div class="mdl-card__actions">
-                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="#">{{ 'forgot_password'|trans({}, 'axipi_backend') }}</a>
-            </div>
-            <div class="mdl-card__supporting-text mdl-grid">
-                <div class="mdl-cell mdl-cell--4-col">
-                    <p>
-                        <label for="username" class="required">{{ 'user.username'|trans({}, 'axipi_backend') }}</label>
-                        <input type="email" id="username" name="username" required="required">
-                    </p>
-                    <p>
-                        <label for="password" class="required">{{ 'user.password'|trans({}, 'axipi_backend') }}</label>
-                        <input type="password" id="password" name="password" required="required">
-                    </p>
-                    <p>
-                        <button class="mdl-button mdl-color--pink mdl-color-text--white" type="submit" id="login_submit" name="login_submit">{{ 'login'|trans({}, 'axipi_backend') }}</button>
-                    </p>
-                </div>
+    <div class="mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+        <div class="mdl-card__actions">
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="#">{{ 'forgot_password'|trans({}, 'axipi_backend') }}</a>
+        </div>
+        <form action="{{ path('axipi_backend_login_check') }}" method="post">
+        <div class="mdl-card__supporting-text mdl-grid">
+            <div class="mdl-cell mdl-cell--4-col">
+                <p>
+                    <label for="username" class="required">{{ 'user.username'|trans({}, 'axipi_backend') }}</label>
+                    <input type="email" id="username" name="username" required="required">
+                </p>
+                <p>
+                    <label for="password" class="required">{{ 'user.password'|trans({}, 'axipi_backend') }}</label>
+                    <input type="password" id="password" name="password" required="required">
+                </p>
+                <p>
+                    <button class="mdl-button mdl-color--pink mdl-color-text--white" type="submit" id="login_submit" name="login_submit">{{ 'login'|trans({}, 'axipi_backend') }}</button>
+                </p>
             </div>
         </div>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        </form>
     </div>
-</form>
 {% endblock %}
 
 {% block style %}

@@ -11,35 +11,30 @@
         </div>
     </div>
 
-    {{ form_start(form) }}
-    {{ form_errors(form) }}
-    <div class="mdl-grid">
-        {% embed 'AxipiBackendBundle::card.html.twig' %}
-            {% block card__actions %}
-                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'update', 'id': page.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
-            {% endblock %}
-            {% block card__title %}
-                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></span>
-                {% if page.parent %}
-                    {% if page.parent.parent %}
-                        {% if page.parent.parent.parent %}
-                            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page.parent.parent.parent.id}) }}">{{ page.parent.parent.parent.title }}</a></span>
-                        {% endif %}
-                        <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page.parent.parent.id}) }}">{{ page.parent.parent.title }}</a></span>
+    {% embed 'AxipiBackendBundle::card.html.twig' with {form: form} %}
+        {% block card__actions %}
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'update', 'id': page.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
+        {% endblock %}
+        {% block card__title %}
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></span>
+            {% if page.parent %}
+                {% if page.parent.parent %}
+                    {% if page.parent.parent.parent %}
+                        <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page.parent.parent.parent.id}) }}">{{ page.parent.parent.parent.title }}</a></span>
                     {% endif %}
-                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page.parent.id}) }}">{{ page.parent.title }}</a></span>
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page.parent.parent.id}) }}">{{ page.parent.parent.title }}</a></span>
                 {% endif %}
-                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'read', 'id': page.id}) }}">{{ page.title }}</a></span>
-            {% endblock %}
-            {% block card__supporting %}
-                <div class="mdl-cell mdl-cell--4-col">
-                    {{ form_row(form.confirm) }}
-                    {{ form_row(form.submit) }}
-                </div>
-            {% endblock %}
-        {% endembed %}
-    </div>
-    {{ form_end(form) }}
+                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page.parent.id}) }}">{{ page.parent.title }}</a></span>
+            {% endif %}
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'read', 'id': page.id}) }}">{{ page.title }}</a></span>
+        {% endblock %}
+        {% block card__supporting %}
+            <div class="mdl-cell mdl-cell--4-col">
+                {{ form_row(form.confirm) }}
+                {{ form_row(form.submit) }}
+            </div>
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
 
 {% block style %}

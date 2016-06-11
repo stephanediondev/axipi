@@ -3,33 +3,28 @@
 {% block title %}{{ user.username }} - {{ 'users'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_errors(form) }}
-    <div class="mdl-grid">
-        {% embed 'AxipiBackendBundle::card.html.twig' %}
-            {% block card__actions %}
-                {% if app.user.id != user.id %}<a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_users', {action: 'delete', 'id': user.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>{% endif %}
-            {% endblock %}
-            {% block card__title %}
-                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_users', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ 'users'|trans({}, 'axipi_backend') }}</a></span>
-                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_users', {action: 'read', 'id': user.id}) }}"><i class="fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ user.username }}</a></span>
-            {% endblock %}
-            {% block card__supporting %}
-                <div class="mdl-cell mdl-cell--4-col">
-                    {{ form_row(form.username) }}
-                    {{ form_row(form.passwordChange) }}
-                    {{ form_row(form.firstname) }}
-                    {{ form_row(form.lastname) }}
-                    {{ form_row(form.submit) }}
-                </div>
-                <div class="mdl-cell mdl-cell--4-col">
-                    {{ form_row(form.rolesChange) }}
-                    {% if app.user.id != user.id %}{{ form_row(form.isActive) }}{% endif %}
-                </div>
-            {% endblock %}
-        {% endembed %}
-    </div>
-    {{ form_end(form) }}
+    {% embed 'AxipiBackendBundle::card.html.twig' with {form: form} %}
+        {% block card__actions %}
+            {% if app.user.id != user.id %}<a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_users', {action: 'delete', 'id': user.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>{% endif %}
+        {% endblock %}
+        {% block card__title %}
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_users', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ 'users'|trans({}, 'axipi_backend') }}</a></span>
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_users', {action: 'read', 'id': user.id}) }}"><i class="fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ user.username }}</a></span>
+        {% endblock %}
+        {% block card__supporting %}
+            <div class="mdl-cell mdl-cell--4-col">
+                {{ form_row(form.username) }}
+                {{ form_row(form.passwordChange) }}
+                {{ form_row(form.firstname) }}
+                {{ form_row(form.lastname) }}
+                {{ form_row(form.submit) }}
+            </div>
+            <div class="mdl-cell mdl-cell--4-col">
+                {{ form_row(form.rolesChange) }}
+                {% if app.user.id != user.id %}{{ form_row(form.isActive) }}{% endif %}
+            </div>
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
 
 {% block style %}

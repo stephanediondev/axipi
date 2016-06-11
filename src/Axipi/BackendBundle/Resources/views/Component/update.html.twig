@@ -3,46 +3,41 @@
 {% block title %}{{ component.title }} - {{ 'components'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_errors(form) }}
-    <div class="mdl-grid">
-        {% embed 'AxipiBackendBundle::card.html.twig' %}
-            {% block card__actions %}
-                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_components', {language: app.request.get('language'), action: 'delete', 'id': component.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
-            {% endblock %}
-            {% block card__title %}
-                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.component'|trans({}, 'axipi_backend') }}"></i>{{ 'components'|trans({}, 'axipi_backend') }}</a></span>
-                {% if component.parent %}
-                    {% if component.parent.parent %}
-                        <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'read', id: component.parent.parent.id}) }}">{{ component.parent.parent.title }}</a></span>
-                    {% endif %}
-                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'read', id: component.parent.id}) }}">{{ component.parent.title }}</a></span>
+    {% embed 'AxipiBackendBundle::card.html.twig' with {form: form} %}
+        {% block card__actions %}
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_components', {language: app.request.get('language'), action: 'delete', 'id': component.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
+        {% endblock %}
+        {% block card__title %}
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.component'|trans({}, 'axipi_backend') }}"></i>{{ 'components'|trans({}, 'axipi_backend') }}</a></span>
+            {% if component.parent %}
+                {% if component.parent.parent %}
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'read', id: component.parent.parent.id}) }}">{{ component.parent.parent.title }}</a></span>
                 {% endif %}
-                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'read', 'id': component.id}) }}">{{ component.title }}</a></span>
-            {% endblock %}
-            {% block card__supporting %}
-                <div class="mdl-cell mdl-cell--4-col">
-                    {{ form_row(form.category) }}
-                    {{ form_row(form.service) }}
-                    {{ form_row(form.template) }}
-                    {{ form_row(form.title) }}
-                    {{ form_row(form.zone) }}
-                    {{ form_row(form.parent) }}
-                    {{ form_row(form.icon) }}
-                    {{ form_row(form.submit) }}
-                </div>
-                <div class="mdl-cell mdl-cell--8-col">
-                    {{ form_row(form.isUnique) }}
-                    {{ form_row(form.isHome) }}
-                    {{ form_row(form.excludeSitemap) }}
-                    {{ form_row(form.excludeSearch) }}
-                    {{ form_row(form.isActive) }}
-                    {{ form_row(form.attributesSchema) }}
-                </div>
-            {% endblock %}
-        {% endembed %}
-    </div>
-    {{ form_end(form) }}
+                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'read', id: component.parent.id}) }}">{{ component.parent.title }}</a></span>
+            {% endif %}
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'read', 'id': component.id}) }}">{{ component.title }}</a></span>
+        {% endblock %}
+        {% block card__supporting %}
+            <div class="mdl-cell mdl-cell--4-col">
+                {{ form_row(form.category) }}
+                {{ form_row(form.service) }}
+                {{ form_row(form.template) }}
+                {{ form_row(form.title) }}
+                {{ form_row(form.zone) }}
+                {{ form_row(form.parent) }}
+                {{ form_row(form.icon) }}
+                {{ form_row(form.submit) }}
+            </div>
+            <div class="mdl-cell mdl-cell--8-col">
+                {{ form_row(form.isUnique) }}
+                {{ form_row(form.isHome) }}
+                {{ form_row(form.excludeSitemap) }}
+                {{ form_row(form.excludeSearch) }}
+                {{ form_row(form.isActive) }}
+                {{ form_row(form.attributesSchema) }}
+            </div>
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
 
 {% block style %}
