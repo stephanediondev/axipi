@@ -28,6 +28,9 @@ a:link, a:visited {
     padding: 8px;
     width: 100%;
 }
+.mdl-list__item a:hover {
+    background-color: #e0e0e0;
+}
 .mdl-grid {
     width: inherit
 }
@@ -56,7 +59,6 @@ a:link, a:visited {
     padding: 0px 8px;
 }
 
-
 .mdl-tabs__tab i.fa, .mdl-list__item i.fa, .mdl-card__title-text i.fa, .mdl-card__actions i.fa {
     margin-right: 5px;
 }
@@ -67,7 +69,7 @@ a:link, a:visited {
     padding: 0px;
     text-align: center;
 }
-.mdl-card__supporting-text.mdl-grid .mdl-cell--2-col a {
+.mdl-card__supporting-text.mdl-grid .mdl-cell--2-col a:link, .mdl-card__supporting-text.mdl-grid .mdl-cell--2-col a:visited {
     display: block;
     line-height: 1.9;
     overflow: hidden;
@@ -75,6 +77,10 @@ a:link, a:visited {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.mdl-card__supporting-text.mdl-grid .mdl-cell--2-col a:hover {
+    background-color: #e0e0e0;
+}
+
 .mdl-card__supporting-text.mdl-grid .mdl-cell--2-col a img {
     max-height: 90px;
 }
