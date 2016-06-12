@@ -3,7 +3,7 @@
     {% if widget.attribute('display_title')|default(false) %}
         <{{ widget.attribute('title_tag')|default('h3') }}>{{ widget.title }}</{{ widget.attribute('title_tag')|default('h3') }}>
     {% endif %}
-    <ul class="{{ widget.attribute('ul_class')|default('nav navbar-nav') }}">
+    <ul class="{{ widget.attribute('ul_class')|default(widget.attribute('predefined'))|default('nav nav-pills') }}">
         {% for relation in relations %}
             <li{% if page.slug == relation.page.slug %} class="active"{% endif %}><a href="{{ buildLink(relation.page) }}">{{ relation.title|default(relation.page.title) }}</a></li>
         {% endfor %}

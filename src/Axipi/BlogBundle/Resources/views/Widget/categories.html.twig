@@ -1,12 +1,12 @@
-<!-- Content / Menu -->
+<!-- Blog / Categories -->
 <div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('col-lg-12') }}">
     {% if widget.attribute('display_title')|default(false) %}
         <{{ widget.attribute('title_tag')|default('h3') }}>{{ widget.title }}</{{ widget.attribute('title_tag')|default('h3') }}>
     {% endif %}
-    <ul class="{{ widget.attribute('ul_class')|default('nav nav-pills nav-stacked') }}">
+    <ul class="{{ widget.attribute('ul_class')|default(widget.attribute('predefined'))|default('nav nav-pills nav-stacked') }}">
         {% for child in children %}
             <li{% if page.slug == child.slug %} class="active"{% endif %}><a href="{{ buildLink(child) }}">{{ child.title }}</a></li>
         {% endfor %}
     </ul>
 </div>
-<!-- Content / Menu (end) -->
+<!-- Blog / Categories (end) -->
