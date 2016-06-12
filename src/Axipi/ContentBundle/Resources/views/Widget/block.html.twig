@@ -1,5 +1,6 @@
 <!-- Content / Block -->
-<div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('col-lg-12') }}">
+<div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('widget') }}">
+    <{{ widget.attribute('title_tag')|default('h3') }} class="widget-title">{{ widget.title }}</{{ widget.attribute('title_tag')|default('h3') }}>
     {{ widget.attribute('description')|raw }}
 </div>
 <!-- Content / Block (end) -->

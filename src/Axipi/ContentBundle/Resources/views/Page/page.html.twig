@@ -2,11 +2,15 @@
 
 {% block main %}
     <!-- Content / Page -->
-    <div class="row">
-        <div class="col-lg-12">
+    <article id="post-71" class="post-71 page type-page status-publish hentry">
+        <header class="entry-header">
+            <h1 class="entry-title">{{ page.title }}</h1>
+        </header>
+
+        <div class="entry-content">
             {{ convertText(page.attribute('description')|raw) }}
         </div>
-    </div>
+    </article>
     <!-- Content / Page (end) -->
 {% endblock %}
 

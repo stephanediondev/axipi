@@ -1,8 +1,10 @@
 <!-- Content / Menu -->
-<div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('col-lg-2 pull-right text-right') }}">
-    <form method="get" class="{{ widget.attribute('form_class')|default('navbar-form navbar-right') }}" action="{{ buildLink(widget.parent) }}">
-        <div class="form-group">
-            <input class="form-control" type="text" name="q" value="{{ request.get('q') }}" placeholder="{{ widget.attribute('placeholder')|default('widget.placeholder'|trans({}, 'axipi_search')) }}">
+<div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('widget') }}">
+    <form role="search" method="get" class="{{ widget.attribute('form_class')|default('navbar-form navbar-right') }}" action="{{ buildLink(widget.parent) }}">
+        <div>
+            <label class="screen-reader-text" for="s">{{ widget.attribute('placeholder')|default('widget.placeholder'|trans({}, 'axipi_search')) }}</label>
+            <input class="form-control" type="text" name="q" value="{{ request.get('q') }}">
+            <input type="submit" id="searchsubmit" value="{{ widget.attribute('placeholder')|default('widget.placeholder'|trans({}, 'axipi_search')) }}">
         </div>
     </form>
 </div>

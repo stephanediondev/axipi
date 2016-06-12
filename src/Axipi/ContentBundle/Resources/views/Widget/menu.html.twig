@@ -5,7 +5,7 @@
     {% endif %}
     <ul class="{{ widget.attribute('ul_class')|default(widget.attribute('predefined'))|default('nav nav-pills') }}">
         {% for relation in relations %}
-            <li{% if page.slug == relation.page.slug %} class="active"{% endif %}><a href="{{ buildLink(relation.page) }}">{{ relation.title|default(relation.page.title) }}</a></li>
+            <li{% if page.slug == relation.page.slug %} class="current_page_item"{% endif %}><a href="{{ buildLink(relation.page) }}">{{ relation.title|default(relation.page.title) }}</a></li>
         {% endfor %}
     </ul>
 </div>

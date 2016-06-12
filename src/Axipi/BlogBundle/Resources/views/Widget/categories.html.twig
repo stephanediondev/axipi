@@ -1,7 +1,7 @@
 <!-- Blog / Categories -->
-<div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('col-lg-12') }}">
+<div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('widget') }}">
     {% if widget.attribute('display_title')|default(false) %}
-        <{{ widget.attribute('title_tag')|default('h3') }}>{{ widget.title }}</{{ widget.attribute('title_tag')|default('h3') }}>
+        <{{ widget.attribute('title_tag')|default('h3') }} class="widget-title">{{ widget.title }}</{{ widget.attribute('title_tag')|default('h3') }}>
     {% endif %}
     <ul class="{{ widget.attribute('ul_class')|default(widget.attribute('predefined'))|default('nav nav-pills nav-stacked') }}">
         {% for child in children %}

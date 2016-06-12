@@ -28,6 +28,20 @@
     {%- endif -%}
 {%- endblock form_errors -%}
 
+{%- block submit_widget -%}
+    {%- set type = type|default('submit') -%}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <input type="{{ type|default('button') }}" {{ block('button_attributes') }} value="{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}">
+{%- endblock submit_widget -%}
 
 {% block axipi_google_form_type_recaptcha_row %}
     <div class="{{ attr.class }}" data-sitekey="{{ google_recaptcha_sitekey }}" data-size="normal"></div>

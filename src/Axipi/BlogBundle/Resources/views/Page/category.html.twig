@@ -2,34 +2,38 @@
 
 {% block main %}
     <!-- Blog / Category -->
-    <div class="row">
-        <div class="col-lg-12">
-            <h1>{{ page.title }}</h1>
-            {{ convertText(page.attribute('description')|raw) }}
-        </div>
-    </div>
+    <article id="category-{{ page.id }}" class="category-{{ page.id }} category type-category">
+        <header class="entry-header">
+            <h1 class="entry-title">{{ page.title }}</h1>
+        </header>
+        {% if page.attribute('description') %}
+            <div class="entry-content">
+                {{ convertText(page.attribute('description')|raw) }}
+            </div>
+        {% endif %}
+    </article>
 
     {%for post in children %}
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="media">
-                    <div class="media-left">
-                        {% if post.attribute('thumbnail') %}
-                            <a class="href="{{ buildLink(post) }}"><img class="media-object" src="{{ asset('uploads/' ~ post.attribute('thumbnail')) }}"></a>
-                        {% endif %}
-                    </div>
-                    <div class="media-body">
-                        <h2 class="media-heading"><a href="{{ buildLink(post) }}">{{ post.title }}</a></h2>
-                        {% set content = post.attribute('description')|split('<p><!-- pagebreak --></p>') %}
-                        {{ convertText(content|first|raw) }}
-                        {% if content|length > 1 %}
-                            <p><a class="btn btn-primary" href="{{ buildLink(post) }}">Read More <i class="fa fa-angle-right"></i></a></p>
-                        {% endif %}
-                    </div>
+        <article id="post-{{ post.id }}" class="post-{{ post.id }} post type-post">
+            <header class="entry-header">
+                <h1 class="entry-title">
+                    <a href="{{ buildLink(post) }}" rel="bookmark">{{ post.title }}</a>
+                </h1>
+                <div class="comments-link">
+                    <a href="{{ buildLink(post) }}#respond"><span class="leave-reply">Leave a reply</span></a>
                 </div>
-                <hr>
+            </header>
+            <div class="entry-content">
+                {% set content = post.attribute('description')|split('<p><!-- pagebreak --></p>') %}
+                {{ convertText(content|first|raw) }}
+                {% if content|length > 1 %}
+                    <p> <a href="{{ buildLink(post) }}#more-{{ post.id }}" class="more-link">Continue reading <span class="meta-nav">→</span></a></p>
+                {% endif %}
             </div>
-        </div>
+            <footer class="entry-meta">
+                This entry was posted in <a href="{{ buildLink(page) }}" rel="category tag">test</a> on <a href="{{ buildLink(post) }}" title="TODO" rel="bookmark"><time class="entry-date" datetime="TODO">TODO</time></a>
+            </footer>
+        </article>
     {% endfor %}
 
     <!-- Blog / Category (end) -->

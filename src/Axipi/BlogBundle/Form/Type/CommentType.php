@@ -27,9 +27,6 @@ class CommentType extends AbstractType
                 'constraints' => [
                     new NotBlank(),
                 ],
-                'attr' => [
-                    'class' => 'form-control',
-                ],
             ]
         );
 
@@ -39,18 +36,12 @@ class CommentType extends AbstractType
                 'constraints' => [
                     new Email(),
                 ],
-                'attr' => [
-                    'class' => 'form-control',
-                ],
             ]
         );
 
         $builder->add('website', TextType::class,
             [
                 'required' => false,
-                'attr' => [
-                    'class' => 'form-control',
-                ],
             ]
         );
 
@@ -60,15 +51,18 @@ class CommentType extends AbstractType
                 'constraints' => [
                     new NotBlank(),
                 ],
-                'attr' => [
-                    'class' => 'form-control',
-                ],
             ]
         );
 
         $builder->add('recaptcha', RecaptchaType::class, []);
 
-        $builder->add('submit', SubmitType::class);
+        $builder->add('submit', SubmitType::class,
+            [
+                'attr' => [
+                    'class' => 'submit',
+                ],
+            ]
+        );
     }
 
     public function finishView(FormView $view, FormInterface $form, array $options)
