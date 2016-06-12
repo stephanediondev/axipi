@@ -68,5 +68,5 @@
     }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ page.attribute('api_key') }}&amp;callback=initMap"></script>
-    {{ page.script }}
+    {{ page.script|raw }}
 {% endblock %}
