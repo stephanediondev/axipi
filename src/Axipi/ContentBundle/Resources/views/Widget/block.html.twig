@@ -1,6 +1,8 @@
 <!-- Content / Block -->
 <div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('widget') }}">
-    <{{ widget.attribute('title_tag')|default('h3') }} class="widget-title">{{ widget.title }}</{{ widget.attribute('title_tag')|default('h3') }}>
+    {% if widget.attribute('display_title')|default(false) %}
+        <{{ widget.attribute('title_tag')|default('h3') }} class="widget-title">{{ widget.title }}</{{ widget.attribute('title_tag')|default('h3') }}>
+    {% endif %}
     {{ widget.attribute('description')|raw }}
 </div>
 <!-- Content / Block (end) -->

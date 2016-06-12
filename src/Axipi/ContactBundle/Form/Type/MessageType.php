@@ -26,9 +26,6 @@ class MessageType extends AbstractType
                 'constraints' => [
                     new NotBlank(),
                 ],
-                'attr' => [
-                    'class' => 'form-control',
-                ],
             ]
         );
 
@@ -38,9 +35,6 @@ class MessageType extends AbstractType
                 'constraints' => [
                     new NotBlank(),
                     new Email(),
-                ],
-                'attr' => [
-                    'class' => 'form-control',
                 ],
             ]
         );
@@ -52,7 +46,8 @@ class MessageType extends AbstractType
                     new NotBlank(),
                 ],
                 'attr' => [
-                    'class' => 'form-control',
+                    'cols' => 45,
+                    'rows' => 8,
                 ],
             ]
         );

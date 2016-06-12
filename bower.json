@@ -4,7 +4,6 @@
     "dependencies": {
         "jquery": "*",
         "jquery-ui": "*",
-        "bootstrap": "*",
         "material-design-lite": "*",
         "FortAwesome/Font-Awesome": "*",
         "blueimp-file-upload-node": "*",

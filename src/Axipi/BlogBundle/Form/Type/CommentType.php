@@ -51,6 +51,10 @@ class CommentType extends AbstractType
                 'constraints' => [
                     new NotBlank(),
                 ],
+                'attr' => [
+                    'cols' => 45,
+                    'rows' => 8,
+                ],
             ]
         );
 

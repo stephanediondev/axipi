@@ -1,11 +1,11 @@
 {% block form_row %}
 {% spaceless %}
     {% if not compound -%}
-        <div class="form-group">
+        <p>
             {{ form_label(form) }}
             {{ form_widget(form) }}
             {{ form_errors(form) }}
-        </div>
+        </p>
     {% else %}
         {{ form_widget(form) }}
     {% endif %}

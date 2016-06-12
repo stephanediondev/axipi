@@ -6,7 +6,6 @@
 
 {% block meta %}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 {% if page.descriptionSeo %}
     <meta name="description" content="{{ page.descriptionSeo }}">
 {% endif %}
@@ -18,20 +17,24 @@
 {% endblock %}
 
 {% block style %}
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&amp;subset=latin,latin-ext" media="all">
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/axipicore/css/base.css') }}">
 {% endblock %}
 
 {{ getWidgets('head') }}
 </head>
 
-<body id="page-{{ page.code }}">
+<body id="page-id-{{ page.id }}" class="page page-template-default custom-font-enabled">
     <div id="page" class="hfeed site">
 
     {% block header %}
         <header id="masthead" class="site-header" role="banner">
-            <button class="menu-toggle">TODO</button>
+            <hgroup>
+                {{ getWidgets('hgroup') }}
+            </hgroup>
             <nav id="site-navigation" class="main-navigation" role="navigation">
-                {{ getWidgets('header') }}
+                <button class="menu-toggle">TODO</button>
+                {{ getWidgets('nav') }}
             </nav>
         </header>
     {% endblock %}

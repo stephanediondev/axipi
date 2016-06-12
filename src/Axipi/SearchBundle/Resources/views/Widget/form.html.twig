@@ -1,5 +1,8 @@
 <!-- Content / Menu -->
 <div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('widget') }}">
+    {% if widget.attribute('display_title')|default(false) %}
+        <{{ widget.attribute('title_tag')|default('h3') }} class="widget-title">{{ widget.title }}</{{ widget.attribute('title_tag')|default('h3') }}>
+    {% endif %}
     <form role="search" method="get" class="{{ widget.attribute('form_class')|default('navbar-form navbar-right') }}" action="{{ buildLink(widget.parent) }}">
         <div>
             <label class="screen-reader-text" for="s">{{ widget.attribute('placeholder')|default('widget.placeholder'|trans({}, 'axipi_search')) }}</label>

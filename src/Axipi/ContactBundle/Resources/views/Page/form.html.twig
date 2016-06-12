@@ -2,45 +2,28 @@
 
 {% block main %}
     <!-- Blog / Post -->
-    <div class="row">
-        <div class="col-lg-12">
-            <h1>{{ page.title }}</h1>
-        </div>
-    </div>
+    <article id="post-{{ page.id }}" class="post-{{ page.id }} page type-page">
+        <header class="entry-header">
+            <h1 class="entry-title">{{ page.title }}</h1>
+        </header>
 
-    <div class="row">
-        <div class="col-lg-4">
+        <div class="entry-content">
             {{ convertText(page.attribute('description')|raw) }}
         </div>
-        <div class="col-lg-8">
-            <div class="well" id="comments">
-                <h4>Leave a Message:</h4>
-                {{ form_start(form) }}
-                {{ form_errors(form) }}
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            {{ form_row(form.author) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_row(form.email) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_row(form.recaptcha) }}
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            {{ form_row(form.message) }}
-                        </div>
-                        {{ form_row(form.submit) }}
-                    </div>
-                </div>
-                {{ form_end(form) }}
-            </div>
+    </article>
+
+    <div id="comments" class="comments-area">
+        <div id="respond" class="comment-respond">
+            <h3 id="reply-title" class="comment-reply-title">Leave a Message</h3>
+            {{ form_start(form) }}
+                {{ form_row(form.message) }}
+                {{ form_row(form.author) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.recaptcha) }}
+                {{ form_row(form.submit) }}
+            {{ form_end(form) }}
         </div>
     </div>
-
     <!-- Blog / Post (end) -->
 {% endblock %}
 
