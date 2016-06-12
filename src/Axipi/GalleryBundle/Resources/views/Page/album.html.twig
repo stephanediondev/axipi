@@ -12,7 +12,7 @@
 
             <p>
             {% for media in medias %}
-                <a class="thumbnail" href="{{ buildLink(media) }}"><img src="{{ asset('uploads/' ~ media.attribute('image')) }}" class="img-responsive"></a>
+                <a href="{{ buildLink(media) }}"><img src="{{ asset('uploads/' ~ media.attribute('image')) }}"></a>
             {% endfor %}
             </p>
         </div>
