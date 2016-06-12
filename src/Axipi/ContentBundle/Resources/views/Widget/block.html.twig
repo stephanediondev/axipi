@@ -3,6 +3,6 @@
     {% if widget.attribute('display_title')|default(false) %}
         <{{ widget.attribute('title_tag')|default('h3') }} class="widget-title">{{ widget.title }}</{{ widget.attribute('title_tag')|default('h3') }}>
     {% endif %}
-    {{ widget.attribute('description')|raw }}
+    {{ convertText(widget.attribute('description')|raw) }}
 </div>
 <!-- Content / Block (end) -->
