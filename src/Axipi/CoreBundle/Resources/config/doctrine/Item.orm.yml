@@ -169,7 +169,7 @@ Axipi\CoreBundle\Entity\Item:
             inversedBy: null
             joinColumns:
                 language_id:
-                    nullable: false
+                    nullable: true
                     referencedColumnName: id
                     onDelete: "cascade"
             orphanRemoval: false
@@ -181,6 +181,7 @@ Axipi\CoreBundle\Entity\Item:
             inversedBy: "children"
             joinColumns:
                 parent:
+                    nullable: true
                     referencedColumnName: id
                     onDelete: "cascade"
             orphanRemoval: false
@@ -192,6 +193,7 @@ Axipi\CoreBundle\Entity\Item:
             inversedBy: widgets
             joinColumns:
                 zone_id:
+                    nullable: true
                     referencedColumnName: id
                     onDelete: "set null"
             orphanRemoval: false

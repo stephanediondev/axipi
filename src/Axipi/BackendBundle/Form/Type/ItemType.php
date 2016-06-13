@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Axipi\CoreBundle\Entity\Item;
 use Axipi\CoreBundle\Entity\Zone;
+use Axipi\CoreBundle\Entity\Language;
 use Axipi\BackendBundle\Form\Type\AttributesType;
 
 class ItemType extends AbstractType
@@ -111,6 +112,17 @@ class ItemType extends AbstractType
         }
 
         if($options['item']->getComponent()->getCategory() == 'widget') {
+            $builder->add('language', EntityType::class,
+                [
+                    'required' => false,
+                    'placeholder' => 'any_language',
+                    'class' => Language::class,
+                    'choices' => $options['languages'],
+                    'choice_label' => function ($language) {
+                        return $language->getTitle();
+                    }
+                ]
+            );
             $builder->add('zone', EntityType::class,
                 [
                     'required' => false,
@@ -163,6 +175,7 @@ class ItemType extends AbstractType
             'item' => null,
             'items' => [],
             'zones' => [],
+            'languages' => [],
         ));
     }
 }

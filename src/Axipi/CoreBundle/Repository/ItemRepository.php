@@ -110,6 +110,11 @@ class ItemRepository extends EntityRepository
             $query->setParameter(':language', $parameters['language_code']);
         }
 
+        if(isset($parameters['language_code_or_language_null']) == 1) {
+            $query->andWhere('(lng.code = :language OR pge.language IS NULL)');
+            $query->setParameter(':language', $parameters['language_code_or_language_null']);
+        }
+
         if(isset($parameters['zone_code']) == 1) {
             $query->andWhere('zon.code = :zone');
             $query->setParameter(':zone', $parameters['zone_code']);

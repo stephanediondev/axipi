@@ -21,7 +21,7 @@
         {% endblock %}
         {% block card__supporting %}
             <div class="mdl-cell mdl-cell--4-col">
-                {{ macro.read_field('item.language'|trans({}, 'axipi_backend'), language.title) }}
+                {{ form_row(form.language) }}
                 {{ macro.read_field('item.component'|trans({}, 'axipi_backend'), component.title) }}
                 {{ form_row(form.template) }}
                 {{ form_row(form.parent) }}

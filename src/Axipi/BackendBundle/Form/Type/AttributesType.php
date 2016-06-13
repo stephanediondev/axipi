@@ -16,6 +16,9 @@ class AttributesType extends AbstractType
 
         if(is_array($attributes)) {
             foreach($attributes as $key => $attribute) {
+                if($options['object']->getId() && $attribute['type'] == 'Symfony\Component\Form\Extension\Core\Type\FileType') {
+                    $attribute['options']['required'] = false;
+                }
                 $attribute['options']['mapped'] = true;
                 $attribute['options']['data_class'] = null;
                 $attribute['options']['data'] = $options['object']->getAttribute($key);

@@ -121,6 +121,7 @@ class WidgetController extends AbstractController
             'item' => $widget,
             'zones' => $this->zoneManager->getList(),
             'items' => $this->itemManager->getList(['component_parent' => $widget]),
+            'languages' => $this->languageManager->getList(),
         ]);
         $form->handleRequest($request);
 
@@ -151,6 +152,7 @@ class WidgetController extends AbstractController
             'item' => $parameters->get('widget'),
             'zones' => $this->zoneManager->getList(),
             'items' => $this->itemManager->getList(['component_parent' => $parameters->get('widget')]),
+            'languages' => $this->languageManager->getList(),
         ]);
         $form->handleRequest($request);
 

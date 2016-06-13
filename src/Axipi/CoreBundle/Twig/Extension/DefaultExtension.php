@@ -50,7 +50,7 @@ class DefaultExtension extends \Twig_Extension
         $request = $this->container->get('request_stack')->getMasterRequest();
         $page = $this->container->get('axipi_core_manager_default')->getPage();
 
-        $widgets = $this->em->getRepository('AxipiCoreBundle:Item')->getList(['category' => 'widget', 'active' => true, 'zone_code' => $code, 'language_code' => $page->getLanguage()->getCode()]);
+        $widgets = $this->em->getRepository('AxipiCoreBundle:Item')->getList(['category' => 'widget', 'active' => true, 'zone_code' => $code, 'language_code_or_language_null' => $page->getLanguage()->getCode()]);
 
         foreach($widgets as $widget) {
             if($this->container->has($widget->getComponent()->getService())) {

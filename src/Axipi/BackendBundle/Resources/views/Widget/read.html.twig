@@ -21,7 +21,11 @@
         {% endblock %}
         {% block card__supporting %}
             <div class="mdl-cell mdl-cell--4-col">
-                {{ macro.read_field('item.language'|trans({}, 'axipi_backend'), widget.language.title) }}
+                {% if widget.language %}
+                    {{ macro.read_field('item.language'|trans({}, 'axipi_backend'), widget.language.title) }}
+                {% else %}
+                    {{ macro.read_field('item.language'|trans({}, 'axipi_backend'), 'any_language'|trans({}, 'axipi_backend')) }}
+                {% endif %}
                 {{ macro.read_field('item.component'|trans({}, 'axipi_backend'), widget.component.title) }}
                 {{ macro.read_field('item.template'|trans({}, 'axipi_backend'), widget.template) }}
                 {% if widget.parent %}{{ macro.read_field('item.parent'|trans({}, 'axipi_backend'), widget.parent.title) }}{% endif %}
