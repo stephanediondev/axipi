@@ -37,7 +37,6 @@ a:link, a:visited {
 .mdl-card {
     min-height: auto;
     overflow: visible;
-    z-index: 3;
 }
 .mdl-card__title {
     padding: 8px;
@@ -68,7 +67,6 @@ a:link, a:visited {
     min-height: 10px;
     overflow: visible;
     padding: 0px 8px;
-    z-index: 2;
 }
 .mdl-card__supporting-text.mdl-grid .mdl-cell--2-col {
     padding: 0px;
@@ -138,7 +136,8 @@ em.default {
 
 .dragitem {
     border: 1px solid #FF0000;
-    z-index: 1;
+    text-align: center;
+    z-index: 10;
 }
 .ui-state-default {
     border: 1px solid #0000FF;
