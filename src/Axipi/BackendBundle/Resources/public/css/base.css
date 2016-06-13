@@ -36,6 +36,8 @@ a:link, a:visited {
 }
 .mdl-card {
     min-height: auto;
+    overflow: visible;
+    z-index: 3;
 }
 .mdl-card__title {
     padding: 8px;
@@ -63,7 +65,10 @@ a:link, a:visited {
     margin-right: 5px;
 }
 .mdl-card__supporting-text {
+    min-height: 10px;
+    overflow: visible;
     padding: 0px 8px;
+    z-index: 2;
 }
 .mdl-card__supporting-text.mdl-grid .mdl-cell--2-col {
     padding: 0px;
@@ -129,4 +134,15 @@ textarea.wysiwyg {
 }
 em.default {
     display: block;
+}
+
+.dragitem {
+    border: 1px solid #FF0000;
+    z-index: 1;
+}
+.ui-state-default {
+    border: 1px solid #0000FF;
+}
+.ui-state-hover {
+    border: 1px solid #00FF00;
 }
