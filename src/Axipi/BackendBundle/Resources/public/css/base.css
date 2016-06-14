@@ -80,7 +80,7 @@ a:link, a:visited {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.mdl-card__supporting-text.mdl-grid .mdl-cell--2-col a:hover {
+.mdl-card__supporting-text.mdl-grid .mdl-cell--2-col a:hover, .mdl-card__supporting-text.mdl-grid .ui-sortable-helper a {
     background-color: #e0e0e0;
 }
 

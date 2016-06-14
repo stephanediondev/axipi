@@ -71,11 +71,13 @@
 
     <script type="text/javascript">
     $('.mdl-card__supporting-text').sortable({
+        forcePlaceholderSize: true,
+        cursor: "move",
         helper: "clone",
         appendTo: "#target-drag",
         zIndex: 9999,
         connectWith: ".mdl-card__supporting-text",
-        placeholder: "mdl-cell mdl-cell--2-col ui-state-highlight",
+        //placeholder: "mdl-cell mdl-cell--2-col ui-state-highlight",
         tolerance: "pointer",
         items: "div:not(.placeholder)",
         stop: function(event, ui) {
