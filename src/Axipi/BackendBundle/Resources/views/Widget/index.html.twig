@@ -64,30 +64,35 @@
 
 {% block script %}
     {{ parent() }}
-    <script type="text/javascript" src="{{ asset('vendor/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/jquery-ui/ui/minified/core.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/jquery-ui/ui/minified/mouse.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/jquery-ui/ui/minified/sortable.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/jquery-ui/ui/minified/droppable.min.js') }}"></script>
 
     <script type="text/javascript">
-    $('.dragitem').draggable({
-        //connectToSortable: ".dragitem",
+    $('.mdl-card__supporting-text').sortable({
+        helper: "clone",
         appendTo: "#target-drag",
-        revert: "invalid",
-        helper: "clone"
+        zIndex: 9999,
+        connectWith: ".mdl-card__supporting-text",
+        placeholder: "mdl-cell mdl-cell--2-col ui-state-highlight",
+        tolerance: "pointer",
+        items: "div:not(.placeholder)",
+        stop: function(event, ui) {
+            console.log(event);
+        }
     });
-    $('.mdl-card__supporting-text' ).droppable({
+
+    $('.mdl-card__supporting-text').droppable({
         activeClass: "ui-state-default",
         hoverClass: "ui-state-hover",
-        accept: ":not(.ui-sortable-helper)",
+        accept: "div",
         drop: function( event, ui ) {
             $(this).append( ui.draggable );
         }
-    }).sortable({
-        revert: true,
-        items: ".dragitem",
-        sort: function() {
-          // gets added unintentionally by droppable interacting with sortable
-          // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
-          $( this ).removeClass( "ui-state-default" );
-        }
+    });
+    $('.mdl-card__supporting-text').each(function(index) {
+
     });
     </script>
 {% endblock %}

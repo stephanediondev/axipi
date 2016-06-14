@@ -1,21 +1,29 @@
 {% extends 'AxipiBackendBundle::base.html.twig' %}
 
-{% block title %}{{ file.code }} - {{ 'files'|trans({}, 'axipi_backend') }}{% endblock %}
+{% block title %}{{ file.name }} - {{ 'files'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
     {% embed 'AxipiBackendBundle::card.html.twig' with {form: form} %}
         {% block card__actions %}
-            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_files', {action: 'update', 'id': file.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_files', {action: 'update', 'slug': file.slug}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
         {% endblock %}
         {% block card__title %}
-            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_files', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.file'|trans({}, 'axipi_backend') }}"></i>{{ 'files'|trans({}, 'axipi_backend') }}</a></span>
-            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_files', {action: 'read', 'id': file.id}) }}"><i class="fa fa-{{ 'icons.file'|trans({}, 'axipi_backend') }}"></i>{{ file.code }}</a></span>
-            <span>{{ 'actions.delete'|trans({}, 'axipi_backend') }}</span>
+            {% for tree in tree %}
+                {% if tree.slug != file.slug %}
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_files', {action: 'index', 'slug': tree.slug}) }}"><i class="fa fa-folder"></i>{{ tree.name }}</a></span>
+                {% endif %}
+            {% endfor %}
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_files', {action: 'read', 'slug': file.slug}) }}"><i class="fa fa-{{ file.icon }}"></i>{{ file.name }}</a></span>
         {% endblock %}
         {% block card__supporting %}
             <div class="mdl-cell mdl-cell--4-col">
                 {{ form_row(form.confirm) }}
                 {{ form_row(form.submit) }}
+            </div>
+            <div class="mdl-cell mdl-cell--4-col">
+                {% if 'image/' in file.mime %}
+                    <img src="{{ asset('files/' ~ file.slug) }}" class="img-responsive">
+                {% endif %}
             </div>
         {% endblock %}
     {% endembed %}

@@ -3,6 +3,7 @@ namespace Axipi\BackendBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Controller\AbstractController;
@@ -10,7 +11,7 @@ use Axipi\CoreBundle\Controller\AbstractController;
 use Axipi\CoreBundle\Manager\FileManager;
 use Axipi\BackendBundle\Form\Type\DeleteType;
 use Axipi\BackendBundle\Form\Type\FileType;
-use Axipi\CoreBundle\Entity\File;
+use Axipi\CoreBundle\Model\FileModel;
 
 class FileController extends AbstractController
 {
@@ -68,6 +69,8 @@ class FileController extends AbstractController
                 return $this->updateAction($request, $parameters, $slug);
             case 'delete':
                 return $this->deleteAction($request, $parameters, $slug);
+            case 'upload':
+                return $this->uploadAction($request, $parameters, $slug);
         }
 
         $this->addFlash('danger', 'not found');
@@ -83,8 +86,7 @@ class FileController extends AbstractController
 
     public function createAction(Request $request, ParameterBag $parameters, $slug)
     {
-        $file = new File();
-        $file->setIsActive(true);
+        $file = new FileModel();
 
         $form = $this->createForm(FileType::class, $file, []);
         $form->handleRequest($request);
@@ -132,7 +134,7 @@ class FileController extends AbstractController
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->fileManager->remove($parameters->get('file'));
+                $this->fileManager->remove($slug);
                 $this->addFlash('success', 'deleted');
                 return $this->redirectToRoute('axipi_backend_files', []);
             }
@@ -141,5 +143,27 @@ class FileController extends AbstractController
         $parameters->set('form', $form->createView());
 
         return $this->render('AxipiBackendBundle:File:delete.html.twig', $parameters->all());
+    }
+
+    public function uploadAction(Request $request, $parameters, $slug)
+    {
+        $data = [];
+
+        foreach($request->files->get('files', []) as $key => $uploadedFile) {
+            $file = new FileModel();
+            $file->setFile($uploadedFile);
+            $file->setDir($slug);
+
+            $filename = $this->fileManager->persist($file);
+
+            $data[] = [
+                'id' => $filename,
+                'title' => $filename,
+                'icon' => 'file-o',
+                'href' => $this->generateUrl('axipi_backend_files', ['action' => 'read', 'slug' => $slug.'/'.$filename]),
+            ];
+        }
+
+        return new JsonResponse($data);
     }
 }

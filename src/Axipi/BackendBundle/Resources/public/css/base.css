@@ -137,7 +137,6 @@ em.default {
 .dragitem {
     border: 1px solid #FF0000;
     text-align: center;
-    z-index: 10;
 }
 .ui-state-default {
     border: 1px solid #0000FF;

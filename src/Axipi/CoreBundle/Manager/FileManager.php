@@ -1,6 +1,8 @@
 <?php
 namespace Axipi\CoreBundle\Manager;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 //use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesser;
@@ -130,18 +132,77 @@ class FileManager extends AbstractManager
 
     public function persist($data)
     {
-        if($data->getDateCreated() == null) {
-            $data->setDateCreated(new \Datetime());
-        }
-        $data->setDateModified(new \Datetime());
+        if(is_object($data->getFile()) && $data->getFile() instanceof UploadedFile) {
+            if($data->getFile()->isValid()) {
+                if(strstr($data->getFile()->getClientOriginalName(), '.php')) {
+                    continue;
+                }
+                $dir = $data->getDir();
+                $filename = $this->cleanString($data->getFile()->getClientOriginalName());
+                $data->getFile()->move('files/'.$dir, $filename);
 
-        $this->em->persist($data);
-        $this->em->flush();
+                return $filename;
+            }
+        }
     }
 
-    public function remove($data)
+    public function remove($slug)
     {
-        $this->em->remove($data);
-        $this->em->flush();
+        @unlink('files/'.$slug);
+    }
+
+    function cleanString($str) {
+        $allowed = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.';
+
+        $from = explode(',', 'À,Á,Â,Ã,Ä,Å,à,á,â,ã,ä,å,Ò,Ó,Ô,Õ,Ö,Ø,ò,ó,ô,õ,ö,ø,È,É,Ê,Ë,è,é,ê,ë,Ç,ç,Ì,Í,Î,Ï,ì,í,î,ï,Ù,Ú,Û,Ü,ù,ú,û,ü,ÿ,Ñ,ñ');
+        $to = explode(',', 'A,A,A,A,A,A,a,a,a,a,a,a,O,O,O,O,O,O,o,o,o,o,o,o,E,E,E,E,e,e,e,e,C,c,I,I,I,I,i,i,i,i,U,U,U,U,u,u,u,u,y,N,n');
+        $str = str_replace($from, $to, $str);
+
+        $str = strtolower($str);
+
+        $str = str_replace('&#039;', '-', $str);
+        $str = str_replace('&quot;', '', $str);
+        $str = str_replace('&amp;', '-', $str);
+        $str = str_replace('&lt;', '', $str);
+        $str = str_replace('&gt;', '', $str);
+        $str = str_replace('\'', '-', $str);
+        $str = str_replace('@', '-', $str);
+        $str = str_replace('(', '-', $str);
+        $str = str_replace(')', '-', $str);
+        $str = str_replace('#', '-', $str);
+        $str = str_replace('&', '-', $str);
+        $str = str_replace(' ', '-', $str);
+        $str = str_replace('_', '-', $str);
+        $str = str_replace('\\', '', $str);
+        $str = str_replace('/', '', $str);
+        $str = str_replace('"', '', $str);
+        $str = str_replace('?', '-', $str);
+        $str = str_replace(':', '-', $str);
+        $str = str_replace('*', '-', $str);
+        $str = str_replace('|', '-', $str);
+        $str = str_replace('<', '-', $str);
+        $str = str_replace('>', '-', $str);
+        $str = str_replace('°', '-', $str);
+        $str = str_replace(',', '-', $str);
+
+        $strlen = strlen($allowed);
+        for($i=0;$i<$strlen;$i++) {
+            $accepted[] = substr($allowed, $i, 1);
+        }
+        $newstr = '';
+        $strlen = strlen($str);
+        for($i=0;$i<$strlen;$i++) {
+            $asc = substr($str, $i, 1);
+            if(in_array($asc, $accepted)) {
+                $newstr .= $asc;
+            }
+        }
+        while(strstr($newstr, '--')) {
+            $newstr = str_replace('--', '-', $newstr);
+        }
+        if(substr($newstr, -1) == '-') {
+            $newstr = substr($newstr, 0, -1);
+        }
+        return $newstr;
     }
 }
