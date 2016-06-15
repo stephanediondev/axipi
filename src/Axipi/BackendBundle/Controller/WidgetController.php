@@ -140,7 +140,7 @@ class WidgetController extends AbstractController
 
     public function readAction(Request $request, ParameterBag $parameters, $id)
     {
-        $parameters->set('objects', $this->relationManager->getList(['widget' => $id]));
+        $parameters->set('relations', $this->relationManager->getList(['widget' => $id, 'parent_null' => true]));
         $parameters->set('components', $this->componentManager->getList(['category' => 'widget', 'active' => true]));
 
         return $this->render('AxipiBackendBundle:Widget:read.html.twig', $parameters->all());

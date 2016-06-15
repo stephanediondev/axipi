@@ -56,20 +56,20 @@ class RelationController extends AbstractController
 
         switch ($action) {
             case 'create':
-                return $this->createAction($request, $parameters, $id);
+                return $this->createAction($request, $parameters, $id, $language);
             case 'read':
                 return $this->readAction($request, $parameters, $id);
             case 'update':
-                return $this->updateAction($request, $parameters, $id);
+                return $this->updateAction($request, $parameters, $id, $language);
             case 'delete':
-                return $this->deleteAction($request, $parameters, $id);
+                return $this->deleteAction($request, $parameters, $id, $language);
         }
 
         $this->addFlash('danger', 'not found');
         return $this->redirectToRoute('axipi_backend_widgets', []);
     }
 
-    public function createAction(Request $request, ParameterBag $parameters, $id)
+    public function createAction(Request $request, ParameterBag $parameters, $id, $language)
     {
         $relation = new Relation();
         $relation->setWidget($parameters->get('widget'));
@@ -77,6 +77,7 @@ class RelationController extends AbstractController
 
         $form = $this->createForm(RelationType::class, $relation, [
             'relation' => $relation,
+            'relations' => $this->relationManager->getList(['widget' => $parameters->get('widget')->getId()]),
             'items' => $this->itemManager->getList(),
         ]);
         $form->handleRequest($request);
@@ -85,7 +86,7 @@ class RelationController extends AbstractController
             if($form->isValid()) {
                 $this->relationManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_relations', ['action' => 'read', 'id' => $relation->getId()]);
+                return $this->redirectToRoute('axipi_backend_relations', ['language' => $language, 'action' => 'read', 'id' => $relation->getId()]);
             }
         }
 
@@ -96,13 +97,16 @@ class RelationController extends AbstractController
 
     public function readAction(Request $request, ParameterBag $parameters, $id)
     {
+        $parameters->set('relations', $this->relationManager->getList(['widget' => $parameters->get('relation')->getWidget()->getId(), 'parent' => $parameters->get('relation')->getId()]));
+
         return $this->render('AxipiBackendBundle:Relation:read.html.twig', $parameters->all());
     }
 
-    public function updateAction(Request $request, ParameterBag $parameters, $id)
+    public function updateAction(Request $request, ParameterBag $parameters, $id, $language)
     {
         $form = $this->createForm(RelationType::class, $parameters->get('relation'), [
             'relation' => $parameters->get('relation'),
+            'relations' => $this->relationManager->getList(['widget' => $parameters->get('relation')->getWidget()->getId()]),
             'items' => $this->itemManager->getList(),
         ]);
         $form->handleRequest($request);
@@ -111,7 +115,7 @@ class RelationController extends AbstractController
             if($form->isValid()) {
                 $this->relationManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_relations', ['action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_relations', ['language' => $language, 'action' => 'read', 'id' => $id]);
             }
         }
 
@@ -120,7 +124,7 @@ class RelationController extends AbstractController
         return $this->render('AxipiBackendBundle:Relation:update.html.twig', $parameters->all());
     }
 
-    public function deleteAction(Request $request, ParameterBag $parameters, $id)
+    public function deleteAction(Request $request, ParameterBag $parameters, $id, $language)
     {
         $form = $this->createForm(DeleteType::class, null, []);
         $form->handleRequest($request);
@@ -129,7 +133,7 @@ class RelationController extends AbstractController
             if($form->isValid()) {
                 $this->relationManager->remove($parameters->get('relation'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_widgets', ['action' => 'read', 'id' => $parameters->get('relation')->getWidget()->getId()]);
+                return $this->redirectToRoute('axipi_backend_widgets', ['language' => $language, 'action' => 'read', 'id' => $parameters->get('relation')->getWidget()->getId()]);
             }
         }
 

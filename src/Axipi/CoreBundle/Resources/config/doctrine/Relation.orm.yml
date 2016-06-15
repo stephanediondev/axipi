@@ -51,6 +51,17 @@ Axipi\CoreBundle\Entity\Relation:
             nullable: true
             column: date_modified
     manyToOne:
+        parent:
+            targetEntity: Relation
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: "children"
+            joinColumns:
+                parent:
+                    referencedColumnName: id
+                    onDelete: "set null"
+            orphanRemoval: false
         page:
             targetEntity: Item
             cascade: {  }
@@ -75,4 +86,8 @@ Axipi\CoreBundle\Entity\Relation:
                     referencedColumnName: id
                     onDelete: "cascade"
             orphanRemoval: false
+    oneToMany:
+        children:
+            targetEntity: Relation
+            mappedBy: parent
     lifecycleCallbacks: {  }

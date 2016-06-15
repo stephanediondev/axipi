@@ -10,8 +10,9 @@ class ComponentRepository extends EntityRepository
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
-        $query->addSelect('cmp');
+        $query->addSelect('cmp', 'cmp_parent');
         $query->from('AxipiCoreBundle:Component', 'cmp');
+        $query->leftJoin('cmp.parent', 'cmp_parent');
 
         if(isset($parameters['id']) == 1) {
             $query->andWhere('cmp.id = :id');
@@ -40,8 +41,9 @@ class ComponentRepository extends EntityRepository
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
-        $query->addSelect('cmp');
+        $query->addSelect('cmp', 'cmp_parent');
         $query->from('AxipiCoreBundle:Component', 'cmp');
+        $query->leftJoin('cmp.parent', 'cmp_parent');
 
         if(isset($parameters['category']) == 1) {
             $query->andWhere('cmp.category = :category');

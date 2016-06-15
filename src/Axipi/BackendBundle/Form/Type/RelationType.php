@@ -19,6 +19,18 @@ class RelationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->add('parent', EntityType::class,
+            [
+                'required' => false,
+                'placeholder' => '-',
+                'class' => Relation::class,
+                'choices' => $options['relations'],
+                'choice_label' => function ($relation) {
+                    return $relation->getPage()->getTitle();
+                }
+            ]
+        );
+
         $builder->add('page', EntityType::class,
             [
                 'required' => true,
@@ -68,6 +80,7 @@ class RelationType extends AbstractType
             'translation_domain' => 'axipi_backend',
             'data_class' => Relation::class,
             'relation' => null,
+            'relations' => [],
             'items' => [],
         ));
     }

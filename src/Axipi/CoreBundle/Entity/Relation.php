@@ -7,6 +7,8 @@ namespace Axipi\CoreBundle\Entity;
  */
 class Relation
 {
+    private $parent;
+
     /**
      * @var integer
      */
@@ -47,6 +49,8 @@ class Relation
      */
     private $widget;
 
+    private $children;
+
     /**
      * Get id
      *
@@ -55,6 +59,30 @@ class Relation
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param integer $parent
+     *
+     * @return Relation
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return integer
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 
     /**
@@ -224,5 +252,9 @@ class Relation
     {
         return $this->widget;
     }
-}
 
+    public function getChildren()
+    {
+        return $this->children;
+    }
+}

@@ -10,7 +10,7 @@ class MenuWidget extends AbstractWidget
 {
     public function getWidget($parameters)
     {
-        $parameters->set('relations', $this->get('axipi_core_manager_relation')->getList(['widget' => $parameters->get('widget'), 'active' => true]));
+        $parameters->set('relations', $this->get('axipi_core_manager_relation')->getList(['widget' => $parameters->get('widget'), 'active' => true, 'parent_null' => true]));
 
         if($parameters->get('widget')->getTemplate()) {
             $template = $parameters->get('widget')->getTemplate();

@@ -10,6 +10,7 @@
         {% endblock %}
         {% block card__supporting %}
             <div class="mdl-cell mdl-cell--4-col">
+                {{ form_row(form.parent) }}
                 {{ form_row(form.page) }}
                 {{ form_row(form.title) }}
                 {{ form_row(form.ordering) }}

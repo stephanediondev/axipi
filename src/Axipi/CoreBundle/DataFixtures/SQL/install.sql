@@ -251,28 +251,32 @@ CREATE TABLE IF NOT EXISTS `relation` (
   `is_active` tinyint(1) NOT NULL DEFAULT '0',
   `date_created` datetime NOT NULL,
   `date_modified` datetime DEFAULT NULL,
+  `parent` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `widget_id_page_id` (`widget_id`,`page_id`),
   KEY `widget_id` (`widget_id`),
-  KEY `page_id` (`page_id`)
+  KEY `page_id` (`page_id`),
+  KEY `IDX_628947493D8E604F` (`parent`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `relation`
 --
 
-INSERT INTO `relation` (`id`, `widget_id`, `page_id`, `title`, `ordering`, `is_active`, `date_created`, `date_modified`) VALUES
-(3, 38, 3, NULL, 0, 1, '2016-05-21 19:42:11', '2016-06-01 18:03:35'),
-(4, 38, 9, NULL, -10, 1, '2016-05-21 19:42:17', '2016-05-21 19:56:25'),
-(5, 3, 5, NULL, 0, 1, '2016-05-21 19:57:12', '2016-05-21 19:57:12'),
-(7, 38, 17, NULL, 0, 1, '2016-05-25 20:20:13', '2016-06-12 09:03:32'),
-(8, 38, 5, NULL, 0, 1, '2016-06-01 18:06:12', '2016-06-01 18:06:12'),
-(9, 117, 116, NULL, -10, 1, '2016-06-03 19:11:07', '2016-06-03 19:11:41'),
-(10, 117, 19, NULL, 0, 1, '2016-06-03 19:11:22', '2016-06-03 19:11:22'),
-(12, 38, 123, NULL, 0, 1, '2016-06-05 09:08:16', '2016-06-05 09:08:16'),
-(15, 162, 161, NULL, 0, 1, '2016-06-12 09:07:06', '2016-06-12 09:07:06'),
-(16, 162, 163, NULL, 0, 1, '2016-06-12 09:11:09', '2016-06-12 09:11:09'),
-(17, 38, 10, NULL, 0, 1, '2016-06-12 09:12:35', '2016-06-12 09:12:35');
+INSERT INTO `relation` (`id`, `widget_id`, `page_id`, `title`, `ordering`, `is_active`, `date_created`, `date_modified`, `parent`) VALUES
+(3, 38, 3, NULL, 0, 1, '2016-05-21 19:42:11', '2016-06-01 18:03:35', NULL),
+(4, 38, 9, NULL, -10, 1, '2016-05-21 19:42:17', '2016-05-21 19:56:25', NULL),
+(5, 3, 5, NULL, 0, 1, '2016-05-21 19:57:12', '2016-05-21 19:57:12', NULL),
+(7, 38, 17, NULL, 0, 1, '2016-05-25 20:20:13', '2016-06-12 09:03:32', NULL),
+(8, 38, 5, NULL, 0, 1, '2016-06-01 18:06:12', '2016-06-01 18:06:12', NULL),
+(9, 117, 116, NULL, -10, 1, '2016-06-03 19:11:07', '2016-06-03 19:11:41', NULL),
+(10, 117, 19, NULL, 0, 1, '2016-06-03 19:11:22', '2016-06-03 19:11:22', NULL),
+(12, 38, 123, NULL, 0, 1, '2016-06-05 09:08:16', '2016-06-05 09:08:16', NULL),
+(15, 162, 161, NULL, 0, 1, '2016-06-12 09:07:06', '2016-06-12 09:07:06', NULL),
+(16, 162, 163, NULL, 0, 1, '2016-06-12 09:11:09', '2016-06-12 09:11:09', NULL),
+(17, 38, 10, NULL, 0, 1, '2016-06-12 09:12:35', '2016-06-12 09:12:35', NULL),
+(18, 38, 6, NULL, 0, 1, '2016-06-15 19:15:38', '2016-06-15 19:31:59', 8),
+(19, 38, 7, NULL, 0, 1, '2016-06-15 19:32:38', '2016-06-15 19:33:43', 18);
 
 -- --------------------------------------------------------
 
@@ -363,6 +367,7 @@ ALTER TABLE `item`
 -- Constraints for table `relation`
 --
 ALTER TABLE `relation`
+  ADD CONSTRAINT `FK_628947493D8E604F` FOREIGN KEY (`parent`) REFERENCES `relation` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `FK_62894749FBE885E2` FOREIGN KEY (`widget_id`) REFERENCES `item` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_8CFDBD9FC4663E4` FOREIGN KEY (`page_id`) REFERENCES `item` (`id`) ON DELETE CASCADE;
 

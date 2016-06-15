@@ -109,6 +109,7 @@ item:
     children: "Children"
 relation:
     id: "ID"
+    parent: "Parent"
     widget: "Widget"
     page: "Page"
     title: "Title"
