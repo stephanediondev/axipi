@@ -68,7 +68,7 @@ a:link, a:visited {
     padding: 0px 8px;
 }
 .mdl-card__supporting-text.dropzone {
-    min-height: 115px;
+    min-height: 105px;
 }
 .mdl-card__supporting-text.mdl-grid .mdl-cell--2-col {
     padding: 0px;

@@ -13,7 +13,7 @@
         {% block card__supporting %}
             {% for object in objects %}
                 <div class="mdl-cell mdl-cell--2-col">
-                    <a href="{{ path('axipi_backend_languages', {action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ 'icons.language'|trans({}, 'axipi_backend') }}"></i><br>{{ object.title }}</a>
+                    <a href="{{ path('axipi_backend_languages', {action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ 'icons.language'|trans({}, 'axipi_backend') }}"></i><br>{{ object.title }}</a>
                 </div>
             {% endfor %}
         {% endblock %}

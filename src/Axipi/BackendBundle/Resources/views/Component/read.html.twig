@@ -50,7 +50,7 @@
             {% block card__supporting %}
                 {% for object in component.children %}
                     <div class="mdl-cell mdl-cell--2-col">
-                        <a href="{{ path('axipi_backend_components', {action: 'read', id: object.id}) }}"><i class="fa fa-4x fa-{{ object.icon }}"></i><br>{{ object.title }}</a>
+                        <a href="{{ path('axipi_backend_components', {action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.icon }}"></i><br>{{ object.title }}</a>
                     </div>
                 {% endfor %}
             {% endblock %}

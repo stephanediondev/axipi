@@ -174,7 +174,7 @@ $(document).ready(function() {
             done: function(e, data) {
                 for(var i in data.result) {
                     content = '<div class="mdl-cell mdl-cell--2-col">';
-                    content += '<a href="' + data.result[i]['href'] + '"><i class="fa fa-4x fa-' + data.result[i]['icon'] + '"></i><br>' + data.result[i]['title'] + '</a>';
+                    content += '<a href="' + data.result[i]['href'] + '"><i class="fa fa-3x fa-' + data.result[i]['icon'] + '"></i><br>' + data.result[i]['title'] + '</a>';
                     content += '</div>';
                     $('#ajax-upload-result').find('.mdl-grid').append(content);
                 }
