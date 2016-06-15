@@ -23,6 +23,12 @@ class ZoneType extends AbstractType
             ]
         );
 
+        $builder->add('ordering', TextType::class,
+            [
+                'required' => true,
+            ]
+        );
+
         $builder->add('isActive');
 
         $builder->add('submit', SubmitType::class,
