@@ -120,7 +120,10 @@ class WidgetController extends AbstractController
         $form = $this->createForm(ItemType::class, $widget, [
             'item' => $widget,
             'zones' => $this->zoneManager->getList(),
-            'items' => $this->itemManager->getList(['component_parent' => $widget]),
+            'items' => [
+                'Page' => $this->itemManager->getList(['component_parent' => $widget, 'category' => 'page']),
+                'Widget' => $this->itemManager->getList(['component_parent' => $widget, 'category' => 'widget']),
+            ],
             'languages' => $this->languageManager->getList(),
         ]);
         $form->handleRequest($request);
@@ -151,7 +154,10 @@ class WidgetController extends AbstractController
         $form = $this->createForm(ItemType::class, $parameters->get('widget'), [
             'item' => $parameters->get('widget'),
             'zones' => $this->zoneManager->getList(),
-            'items' => $this->itemManager->getList(['component_parent' => $parameters->get('widget')]),
+            'items' => [
+                'Page' => $this->itemManager->getList(['component_parent' => $parameters->get('widget'), 'category' => 'page']),
+                'Widget' => $this->itemManager->getList(['component_parent' => $parameters->get('widget'), 'category' => 'widget']),
+            ],
             'languages' => $this->languageManager->getList(),
         ]);
         $form->handleRequest($request);

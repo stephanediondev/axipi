@@ -112,7 +112,7 @@ class PageController extends AbstractController
 
         $form = $this->createForm(ItemType::class, $page, [
             'item' => $page,
-            'items' => $this->itemManager->getList(['component_parent' => $page]),
+            'items' => $this->itemManager->getList(['component_parent' => $page, 'category' => 'page']),
         ]);
         $form->handleRequest($request);
 
@@ -144,7 +144,7 @@ class PageController extends AbstractController
     {
         $form = $this->createForm(ItemType::class, $parameters->get('page'), [
             'item' => $parameters->get('page'),
-            'items' => $this->itemManager->getList(['component_parent' => $parameters->get('page')]),
+            'items' => $this->itemManager->getList(['component_parent' => $parameters->get('page'), 'category' => 'page']),
         ]);
         $form->handleRequest($request);
 
