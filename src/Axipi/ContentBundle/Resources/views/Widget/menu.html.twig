@@ -1,3 +1,4 @@
+{% import '@AxipiContent/Widget/menu_macro.html.twig' as helper %}
 <!-- Content / Menu -->
 <div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('widget') }}">
     {% if widget.attribute('display_title')|default(false) %}
@@ -8,22 +9,7 @@
             <li{% if page.slug == relation.page.slug %} class="current_page_item"{% endif %}>
                 <a href="{{ buildLink(relation.page) }}">{{ relation.title|default(relation.page.title) }}</a>
                 {%if relation.children %}
-                    <ul class="sub-menu">
-                        {% for relation_child in relation.children %}
-                            <li{% if page.slug == relation_child.page.slug %} class="current_page_item"{% endif %}>
-                                <a href="{{ buildLink(relation_child.page) }}">{{ relation_child.title|default(relation_child.page.title) }}</a>
-                                {%if relation_child.children %}
-                                    <ul class="sub-menu">
-                                        {% for relation_child_child in relation_child.children %}
-                                            <li{% if page.slug == relation_child_child.page.slug %} class="current_page_item"{% endif %}>
-                                                <a href="{{ buildLink(relation_child_child.page) }}">{{ relation_child_child.title|default(relation_child_child.page.title) }}</a>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                {% endif %}
-                            </li>
-                        {% endfor %}
-                    </ul>
+                    {{ helper.menu_loop(relation, page) }}
                 {% endif %}
             </li>
         {% endfor %}

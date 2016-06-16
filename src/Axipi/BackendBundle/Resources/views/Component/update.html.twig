@@ -1,5 +1,7 @@
 {% extends 'AxipiBackendBundle::base.html.twig' %}
 
+{% import '@AxipiBackend/Component/macro.html.twig' as helper %}
+
 {% block title %}{{ component.title }} - {{ 'components'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
@@ -10,10 +12,7 @@
         {% block card__title %}
             <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.component'|trans({}, 'axipi_backend') }}"></i>{{ 'components'|trans({}, 'axipi_backend') }}</a></span>
             {% if component.parent %}
-                {% if component.parent.parent %}
-                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'read', id: component.parent.parent.id}) }}">{{ component.parent.parent.title }}</a></span>
-                {% endif %}
-                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'read', id: component.parent.id}) }}">{{ component.parent.title }}</a></span>
+                {{ helper.path_loop(component.parent) }}
             {% endif %}
             <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'read', 'id': component.id}) }}">{{ component.title }}</a></span>
         {% endblock %}

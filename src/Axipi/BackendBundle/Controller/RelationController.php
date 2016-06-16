@@ -78,7 +78,7 @@ class RelationController extends AbstractController
         $form = $this->createForm(RelationType::class, $relation, [
             'relation' => $relation,
             'relations' => $this->relationManager->getList(['widget' => $parameters->get('widget')->getId()]),
-            'items' => $this->itemManager->getList(),
+            'items' => $this->itemManager->getList(['category' => 'page']),
         ]);
         $form->handleRequest($request);
 
@@ -107,7 +107,7 @@ class RelationController extends AbstractController
         $form = $this->createForm(RelationType::class, $parameters->get('relation'), [
             'relation' => $parameters->get('relation'),
             'relations' => $this->relationManager->getList(['widget' => $parameters->get('relation')->getWidget()->getId()]),
-            'items' => $this->itemManager->getList(),
+            'items' => $this->itemManager->getList(['category' => 'page']),
         ]);
         $form->handleRequest($request);
 

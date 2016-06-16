@@ -1,0 +1,7 @@
+{% macro path_loop(object, language) %}
+    {% import _self as helper %}
+    {% if object.parent %}
+        {{ helper.path_loop(object.parent, language) }}
+    {% endif %}
+    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_relations', {language: language, action: 'read', id: object.id}) }}">{{ object.page.title }}</a></span>
+{% endmacro %}

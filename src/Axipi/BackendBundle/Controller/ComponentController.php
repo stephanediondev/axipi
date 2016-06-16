@@ -80,7 +80,7 @@ class ComponentController extends AbstractController
 
         $form = $this->createForm(ComponentType::class, $component, [
             'component' => $component,
-            'components' => $this->componentManager->getList(),
+            'components' => ['Page' => $this->componentManager->getList(['category' => 'page']), 'Widget' => $this->componentManager->getList(['category' => 'widget'])],
             'zones' => $this->zoneManager->getList(),
         ]);
         $form->handleRequest($request);
@@ -107,7 +107,7 @@ class ComponentController extends AbstractController
     {
         $form = $this->createForm(ComponentType::class, $parameters->get('component'), [
             'component' => $parameters->get('component'),
-            'components' => $this->componentManager->getList(),
+            'components' => ['Page' => $this->componentManager->getList(['category' => 'page']), 'Widget' => $this->componentManager->getList(['category' => 'widget'])],
             'zones' => $this->zoneManager->getList(),
         ]);
         $form->handleRequest($request);

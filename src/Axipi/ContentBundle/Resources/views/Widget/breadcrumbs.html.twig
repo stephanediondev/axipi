@@ -1,14 +1,11 @@
+{% import '@AxipiContent/Widget/breadcrumbs_macro.html.twig' as helper %}
 <!-- Content / Breadcrumbs -->
 {% if page.parent %}
     <div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('col-lg-12') }}">
         <ol class="breadcrumb">
-            {% if page.parent.parent %}
-                {% if page.parent.parent.parent %}
-                    <li><a href="{{ buildLink(page.parent.parent.parent) }}">{{ page.parent.parent.parent.title }}</a></li>
-                {% endif %}
-                <li><a href="{{ buildLink(page.parent.parent) }}">{{ page.parent.parent.title }}</a></li>
+            {% if page.parent %}
+                {{ helper.breadcrumbs_loop(page.parent) }}
             {% endif %}
-            <li><a href="{{ buildLink(page.parent) }}">{{ page.parent.title }}</a></li>
             <li>{{ page.title }}</li>
         </ol>
     </div>

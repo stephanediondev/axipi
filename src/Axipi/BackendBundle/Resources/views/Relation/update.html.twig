@@ -1,5 +1,7 @@
 {% extends 'AxipiBackendBundle::base.html.twig' %}
 
+{% import '@AxipiBackend/Relation/macro.html.twig' as helper %}
+
 {% block title %}{{ relation.widget.title }} - {{ 'widgets'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
@@ -11,10 +13,7 @@
             <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></span>
             <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', 'id': relation.widget.id}) }}">{{ relation.widget.title }}</a></span>
             {% if relation.parent %}
-                {% if relation.parent.parent %}
-                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_relations', {language: app.request.get('language'), action: 'read', id: relation.parent.parent.id}) }}">{{ relation.parent.parent.page.title }}</a></span>
-                {% endif %}
-                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_relations', {language: app.request.get('language'), action: 'read', id: relation.parent.id}) }}">{{ relation.parent.page.title }}</a></span>
+                {{ helper.path_loop(relation.parent, app.request.get('language')) }}
             {% endif %}
             <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_relations', {language: app.request.get('language'), action: 'read', 'id': relation.id}) }}">{{ relation.page.title }}</a></span>
         {% endblock %}

@@ -1,5 +1,7 @@
 {% extends 'AxipiBackendBundle::base.html.twig' %}
 
+{% import '@AxipiBackend/Widget/macro.html.twig' as helper %}
+
 {% block title %}{{ widget.title }} - {{ 'widgets'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
@@ -11,11 +13,7 @@
         {% block card__title %}
             <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></span>
             {% if widget.parent %}
-                {% if widget.parent.component.category == 'widget' %}
-                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: widget.parent.id}) }}">{{ widget.parent.title }}</a></span>
-                {% else %}
-                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'read', id: widget.parent.id}) }}">{{ widget.parent.title }}</a></span>
-                {% endif %}
+                {{ helper.path_loop(widget.parent, app.request.get('language')) }}
             {% endif %}
             <span>{{ widget.title }}</span>
         {% endblock %}
