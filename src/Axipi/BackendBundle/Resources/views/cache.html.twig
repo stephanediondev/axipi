@@ -5,6 +5,7 @@
 {% block body %}
     {% embed 'AxipiBackendBundle::card.html.twig' %}
         {% block card__actions %}
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_cache', {action: 'symfony'}) }}">{{ 'reset_symfony'|trans({}, 'axipi_backend') }}</a>
             {% if apcu %}
                 <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_cache', {action: 'apcu'}) }}">{{ 'reset_apcu'|trans({}, 'axipi_backend') }}</a>
             {% endif %}

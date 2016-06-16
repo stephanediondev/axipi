@@ -30,6 +30,8 @@ class CacheController extends AbstractController
         switch ($action) {
             case 'index':
                 return $this->indexAction($request, $parameters);
+            case 'symfony':
+                return $this->symfonyAction($request, $parameters);
             case 'apcu':
                 return $this->apcuAction($request, $parameters);
             case 'opcache':
@@ -48,11 +50,37 @@ class CacheController extends AbstractController
         return $this->render('AxipiBackendBundle::cache.html.twig', $parameters->all());
     }
 
+    public function symfonyAction(Request $request, ParameterBag $parameters)
+    {
+        $realCacheDir = $this->getParameter('kernel.cache_dir');
+        $oldCacheDir = substr($realCacheDir, 0, -1).('~' === substr($realCacheDir, -1) ? '+' : '~');
+        $filesystem = $this->get('filesystem');
+
+        if(!is_writable($realCacheDir)) {
+            throw new \RuntimeException(sprintf('Unable to write in the "%s" directory', $realCacheDir));
+        }
+
+        if($filesystem->exists($oldCacheDir)) {
+            $filesystem->remove($oldCacheDir);
+        }
+
+        $kernel = $this->get('kernel');
+        $this->get('cache_clearer')->clear($realCacheDir);
+
+        $filesystem->rename($realCacheDir, $oldCacheDir);
+
+        $filesystem->remove($oldCacheDir);
+
+        $this->addFlash('success', 'Reset Symfony done');
+
+        return $this->redirectToRoute('axipi_backend_cache', []);
+    }
+
     public function apcuAction(Request $request, ParameterBag $parameters)
     {
         if(function_exists('apcu_clear_cache')) {
             apcu_clear_cache();
-            $this->addFlash('success', 'done');
+            $this->addFlash('success', 'Reset APCu done');
         }
 
         return $this->redirectToRoute('axipi_backend_cache', []);
@@ -62,7 +90,7 @@ class CacheController extends AbstractController
     {
         if(function_exists('opcache_reset')) {
             opcache_reset();
-            $this->addFlash('success', 'done');
+            $this->addFlash('success', 'Reset OPcache done');
         }
 
         return $this->redirectToRoute('axipi_backend_cache', []);
