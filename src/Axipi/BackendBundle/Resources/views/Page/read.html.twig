@@ -118,7 +118,7 @@
         {% block card__supporting %}
             {% if page.component.id == 5 %}
                 <div class="mdl-cell mdl-cell--2-col" data-url="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'upload'}) }}" id="ajax-uploader" data-parent="{{ page.id }}" data-component="6">
-                    <a fileinput-button attachment-upload" href="#"><i class="fa fa-3x fa-picture-o"></i><br>Gallery / Media</a>
+                    <a class="fileinput-button attachment-upload" href="#"><i class="fa fa-3x fa-picture-o"></i><br>Gallery / Media</a>
                 </div>
             {% endif %}
         {% endblock %}

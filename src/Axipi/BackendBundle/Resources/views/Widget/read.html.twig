@@ -100,7 +100,7 @@
         {% block card__supporting %}
             {% if widget.component.id == 31 %}
                 <div class="mdl-cell mdl-cell--2-col" data-url="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'upload'}) }}" id="ajax-uploader" data-parent="{{ widget.id }}" data-component="32">
-                    <a fileinput-button attachment-upload" href="#"><i class="fa fa-3x fa-picture-o"></i><br>Slideshow / Slide</a>
+                    <a class="fileinput-button attachment-upload" href="#"><i class="fa fa-3x fa-picture-o"></i><br>Slideshow / Slide</a>
                 </div>
             {% endif %}
         {% endblock %}

@@ -24,7 +24,7 @@
             </div>
             <div class="mdl-cell mdl-cell--4-col">
                 {% if 'image/' in file.mime %}
-                    <img src="{{ asset('files/' ~ file.slug) }}" class="img-responsive">
+                    <img alt="" src="{{ asset('files/' ~ file.slug) }}" class="img-responsive">
                 {% endif %}
             </div>
         {% endblock %}

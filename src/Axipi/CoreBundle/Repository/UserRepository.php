@@ -18,6 +18,11 @@ class UserRepository extends EntityRepository
             $query->setParameter(':id', $parameters['id']);
         }
 
+        if(isset($parameters['username']) == 1) {
+            $query->andWhere('usr.username = :username');
+            $query->setParameter(':username', $parameters['username']);
+        }
+
         return $query->getQuery()->setMaxResults(1)->getOneOrNullResult();
     }
 
