@@ -3,7 +3,7 @@
 {% block title %}{{ 'zones'|trans({}, 'axipi_backend') }}{% endblock %}
 
 {% block body %}
-    {% embed 'AxipiBackendBundle::card.html.twig' %}
+    {% embed 'AxipiBackendBundle::card.html.twig' with {sortzone: true} %}
         {% block card__actions %}
             <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_zones', {action: 'create'}) }}">{{ 'actions.create'|trans({}, 'axipi_backend') }}</a>
         {% endblock %}
@@ -31,13 +31,12 @@
     <script type="text/javascript" src="{{ asset('vendor/jquery-ui/ui/minified/sortable.min.js') }}"></script>
 
     <script type="text/javascript">
-    $('.mdl-card__supporting-text').sortable({
+    $('.sortzone').sortable({
         forcePlaceholderSize: true,
         cursor: "move",
         helper: "clone",
         appendTo: "#target-drag",
         zIndex: 9999,
-        //placeholder: "mdl-cell mdl-cell--2-col ui-state-highlight",
         tolerance: "pointer",
         items: "div:not(.placeholder)",
         stop: function(event, ui) {

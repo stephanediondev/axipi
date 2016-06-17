@@ -11,7 +11,7 @@
         {{ form_start(form) }}
         {{ form_errors(form) }}
     {% endif %}
-    <div class="mdl-card__supporting-text mdl-grid{% if dropzone is defined %} dropzone{% endif %}">
+    <div class="mdl-card__supporting-text mdl-grid{% if dropzone is defined %} dropzone{% endif %}{% if sortzone is defined %} sortzone{% endif %}">
         {% block card__supporting %}{% endblock %}
     </div>
     {% if form is defined %}
