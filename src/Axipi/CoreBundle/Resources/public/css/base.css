@@ -119,6 +119,14 @@ main header h1 {
     line-height: 1.2;
     margin-bottom: 20px;
 }
+main section {
+    border-bottom: 1px solid #ededed;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+main section:last-child {
+    border: none;
+}
 main article p {
     margin: 0 0 20px;
     line-height: 1.5;
@@ -155,7 +163,7 @@ aside section a:visited {
     clear: both;
     font-size: 12px;
     line-height: 2;
-    margin-top: 20px;
+    margin-top: 30px;
     padding: 20px 0px;
 }
 
