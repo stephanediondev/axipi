@@ -1,8 +1,9 @@
 <!-- Content / Block -->
-<div class="widget{% if widget.attribute('div_class') %} {{ widget.attribute('div_class') }}{% endif %}" id="widget-{{ widget.id }}">
+<section class="widget{% if widget.attribute('section_class') %} {{ widget.attribute('section_class') }}{% endif %}" id="widget-{{ widget.id }}">
     {% if widget.attribute('display_title')|default(false) %}
-        <{{ widget.attribute('title_tag')|default('h1') }}>{{ widget.title }}</{{ widget.attribute('title_tag')|default('h1') }}>
+        <header>{{ widget.title }}</header>
     {% endif %}
+
     {{ convertText(widget.attribute('description')|raw) }}
-</div>
+</section>
 <!-- Content / Block (end) -->

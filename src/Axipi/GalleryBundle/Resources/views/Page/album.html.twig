@@ -2,35 +2,37 @@
 
 {% block main %}
     <!-- Gallery / Album -->
-    <article id="post-71" class="post-71 page type-page status-publish hentry">
-        <header class="entry-header">
-            <h1 class="entry-title">{{ page.title }}</h1>
+    <section class="main">
+        <header>
+            <h1>{{ page.title }}</h1>
         </header>
 
-        <div class="entry-content">
+        <article>
             {{ convertText(page.attribute('description')|raw) }}
+        </article>
+    </section>
 
-            <p>
-            {% for media in medias %}
-                <a href="{{ buildLink(media) }}"><img src="{{ asset('uploads/' ~ media.attribute('image')) }}"></a>
-            {% endfor %}
-            </p>
-        </div>
-    </article>
-
-    <div class="row">
-        {% for album in albums %}
-            <div class="col-lg-2">
-                <a class="thumbnail" href="{{ buildLink(album) }}">
-                    {% if album.attribute('thumbnail') %}
-                        <img src="{{ asset('uploads/' ~ album.attribute('thumbnail')) }}" class="img-responsive">
-                    {% else %}
-                        {{ album.title }}
-                    {% endif %}
-                </a>
-            </div>
+    <section class="medias">
+        <p>
+        {% for media in medias %}
+            <a href="{{ buildLink(media) }}">
+                <img src="{{ asset('uploads/' ~ media.attribute('image')) }}">
+            </a>
         {% endfor %}
-    </div>
+        </p>
+    </section>
+
+    <section class="albums">
+        {% for album in albums %}
+            <a  href="{{ buildLink(album) }}">
+                {% if album.attribute('thumbnail') %}
+                    <img src="{{ asset('uploads/' ~ album.attribute('thumbnail')) }}">
+                {% else %}
+                    {{ album.title }}
+                {% endif %}
+            </a>
+        {% endfor %}
+    </section>
     <!-- Gallery / Album (end) -->
 {% endblock %}
 

@@ -1,8 +1,8 @@
 <!-- Content / Block -->
 {% if widget.attribute('inside_div') %}
-    <div class="widget{% if widget.attribute('div_class') %} {{ widget.attribute('div_class') }}{% endif %}" id="widget-{{ widget.id }}">
+    <section class="widget{% if widget.attribute('section_class') %} {{ widget.attribute('section_class') }}{% endif %}" id="widget-{{ widget.id }}">
         {{ widget.attribute('description')|raw }}
-    </div>
+    </section>
 {% else %}
     {{ widget.attribute('description')|raw }}
 {% endif %}

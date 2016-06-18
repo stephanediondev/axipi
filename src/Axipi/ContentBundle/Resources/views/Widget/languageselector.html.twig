@@ -1,14 +1,15 @@
 <!-- Content / Language Selector -->
 {% if languages|length > 1 %}
-    <div class="widget{% if widget.attribute('div_class') %} {{ widget.attribute('div_class') }}{% endif %}" id="widget-{{ widget.id }}">
-        {% if widget.attribute('display_title')|default(true) %}
-            <{{ widget.attribute('title_tag')|default('h1') }}>{{ widget.title }}</{{ widget.attribute('title_tag')|default('h1') }}>
+    <section class="widget{% if widget.attribute('section_class') %} {{ widget.attribute('section_class') }}{% endif %}" id="widget-{{ widget.id }}">
+        {% if widget.attribute('display_title')|default(false) %}
+            <header>{{ widget.title }}</header>
         {% endif %}
+
         <ul>
             {% for language in languages %}
                 <li{% if page.language.code == language.code %} class="active"{% endif %}><a href="{{ buildLink({'language': language.code, 'slug': ''}) }}">{{ language.title }}</a></li>
             {% endfor %}
         </ul>
-    </div>
+    </section>
 {% endif %}
 <!-- Content / Language Selector (end) -->

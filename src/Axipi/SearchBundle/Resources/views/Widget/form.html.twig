@@ -1,12 +1,13 @@
 <!-- Search / Form -->
-<div class="widget{% if widget.attribute('div_class') %} {{ widget.attribute('div_class') }}{% endif %}" id="widget-{{ widget.id }}">
-    {% if widget.attribute('display_title')|default(true) %}
-        <{{ widget.attribute('title_tag')|default('h1') }}>{{ widget.title }}</{{ widget.attribute('title_tag')|default('h1') }}>
+<section class="widget{% if widget.attribute('section_class') %} {{ widget.attribute('section_class') }}{% endif %}" id="widget-{{ widget.id }}">
+    {% if widget.attribute('display_title')|default(false) %}
+        <header>{{ widget.title }}</header>
     {% endif %}
+
     <form role="search" method="get" action="{{ buildLink(widget.parent) }}"{% if widget.attribute('form_class') %} class="{{ widget.attribute('form_class') }}"{% endif %}>
         <label for="widget-input-{{ widget.id }}">{{ widget.attribute('label')|default('widget.label'|trans({}, 'axipi_search')) }}</label>
         <input id="widget-input-{{ widget.id }}" type="text" name="q" value="{{ request.get('q') }}">
         <input type="submit" value="{{ widget.attribute('submit')|default('widget.submit'|trans({}, 'axipi_search')) }}">
     </form>
-</div>
+</section>
 <!-- Search / Form (end) -->

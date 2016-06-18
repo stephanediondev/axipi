@@ -1,13 +1,13 @@
 {% import '@AxipiContent/Widget/breadcrumbs_macro.html.twig' as helper %}
 <!-- Content / Breadcrumbs -->
 {% if page.parent %}
-    <div class="widget{% if widget.attribute('div_class') %} {{ widget.attribute('div_class') }}{% endif %}" id="widget-{{ widget.id }}">
+    <section class="widget{% if widget.attribute('section_class') %} {{ widget.attribute('section_class') }}{% endif %}" id="widget-{{ widget.id }}">
         <ol{% if widget.attribute('ol_class') %} class="{{ widget.attribute('ol_class') }}"{% endif %}>
             {% if page.parent %}
                 {{ helper.breadcrumbs_loop(page.parent) }}
             {% endif %}
             <li>{{ page.title }}</li>
         </ol>
-    </div>
+    </section>
 {% endif %}
 <!-- Content / Breadcrumbs (end) -->

@@ -1,9 +1,10 @@
 {% import '@AxipiContent/Widget/menu_macro.html.twig' as helper %}
 <!-- Content / Menu -->
-<div class="widget{% if widget.attribute('div_class') %} {{ widget.attribute('div_class') }}{% endif %}" id="widget-{{ widget.id }}">
+<section class="widget{% if widget.attribute('section_class') %} {{ widget.attribute('section_class') }}{% endif %}" id="widget-{{ widget.id }}">
     {% if widget.attribute('display_title')|default(false) %}
-        <{{ widget.attribute('title_tag')|default('h1') }}>{{ widget.title }}</{{ widget.attribute('title_tag')|default('h1') }}>
+        <header>{{ widget.title }}</header>
     {% endif %}
+
     <ul{% if widget.attribute('ul_class') %} class="{{ widget.attribute('ul_class') }}"{% endif %}>
         {% for relation in relations %}
             <li{% if page.slug == relation.page.slug %} class="active"{% endif %}>
@@ -14,5 +15,5 @@
             </li>
         {% endfor %}
     </ul>
-</div>
+</section>
 <!-- Content / Menu (end) -->
