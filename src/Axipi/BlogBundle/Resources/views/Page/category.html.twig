@@ -15,7 +15,10 @@
     {%for post in children %}
         <section class="post" id="post-{{ post.id }}">
             <header>
-                <h2><a href="{{ buildLink(post) }}" rel="bookmark">{{ post.title }}</a></h2>
+                <h2><a href="{{ buildLink(post) }}">{{ post.title }}</a></h2>
+                {% if post.attribute('image') %}
+                    <p><a href="{{ buildLink(post) }}"><img src="{{ relative_path('uploads/' ~ post.attribute('image'))|imagine_filter('banner') }}" alt=""></a></p>
+                {% endif %}
             </header>
 
             <article>
@@ -27,7 +30,7 @@
             </article>
 
             <footer>
-                <p>This entry was posted in <a href="{{ buildLink(page) }}" rel="category tag">{{ page.title }}</a> on <a href="{{ buildLink(post) }}" title="TODO" rel="bookmark"><time class="entry-date" datetime="TODO">TODO</time></a></p>
+                <p>This entry was posted in <a href="{{ buildLink(page) }}">{{ page.title }}</a> on <a href="{{ buildLink(post) }}" title="TODO"><time class="entry-date" datetime="TODO">TODO</time></a></p>
             </footer>
         </section>
     {% endfor %}

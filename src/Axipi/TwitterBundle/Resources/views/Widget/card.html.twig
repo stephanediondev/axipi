@@ -4,7 +4,7 @@
 <meta name="twitter:title" content="{{ page.titleSocial|default(page.title) }}">
 <meta name="twitter:description" content="{{ page.descriptionSocial }}">
 <meta name="twitter:url" content="{{ buildLink(page) }}">
-{% if page.attribute('thumbnail') %}
-<meta name="twitter:image" content="{{ absolute_url(asset('uploads/' ~ page.attribute('thumbnail'))) }}">
+{% if page.attribute('image') %}
+<meta name="twitter:image" content="{{ absolute_url(asset('uploads/' ~ page.attribute('image'))) }}">
 {% endif %}
 <!-- Twitter / Card (end) -->

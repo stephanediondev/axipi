@@ -10,7 +10,7 @@ class CategoryController extends AbstractController
 {
     public function getPage($parameters)
     {
-        $parameters->set('children', $this->get('axipi_core_manager_item')->getList(['parent' => $parameters->get('page'), 'active' => true]));
+        $parameters->set('children', $this->get('axipi_core_manager_item')->getList(['component_service' => 'axipi_blog_controller_post', 'parent' => $parameters->get('page'), 'active' => true]));
 
         if($parameters->get('page')->getTemplate()) {
             $template = $parameters->get('page')->getTemplate();

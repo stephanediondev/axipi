@@ -13,9 +13,12 @@
 
         <footer>
             <form role="search" method="get"{% if page.attribute('form_class') %} class="{{ page.attribute('form_class') }}"{% endif %}>
-                <label for="page-input-{{ page.id }}">{{ page.attribute('label')|default('page.label'|trans({}, 'axipi_search')) }}</label>
-                <input id="page-input-{{ page.id }}" type="text" name="q" value="{{ request.get('q') }}">
-                <input type="submit" value="{{ page.attribute('submit')|default('page.submit'|trans({}, 'axipi_search')) }}">
+                <p>
+                    <input id="page-input-{{ page.id }}" type="text" name="q" value="{{ request.get('q') }}">
+                </p>
+                <p>
+                    <input type="submit" value="{{ page.attribute('submit')|default('page.submit'|trans({}, 'axipi_search')) }}">
+                </p>
             </form>
         </footer>
     </section>
@@ -43,6 +46,16 @@
                 </footer>
             </section>
         {% endfor %}
+
+        {% if pagination|length > 0 %}
+            <section class="pagination">
+                <ol>
+                    {% for number, index in pagination %}
+                        <li{% if current_from == index %} class="active"{% endif %}><a href="{{ buildLink(page) }}?q={{ request.get('q') }}&amp;from={{ index }}">{{ number }}</a></li>
+                    {% endfor %}
+                </ol>
+            </section>
+        {% endif %}
     {% endif %}
     <!-- Search / Page (end) -->
 {% endblock %}

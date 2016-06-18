@@ -10,7 +10,7 @@
         <article>
             {{ convertText(page.attribute('description')|raw) }}
 
-            <p><img src="{{ asset('uploads/' ~ page.attribute('image')) }}"></p>
+            <p><img src="{{ asset('uploads/' ~ page.attribute('image')) }}" alt=""></p>
         </article>
     </section>
     <!-- Gallery / Media (end) -->

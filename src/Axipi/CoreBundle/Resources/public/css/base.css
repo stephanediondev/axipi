@@ -28,6 +28,35 @@ ol, ul {
     padding: 0px;
     text-indent: 0px;
 }
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], select, textarea {
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    font-family: inherit;
+    padding: 6px;
+    width: 80%;
+}
+textarea {
+    height: 100px;
+    min-height: 100px;
+    resize: vertical;
+    width: 80%;
+}
+button, input[type="submit"], input[type="button"], input[type="reset"] {
+    background-color: #e6e6e6;
+    background: linear-gradient(#f4f4f4, #e6e6e6);
+    border: 1px solid #d2d2d2;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(64, 64, 64, 0.1);
+    color: #7c7c7c;
+    font-size: 11px;
+    font-weight: normal;
+    line-height: 1.4;
+    padding: 6px 10px;
+}
 .page {
     background-color: #ffffff;
     padding: 0 20px;
@@ -53,6 +82,7 @@ ol, ul {
 }
 .page > header h1 {
     font-size: 26px;
+    font-weight: bold;
     margin-bottom: 10px;
 }
 .page > header h2 {
@@ -130,21 +160,29 @@ main section {
 main section:last-child {
     border: none;
 }
-main article {
+main section article {
     text-align: justify;
 }
-main footer {
+main section footer {
+    font-style: italic;
     padding-top: 20px;
 }
-main section p, .g-recaptcha {
-    margin: 0px 0px 20px 0px;
+section p, .g-recaptcha {
+    margin: 0px 0px 10px 0px;
     line-height: 1.5;
 }
-main section p:last-child {
+section p:last-child {
     margin: 0px;
 }
-main img {
+main section img {
     max-width: 100%;
+}
+main section ol li {
+    display: inline;
+    margin-right: 10px;
+}
+main section ol li.active {
+    font-weight: bold;
 }
 .page > aside section {
     padding-bottom: 20px;
@@ -175,30 +213,13 @@ main img {
     line-height: 2;
     padding: 20px 0px;
 }
-label {
-    display: block;
-    margin-bottom: 5px;
+
+section.flex {
+    align-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
-input[type="text"], input[type="email"], input[type="password"], input[type="number"], select, textarea {
-    border: 1px solid #cccccc;
-    border-radius: 3px;
-    font-family: inherit;
-    padding: 6px;
-}
-textarea {
-    height: 100px;
-    min-height: 100px;
-    resize: vertical;
-}
-button, input[type="submit"], input[type="button"], input[type="reset"] {
-    background-color: #e6e6e6;
-    background: linear-gradient(#f4f4f4, #e6e6e6);
-    border: 1px solid #d2d2d2;
-    border-radius: 3px;
-    box-shadow: 0 1px 2px rgba(64, 64, 64, 0.1);
-    color: #7c7c7c;
-    font-size: 11px;
-    font-weight: normal;
-    line-height: 1.4;
-    padding: 6px 10px;
+.flexitem {
+    margin-bottom: 20px;
 }

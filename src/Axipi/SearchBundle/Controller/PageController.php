@@ -100,7 +100,7 @@ class PageController extends AbstractController
                         $pagination[$start] = $i;
                         $start++;
                     }
-                    $data['current_from'] = intval($from);
+                    $parameters->set('current_from', intval($from));
                 }
                 $parameters->set('pagination', $pagination);
             }

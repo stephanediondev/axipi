@@ -12,25 +12,19 @@
         </article>
     </section>
 
-    <section class="medias">
-        <p>
+    <section class="medias flex">
         {% for media in medias %}
-            <a href="{{ buildLink(media) }}">
-                <img src="{{ asset('uploads/' ~ media.attribute('image')) }}">
-            </a>
+            <a class="flexitem" href="{{ buildLink(media) }}"><img src="{{ relative_path('uploads/' ~ media.attribute('image'))|imagine_filter('square_thumb') }}" alt=""></a>
         {% endfor %}
-        </p>
     </section>
 
-    <section class="albums">
+    <section class="albums flex">
         {% for album in albums %}
-            <a  href="{{ buildLink(album) }}">
-                {% if album.attribute('thumbnail') %}
-                    <img src="{{ asset('uploads/' ~ album.attribute('thumbnail')) }}">
-                {% else %}
-                    {{ album.title }}
-                {% endif %}
-            </a>
+            {% if album.attribute('image') %}
+                <a class="flexitem" href="{{ buildLink(album) }}"><img src="{{ relative_path('uploads/' ~ album.attribute('image'))|imagine_filter('square_thumb') }}" alt=""></a>
+            {% else %}
+                <a class="flexitem" href="{{ buildLink(album) }}">{{ album.title }}</a>
+            {% endif %}
         {% endfor %}
     </section>
     <!-- Gallery / Album (end) -->

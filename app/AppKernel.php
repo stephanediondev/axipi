@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
 
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
 
             new Axipi\CoreBundle\AxipiCoreBundle(),
             new Axipi\BackendBundle\AxipiBackendBundle(),

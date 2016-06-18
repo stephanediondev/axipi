@@ -5,11 +5,18 @@
     <section class="main">
         <header>
             <h1>{{ page.title }}</h1>
+            {% if page.attribute('image') %}
+                <p><img src="{{ relative_path('uploads/' ~ page.attribute('image'))|imagine_filter('banner') }}" alt=""></p>
+            {% endif %}
         </header>
 
         <article>
             {{ convertText(page.attribute('description')|raw) }}
         </article>
+
+        <footer>
+            <p>This entry was posted in <a href="{{ buildLink(page.parent) }}" rel="category tag">{{ page.parent.title }}</a> on <a href="{{ buildLink(page) }}" title="TODO" rel="bookmark"><time class="entry-date" datetime="TODO">TODO</time></a></p>
+        </footer>
     </section>
 
     <section class="comment-form">

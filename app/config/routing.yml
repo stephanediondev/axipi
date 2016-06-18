@@ -1,3 +1,6 @@
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
 AxipiBackendBundle:
     resource: "@AxipiBackendBundle/Resources/config/routing.yml"
     prefix: "/backend"

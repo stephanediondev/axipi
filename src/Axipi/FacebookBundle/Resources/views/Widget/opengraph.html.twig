@@ -1,8 +1,8 @@
 <!-- Facebook / Opengraph -->
 <meta property="og:site_name" content="{{ widget.attribute('site') }}">
 <meta property="og:title" content="{{ page.titleSocial|default(page.title) }}">
-{% if page.attribute('thumbnail') %}
-<meta property="og:image" content="{{ absolute_url(asset('uploads/' ~ page.attribute('thumbnail'))) }}">
+{% if page.attribute('image') %}
+<meta property="og:image" content="{{ absolute_url(asset('uploads/' ~ page.attribute('image'))) }}">
 {% endif %}
 <meta property="og:description" content="{{ page.descriptionSocial }}">
 <meta property="og:type" content="website">
