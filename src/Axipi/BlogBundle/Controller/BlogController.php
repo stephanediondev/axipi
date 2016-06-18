@@ -10,6 +10,8 @@ class BlogController extends AbstractController
 {
     public function getPage($parameters)
     {
+        $parameters->set('children', $this->get('axipi_core_manager_item')->getList(['component_service' => 'axipi_blog_controller_post', 'active' => true]));
+
         if($parameters->get('page')->getTemplate()) {
             $template = $parameters->get('page')->getTemplate();
         } else {

@@ -11,6 +11,26 @@
             {{ convertText(page.attribute('description')|raw) }}
         </article>
     </section>
+
+    {%for post in children %}
+        <section class="post" id="post-{{ post.id }}">
+            <header>
+                <h2><a href="{{ buildLink(post) }}" rel="bookmark">{{ post.title }}</a></h2>
+            </header>
+
+            <article>
+                {% set content = post.attribute('description')|split('<p><!-- pagebreak --></p>') %}
+                {{ convertText(content|first|raw) }}
+                {% if content|length > 1 %}
+                    <p><a href="{{ buildLink(post) }}#more-{{ post.id }}" class="more-link">Continue reading</a></p>
+                {% endif %}
+            </article>
+
+            <footer>
+                <p>This entry was posted in <a href="{{ buildLink(post.parent) }}" rel="category tag">{{ post.parent.title }}</a> on <a href="{{ buildLink(post) }}" title="TODO" rel="bookmark"><time class="entry-date" datetime="TODO">TODO</time></a></p>
+            </footer>
+        </section>
+    {% endfor %}
     <!-- Blog (end) -->
 {% endblock %}
 

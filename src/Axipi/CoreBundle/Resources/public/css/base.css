@@ -18,6 +18,7 @@ a {
 }
 h1, h2, h3, h4, h5, h6, p {
     clear: both;
+    font-weight: normal;
     margin: 0px;
     padding: 0px;
 }
@@ -37,7 +38,6 @@ ol, ul {
         margin: 20px auto;
         max-width: 960px;
         overflow: hidden;
-        padding: 0 30px;
     }
 }
 .page > header {
@@ -60,8 +60,8 @@ ol, ul {
     font-weight: normal;
     font-size: 13px;
 }
-.page > header h1 a, .page > header h2 a {
-    color: #515151;
+.page > header h1 a {
+    color: #444444;
     display: inline-block;
     text-decoration: none;
 }
@@ -81,12 +81,12 @@ ol, ul {
 .page > header nav section li {
     display: block;
     font-size: 12px;
-    margin: 0px 40px 0px 0px;
     position: relative;
 }
 @media screen and (min-width: 768px) {
     .page > header nav section li {
         display: inline-block;
+        margin: 0px 40px 0px 0px;
     }
 }
 .page > header nav section li.active {
@@ -99,21 +99,24 @@ ol, ul {
     text-transform: uppercase;
     white-space: nowrap;
 }
-
+.page > aside {
+    border-top: 1px solid #ededed;
+    clear: both;
+}
 @media screen and (min-width: 768px) {
     main {
         float: left;
-        margin: 20px 0px 0px 0px;
         width: 70%;
     }
-    aside {
+    .page > aside {
+        border-top: none;
+        clear: none;
         float: right;
-        margin: 20px 0px 0px 0px;
+        padding: 0px;
         width: 25%;
     }
 }
-
-main header h1 {
+main header h1, main header h2 {
     font-size: 22px;
     font-weight: normal;
     line-height: 1.2;
@@ -121,25 +124,33 @@ main header h1 {
 }
 main section {
     border-bottom: 1px solid #ededed;
+    padding-bottom: 20px;
     padding-top: 20px;
-    padding-bottom: 10px;
 }
 main section:last-child {
     border: none;
 }
-main article p {
-    margin: 0 0 20px;
+main article {
+    text-align: justify;
+}
+main footer {
+    padding-top: 20px;
+}
+main section p, .g-recaptcha {
+    margin: 0px 0px 20px 0px;
     line-height: 1.5;
+}
+main section p:last-child {
+    margin: 0px;
 }
 main img {
     max-width: 100%;
 }
-
-aside section {
-    margin-bottom: 30px;
+.page > aside section {
+    padding-bottom: 20px;
+    padding-top: 20px;
 }
-
-aside section header {
+.page > aside section header {
     color: #636363;
     font-size: 11px;
     font-weight: bold;
@@ -147,26 +158,23 @@ aside section header {
     margin-bottom: 0px;
     text-transform: uppercase;
 }
-aside section p, aside section li {
+.page > aside section p, .page > aside section li {
     font-size: 13px;
     line-height: 1.7;
 }
-aside section a:link {
+.page > aside section a:link {
     color: #757575;
 }
-aside section a:visited {
+.page > aside section a:visited {
     color: #9f9f9f;
 }
-
 .page > footer {
     border-top: 1px solid #ededed;
     clear: both;
     font-size: 12px;
     line-height: 2;
-    margin-top: 30px;
     padding: 20px 0px;
 }
-
 label {
     display: block;
     margin-bottom: 5px;
@@ -177,14 +185,14 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
     font-family: inherit;
     padding: 6px;
 }
+textarea {
+    height: 100px;
+    min-height: 100px;
+    resize: vertical;
+}
 button, input[type="submit"], input[type="button"], input[type="reset"] {
     background-color: #e6e6e6;
-    background-image: -moz-linear-gradient(top, #f4f4f4, #e6e6e6);
-    background-image: -ms-linear-gradient(top, #f4f4f4, #e6e6e6);
-    background-image: -webkit-linear-gradient(top, #f4f4f4, #e6e6e6);
-    background-image: -o-linear-gradient(top, #f4f4f4, #e6e6e6);
-    background-image: linear-gradient(top, #f4f4f4, #e6e6e6);
-    background-repeat: repeat-x;
+    background: linear-gradient(#f4f4f4, #e6e6e6);
     border: 1px solid #d2d2d2;
     border-radius: 3px;
     box-shadow: 0 1px 2px rgba(64, 64, 64, 0.1);

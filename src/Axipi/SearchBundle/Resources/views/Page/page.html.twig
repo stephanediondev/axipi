@@ -10,14 +10,14 @@
         <article>
             {{ convertText(page.attribute('description')|raw) }}
         </article>
-    </section>
 
-    <section class="search-form">
-        <form role="search" method="get"{% if page.attribute('form_class') %} class="{{ page.attribute('form_class') }}"{% endif %}>
-            <label for="page-input-{{ page.id }}">{{ page.attribute('label')|default('page.label'|trans({}, 'axipi_search')) }}</label>
-            <input id="page-input-{{ page.id }}" type="text" name="q" value="{{ request.get('q') }}">
-            <input type="submit" value="{{ page.attribute('submit')|default('page.submit'|trans({}, 'axipi_search')) }}">
-        </form>
+        <footer>
+            <form role="search" method="get"{% if page.attribute('form_class') %} class="{{ page.attribute('form_class') }}"{% endif %}>
+                <label for="page-input-{{ page.id }}">{{ page.attribute('label')|default('page.label'|trans({}, 'axipi_search')) }}</label>
+                <input id="page-input-{{ page.id }}" type="text" name="q" value="{{ request.get('q') }}">
+                <input type="submit" value="{{ page.attribute('submit')|default('page.submit'|trans({}, 'axipi_search')) }}">
+            </form>
+        </footer>
     </section>
 
     {% if hits is defined %}
@@ -28,16 +28,19 @@
                 </header>
 
                 <article>
+                    {% if result.highlight.description[0] is defined %}
+                        <p>{{ result.highlight.description[0]|raw }}</p>
+                    {% endif %}
+                </article>
+
+                <footer>
                     {% if result._score is defined %}
                         <p><em>{{ result._score }}</em></p>
                     {% endif %}
                     {% if page.attribute('all_languages') %}
                         <p><em>{{ result._source.language.title }}</em></p>
                     {% endif %}
-                    {% if result.highlight.description[0] is defined %}
-                        <p>{{ result.highlight.description[0]|raw }}</p>
-                    {% endif %}
-                </article>
+                </footer>
             </section>
         {% endfor %}
     {% endif %}
