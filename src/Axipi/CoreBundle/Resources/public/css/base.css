@@ -105,8 +105,43 @@ button, input[type="submit"], input[type="button"], input[type="reset"] {
     text-align: left;
     width: 100%;
 }
-.page > header nav section li ul {
-    display: none;
+@media screen and (min-width: 600px) {
+    .page > header nav section li ul {
+        clip: rect(1px, 1px, 1px, 1px);
+        height: 1px;
+        margin: 0;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        top: 100%;
+        width: 1px;
+        z-index: 1;
+    }
+    .page > header nav section li ul ul {
+        top: 0;
+        left: 100%;
+    }
+    .page > header nav section li:hover > ul {
+        border-left: 0;
+        clip: inherit;
+        height: inherit;
+        overflow: inherit;
+        width: inherit;
+    }
+    .page > header nav section li ul li a {
+        background-color: #efefef;
+        border-bottom: 1px solid #ededed;
+        display: block;
+        font-size: 11px;
+        line-height: 2;
+        padding: 8px 10px;
+        width: 180px;
+        white-space: normal;
+    }
+    .page > header nav section li ul li a:hover {
+        background-color: #e3e3e3;
+        color: #4444444;
+    }
 }
 .page > header nav section li {
     display: block;
