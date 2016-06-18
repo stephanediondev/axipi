@@ -32,6 +32,8 @@ class CacheController extends AbstractController
                 return $this->indexAction($request, $parameters);
             case 'symfony':
                 return $this->symfonyAction($request, $parameters);
+            case 'mediacache':
+                return $this->mediacacheAction($request, $parameters);
             case 'apcu':
                 return $this->apcuAction($request, $parameters);
             case 'opcache':
@@ -44,6 +46,7 @@ class CacheController extends AbstractController
 
     public function indexAction(Request $request, ParameterBag $parameters)
     {
+        $parameters->set('mediacache', is_dir('media'));
         $parameters->set('apcu', function_exists('apcu_clear_cache'));
         $parameters->set('opcache', function_exists('opcache_reset'));
 
@@ -72,6 +75,32 @@ class CacheController extends AbstractController
         $filesystem->remove($oldCacheDir);
 
         $this->addFlash('success', 'Reset Symfony done');
+
+        return $this->redirectToRoute('axipi_backend_cache', []);
+    }
+
+    public function mediacacheAction(Request $request, ParameterBag $parameters)
+    {
+        $realCacheDir = 'media';
+        $oldCacheDir = substr($realCacheDir, 0, -1).('~' === substr($realCacheDir, -1) ? '+' : '~');
+        $filesystem = $this->get('filesystem');
+
+        if(!is_writable($realCacheDir)) {
+            throw new \RuntimeException(sprintf('Unable to write in the "%s" directory', $realCacheDir));
+        }
+
+        if($filesystem->exists($oldCacheDir)) {
+            $filesystem->remove($oldCacheDir);
+        }
+
+        $kernel = $this->get('kernel');
+        $this->get('cache_clearer')->clear($realCacheDir);
+
+        $filesystem->rename($realCacheDir, $oldCacheDir);
+
+        $filesystem->remove($oldCacheDir);
+
+        $this->addFlash('success', 'Reset Media cache done');
 
         return $this->redirectToRoute('axipi_backend_cache', []);
     }
