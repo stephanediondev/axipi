@@ -157,6 +157,9 @@ button, input[type="submit"], input[type="button"], input[type="reset"] {
 .page > header nav section li.active {
     font-weight: bold;
 }
+.page > header nav section li.active li {
+    font-weight: normal;
+}
 .page > header nav section li a {
     color: #6a6a6a;
     line-height: 3;
