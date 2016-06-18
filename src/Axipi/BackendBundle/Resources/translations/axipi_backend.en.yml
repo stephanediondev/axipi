@@ -38,6 +38,8 @@ actions:
     get_location: "Get location"
 search: "Search"
 cache: "Cache"
+reset_symfony: "Reset Symfony cache"
+reset_mediacache: "Reset media cache"
 reset_apcu: "Reset APCu"
 reset_opcache: "Reset OPcache"
 info: "Info"
