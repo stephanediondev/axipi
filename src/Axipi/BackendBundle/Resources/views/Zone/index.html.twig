@@ -12,7 +12,7 @@
         {% endblock %}
         {% block card__supporting %}
             {% for object in objects %}
-                <div class="mdl-cell mdl-cell--2-col dragitem">
+                <div class="mdl-cell mdl-cell--2-col sortitem" id="zone-{{ object.id }}">
                     <a href="{{ path('axipi_backend_zones', {action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i><br>{{ object.code }}</a>
                 </div>
             {% endfor %}
@@ -40,7 +40,20 @@
         tolerance: "pointer",
         items: "div:not(.placeholder)",
         stop: function(event, ui) {
-            console.log(event);
+            var result = {};
+            $('.sortzone').find('.sortitem').each(function(index) {
+                result[$(this).attr('id')] = index + 1;
+            });
+            $.ajax({
+                async: false,
+                cache: false,
+                data: {'result': JSON.stringify(result)},
+                dataType: 'json',
+                success: function (data) {
+                },
+                type: 'POST',
+                url: '{{ path('axipi_backend_zones', {action: 'sort'}) }}'
+            });
         }
     });
     </script>
