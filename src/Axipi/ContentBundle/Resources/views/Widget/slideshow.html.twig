@@ -1,5 +1,5 @@
-<!-- Content / Block -->
-<div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('col-lg-12') }}">
+<!-- Slideshow -->
+<div class="widget{% if widget.attribute('div_class') %} {{ widget.attribute('div_class') }}{% endif %}" id="widget-{{ widget.id }}">
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -31,4 +31,4 @@
         </a>
     </div>
 </div>
-<!-- Content / Block (end) -->
+<!-- Slideshow (end) -->

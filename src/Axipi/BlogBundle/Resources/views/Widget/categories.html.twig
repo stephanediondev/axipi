@@ -1,9 +1,9 @@
 <!-- Blog / Categories -->
-<div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('widget') }}">
-    {% if widget.attribute('display_title')|default(false) %}
-        <{{ widget.attribute('title_tag')|default('h3') }} class="widget-title">{{ widget.title }}</{{ widget.attribute('title_tag')|default('h3') }}>
+<div class="widget{% if widget.attribute('div_class') %} {{ widget.attribute('div_class') }}{% endif %}" id="widget-{{ widget.id }}">
+    {% if widget.attribute('display_title')|default(true) %}
+        <{{ widget.attribute('title_tag')|default('h1') }}>{{ widget.title }}</{{ widget.attribute('title_tag')|default('h1') }}>
     {% endif %}
-    <ul class="{{ widget.attribute('ul_class')|default(widget.attribute('predefined'))|default('nav nav-pills nav-stacked') }}">
+    <ul{% if widget.attribute('ul_class') %} class="{{ widget.attribute('ul_class') }}"{% endif %}>
         {% for child in children %}
             <li{% if page.slug == child.slug %} class="active"{% endif %}><a href="{{ buildLink(child) }}">{{ child.title }}</a></li>
         {% endfor %}

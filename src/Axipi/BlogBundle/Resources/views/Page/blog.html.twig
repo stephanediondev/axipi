@@ -2,16 +2,15 @@
 
 {% block main %}
     <!-- Blog -->
-    <article id="category-{{ page.id }}" class="category-{{ page.id }} category type-category">
-        <header class="entry-header">
-            <h1 class="entry-title">{{ page.title }}</h1>
+    <section class="main">
+        <header>
+            <h1>{{ page.title }}</h1>
         </header>
-        {% if page.attribute('description') %}
-            <div class="entry-content">
-                {{ convertText(page.attribute('description')|raw) }}
-            </div>
-        {% endif %}
-    </article>
+
+        <article>
+            {{ convertText(page.attribute('description')|raw) }}
+        </article>
+    </section>
     <!-- Blog (end) -->
 {% endblock %}
 

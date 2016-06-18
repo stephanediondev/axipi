@@ -17,72 +17,56 @@
 {% endblock %}
 
 {% block style %}
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&amp;subset=latin,latin-ext" media="all">
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/axipicore/css/base.css') }}">
 {% endblock %}
 
 {{ getWidgets('head') }}
 </head>
 
-<body id="page-id-{{ page.id }}" class="page page-template-default custom-font-enabled">
-    <div id="page" class="hfeed site">
-
+<body>
+<div class="page" id="page-{{ page.id }}">
     {% block header %}
-        <header id="masthead" class="site-header" role="banner">
+        <header role="banner">
             {{ getWidgets('before_nav') }}
-            <nav id="site-navigation" class="main-navigation" role="navigation">
-                <button class="menu-toggle">TODO</button>
+            <nav role="navigation">
+                <button>NAV</button>
                 {{ getWidgets('nav') }}
             </nav>
         </header>
     {% endblock %}
 
-    <div class="container">
-        {% for type, flashes in app.session.flashbag.all() %}
-            {% for flash in flashes %}
-                <div class="alert alert-{{ type }}" role="alert">
-                    <p>{{ flash }}</p>
-                </div>
-            {% endfor %}
-        {% endfor %}
-    </div>
-
-    {% block before_content %}
-        <div class="container">
-            <div class="row">
+    <main role="main">
+        {% block before_content %}
+            <section id="before_content">
                 {{ getWidgets('before_content') }}
-            </div>
-        </div>
-    {% endblock %}
+            </section>
+        {% endblock %}
 
-    <div id="main" class="wrapper">
-        <div id="primary" class="site-content">
-            <div id="content" role="main">
-                {% block content %}
-                {% endblock %}
-            </div>
-        </div>
-        <div id="secondary" class="widget-area" role="complementary">
-            {{ getWidgets('sidebar') }}
-        </div>
-    </div>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <aside role="complementary">
+        {{ getWidgets('sidebar') }}
+    </aside>
 
     {% block footer %}
-        <footer id="colophon" role="contentinfo">
+        <footer role="contentinfo">
             {{ getWidgets('footer') }}
         </footer>
     {% endblock %}
-    </div>
+</div>
 
-    {% block script %}
-    <script type="text/javascript">
-    var app_environment = '{{ app.environment }}';
-    var app_request_locale = '{{ app.request.locale }}';
-    var app_request_uri = '{{ app.request.uri }}';
-    </script>
-    <script type="text/javascript" src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/axipicore/js/base.js') }}"></script>
-    {% endblock %}
+{% block script %}
+<script type="text/javascript">
+var app_environment = '{{ app.environment }}';
+var app_request_locale = '{{ app.request.locale }}';
+var app_request_uri = '{{ app.request.uri }}';
+var page_id = '{{ page.id }}';
+var page_language_code = '{{ page.language.code }}';
+</script>
+<script type="text/javascript" src="{{ asset('bundles/axipicore/js/base.js') }}"></script>
+{% endblock %}
 
 </body>
 </html>

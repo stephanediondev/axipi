@@ -1,6 +1,6 @@
 <!-- Content / Block -->
 {% if widget.attribute('inside_div') %}
-    <div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('col-lg-12') }}">
+    <div class="widget{% if widget.attribute('div_class') %} {{ widget.attribute('div_class') }}{% endif %}" id="widget-{{ widget.id }}">
         {{ widget.attribute('description')|raw }}
     </div>
 {% else %}

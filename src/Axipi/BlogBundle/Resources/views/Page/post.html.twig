@@ -2,23 +2,23 @@
 
 {% block main %}
     <!-- Blog / Post -->
-    <article id="post-{{ page.id }}" class="post-{{ page.id }} page type-page">
-        <header class="entry-header">
-            <h1 class="entry-title">{{ page.title }}</h1>
+    <section class="main">
+        <header>
+            <h1>{{ page.title }}</h1>
         </header>
 
-        <div class="entry-content">
+        <article>
             {{ convertText(page.attribute('description')|raw) }}
-        </div>
-    </article>
+        </article>
+    </section>
 
-    <div id="comments" class="comments-area">
-        <div id="respond" class="comment-respond">
-            <h3 id="reply-title" class="comment-reply-title">Leave a Reply</h3>
+    <section class="comment-form">
+        <header>
+            <h1>Leave a Reply</h1>
+        </header>
+
+        <article>
             {{ form_start(form) }}
-                <p class="comment-notes">
-                    <span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span>
-                </p>
                 {{ form_row(form.message) }}
                 {{ form_row(form.author) }}
                 {{ form_row(form.email) }}
@@ -27,8 +27,12 @@
                 {{ form_row(form.submit) }}
                 <input type="hidden" name="comment_parent" id="comment_parent" value="0">
             {{ form_end(form) }}
-        </div>
-    </div>
+        </article>
+
+        <footer>
+            <p>Your email address will not be published. Required fields are marked <span class="required">*</span>
+        </footer>
+    </section>
     <!-- Blog / Post (end) -->
 {% endblock %}
 

@@ -2,16 +2,18 @@
 
 {% block main %}
     <!-- Google / Map -->
-    <article id="post-{{ page.id }}" class="post-{{ page.id }} page type-pagey">
-        <header class="entry-header">
-            <h1 class="entry-title">{{ page.title }}</h1>
+    <section class="main">
+        <header>
+            <h1>{{ page.title }}</h1>
         </header>
 
-        <div class="entry-content">
+        <article>
             {{ convertText(page.attribute('description')|raw) }}
-            <div id="map" style="height:{{ page.attribute('height')|default(400) }}px;">
-        </div>
-    </article>
+        </article>
+    </section>
+
+    <section id="map" style="height:{{ page.attribute('height')|default(400) }}px;">
+    </section>
     <!-- Google / Map (end) -->
 {% endblock %}
 

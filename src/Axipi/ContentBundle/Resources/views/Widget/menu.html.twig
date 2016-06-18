@@ -1,12 +1,12 @@
 {% import '@AxipiContent/Widget/menu_macro.html.twig' as helper %}
 <!-- Content / Menu -->
-<div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('widget') }}">
+<div class="widget{% if widget.attribute('div_class') %} {{ widget.attribute('div_class') }}{% endif %}" id="widget-{{ widget.id }}">
     {% if widget.attribute('display_title')|default(false) %}
-        <{{ widget.attribute('title_tag')|default('h3') }} class="widget-title">{{ widget.title }}</{{ widget.attribute('title_tag')|default('h3') }}>
+        <{{ widget.attribute('title_tag')|default('h1') }}>{{ widget.title }}</{{ widget.attribute('title_tag')|default('h1') }}>
     {% endif %}
-    <ul class="{{ widget.attribute('ul_class')|default(widget.attribute('predefined'))|default('nav-menu') }}">
+    <ul{% if widget.attribute('ul_class') %} class="{{ widget.attribute('ul_class') }}"{% endif %}>
         {% for relation in relations %}
-            <li{% if page.slug == relation.page.slug %} class="current_page_item"{% endif %}>
+            <li{% if page.slug == relation.page.slug %} class="active"{% endif %}>
                 <a href="{{ buildLink(relation.page) }}">{{ relation.title|default(relation.page.title) }}</a>
                 {%if relation.children %}
                     {{ helper.menu_loop(relation, page) }}

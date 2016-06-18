@@ -1,14 +1,12 @@
-<!-- Content / Menu -->
-<div id="widget-{{ widget.code }}" class="{{ widget.attribute('div_class')|default('widget') }}">
-    {% if widget.attribute('display_title')|default(false) %}
-        <{{ widget.attribute('title_tag')|default('h3') }} class="widget-title">{{ widget.title }}</{{ widget.attribute('title_tag')|default('h3') }}>
+<!-- Search / Form -->
+<div class="widget{% if widget.attribute('div_class') %} {{ widget.attribute('div_class') }}{% endif %}" id="widget-{{ widget.id }}">
+    {% if widget.attribute('display_title')|default(true) %}
+        <{{ widget.attribute('title_tag')|default('h1') }}>{{ widget.title }}</{{ widget.attribute('title_tag')|default('h1') }}>
     {% endif %}
-    <form role="search" method="get" class="{{ widget.attribute('form_class')|default('navbar-form navbar-right') }}" action="{{ buildLink(widget.parent) }}">
-        <div>
-            <label class="screen-reader-text" for="s">{{ widget.attribute('placeholder')|default('widget.placeholder'|trans({}, 'axipi_search')) }}</label>
-            <input class="form-control" type="text" name="q" value="{{ request.get('q') }}">
-            <input type="submit" id="searchsubmit" value="{{ widget.attribute('placeholder')|default('widget.placeholder'|trans({}, 'axipi_search')) }}">
-        </div>
+    <form role="search" method="get" action="{{ buildLink(widget.parent) }}"{% if widget.attribute('form_class') %} class="{{ widget.attribute('form_class') }}"{% endif %}>
+        <label for="widget-input-{{ widget.id }}">{{ widget.attribute('label')|default('widget.label'|trans({}, 'axipi_search')) }}</label>
+        <input id="widget-input-{{ widget.id }}" type="text" name="q" value="{{ request.get('q') }}">
+        <input type="submit" value="{{ widget.attribute('submit')|default('widget.submit'|trans({}, 'axipi_search')) }}">
     </form>
 </div>
-<!-- Content / Menu (end) -->
+<!-- Search / Form (end) -->

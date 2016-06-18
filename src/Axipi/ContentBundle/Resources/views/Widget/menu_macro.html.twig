@@ -1,9 +1,9 @@
 {% macro menu_loop(object, page) %}
     {% import _self as helper %}
 
-    <ul class="sub-menu">
+    <ul>
         {% for relation_child in object.children %}
-            <li{% if page.slug == relation_child.page.slug %} class="current_page_item"{% endif %}>
+            <li{% if page.slug == relation_child.page.slug %} class="active"{% endif %}>
                 <a href="{{ buildLink(relation_child.page) }}">{{ relation_child.title|default(relation_child.page.title) }}</a>
                 {%if relation_child.children %}
                     {{ helper.menu_loop(relation_child, page) }}
