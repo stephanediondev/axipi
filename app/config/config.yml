@@ -76,10 +76,10 @@ liip_imagine:
     filter_sets:
         cache: ~
         square_thumb:
-            quality: 80
+            quality: 85
             filters:
                 thumbnail: { size: [150, 150], mode: outbound }
         banner:
-            quality: 80
+            quality: 85
             filters:
                 thumbnail: { size: [680, 200], mode: outbound }
