@@ -58,7 +58,7 @@
         {% endblock %}
     {% endembed %}
 
-    {% embed 'AxipiBackendBundle::card.html.twig' with {toggle: true, id: 'widgets-create'} %}
+    {% embed 'AxipiBackendBundle::card.html.twig' with {no_title: true, toggle: true, id: 'widgets-create'} %}
         {% block card__actions %}
             <a class="mdl-button mdl-color--pink mdl-color-text--white toggle" href="#widgets-create">{{ 'actions.close'|trans({}, 'axipi_backend') }}</a>
         {% endblock %}

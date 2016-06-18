@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block body %}
-    {% embed 'AxipiBackendBundle::card.html.twig' with {toggle: true, id: 'files-create'} %}
+    {% embed 'AxipiBackendBundle::card.html.twig' with {no_title: true, toggle: true, id: 'files-create'} %}
         {% block card__actions %}
             <a class="mdl-button mdl-color--pink mdl-color-text--white toggle" href="#files-create">{{ 'actions.close'|trans({}, 'axipi_backend') }}</a>
         {% endblock %}

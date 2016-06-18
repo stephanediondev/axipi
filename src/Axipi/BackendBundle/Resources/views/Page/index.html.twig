@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    {% embed 'AxipiBackendBundle::card.html.twig' with {toggle: true, id: 'pages-create'} %}
+    {% embed 'AxipiBackendBundle::card.html.twig' with {no_title: true, toggle: true, id: 'pages-create'} %}
         {% block card__actions %}
             <a class="mdl-button mdl-color--pink mdl-color-text--white toggle" href="#pages-create">{{ 'actions.close'|trans({}, 'axipi_backend') }}</a>
         {% endblock %}
