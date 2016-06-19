@@ -26,6 +26,8 @@
             </header>
 
             <article>
+                <p><em>Your email address will not be published. Required fields are marked <span class="required">*</span></em></p>
+
                 {{ form_start(form) }}
                     {{ form_row(form.message) }}
                     {{ form_row(form.author) }}
@@ -36,10 +38,6 @@
                     <input type="hidden" name="comment_parent" id="comment_parent" value="0">
                 {{ form_end(form) }}
             </article>
-
-            <footer>
-                <p>Your email address will not be published. Required fields are marked <span class="required">*</span>
-            </footer>
         </section>
 
     {%for comment in comments %}
