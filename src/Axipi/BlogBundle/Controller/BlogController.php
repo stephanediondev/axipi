@@ -10,7 +10,14 @@ class BlogController extends AbstractController
 {
     public function getPage($parameters)
     {
-        $parameters->set('children', $this->get('axipi_core_manager_item')->getList(['component_service' => 'axipi_blog_controller_post', 'active' => true]));
+        $paginator  = $this->get('knp_paginator');
+        $paginator->setDefaultPaginatorOptions(['widgetParameterName' => 'page']);
+        $pagination = $paginator->paginate(
+            $this->get('axipi_core_manager_item')->getList(['component_service' => 'axipi_blog_controller_post', 'language_code' => $parameters->get('page')->getLanguage()->getCode(), 'active' => true]),
+            $parameters->get('request')->query->getInt('page', 1),
+            20
+        );
+        $parameters->set('posts', $pagination);
 
         if($parameters->get('page')->getTemplate()) {
             $template = $parameters->get('page')->getTemplate();

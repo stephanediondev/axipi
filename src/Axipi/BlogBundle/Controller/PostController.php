@@ -21,6 +21,17 @@ class PostController extends AbstractController
 
     public function getPage($parameters)
     {
+        $parameters->set('blog', $this->get('axipi_core_manager_item')->getOne(['component_service' => 'axipi_blog_controller_blog', 'language_code' => $parameters->get('page')->getLanguage()->getCode(), 'active' => true]));
+
+        $paginator  = $this->get('knp_paginator');
+        $paginator->setDefaultPaginatorOptions(['widgetParameterName' => 'page']);
+        $pagination = $paginator->paginate(
+            $this->commentManager->getList(['item' => $parameters->get('page'), 'active' => true]),
+            $parameters->get('request')->query->getInt('page', 1),
+            20
+        );
+        $parameters->set('comments', $pagination);
+
         $comment = new Comment();
         $comment->setItem($parameters->get('page'));
         $comment->setIsActive(true);

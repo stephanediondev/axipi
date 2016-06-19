@@ -12,21 +12,25 @@
         </article>
     </section>
 
-    <section class="medias flex">
-        {% for media in medias %}
-            <a class="flexitem" href="{{ buildLink(media) }}"><img src="{{ relative_path('uploads/' ~ media.attribute('image'))|imagine_filter('square_thumb') }}" alt=""></a>
-        {% endfor %}
-    </section>
+    {% if medias|length > 0 %}
+        <section class="medias flex">
+            {% for media in medias %}
+                <a class="flexitem" href="{{ buildLink(media) }}"><img src="{{ relative_path('uploads/' ~ media.attribute('image'))|imagine_filter('square_thumb') }}" alt=""></a>
+            {% endfor %}
+        </section>
+    {% endif %}
 
-    <section class="albums flex">
-        {% for album in albums %}
-            {% if album.attribute('image') %}
-                <a class="flexitem" href="{{ buildLink(album) }}"><img src="{{ relative_path('uploads/' ~ album.attribute('image'))|imagine_filter('square_thumb') }}" alt=""></a>
-            {% else %}
-                <a class="flexitem" href="{{ buildLink(album) }}">{{ album.title }}</a>
-            {% endif %}
-        {% endfor %}
-    </section>
+    {% if albums|length > 0 %}
+        <section class="albums flex">
+            {% for album in albums %}
+                {% if album.attribute('image') %}
+                    <a class="flexitem" href="{{ buildLink(album) }}"><img src="{{ relative_path('uploads/' ~ album.attribute('image'))|imagine_filter('square_thumb') }}" alt=""></a>
+                {% else %}
+                    <a class="flexitem" href="{{ buildLink(album) }}">{{ album.title }}</a>
+                {% endif %}
+            {% endfor %}
+        </section>
+    {% endif %}
     <!-- Gallery / Album (end) -->
 {% endblock %}
 

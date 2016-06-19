@@ -2,9 +2,9 @@
 namespace Axipi\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Axipi\CoreBundle\Entity\Relation;
+use Axipi\CoreBundle\Entity\Comment;
 
-class RelationRepository extends EntityRepository
+class CommentRepository extends EntityRepository
 {
     public function getOne($parameters = []) {
         $em = $this->getEntityManager();
@@ -29,35 +29,20 @@ class RelationRepository extends EntityRepository
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
-        $query->addSelect('rel', 'rel_parent', 'rel_children', 'wdg', 'pge');
-        $query->from('AxipiCoreBundle:Relation', 'rel');
-        $query->leftJoin('rel.parent', 'rel_parent');
-        $query->leftJoin('rel.children', 'rel_children');
-        $query->leftJoin('rel.widget', 'wdg');
-        $query->leftJoin('rel.page', 'pge');
+        $query->addSelect('com');
+        $query->from('AxipiCoreBundle:Comment', 'com');
 
-        if(isset($parameters['parent_null']) == 1 && $parameters['parent_null'] == true) {
-            $query->andWhere('rel.parent IS NULL');
-        }
-
-        if(isset($parameters['parent']) == 1) {
-            $query->andWhere('rel.parent = :parent');
-            $query->setParameter(':parent', $parameters['parent']);
-        }
-
-        if(isset($parameters['widget']) == 1) {
-            $query->andWhere('rel.widget = :widget');
-            $query->setParameter(':widget', $parameters['widget']);
+        if(isset($parameters['item']) == 1) {
+            $query->andWhere('com.item = :item');
+            $query->setParameter(':item', $parameters['item']);
         }
 
         if(isset($parameters['active']) == 1 && $parameters['active'] == true) {
-            $query->andWhere('rel.isActive = :active');
-            $query->andWhere('pge.isActive = :active');
+            $query->andWhere('com.isActive = :active');
             $query->setParameter(':active', true);
         }
 
-        $query->addOrderBy('rel.ordering');
-        $query->addOrderBy('pge.title');
+        $query->addOrderBy('com.id');
 
         $getQuery = $query->getQuery();
 

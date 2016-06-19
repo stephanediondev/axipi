@@ -12,10 +12,10 @@
         </article>
     </section>
 
-    {%for post in children %}
+    {%for post in posts %}
         <section class="post" id="post-{{ post.id }}">
             <header>
-                <h2><a href="{{ buildLink(post) }}" rel="bookmark">{{ post.title }}</a></h2>
+                <h2><a href="{{ buildLink(post) }}">{{ post.title }}</a></h2>
                 {% if post.attribute('image') %}
                     <p><a href="{{ buildLink(post) }}"><img src="{{ relative_path('uploads/' ~ post.attribute('image'))|imagine_filter('banner') }}" alt=""></a></p>
                 {% endif %}
@@ -30,10 +30,16 @@
             </article>
 
             <footer>
-                <p>This entry was posted in <a href="{{ buildLink(post.parent) }}" rel="category tag">{{ post.parent.title }}</a> on <a href="{{ buildLink(post) }}" title="TODO" rel="bookmark"><time class="entry-date" datetime="TODO">TODO</time></a></p>
+                <p>This entry was posted in <a href="{{ buildLink(post.parent) }}" rel="category tag">{{ post.parent.title }}</a> on <a href="{{ buildLink(post) }}"><time class="entry-date" datetime="{{ post.dateCreated|date('c') }}">{{ post.dateCreated|date('D, F j, Y, H:i') }}</time></a></p>
             </footer>
         </section>
     {% endfor %}
+
+    {% if posts.pageCount > 1 %}
+        <div class="paging">
+            {{ knp_pagination_render(posts) }}
+        </div>
+    {% endif %}
     <!-- Blog (end) -->
 {% endblock %}
 

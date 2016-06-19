@@ -15,31 +15,52 @@
         </article>
 
         <footer>
-            <p>This entry was posted in <a href="{{ buildLink(page.parent) }}" rel="category tag">{{ page.parent.title }}</a> on <a href="{{ buildLink(page) }}" title="TODO" rel="bookmark"><time class="entry-date" datetime="TODO">TODO</time></a></p>
+            <p>This entry was posted in <a href="{{ buildLink(page.parent) }}" rel="category tag">{{ page.parent.title }}</a> on <a href="{{ buildLink(page) }}"><time class="entry-date" datetime="{{ page.dateCreated|date('c') }}">{{ page.dateCreated|date('D, F j, Y, H:i') }}</time></a></p>
         </footer>
     </section>
 
-    <section class="comment-form">
-        <header>
-            <h1>Leave a Reply</h1>
-        </header>
+    {% if blog.attribute('comments_disabled') == false and page.attribute('comments_disabled') == false %}
+        <section class="comment-form">
+            <header>
+                <h1>Leave a Reply</h1>
+            </header>
 
-        <article>
-            {{ form_start(form) }}
-                {{ form_row(form.message) }}
-                {{ form_row(form.author) }}
-                {{ form_row(form.email) }}
-                {{ form_row(form.website) }}
-                {{ form_row(form.recaptcha) }}
-                {{ form_row(form.submit) }}
-                <input type="hidden" name="comment_parent" id="comment_parent" value="0">
-            {{ form_end(form) }}
-        </article>
+            <article>
+                {{ form_start(form) }}
+                    {{ form_row(form.message) }}
+                    {{ form_row(form.author) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.website) }}
+                    {{ form_row(form.recaptcha) }}
+                    {{ form_row(form.submit) }}
+                    <input type="hidden" name="comment_parent" id="comment_parent" value="0">
+                {{ form_end(form) }}
+            </article>
 
-        <footer>
-            <p>Your email address will not be published. Required fields are marked <span class="required">*</span>
-        </footer>
-    </section>
+            <footer>
+                <p>Your email address will not be published. Required fields are marked <span class="required">*</span>
+            </footer>
+        </section>
+
+    {%for comment in comments %}
+        <section class="comment" id="comment-{{ comment.id }}">
+            <header>
+                <p>Posted by {% if comment.website %}<a href="{{ comment.website }}">{{ comment.author }}</a>{% else %}{{ comment.author }}{% endif %} on <time class="entry-date" datetime="{{ comment.dateCreated|date('c') }}">{{ comment.dateCreated|date('D, F j, Y, H:i') }}</time></a></p>
+            </header>
+
+            <article>
+                {{ comment.message }}
+            </article>
+        </section>
+    {% endfor %}
+
+    {% if comments.pageCount > 1 %}
+        <div class="paging">
+            {{ knp_pagination_render(comments) }}
+        </div>
+    {% endif %}
+
+    {% endif %}
     <!-- Blog / Post (end) -->
 {% endblock %}
 
