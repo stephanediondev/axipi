@@ -120,6 +120,10 @@ class ItemRepository extends EntityRepository
             $query->setParameter(':zone', $parameters['zone_code']);
         }
 
+        if(isset($parameters['zone_null']) == 1 && $parameters['zone_null'] == true) {
+            $query->andWhere('pge.zone IS NULL');
+        }
+
         if(isset($parameters['parent']) == 1) {
             $query->andWhere('pge.parent = :parent');
             $query->setParameter(':parent', $parameters['parent']);

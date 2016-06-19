@@ -34,6 +34,27 @@
         {% endblock %}
     {% endembed %}
 
+    {% embed 'AxipiBackendBundle::card.html.twig' with {dropzone: true, sortzone: true, id: 'no_zone'} %}
+        {% block card__title %}
+            <span><i class="fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'no_zone'|trans({}, 'axipi_backend') }}</span>
+        {% endblock %}
+        {% block card__supporting %}
+            {% if app.request.get('language') == 'null' %}
+                {% for object in no_zone if object.language is null %}
+                    <div class="mdl-cell mdl-cell--2-col sortitem">
+                        <a href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% for object in no_zone if object.language is not null and object.language.code == app.request.get('language') %}
+                    <div class="mdl-cell mdl-cell--2-col sortitem">
+                        <a href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
+
     {% for zone in zones %}
         {% embed 'AxipiBackendBundle::card.html.twig' with {dropzone: true, sortzone: true, id: zone.code} %}
             {% block card__title %}

@@ -98,6 +98,7 @@ class WidgetController extends AbstractController
     {
         $parameters->set('components', $this->componentManager->getList(['category' => 'widget', 'active' => true]));
         $parameters->set('zones', $this->zoneManager->getList());
+        $parameters->set('no_zone', $this->itemManager->getList(['category' => 'widget', 'zone_null' => true]));
 
         return $this->render('AxipiBackendBundle:Widget:index.html.twig', $parameters->all());
     }

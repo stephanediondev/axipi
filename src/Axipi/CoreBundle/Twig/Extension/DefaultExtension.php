@@ -44,6 +44,24 @@ class DefaultExtension extends \Twig_Extension
         ];
     }
 
+    public function getWidget($id)
+    {
+        $content = '';
+        $request = $this->container->get('request_stack')->getMasterRequest();
+        $page = $this->container->get('axipi_core_manager_default')->getPage();
+
+        $widget = $this->em->getRepository('AxipiCoreBundle:Item')->getOne(['category' => 'widget', 'active' => true, 'id' => $id]);
+
+        if($this->container->has($widget->getComponent()->getService())) {
+            $parameters = new ParameterBag();
+            $parameters->set('request', $request);
+            $parameters->set('widget', $widget);
+            $parameters->set('page', $page);
+            $content .= $this->container->get($widget->getComponent()->getService())->getWidget($parameters);
+        }
+        return $content;
+    }
+
     public function getWidgets($code)
     {
         $content = '';
@@ -109,14 +127,14 @@ class DefaultExtension extends \Twig_Extension
         }
 
         $widgets = [];
-        preg_match_all('/\[widgets:(.*)\]/i', $text, $matches);
+        preg_match_all('/\[widget:(.*)\]/i', $text, $matches);
         if(isset($matches[1]) == 1) {
             $widgets = $matches[1];
         }
         if(count($ids) > 0) {
             foreach($widgets as $widget) {
-                $text = str_replace('<p>[widgets:'.$widget.']</p>', '[widgets:'.$widget.']', $text);
-                $text = str_replace('[widgets:'.$widget.']', $this->getWidgets($widget), $text);
+                $text = str_replace('<p>[widget:'.$widget.']</p>', '[widget:'.$widget.']', $text);
+                $text = str_replace('[widget:'.$widget.']', $this->getWidget($widget), $text);
             }
         }
 
