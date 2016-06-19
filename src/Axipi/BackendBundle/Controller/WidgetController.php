@@ -88,6 +88,8 @@ class WidgetController extends AbstractController
                 return $this->deleteAction($request, $parameters, $id);
             case 'upload':
                 return $this->uploadAction($request, $parameters);
+            case 'wysiwyg':
+                return $this->wysiwygAction($request, $parameters);
         }
 
         $this->addFlash('danger', 'not found');
@@ -226,6 +228,19 @@ class WidgetController extends AbstractController
                 'icon' => $component->geticon(),
                 'href' => $this->generateUrl('axipi_backend_widgets', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]),
             ];
+        }
+
+        return new JsonResponse($data);
+    }
+
+    public function wysiwygAction(Request $request, ParameterBag $parameters)
+    {
+        $data = [];
+        $data['widgets'] = [];
+
+        $results = $this->itemManager->getList(['category' => 'widget', 'zone_null' => true, 'parent_null' => true]);
+        foreach($results as $result) {
+            $data['widgets'][] = ['value' => '[widget:'.$result->getId().']', 'text' => $result->getTitle()];
         }
 
         return new JsonResponse($data);

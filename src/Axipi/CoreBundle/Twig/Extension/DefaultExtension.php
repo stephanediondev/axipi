@@ -52,12 +52,14 @@ class DefaultExtension extends \Twig_Extension
 
         $widget = $this->em->getRepository('AxipiCoreBundle:Item')->getOne(['category' => 'widget', 'active' => true, 'id' => $id]);
 
-        if($this->container->has($widget->getComponent()->getService())) {
-            $parameters = new ParameterBag();
-            $parameters->set('request', $request);
-            $parameters->set('widget', $widget);
-            $parameters->set('page', $page);
-            $content .= $this->container->get($widget->getComponent()->getService())->getWidget($parameters);
+        if($widget) {
+            if($this->container->has($widget->getComponent()->getService())) {
+                $parameters = new ParameterBag();
+                $parameters->set('request', $request);
+                $parameters->set('widget', $widget);
+                $parameters->set('page', $page);
+                $content .= $this->container->get($widget->getComponent()->getService())->getWidget($parameters);
+            }
         }
         return $content;
     }

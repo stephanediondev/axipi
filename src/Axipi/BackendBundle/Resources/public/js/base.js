@@ -3,6 +3,41 @@ var current_popup;
 document.addEventListener('mdl-componentupgraded', function(e){
     //In case other element are upgraded before the layout  
     if (typeof e.target.MaterialLayout !== 'undefined') {
+        tinymce.PluginManager.add('axipi', function(editor, url) {
+            $.ajax({
+                async: false,
+                cache: false,
+                dataType: 'json',
+                success: function (data) {
+                    editor.addButton('axipi', {
+                        text: 'Insert Widget',
+                        icon: false,
+                        onclick: function() {
+                            editor.windowManager.open({
+                                title: 'Insert Widget',
+                                body: [
+                                    {
+                                        type: 'listbox',
+                                        name: 'widget',
+                                        label: 'Select',
+                                        text: '-',
+                                        values: data.widgets
+                                    }
+                                ],
+                                width: 500,
+                                height: 100,
+                                onsubmit: function(e) {
+                                    editor.insertContent(e.data.widget);
+                                }
+                            });
+                        }
+                    });
+                },
+                type: 'POST',
+                url: axipi_backend_home + 'widgets/en/wysiwyg'
+            });
+        });
+
         tinymce.init({
             file_browser_callback : function(field_name, url, type, win) {
                 if(type == 'image') {
@@ -38,7 +73,6 @@ document.addEventListener('mdl-componentupgraded', function(e){
             relative_urls: true,
             document_base_url: axipi_core_home,
             visualblocks_default_state: true,
-            content_css : '../vendor/bootstrap/dist/css/bootstrap.min.css',
             style_formats: [
               { title: 'Headers', items: [
                 { title: 'h1', block: 'h1' },
@@ -48,16 +82,13 @@ document.addEventListener('mdl-componentupgraded', function(e){
                 { title: 'h5', block: 'h5' },
                 { title: 'h6', block: 'h6' }
               ] },
-
               { title: 'Blocks', items: [
                 { title: 'p', block: 'p' },
-                { title: 'p.lead', block: 'p', classes: 'lead' },
-                { title: 'div', block: 'div' },
-                { title: 'pre', block: 'pre' }
+                { title: 'blockquote', block: 'blockquote' },
               ] }
             ],
-            plugins: 'advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker searchreplace wordcount visualblocks visualchars code fullscreen media nonbreaking table contextmenu directionality template paste',
-            toolbar1: 'bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect',
+            plugins: 'axipi advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker searchreplace wordcount visualblocks visualchars code fullscreen media nonbreaking table contextmenu directionality template paste',
+            toolbar1: 'bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect axipi',
             toolbar2: 'cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code',
             toolbar3: 'table | hr removeformat | subscript superscript | charmap | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft',
             menubar: false,
