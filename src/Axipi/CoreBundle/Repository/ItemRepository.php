@@ -152,10 +152,10 @@ class ItemRepository extends EntityRepository
 
         if(isset($parameters['category']) == 1) {
             if($parameters['category'] == 'page') {
-                $query->orderBy('pge.slug');
+                $query->addOrderBy('pge.slug');
             }
             if($parameters['category'] == 'widget') {
-                $query->orderBy('pge.ordering');
+                $query->addOrderBy('pge.ordering');
             }
         }
 

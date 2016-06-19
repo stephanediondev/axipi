@@ -32,7 +32,8 @@
         <header>
             {{ getWidgets('before_nav') }}
             {% block nav %}
-                <nav>
+                <nav id="nav">
+                    <button>NAV</button>
                     {{ getWidgets('nav') }}
                 </nav>
             {% endblock %}
@@ -65,7 +66,31 @@ var app_request_uri = '{{ app.request.uri }}';
 var page_id = '{{ page.id }}';
 var page_language_code = '{{ page.language.code }}';
 </script>
-<script type="text/javascript" src="{{ asset('bundles/axipicore/js/base.js') }}"></script>
+<script type="text/javascript">
+(function() {
+    var nav = document.getElementById('nav'), button, menu;
+    if(!nav) {
+        return;
+    }
+    button = nav.getElementsByTagName('button')[0];
+    section = nav.getElementsByTagName('section')[0];
+    menu = section.getElementsByTagName('ul')[0];
+    if(!button ) {
+        return;
+    }
+    if(!menu || !menu.childNodes.length) {
+        button.style.display = 'none';
+        return;
+    }
+    button.onclick = function() {
+        if(menu.style.display == "" || menu.style.display == 'none') {
+            menu.style.display = 'block';
+        } else {
+            menu.style.display = 'none';
+        }
+    };
+}) ();
+</script>
 {% endblock %}
 
 </body>

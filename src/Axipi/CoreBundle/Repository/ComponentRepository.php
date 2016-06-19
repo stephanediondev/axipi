@@ -55,7 +55,7 @@ class ComponentRepository extends EntityRepository
             $query->setParameter(':active', true);
         }
 
-        $query->orderBy('cmp.title');
+        $query->addOrderBy('cmp.title');
 
         return $query->getQuery()->getResult();
     }

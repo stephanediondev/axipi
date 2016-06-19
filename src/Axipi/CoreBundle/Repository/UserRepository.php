@@ -33,7 +33,7 @@ class UserRepository extends EntityRepository
         $query->addSelect('usr');
         $query->from('AxipiCoreBundle:User', 'usr');
 
-        $query->orderBy('usr.username');
+        $query->addOrderBy('usr.username');
 
         return $query->getQuery()->getResult();
     }

@@ -56,7 +56,8 @@ class RelationRepository extends EntityRepository
             $query->setParameter(':active', true);
         }
 
-        $query->orderBy('rel.ordering');
+        $query->addOrderBy('rel.ordering');
+        $query->addOrderBy('pge.title');
 
         $getQuery = $query->getQuery();
 
