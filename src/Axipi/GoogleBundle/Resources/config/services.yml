@@ -1,6 +1,6 @@
 services:
-    axipi_google_controller_map:
-        class: Axipi\GoogleBundle\Controller\MapController
+    axipi_google_widget_map:
+        class: Axipi\GoogleBundle\Widget\MapWidget
         parent: "axipi_core_controller_abstract"
 
     axipi_google_widget_analytics:

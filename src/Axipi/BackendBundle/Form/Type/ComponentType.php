@@ -39,7 +39,7 @@ class ComponentType extends AbstractType
 
         $builder->add('service', TextType::class,
             [
-                'required' => true,
+                'required' => false,
             ]
         );
 

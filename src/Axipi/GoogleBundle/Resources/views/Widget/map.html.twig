@@ -1,0 +1,54 @@
+<!-- Google / Map -->
+<section class="widget{% if widget.attribute('section_class') %} {{ widget.attribute('section_class') }}{% endif %}" id="widget-{{ widget.id }}" style="height:{{ widget.attribute('height')|default(400) }}px;">
+</section>
+
+<script type="text/javascript">
+var map;
+function initMap() {
+    var myLatLng = {lat: {{ widget.attribute('latitude') }}, lng: {{ widget.attribute('longitude') }}};
+    map = new google.maps.Map(document.getElementById('widget-{{ widget.id }}'), {
+        center: myLatLng,
+        zoom: {{ widget.attribute('zoom')|default(15) }},
+        overviewMapControl: false,
+        overviewMapControlOptions: {
+            opened: true
+        },
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        panControl: true,
+        mapTypeControl: true,
+        mapTypeControlOptions: {
+            style: google.maps.MapTypeControlStyle.DEFAULT
+        },
+        scrollwheel: true,
+        streetViewControl: true,
+        zoomControl: true,
+        ZoomControlOptions: {
+            position: google.maps.ControlPosition.TOP_LEFT,
+            style: google.maps.ZoomControlStyle.SMALL
+        }
+    });
+
+    {% for marker in widget.children %}
+        var myLatLng{{ marker.id }} = {lat: {{ marker.attribute('latitude') }}, lng: {{ marker.attribute('longitude') }}};
+
+        var infowindow{{ marker.id }} = new google.maps.InfoWindow({
+            content: '{{ convertText(marker.attribute('infowindow'))|escape('js') }}'
+        });
+
+        var marker{{ marker.id }} = new google.maps.Marker({
+            position: myLatLng{{ marker.id }},
+            map: map
+        });
+
+        marker{{ marker.id }}.addListener('click', function() {
+            infowindow{{ marker.id }}.open(map, marker{{ marker.id }});
+        });
+
+        map.addListener('click', function() {
+            infowindow{{ marker.id }}.close();
+        });
+    {% endfor %}
+}
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ widget.attribute('api_key') }}&amp;callback=initMap"></script>
+<!-- Google / Map (end) -->

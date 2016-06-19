@@ -131,7 +131,8 @@ class DefaultExtension extends \Twig_Extension
         if(isset($matches[1]) == 1) {
             $widgets = $matches[1];
         }
-        if(count($ids) > 0) {
+
+        if(count($widgets) > 0) {
             foreach($widgets as $widget) {
                 $text = str_replace('<p>[widget:'.$widget.']</p>', '[widget:'.$widget.']', $text);
                 $text = str_replace('[widget:'.$widget.']', $this->getWidget($widget), $text);
