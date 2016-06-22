@@ -30,6 +30,8 @@ class ComponentManager extends AbstractManager
         $event = new ComponentEvent($data);
         $this->eventDispatcher->dispatch('component.after_persist', $event);
 
+        $this->removeCache();
+
         return $data->getId();
     }
 
@@ -40,5 +42,14 @@ class ComponentManager extends AbstractManager
 
         $this->em->remove($data);
         $this->em->flush();
+
+        $this->removeCache();
+    }
+
+    public function removeCache()
+    {
+        if(function_exists('apcu_clear_cache')) {
+            apcu_clear_cache();
+        }
     }
 }

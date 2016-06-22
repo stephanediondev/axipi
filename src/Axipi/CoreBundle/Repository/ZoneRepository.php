@@ -41,6 +41,14 @@ class ZoneRepository extends EntityRepository
         $query->addOrderBy('zon.ordering');
         $query->addOrderBy('zon.code');
 
-        return $query->getQuery()->getResult();
+        $getQuery = $query->getQuery();
+
+        if(isset($parameters['active']) == 1 && $parameters['active'] == true && function_exists('apcu_clear_cache')) {
+            $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
+            $cacheDriver->setNamespace('axipi_zone_');
+            $getQuery->setResultCacheDriver($cacheDriver);
+            $getQuery->setResultCacheLifetime(86400);
+        }
+        return $getQuery->getResult();
     }
 }

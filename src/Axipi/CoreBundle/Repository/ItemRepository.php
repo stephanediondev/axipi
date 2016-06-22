@@ -51,20 +51,12 @@ class ItemRepository extends EntityRepository
         $getQuery = $query->getQuery();
         $getQuery->setMaxResults(1);
 
-        $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
-        if(isset($parameters['active']) == 1 && isset($parameters['active']) == true && isset($parameters['slug']) == 1 && isset($parameters['language_code']) == 1) {
-            $cacheId = 'axipi/page/'.$parameters['language_code'].'/'.$parameters['slug'];
+        if(isset($parameters['active']) == 1 && $parameters['active'] == true && function_exists('apcu_clear_cache')) {
+            $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
+            $cacheDriver->setNamespace('axipi_item_');
             $getQuery->setResultCacheDriver($cacheDriver);
-            $getQuery->setResultCacheId($cacheId);
             $getQuery->setResultCacheLifetime(86400);
         }
-        if(isset($parameters['active']) == 1 && isset($parameters['active']) == true && isset($parameters['id']) == 1) {
-            $cacheId = 'axipi/page/'.$parameters['id'];
-            $getQuery->setResultCacheDriver($cacheDriver);
-            $getQuery->setResultCacheId($cacheId);
-            $getQuery->setResultCacheLifetime(86400);
-        }
-
         return $getQuery->getOneOrNullResult();
     }
 
@@ -165,24 +157,12 @@ class ItemRepository extends EntityRepository
 
         $getQuery = $query->getQuery();
 
-        $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
-        if(isset($parameters['active']) == 1 && isset($parameters['active']) == true && isset($parameters['zone_code']) == 1) {
-            $cacheId = 'axipi/widgets/'.$parameters['zone_code'];
+        if(isset($parameters['active']) == 1 && $parameters['active'] == true && function_exists('apcu_clear_cache')) {
+            $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
+            $cacheDriver->setNamespace('axipi_item_');
             $getQuery->setResultCacheDriver($cacheDriver);
-            $getQuery->setResultCacheId($cacheId);
             $getQuery->setResultCacheLifetime(86400);
         }
-        if(isset($parameters['active']) == 1 && isset($parameters['active']) == true && isset($parameters['parent']) == 1) {
-            if(isset($parameters['component_service']) == 1) {
-                $cacheId = 'axipi/children/'.$parameters['parent']->getId().'/'.$parameters['component_service'];
-            } else {
-                $cacheId = 'axipi/children/'.$parameters['parent']->getId();
-            }
-            $getQuery->setResultCacheDriver($cacheDriver);
-            $getQuery->setResultCacheId($cacheId);
-            $getQuery->setResultCacheLifetime(86400);
-        }
-
         return $getQuery->getResult();
     }
 

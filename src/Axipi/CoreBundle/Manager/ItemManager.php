@@ -21,8 +21,6 @@ class ItemManager extends AbstractManager
 
     public function persist($data)
     {
-        $this->removeCache($data);
-
         $attributes = json_decode($data->getComponent()->getAttributesSchema(), true);
         if($attributes) {
             foreach($attributes as $key => $attribute) {
@@ -100,13 +98,13 @@ class ItemManager extends AbstractManager
         $event = new ItemEvent($data);
         $this->eventDispatcher->dispatch('item.after_persist', $event);
 
+        $this->removeCache();
+
         return $data->getId();
     }
 
     public function remove($data)
     {
-        $this->removeCache($data);
-
         $event = new ItemEvent($data);
         $this->eventDispatcher->dispatch('item.before_remove', $event);
 
@@ -124,43 +122,14 @@ class ItemManager extends AbstractManager
 
         $this->em->remove($data);
         $this->em->flush();
+
+        $this->removeCache();
     }
 
-    public function removeCache($data)
+    public function removeCache()
     {
-        $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
-
-        if($data->getParent()) {
-            $cacheId = 'axipi/children/'.$data->getParent()->getId();
-            if($cacheDriver->contains($cacheId)) {
-                $cacheDriver->delete($cacheId);
-            }
-        }
-
-        if($data->getComponent()->getCategory() == 'page') {
-            $cacheId = 'axipi/page/'.$data->getLanguage()->getCode().'/'.$data->getSlug();
-            if($cacheDriver->contains($cacheId)) {
-                $cacheDriver->delete($cacheId);
-            }
-
-            $cacheId = 'axipi/page/'.$data->getId();
-            if($cacheDriver->contains($cacheId)) {
-                $cacheDriver->delete($cacheId);
-            }
-        }
-
-        if($data->getComponent()->getCategory() == 'widget') {
-            $cacheId = 'axipi/relations/'.$data->getId();
-            if($cacheDriver->contains($cacheId)) {
-                $cacheDriver->delete($cacheId);
-            }
-
-            if($data->getZone()) {
-                $cacheId = 'axipi/widgets/'.$data->getZone()->getCode();
-                if($cacheDriver->contains($cacheId)) {
-                    $cacheDriver->delete($cacheId);
-                }
-            }
+        if(function_exists('apcu_clear_cache')) {
+            apcu_clear_cache();
         }
     }
 
