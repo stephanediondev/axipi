@@ -28,7 +28,7 @@ function initMap() {
         }
     });
 
-    {% for marker in widget.children %}
+    {% for marker in markers %}
         var myLatLng{{ marker.id }} = {lat: {{ marker.attribute('latitude') }}, lng: {{ marker.attribute('longitude') }}};
 
         var infowindow{{ marker.id }} = new google.maps.InfoWindow({

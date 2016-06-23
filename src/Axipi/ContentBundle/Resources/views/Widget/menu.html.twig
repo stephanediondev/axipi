@@ -6,11 +6,11 @@
     {% endif %}
 
     <ul{% if widget.attribute('ul_class') %} class="{{ widget.attribute('ul_class') }}"{% endif %}>
-        {% for relation in relations %}
+        {% for relation in relations['null'] %}
             <li{% if page.slug == relation.page.slug %} class="active"{% endif %}>
                 <a href="{{ buildLink(relation.page) }}">{{ relation.title|default(relation.page.title) }}</a>
-                {%if relation.children %}
-                    {{ helper.menu_loop(relation, page) }}
+                {%if relations[relation.id] is defined %}
+                    {{ helper.menu_loop(relations, relation.id, page) }}
                 {% endif %}
             </li>
         {% endfor %}

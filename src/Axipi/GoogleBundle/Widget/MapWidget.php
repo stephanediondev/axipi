@@ -10,6 +10,8 @@ class MapWidget extends AbstractWidget
 {
     public function getWidget($parameters)
     {
+        $parameters->set('markers', $this->get('axipi_core_manager_item')->getList(['parent' => $parameters->get('widget'), 'active' => true]));
+
         if($parameters->get('widget')->getTemplate()) {
             $template = $parameters->get('widget')->getTemplate();
         } else {

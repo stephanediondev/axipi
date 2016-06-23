@@ -1,12 +1,12 @@
-{% macro menu_loop(object, page) %}
+{% macro menu_loop(relations, id, page) %}
     {% import _self as helper %}
 
     <ul>
-        {% for relation_child in object.children %}
+        {% for relation_child in relations[id] %}
             <li{% if page.slug == relation_child.page.slug %} class="active"{% endif %}>
                 <a href="{{ buildLink(relation_child.page) }}">{{ relation_child.title|default(relation_child.page.title) }}</a>
-                {%if relation_child.children %}
-                    {{ helper.menu_loop(relation_child, page) }}
+                {%if relations[relation_child.id] is defined %}
+                    {{ helper.menu_loop(relations, relation_child.id, page) }}
                 {% endif %}
             </li>
         {% endfor %}
