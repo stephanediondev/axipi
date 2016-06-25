@@ -30,6 +30,12 @@ class CommentManager extends AbstractManager
         $event = new CommentEvent($data);
         $this->eventDispatcher->dispatch('comment.after_persist', $event);
 
+        $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
+        $cacheId = 'axipi_comment_'.$data->getItem()->getId();
+        if($cacheDriver->contains($cacheId)) {
+            $cacheDriver->delete($cacheId);
+        }
+
         return $data->getId();
     }
 
@@ -40,5 +46,11 @@ class CommentManager extends AbstractManager
 
         $this->em->remove($data);
         $this->em->flush();
+
+        $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
+        $cacheId = 'axipi_comment_'.$data->getItem()->getId();
+        if($cacheDriver->contains($cacheId)) {
+            $cacheDriver->delete($cacheId);
+        }
     }
 }

@@ -1,3 +1,6 @@
-test: "oo"
-test1:
-    test2: "test translation core"
+blog:
+    message: "Comment*"
+    author: "Name*"
+    email: "Email"
+    website: "Website"
+    submit: "Post Comment"

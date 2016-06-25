@@ -53,9 +53,7 @@
     {% endfor %}
 
     {% if comments.pageCount > 1 %}
-        <div class="paging">
-            {{ knp_pagination_render(comments) }}
-        </div>
+        {{ knp_pagination_render(comments) }}
     {% endif %}
 
     {% endif %}

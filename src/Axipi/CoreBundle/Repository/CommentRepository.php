@@ -48,7 +48,11 @@ class CommentRepository extends EntityRepository
 
         if(isset($parameters['active']) == 1 && $parameters['active'] == true && function_exists('apcu_clear_cache')) {
             $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
-            $cacheDriver->setNamespace('axipi_comment_');
+            if(isset($parameters['item']) == 1) {
+                $getQuery->setResultCacheId('axipi_comment_'.$parameters['item']->getId());
+            } else {
+                $cacheDriver->setNamespace('axipi_comment_');
+            }
             $getQuery->setResultCacheDriver($cacheDriver);
             $getQuery->setResultCacheLifetime(86400);
         }

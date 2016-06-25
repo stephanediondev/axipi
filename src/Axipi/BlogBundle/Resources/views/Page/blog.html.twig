@@ -36,9 +36,7 @@
     {% endfor %}
 
     {% if posts.pageCount > 1 %}
-        <div class="paging">
-            {{ knp_pagination_render(posts) }}
-        </div>
+        {{ knp_pagination_render(posts) }}
     {% endif %}
     <!-- Blog (end) -->
 {% endblock %}

@@ -21,6 +21,19 @@ class CommentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->add('message', TextareaType::class,
+            [
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(),
+                ],
+                'attr' => [
+                    'cols' => 45,
+                    'rows' => 8,
+                ],
+            ]
+        );
+
         $builder->add('author', TextType::class,
             [
                 'required' => true,
@@ -32,8 +45,9 @@ class CommentType extends AbstractType
 
         $builder->add('email', TextType::class,
             [
-                'required' => false,
+                'required' => true,
                 'constraints' => [
+                    new NotBlank(),
                     new Email(),
                 ],
             ]
@@ -42,19 +56,6 @@ class CommentType extends AbstractType
         $builder->add('website', TextType::class,
             [
                 'required' => false,
-            ]
-        );
-
-        $builder->add('message', TextareaType::class,
-            [
-                'required' => true,
-                'constraints' => [
-                    new NotBlank(),
-                ],
-                'attr' => [
-                    'cols' => 45,
-                    'rows' => 8,
-                ],
             ]
         );
 
@@ -72,11 +73,7 @@ class CommentType extends AbstractType
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
         foreach($view->children as $name => $child) {
-            if($name == 'submit') {
-                $child->vars['label'] = 'actions.'.$name;
-            } else {
-                $child->vars['label'] = 'blog.'.$name;
-            }
+            $child->vars['label'] = 'blog.'.$name;
         }
     }
 
