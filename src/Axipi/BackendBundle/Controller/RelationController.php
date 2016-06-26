@@ -3,6 +3,7 @@ namespace Axipi\BackendBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Controller\AbstractController;
@@ -63,6 +64,8 @@ class RelationController extends AbstractController
                 return $this->updateAction($request, $parameters, $id, $language);
             case 'delete':
                 return $this->deleteAction($request, $parameters, $id, $language);
+            case 'sort':
+                return $this->sortAction($request, $parameters);
         }
 
         $this->addFlash('danger', 'not found');
@@ -140,5 +143,20 @@ class RelationController extends AbstractController
         $parameters->set('form', $form->createView());
 
         return $this->render('AxipiBackendBundle:Relation:delete.html.twig', $parameters->all());
+    }
+    public function sortAction(Request $request, ParameterBag $parameters)
+    {
+        $data = json_decode($request->request->get('result'));
+        foreach($data as $id => $ordering) {
+            $relation = $this->relationManager->getOne(['id' => intval($id)]);
+            if($relation) {
+                $relation->setOrdering(intval($ordering));
+                $this->relationManager->persist($relation);
+            }
+        }
+
+        $response = new JsonResponse();
+        $response->setData($data);
+        return $response;
     }
 }

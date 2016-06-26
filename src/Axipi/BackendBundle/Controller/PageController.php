@@ -79,6 +79,8 @@ class PageController extends AbstractController
                 return $this->deleteAction($request, $parameters, $id);
             case 'upload':
                 return $this->uploadAction($request, $parameters);
+            case 'sort':
+                return $this->sortAction($request, $parameters);
         }
 
         $this->addFlash('danger', 'not found');
@@ -132,6 +134,7 @@ class PageController extends AbstractController
     public function readAction(Request $request, ParameterBag $parameters, $id)
     {
         $parameters->set('components', $this->componentManager->getList(['category' => 'page', 'active' => true]));
+        $parameters->set('children', $this->itemManager->getList(['parent' => $parameters->get('page')]));
 
         $languages = $this->languageManager->getList(['active' => true]);
         $this->container->get('axipi_core_manager_default')->setLanguages($languages);
@@ -219,5 +222,21 @@ class PageController extends AbstractController
         }
 
         return new JsonResponse($data);
+    }
+
+    public function sortAction(Request $request, ParameterBag $parameters)
+    {
+        $data = json_decode($request->request->get('result'));
+        foreach($data as $id => $ordering) {
+            $item = $this->itemManager->getOne(['id' => intval($id)]);
+            if($item) {
+                $item->setOrdering(intval($ordering));
+                $this->itemManager->persist($item);
+            }
+        }
+
+        $response = new JsonResponse();
+        $response->setData($data);
+        return $response;
     }
 }

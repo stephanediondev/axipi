@@ -136,6 +136,13 @@ class ZoneController extends AbstractController
     public function sortAction(Request $request, ParameterBag $parameters)
     {
         $data = json_decode($request->request->get('result'));
+        foreach($data as $id => $ordering) {
+            $zone = $this->zoneManager->getOne(['id' => intval($id)]);
+            if($zone) {
+                $zone->setOrdering(intval($ordering));
+                $this->zoneManager->persist($zone);
+            }
+        }
 
         $response = new JsonResponse();
         $response->setData($data);

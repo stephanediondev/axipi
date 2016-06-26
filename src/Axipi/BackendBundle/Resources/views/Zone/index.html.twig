@@ -42,7 +42,8 @@
         stop: function(event, ui) {
             var result = {};
             $('.sortzone').find('.sortitem').each(function(index) {
-                result[$(this).attr('id')] = index + 1;
+                var id = $(this).attr('id');
+                result[id.replace('zone-', '')] = index + 1;
             });
             $.ajax({
                 async: false,

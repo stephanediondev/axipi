@@ -89,7 +89,7 @@
         {% endblock %}
     {% endembed %}
 
-    {% embed 'AxipiBackendBundle::card.html.twig' with {id: 'ajax-upload-result'} %}
+    {% embed 'AxipiBackendBundle::card.html.twig' with {sortzone: true, id: 'ajax-upload-result'} %}
         {% block card__actions %}
             <a class="mdl-button mdl-color--pink mdl-color-text--white toggle" href="#pages-create">{{ 'actions.create'|trans({}, 'axipi_backend') }}</a>
         {% endblock %}
@@ -97,9 +97,9 @@
             <span>{{ 'item.children'|trans({}, 'axipi_backend') }}</span>
         {% endblock %}
         {% block card__supporting %}
-            {% if page.children|length %}
-                {% for object in page.children %}
-                    <div class="mdl-cell mdl-cell--2-col">
+            {% if children|length %}
+                {% for object in children %}
+                    <div class="mdl-cell mdl-cell--2-col sortitem" id="item-{{ object.id }}">
                         {% if object.component.category == 'page' %}
                             <a href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
                         {% else %}
@@ -131,4 +131,36 @@
 
 {% block script %}
     {{ parent() }}
+    <script type="text/javascript" src="{{ asset('vendor/jquery-ui/ui/minified/core.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/jquery-ui/ui/minified/mouse.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/jquery-ui/ui/minified/sortable.min.js') }}"></script>
+
+    <script type="text/javascript">
+    $('.sortzone').sortable({
+        forcePlaceholderSize: true,
+        cursor: "move",
+        helper: "clone",
+        appendTo: "#target-drag",
+        zIndex: 9999,
+        tolerance: "pointer",
+        items: "div:not(.placeholder)",
+        stop: function(event, ui) {
+            var result = {};
+            $('.sortzone').find('.sortitem').each(function(index) {
+                var id = $(this).attr('id');
+                result[id.replace('item-', '')] = index + 1;
+            });
+            $.ajax({
+                async: false,
+                cache: false,
+                data: {'result': JSON.stringify(result)},
+                dataType: 'json',
+                success: function (data) {
+                },
+                type: 'POST',
+                url: '{{ path('axipi_backend_pages', {mode: 'normal', language: app.request.get('language'), action: 'sort'}) }}'
+            });
+        }
+    });
+    </script>
 {% endblock %}
