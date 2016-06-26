@@ -90,6 +90,10 @@ class WidgetController extends AbstractController
                 return $this->uploadAction($request, $parameters);
             case 'wysiwyg':
                 return $this->wysiwygAction($request, $parameters);
+            case 'sort':
+                return $this->sortAction($request, $parameters);
+            case 'move':
+                return $this->moveAction($request, $parameters, $id);
         }
 
         $this->addFlash('danger', 'not found');
@@ -244,5 +248,34 @@ class WidgetController extends AbstractController
         }
 
         return new JsonResponse($data);
+    }
+
+    public function sortAction(Request $request, ParameterBag $parameters)
+    {
+        $data = json_decode($request->request->get('result'));
+        foreach($data as $id => $ordering) {
+            $item = $this->itemManager->getOne(['id' => intval($id)]);
+            if($item) {
+                $item->setOrdering(intval($ordering));
+                $this->itemManager->persist($item);
+            }
+        }
+
+        $response = new JsonResponse();
+        $response->setData($data);
+        return $response;
+    }
+
+    public function moveAction(Request $request, ParameterBag $parameters, $id)
+    {
+        $zone = $this->zoneManager->getOne(['id' => $request->request->get('zone')]);
+        if($zone) {
+            $parameters->get('widget')->setZone($zone);
+            $this->itemManager->persist($parameters->get('widget'));
+        }
+
+        $response = new JsonResponse();
+        $response->setData($data);
+        return $response;
     }
 }

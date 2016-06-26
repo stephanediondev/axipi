@@ -128,7 +128,7 @@
         items: "div:not(.placeholder)",
         stop: function(event, ui) {
             var result = {};
-            $('.sortzone').find('.sortitem').each(function(index) {
+            $(this).find('.sortitem').each(function(index) {
                 var id = $(this).attr('id');
                 result[id.replace('relation-', '')] = index + 1;
             });

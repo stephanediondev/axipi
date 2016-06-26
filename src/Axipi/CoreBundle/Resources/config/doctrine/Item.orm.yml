@@ -201,4 +201,7 @@ Axipi\CoreBundle\Entity\Item:
         children:
             targetEntity: Item
             mappedBy: parent
+            orderBy:
+                ordering: ASC
+                title: ASC
     lifecycleCallbacks: {  }

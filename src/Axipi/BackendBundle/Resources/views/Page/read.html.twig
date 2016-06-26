@@ -97,8 +97,8 @@
             <span>{{ 'item.children'|trans({}, 'axipi_backend') }}</span>
         {% endblock %}
         {% block card__supporting %}
-            {% if children|length %}
-                {% for object in children %}
+            {% if page.children|length %}
+                {% for object in page.children %}
                     <div class="mdl-cell mdl-cell--2-col sortitem" id="item-{{ object.id }}">
                         {% if object.component.category == 'page' %}
                             <a href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
@@ -146,7 +146,7 @@
         items: "div:not(.placeholder)",
         stop: function(event, ui) {
             var result = {};
-            $('.sortzone').find('.sortitem').each(function(index) {
+            $(this).find('.sortitem').each(function(index) {
                 var id = $(this).attr('id');
                 result[id.replace('item-', '')] = index + 1;
             });

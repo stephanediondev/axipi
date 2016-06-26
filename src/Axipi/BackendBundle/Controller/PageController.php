@@ -134,7 +134,6 @@ class PageController extends AbstractController
     public function readAction(Request $request, ParameterBag $parameters, $id)
     {
         $parameters->set('components', $this->componentManager->getList(['category' => 'page', 'active' => true]));
-        $parameters->set('children', $this->itemManager->getList(['parent' => $parameters->get('page')]));
 
         $languages = $this->languageManager->getList(['active' => true]);
         $this->container->get('axipi_core_manager_default')->setLanguages($languages);

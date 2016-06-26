@@ -41,13 +41,13 @@
         {% block card__supporting %}
             {% if app.request.get('language') == 'null' %}
                 {% for object in no_zone if object.language is null %}
-                    <div class="mdl-cell mdl-cell--2-col sortitem">
+                    <div class="mdl-cell mdl-cell--2-col sortitem" id="item-{{ object.id }}">
                         <a href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
                     </div>
                 {% endfor %}
             {% else %}
                 {% for object in no_zone if object.language is not null and object.language.code == app.request.get('language') %}
-                    <div class="mdl-cell mdl-cell--2-col sortitem">
+                    <div class="mdl-cell mdl-cell--2-col sortitem" id="item-{{ object.id }}">
                         <a href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
                     </div>
                 {% endfor %}
@@ -56,20 +56,20 @@
     {% endembed %}
 
     {% for zone in zones %}
-        {% embed 'AxipiBackendBundle::card.html.twig' with {dropzone: true, sortzone: true, id: zone.code} %}
+        {% embed 'AxipiBackendBundle::card.html.twig' with {dropzone: true, sortzone: true, id: 'zone-' ~ zone.id} %}
             {% block card__title %}
                 <span><i class="fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ zone.code }}</span>
             {% endblock %}
             {% block card__supporting %}
                 {% if app.request.get('language') == 'null' %}
                     {% for object in zone.widgets if object.language is null %}
-                        <div class="mdl-cell mdl-cell--2-col sortitem">
+                        <div class="mdl-cell mdl-cell--2-col sortitem" id="item-{{ object.id }}">
                             <a href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
                         </div>
                     {% endfor %}
                 {% else %}
                     {% for object in zone.widgets if object.language is not null and object.language.code == app.request.get('language') %}
-                        <div class="mdl-cell mdl-cell--2-col sortitem">
+                        <div class="mdl-cell mdl-cell--2-col sortitem" id="item-{{ object.id }}">
                             <a href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
                         </div>
                     {% endfor %}
@@ -101,8 +101,22 @@
         tolerance: "pointer",
         items: "div:not(.placeholder)",
         stop: function(event, ui) {
-            //console.log($(event.target).parent().attr('id'));
-            console.log(ui);
+            var zone = $(ui.item).parent().parent();
+            var result = {};
+            zone.find('.sortitem').each(function(index) {
+                var id = $(this).attr('id');
+                result[id.replace('item-', '')] = index + 1;
+            });
+            $.ajax({
+                async: true,
+                cache: false,
+                data: {'result': JSON.stringify(result)},
+                dataType: 'json',
+                success: function (data) {
+                },
+                type: 'POST',
+                url: '{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'sort'}) }}'
+            });
         }
     });
 
@@ -111,7 +125,18 @@
         hoverClass: "ui-state-hover",
         accept: "div",
         drop: function( event, ui ) {
-            $(this).append( ui.draggable );
+            /*var zone = $(ui.draggable).parent().parent().attr('id');
+            console.log(zone);
+            $.ajax({
+                async: true,
+                cache: false,
+                data: {'zone': zone.replace('zone-', '')},
+                dataType: 'json',
+                success: function (data) {
+                },
+                type: 'POST',
+                url: '{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'move'}) }}/' + $(ui.draggable).attr('id')
+            });*/
         }
     });
     </script>
