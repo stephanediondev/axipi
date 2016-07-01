@@ -1,19 +1,19 @@
 services:
     axipi_google_widget_map:
         class: Axipi\GoogleBundle\Widget\MapWidget
-        parent: "axipi_core_controller_abstract"
+        parent: "axipi_core_widget_abstract"
 
     axipi_google_widget_analytics:
         class: Axipi\GoogleBundle\Widget\AnalyticsWidget
-        parent: "axipi_core_controller_abstract"
+        parent: "axipi_core_widget_abstract"
 
     axipi_google_widget_searchconsole:
         class: Axipi\GoogleBundle\Widget\SearchconsoleWidget
-        parent: "axipi_core_controller_abstract"
+        parent: "axipi_core_widget_abstract"
 
     axipi_google_widget_tagmanager:
         class: Axipi\GoogleBundle\Widget\TagmanagerWidget
-        parent: "axipi_core_controller_abstract"
+        parent: "axipi_core_widget_abstract"
 
     axipi_google_validator_constraints_recaptcha:
         class: Axipi\GoogleBundle\Validator\Constraints\RecaptchaValidator

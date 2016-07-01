@@ -92,3 +92,10 @@ services:
             - "@axipi_core_manager_component"
         tags:
             - { name: "kernel.event_listener", event: "language.after_persist", method: "persist" }
+
+    axipi_backend_controller_comment:
+        class: Axipi\BackendBundle\Controller\CommentController
+        parent: "axipi_core_controller_abstract"
+        arguments:
+            - "@axipi_core_manager_comment"
+            - "@axipi_core_manager_item"

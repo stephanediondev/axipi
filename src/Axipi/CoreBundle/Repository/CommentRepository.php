@@ -10,15 +10,12 @@ class CommentRepository extends EntityRepository
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
-        $query->addSelect('rel', 'rel_parent', 'rel_children', 'wdg', 'pge');
-        $query->from('AxipiCoreBundle:Relation', 'rel');
-        $query->leftJoin('rel.parent', 'rel_parent');
-        $query->leftJoin('rel.children', 'rel_children');
-        $query->leftJoin('rel.widget', 'wdg');
-        $query->leftJoin('rel.page', 'pge');
+        $query->addSelect('com', 'itm');
+        $query->from('AxipiCoreBundle:Comment', 'com');
+        $query->leftJoin('com.item', 'itm');
 
         if(isset($parameters['id']) == 1) {
-            $query->andWhere('rel.id = :id');
+            $query->andWhere('com.id = :id');
             $query->setParameter(':id', $parameters['id']);
         }
 
@@ -29,8 +26,9 @@ class CommentRepository extends EntityRepository
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
-        $query->addSelect('com');
+        $query->addSelect('com', 'itm');
         $query->from('AxipiCoreBundle:Comment', 'com');
+        $query->leftJoin('com.item', 'itm');
 
         if(isset($parameters['item']) == 1) {
             $query->andWhere('com.item = :item');

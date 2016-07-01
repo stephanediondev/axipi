@@ -3,6 +3,7 @@ category:
     page: "Page"
     widget: "Widget"
 icons:
+    comment: "comments-o"
     initialize: "bolt"
     refresh: "refresh"
     search: "search"
@@ -67,6 +68,7 @@ file: "File"
 folder: "Folder"
 frontend: "Frontend"
 languages: "Languages"
+comments: "Comments"
 component:
     id: "ID"
     service: "Service"

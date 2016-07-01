@@ -1,0 +1,37 @@
+{% extends 'AxipiBackendBundle::base.html.twig' %}
+
+{% block title %}{{ comment.id }} - {{ 'comments'|trans({}, 'axipi_backend') }}{% endblock %}
+
+{% block body %}
+    {% embed 'AxipiBackendBundle::card.html.twig' %}
+        {% block card__actions %}
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_comments', {action: 'update', 'id': comment.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_comments', {action: 'delete', 'id': comment.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
+        {% endblock %}
+        {% block card__title %}
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_comments', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.comment'|trans({}, 'axipi_backend') }}"></i>{{ 'comments'|trans({}, 'axipi_backend') }}</a></span>
+            <span>{{ comment.id }}</span>
+        {% endblock %}
+        {% block card__supporting %}
+            <div class="mdl-cell mdl-cell--4-col">
+                {{ macro.read_field('comment.id'|trans({}, 'axipi_backend'), comment.id) }}
+                {{ macro.read_field('comment.author'|trans({}, 'axipi_backend'), comment.author) }}
+                {{ macro.read_field('comment.email'|trans({}, 'axipi_backend'), comment.email) }}
+                {{ macro.read_field('comment.website'|trans({}, 'axipi_backend'), comment.website) }}
+                {{ macro.read_field('comment.message'|trans({}, 'axipi_backend'), comment.message) }}
+            </div>
+            <div class="mdl-cell mdl-cell--4-col">
+                {{ macro.read_field('comment.isActive'|trans({}, 'axipi_backend'), comment.isActive) }}
+                {{ macro.read_field('comment.dateCreated'|trans({}, 'axipi_backend'), comment.dateCreated|date('Y-m-d H:i:s')) }}
+            </div>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+{% endblock %}

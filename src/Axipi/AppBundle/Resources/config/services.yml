@@ -1,7 +1,7 @@
 services:
     axipi_app_controller_example:
         class: Axipi\AppBundle\Controller\ExampleController
-        parent: "axipi_core_widget_abstract"
+        parent: "axipi_core_controller_abstract"
 
     axipi_app_widget_example:
         class: Axipi\AppBundle\Widget\ExampleWidget

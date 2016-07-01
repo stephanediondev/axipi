@@ -21,28 +21,28 @@ services:
 
     axipi_content_widget_block:
         class: Axipi\ContentBundle\Widget\BlockWidget
-        parent: "axipi_core_controller_abstract"
+        parent: "axipi_core_widget_abstract"
 
     axipi_content_widget_breadcrumbs:
         class: Axipi\ContentBundle\Widget\BreadcrumbsWidget
-        parent: "axipi_core_controller_abstract"
+        parent: "axipi_core_widget_abstract"
 
     axipi_content_widget_menu:
         class: Axipi\ContentBundle\Widget\MenuWidget
-        parent: "axipi_core_controller_abstract"
+        parent: "axipi_core_widget_abstract"
 
     axipi_content_widget_icon:
         class: Axipi\ContentBundle\Widget\IconWidget
-        parent: "axipi_core_controller_abstract"
+        parent: "axipi_core_widget_abstract"
 
     axipi_content_widget_languageselector:
         class: Axipi\ContentBundle\Widget\LanguageselectorWidget
-        parent: "axipi_core_controller_abstract"
+        parent: "axipi_core_widget_abstract"
 
     axipi_content_widget_slideshow:
         class: Axipi\ContentBundle\Widget\SlideshowWidget
-        parent: "axipi_core_controller_abstract"
+        parent: "axipi_core_widget_abstract"
 
     axipi_content_widget_code:
         class: Axipi\ContentBundle\Widget\CodeWidget
-        parent: "axipi_core_controller_abstract"
+        parent: "axipi_core_widget_abstract"

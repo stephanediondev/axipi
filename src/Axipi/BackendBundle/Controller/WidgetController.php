@@ -173,7 +173,11 @@ class WidgetController extends AbstractController
             if($form->isValid()) {
                 $this->itemManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_widgets', ['language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
+                if($parameters->get('language')) {
+                    return $this->redirectToRoute('axipi_backend_widgets', ['language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
+                } else {
+                    return $this->redirectToRoute('axipi_backend_widgets', ['language' => 'null', 'action' => 'read', 'id' => $id]);
+                }
             }
         }
 
@@ -191,7 +195,11 @@ class WidgetController extends AbstractController
             if($form->isValid()) {
                 $this->itemManager->remove($parameters->get('widget'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_widgets', ['language' => $parameters->get('language')->getCode()]);
+                if($parameters->get('language')) {
+                    return $this->redirectToRoute('axipi_backend_widgets', ['language' => $parameters->get('language')->getCode()]);
+                } else {
+                    return $this->redirectToRoute('axipi_backend_widgets', ['language' => 'null']);
+                }
             }
         }
 
