@@ -124,9 +124,9 @@
         activeClass: "ui-state-default",
         hoverClass: "ui-state-hover",
         accept: "div",
-        drop: function( event, ui ) {
-            /*var zone = $(ui.draggable).parent().parent().attr('id');
-            console.log(zone);
+        drop: function(event, ui) {
+            var id = $(ui.draggable).attr('id');
+            var zone = $(this).parent().attr('id');
             $.ajax({
                 async: true,
                 cache: false,
@@ -135,8 +135,8 @@
                 success: function (data) {
                 },
                 type: 'POST',
-                url: '{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'move'}) }}/' + $(ui.draggable).attr('id')
-            });*/
+                url: '{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'move'}) }}/' + id.replace('item-', '')
+            });
         }
     });
     </script>

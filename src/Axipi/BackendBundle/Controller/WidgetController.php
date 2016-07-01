@@ -268,6 +268,8 @@ class WidgetController extends AbstractController
 
     public function moveAction(Request $request, ParameterBag $parameters, $id)
     {
+        $data = [];
+
         $zone = $this->zoneManager->getOne(['id' => $request->request->get('zone')]);
         if($zone) {
             $parameters->get('widget')->setZone($zone);
