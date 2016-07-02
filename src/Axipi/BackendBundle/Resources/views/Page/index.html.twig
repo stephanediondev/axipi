@@ -42,10 +42,10 @@
 
     {% embed 'AxipiBackendBundle::card.html.twig' %}
         {% block card__title %}
-            <span><i class="fa fa-{{ 'icons.is_home'|trans({}, 'axipi_backend') }}"></i>{{ 'is_home'|trans({}, 'axipi_backend') }}</span>
+            <span><i class="fa fa-{{ 'icons.parent_null'|trans({}, 'axipi_backend') }}"></i>{{ 'parent_null'|trans({}, 'axipi_backend') }}</span>
         {% endblock %}
         {% block card__supporting %}
-            {% for object in is_home %}
+            {% for object in parent_null %}
                 <div class="mdl-cell mdl-cell--2-col">
                     <a href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
                 </div>
@@ -55,27 +55,18 @@
 
     {% embed 'AxipiBackendBundle::card.html.twig' %}
         {% block card__title %}
-            <span><i class="fa fa-{{ 'icons.with_no_parent'|trans({}, 'axipi_backend') }}"></i>{{ 'with_no_parent'|trans({}, 'axipi_backend') }}</span>
+            <span><i class="fa fa-{{ 'icons.search'|trans({}, 'axipi_backend') }}"></i>{{ 'search'|trans({}, 'axipi_backend') }}</span>
         {% endblock %}
         {% block card__supporting %}
-            {% for object in with_no_parent %}
-                <div class="mdl-cell mdl-cell--2-col">
-                    <a href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
-                </div>
-            {% endfor %}
-        {% endblock %}
-    {% endembed %}
-
-    {% embed 'AxipiBackendBundle::card.html.twig' %}
-        {% block card__title %}
-            <span><i class="fa fa-{{ 'icons.with_parent'|trans({}, 'axipi_backend') }}"></i>{{ 'with_parent'|trans({}, 'axipi_backend') }}</span>
-        {% endblock %}
-        {% block card__supporting %}
-            {% for object in with_parent %}
-                <div class="mdl-cell mdl-cell--2-col">
-                    <a href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
-                </div>
-            {% endfor %}
+            <div class="mdl-cell mdl-cell--4-col">
+                <p>
+                    <label for="term" class="required">{{ 'Term(s)'|trans({}, 'axipi_backend') }}</label>
+                    <input type="text" id="term" name="term" required="required" value="">
+                </p>
+                <p>
+                    <button class="mdl-button mdl-color--pink mdl-color-text--white" type="submit" id="submit" name="submit">{{ 'OK'|trans({}, 'axipi_backend') }}</button>
+                </p>
+            </div>
         {% endblock %}
     {% endembed %}
 {% endblock %}

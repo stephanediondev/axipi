@@ -201,6 +201,8 @@ div.page  > aside {
 }
 main section {
     border-bottom: 1px solid #ededed;
+    clear: both;
+    overflow: hidden;
     padding-bottom: 20px;
     padding-top: 20px;
 }
@@ -281,4 +283,15 @@ section.flex {
 }
 .pagination span.current {
     font-weight: bold;
+}
+.nav-previous, .nav-next {
+    margin-bottom: 20px;
+    width: 50%;
+}
+.nav-previous {
+    float: left;
+}
+.nav-next {
+    float: right;
+    text-align: right;
 }

@@ -5,6 +5,8 @@
     <section class="main">
         <header>
             <h1>{{ page.title }}</h1>
+            <span class="nav-previous"><a href="{{ buildLink(page.parent) }}" rel="prev"><span class="meta-nav">←</span> {{ page.parent.title }}</a></span>
+        </nav>
         </header>
 
         <article>
@@ -13,6 +15,17 @@
             <p><img src="{{ asset('uploads/' ~ page.attribute('image')) }}" alt=""></p>
         </article>
     </section>
+
+    {% if previous or next %}
+        <section class="nav">
+            {% if previous %}
+                <span class="nav-previous"><a href="{{ buildLink(previous) }}" rel="prev"><span class="meta-nav">←</span> {{ previous.title }}</a></span>
+            {% endif %}
+            {% if next %}
+                <span class="nav-next"><a href="{{ buildLink(next) }}" rel="next">{{ next.title }} <span class="meta-nav">→</span></a></span>
+            {% endif %}
+        </section>
+    {% endif %}
     <!-- Gallery / Media (end) -->
 {% endblock %}
 

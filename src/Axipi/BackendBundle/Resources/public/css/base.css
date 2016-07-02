@@ -1,3 +1,6 @@
+body {
+    color: #757575;
+}
 a:link, a:visited {
     color: #757575;
     text-decoration: none;
@@ -39,6 +42,7 @@ a:link, a:visited {
     overflow: visible;
 }
 .mdl-card__title {
+    color: #757575;
     padding: 8px;
 }
 .mdl-card__title-text {

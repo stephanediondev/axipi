@@ -12,6 +12,9 @@ class MediaController extends AbstractController
     {
         $parameters->set('albums', $this->get('axipi_core_manager_item')->getList(['component_service' => 'axipi_gallery_controller_album', 'language_code' => $parameters->get('page')->getLanguage()->getCode(), 'active' => true]));
 
+        $parameters->set('previous', $this->get('axipi_core_manager_item')->getOne(['parent' => $parameters->get('page')->getParent(), 'previous_id' => $parameters->get('page')->getId(), 'active' => true]));
+        $parameters->set('next', $this->get('axipi_core_manager_item')->getOne(['parent' => $parameters->get('page')->getParent(), 'next_id' => $parameters->get('page')->getId(), 'active' => true]));
+
         if($parameters->get('page')->getTemplate()) {
             $template = $parameters->get('page')->getTemplate();
         } else {

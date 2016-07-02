@@ -44,6 +44,10 @@ function initMap() {
             infowindow{{ marker.id }}.open(map, marker{{ marker.id }});
         });
 
+        {% if marker.attribute('infowindow_default_open') %}
+            infowindow{{ marker.id }}.open(map, marker{{ marker.id }});
+        {% endif %}
+
         map.addListener('click', function() {
             infowindow{{ marker.id }}.close();
         });

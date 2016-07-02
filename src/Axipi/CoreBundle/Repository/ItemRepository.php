@@ -21,6 +21,16 @@ class ItemRepository extends EntityRepository
             $query->setParameter(':id', $parameters['id']);
         }
 
+        if(isset($parameters['previous_id']) == 1) {
+            $query->andWhere('itm.id < :id');
+            $query->setParameter(':id', $parameters['previous_id']);
+        }
+
+        if(isset($parameters['next_id']) == 1) {
+            $query->andWhere('itm.id > :id');
+            $query->setParameter(':id', $parameters['next_id']);
+        }
+
         if(isset($parameters['slug']) == 1) {
             if($parameters['slug'] == '') {
                 $query->andWhere('itm.slug IS NULL');
@@ -41,6 +51,11 @@ class ItemRepository extends EntityRepository
         if(isset($parameters['component_service']) == 1) {
             $query->andWhere('cmp.service = :component_service');
             $query->setParameter(':component_service', $parameters['component_service']);
+        }
+
+        if(isset($parameters['parent']) == 1) {
+            $query->andWhere('itm.parent = :parent');
+            $query->setParameter(':parent', $parameters['parent']);
         }
 
         if(isset($parameters['active']) == 1 && $parameters['active'] == true) {

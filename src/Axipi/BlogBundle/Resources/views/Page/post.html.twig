@@ -19,6 +19,11 @@
         </footer>
     </section>
 
+    <section class="nav">
+        <span class="nav-previous"><a href="#" rel="prev"><span class="meta-nav">←</span> TODO</a></span>
+        <span class="nav-next"><a href="#" rel="next">TODO <span class="meta-nav">→</span></a></span>
+    </section>
+
     {% if blog.attribute('comments_disabled') == false and page.attribute('comments_disabled') == false %}
         <section class="comment-form">
             <header>
@@ -40,21 +45,21 @@
             </article>
         </section>
 
-    {%for comment in comments %}
-        <section class="comment" id="comment-{{ comment.id }}">
-            <header>
-                <p>Posted by {% if comment.website %}<a href="{{ comment.website }}">{{ comment.author }}</a>{% else %}{{ comment.author }}{% endif %} on <time class="entry-date" datetime="{{ comment.dateCreated|date('c') }}">{{ comment.dateCreated|date('D, F j, Y, H:i') }}</time></a></p>
-            </header>
+        {%for comment in comments %}
+            <section class="comment" id="comment-{{ comment.id }}">
+                <header>
+                    <p>Posted by {% if comment.website %}<a href="{{ comment.website }}">{{ comment.author }}</a>{% else %}{{ comment.author }}{% endif %} on <time class="entry-date" datetime="{{ comment.dateCreated|date('c') }}">{{ comment.dateCreated|date('D, F j, Y, H:i') }}</time></a></p>
+                </header>
+    
+                <article>
+                    {{ comment.message|nl2br }}
+                </article>
+            </section>
+        {% endfor %}
 
-            <article>
-                {{ comment.message }}
-            </article>
-        </section>
-    {% endfor %}
-
-    {% if comments.pageCount > 1 %}
-        {{ knp_pagination_render(comments) }}
-    {% endif %}
+        {% if comments.pageCount > 1 %}
+            {{ knp_pagination_render(comments) }}
+        {% endif %}
 
     {% endif %}
     <!-- Blog / Post (end) -->

@@ -26,11 +26,11 @@
             {% for key, stats in stats.indices %}
                 {% embed 'AxipiBackendBundle::card.html.twig' %}
                     {% block card__title %}
-                        <span><i class="fa fa-bolt"></i>{{ 'backend.index'|trans({}, 'axipi_search') }}</span>
-                        <span>{{ key }}</span>
+                        <span><i class="fa fa-bolt"></i>Index</span>
                     {% endblock %}
                     {% block card__supporting %}
                         <div class="mdl-cell mdl-cell--4-col">
+                            {{ macro.read_field('Name', key) }}
                             {{ macro.read_field('total.store.size_in_bytes', stats.total.store.size_in_bytes) }}
                             {{ macro.read_field('total.docs.count', stats.total.docs.count) }}
                             {{ macro.read_field('total.docs.deleted', stats.total.docs.deleted) }}
@@ -47,11 +47,11 @@
         {% if health is defined %}
             {% embed 'AxipiBackendBundle::card.html.twig' %}
                 {% block card__title %}
-                    <span><i class="fa fa-database"></i>{{ 'backend.cluster'|trans({}, 'axipi_search') }}</span>
-                    <span>{{ health.cluster_name }}</span>
+                    <span><i class="fa fa-cloud"></i>Cluster</span>
                 {% endblock %}
                 {% block card__supporting %}
                     <div class="mdl-cell mdl-cell--4-col">
+                        {{ macro.read_field('Name', health.cluster_name) }}
                         {{ macro.read_field('status', health.status) }}
                         {{ macro.read_field('number_of_nodes', health.number_of_nodes) }}
                     </div>
@@ -67,11 +67,11 @@
             {% for key, node in nodes.nodes %}
                 {% embed 'AxipiBackendBundle::card.html.twig' %}
                     {% block card__title %}
-                        <span><i class="fa fa-server"></i>{{ 'backend.node'|trans({}, 'axipi_search') }}</span>
-                        <span>{{ node.name }}</span>
+                        <span><i class="fa fa-server"></i>Node</span>
                     {% endblock %}
                     {% block card__supporting %}
                         <div class="mdl-cell mdl-cell--4-col">
+                            {{ macro.read_field('Name', node.name) }}
                             {{ macro.read_field('attributes.master', node.attributes.master) }}
                             {{ macro.read_field('ip', node.ip) }}
                             {{ macro.read_field('version', node.version) }}
