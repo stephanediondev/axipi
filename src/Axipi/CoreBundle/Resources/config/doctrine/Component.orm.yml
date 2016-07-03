@@ -125,4 +125,6 @@ Axipi\CoreBundle\Entity\Component:
         children:
             targetEntity: Component
             mappedBy: parent
+            orderBy:
+                title: ASC
     lifecycleCallbacks: {  }

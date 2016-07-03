@@ -34,7 +34,7 @@
         {% endblock %}
     {% endembed %}
 
-    {% embed 'AxipiBackendBundle::card.html.twig' with {dropzone: true, sortzone: true, id: 'no_zone'} %}
+    {% embed 'AxipiBackendBundle::card.html.twig' with {id: 'no_zone'} %}
         {% block card__title %}
             <span><i class="fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'no_zone'|trans({}, 'axipi_backend') }}</span>
         {% endblock %}

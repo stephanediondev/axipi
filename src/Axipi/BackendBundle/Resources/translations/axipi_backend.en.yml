@@ -35,6 +35,7 @@ actions:
     refresh: "Refresh"
     close: "Close"
     get_location: "Get location"
+no_zone: "Inside page"
 search: "Search"
 cache: "Cache"
 reset_symfony: "Reset Symfony cache"

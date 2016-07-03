@@ -55,4 +55,5 @@ Axipi\CoreBundle\Entity\Zone:
             cascade: [ "persist" ]
             orderBy:
                 ordering: ASC
+                title: ASC
     lifecycleCallbacks: {  }
