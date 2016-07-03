@@ -1,0 +1,15 @@
+{% if form is defined %}{% form_theme form 'AxipiCoreBundle::form.html.twig' %}{% endif %}
+<!-- Contact / Form -->
+<section class="widget{% if widget.attribute('section_class') %} {{ widget.attribute('section_class') }}{% endif %}" id="widget-{{ widget.id }}">
+    <header>Leave a Message</header>
+
+    {{ form_start(form) }}
+        {{ form_row(form.message) }}
+        {{ form_row(form.author) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.recaptcha) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+</section>
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl={{ app.request.locale }}"></script>
+<!-- Contact / Form (end) -->

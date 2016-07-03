@@ -1,4 +1,4 @@
 services:
-    axipi_contact_controller_form:
-        class: Axipi\ContactBundle\Controller\FormController
-        parent: "axipi_core_controller_abstract"
+    axipi_contact_widget_form:
+        class: Axipi\ContactBundle\Widget\FormWidget
+        parent: "axipi_core_widget_abstract"
