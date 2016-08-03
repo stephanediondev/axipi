@@ -3,7 +3,7 @@
     "private": true,
     "dependencies": {
         "jquery": "*",
-        "jquery-ui": "*",
+        "jquery-ui": "1.11.*",
         "material-design-lite": "*",
         "FortAwesome/Font-Awesome": "*",
         "blueimp-file-upload-node": "*",
