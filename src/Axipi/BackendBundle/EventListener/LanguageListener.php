@@ -22,16 +22,20 @@ class LanguageListener
 
     public function persist(LanguageEvent $languageEvent)
     {
-        $language = $languageEvent->getLanguage();
-        $component = $this->componentManager->getOne(['is_home' => true, 'active' => true]);
+        $language = $languageEvent->getData();
+        $mode = $languageEvent->getMode();
 
-        $page = new Item();
-        $page->setLanguage($language);
-        $page->setComponent($component);
-        $page->setTitle('Home');
-        $page->setIsHome($component->getIshome());
-        $page->setIsActive(true);
+        if( $mode == 'insert') {
+            $component = $this->componentManager->getOne(['is_home' => true, 'active' => true]);
 
-        $this->itemManager->persist($page);
+            $page = new Item();
+            $page->setLanguage($language);
+            $page->setComponent($component);
+            $page->setTitle('Home');
+            $page->setIsHome($component->getIshome());
+            $page->setIsActive(true);
+
+            $this->itemManager->persist($page);
+        }
     }
 }

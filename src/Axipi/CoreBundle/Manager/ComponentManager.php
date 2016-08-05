@@ -20,14 +20,17 @@ class ComponentManager extends AbstractManager
     public function persist($data)
     {
         if($data->getDateCreated() == null) {
+            $mode = 'insert';
             $data->setDateCreated(new \Datetime());
+        } else {
+            $mode = 'update';
         }
         $data->setDateModified(new \Datetime());
 
         $this->em->persist($data);
         $this->em->flush();
 
-        $event = new ComponentEvent($data);
+        $event = new ComponentEvent($data, $mode);
         $this->eventDispatcher->dispatch('component.after_persist', $event);
 
         $this->removeCache();
@@ -37,7 +40,7 @@ class ComponentManager extends AbstractManager
 
     public function remove($data)
     {
-        $event = new ComponentEvent($data);
+        $event = new ComponentEvent($data, 'delete');
         $this->eventDispatcher->dispatch('component.before_remove', $event);
 
         $this->em->remove($data);

@@ -6,15 +6,23 @@ use Symfony\Component\EventDispatcher\Event;
 
 class RelationEvent extends Event
 {
-    protected $relation;
+    protected $data;
 
-    public function __construct(Relation $relation)
+    protected $mode;
+
+    public function __construct(Relation $data, $mode)
     {
-        $this->relation = $relation;
+        $this->data = $data;
+        $this->mode = $mode;
     }
 
-    public function getRelation()
+    public function getData()
     {
-        return $this->relation;
+        return $this->data;
+    }
+
+    public function getMode()
+    {
+        return $this->mode;
     }
 }

@@ -16,11 +16,11 @@ class ItemListener
 
     public function persist(ItemEvent $itemEvent)
     {
-        $this->searchManager->persist($itemEvent->getItem());
+        $this->searchManager->persist($itemEvent->getdata());
     }
 
     public function remove(ItemEvent $itemEvent)
     {
-        $this->searchManager->remove($itemEvent->getItem());
+        $this->searchManager->remove($itemEvent->getdata());
     }
 }

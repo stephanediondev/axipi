@@ -6,15 +6,23 @@ use Symfony\Component\EventDispatcher\Event;
 
 class ItemEvent extends Event
 {
-    protected $item;
+    protected $data;
 
-    public function __construct(Item $item)
+    protected $mode;
+
+    public function __construct(Item $data, $mode)
     {
-        $this->item = $item;
+        $this->data = $data;
+        $this->mode = $mode;
     }
 
-    public function getItem()
+    public function getData()
     {
-        return $this->item;
+        return $this->data;
+    }
+
+    public function getMode()
+    {
+        return $this->mode;
     }
 }

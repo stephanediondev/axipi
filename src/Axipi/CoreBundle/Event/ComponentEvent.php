@@ -6,15 +6,23 @@ use Symfony\Component\EventDispatcher\Event;
 
 class ComponentEvent extends Event
 {
-    protected $component;
+    protected $data;
 
-    public function __construct(Component $component)
+    protected $mode;
+
+    public function __construct(Component $data, $mode)
     {
-        $this->component = $component;
+        $this->data = $data;
+        $this->mode = $mode;
     }
 
-    public function getComponent()
+    public function getData()
     {
-        return $this->component;
+        return $this->data;
+    }
+
+    public function getMode()
+    {
+        return $this->mode;
     }
 }

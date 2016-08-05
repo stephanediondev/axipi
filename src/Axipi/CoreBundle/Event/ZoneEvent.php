@@ -6,15 +6,23 @@ use Symfony\Component\EventDispatcher\Event;
 
 class ZoneEvent extends Event
 {
-    protected $zone;
+    protected $data;
 
-    public function __construct(Zone $zone)
+    protected $mode;
+
+    public function __construct(Zone $data, $mode)
     {
-        $this->zone = $zone;
+        $this->data = $data;
+        $this->mode = $mode;
     }
 
-    public function getZone()
+    public function getData()
     {
-        return $this->zone;
+        return $this->data;
+    }
+
+    public function getMode()
+    {
+        return $this->mode;
     }
 }

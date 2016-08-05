@@ -20,14 +20,17 @@ class ZoneManager extends AbstractManager
     public function persist($data)
     {
         if($data->getDateCreated() == null) {
+            $mode = 'insert';
             $data->setDateCreated(new \Datetime());
+        } else {
+            $mode = 'update';
         }
         $data->setDateModified(new \Datetime());
 
         $this->em->persist($data);
         $this->em->flush();
 
-        $event = new ZoneEvent($data);
+        $event = new ZoneEvent($data, $mode);
         $this->eventDispatcher->dispatch('zone.after_persist', $event);
 
         $this->removeCache();
@@ -37,7 +40,7 @@ class ZoneManager extends AbstractManager
 
     public function remove($data)
     {
-        $event = new ZoneEvent($data);
+        $event = new ZoneEvent($data, 'delete');
         $this->eventDispatcher->dispatch('zone.before_remove', $event);
 
         $this->em->remove($data);

@@ -20,14 +20,17 @@ class CommentManager extends AbstractManager
     public function persist($data)
     {
         if($data->getDateCreated() == null) {
+            $mode = 'insert';
             $data->setDateCreated(new \Datetime());
+        } else {
+            $mode = 'update';
         }
         $data->setDateModified(new \Datetime());
 
         $this->em->persist($data);
         $this->em->flush();
 
-        $event = new CommentEvent($data);
+        $event = new CommentEvent($data, $mode);
         $this->eventDispatcher->dispatch('comment.after_persist', $event);
 
         $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
@@ -41,7 +44,7 @@ class CommentManager extends AbstractManager
 
     public function remove($data)
     {
-        $event = new CommentEvent($data);
+        $event = new CommentEvent($data, 'delete');
         $this->eventDispatcher->dispatch('comment.before_remove', $event);
 
         $this->em->remove($data);

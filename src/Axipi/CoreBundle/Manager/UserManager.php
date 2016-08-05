@@ -51,14 +51,17 @@ class UserManager extends AbstractManager
         }
 
         if($data->getDateCreated() == null) {
+            $mode = 'insert';
             $data->setDateCreated(new \Datetime());
+        } else {
+            $mode = 'update';
         }
         $data->setDateModified(new \Datetime());
 
         $this->em->persist($data);
         $this->em->flush();
 
-        $event = new UserEvent($data);
+        $event = new UserEvent($data, $mode);
         $this->eventDispatcher->dispatch('user.after_persist', $event);
 
         return $data->getId();
@@ -66,7 +69,7 @@ class UserManager extends AbstractManager
 
     public function remove($data)
     {
-        $event = new UserEvent($data);
+        $event = new UserEvent($data, 'delete');
         $this->eventDispatcher->dispatch('user.before_remove', $event);
 
         $this->em->remove($data);

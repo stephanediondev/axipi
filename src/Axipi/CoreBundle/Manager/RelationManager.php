@@ -20,14 +20,17 @@ class RelationManager extends AbstractManager
     public function persist($data)
     {
         if($data->getDateCreated() == null) {
+            $mode = 'insert';
             $data->setDateCreated(new \Datetime());
+        } else {
+            $mode = 'update';
         }
         $data->setDateModified(new \Datetime());
 
         $this->em->persist($data);
         $this->em->flush();
 
-        $event = new RelationEvent($data);
+        $event = new RelationEvent($data, $mode);
         $this->eventDispatcher->dispatch('relation.after_persist', $event);
 
         $this->removeCache();
@@ -37,7 +40,7 @@ class RelationManager extends AbstractManager
 
     public function remove($data)
     {
-        $event = new RelationEvent($data);
+        $event = new RelationEvent($data, 'delete');
         $this->eventDispatcher->dispatch('relation.before_remove', $event);
 
         $this->em->remove($data);

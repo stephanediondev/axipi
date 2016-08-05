@@ -6,15 +6,23 @@ use Symfony\Component\EventDispatcher\Event;
 
 class LanguageEvent extends Event
 {
-    protected $language;
+    protected $data;
 
-    public function __construct(Language $language)
+    protected $mode;
+
+    public function __construct(Language $data, $mode)
     {
-        $this->language = $language;
+        $this->data = $data;
+        $this->mode = $mode;
     }
 
-    public function getLanguage()
+    public function getData()
     {
-        return $this->language;
+        return $this->data;
+    }
+
+    public function getMode()
+    {
+        return $this->mode;
     }
 }

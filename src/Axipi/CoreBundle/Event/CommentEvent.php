@@ -6,15 +6,23 @@ use Symfony\Component\EventDispatcher\Event;
 
 class CommentEvent extends Event
 {
-    protected $comment;
+    protected $data;
 
-    public function __construct(Comment $comment)
+    protected $mode;
+
+    public function __construct(Comment $data, $mode)
     {
-        $this->comment = $comment;
+        $this->data = $data;
+        $this->mode = $mode;
     }
 
-    public function getComment()
+    public function getData()
     {
-        return $this->comment;
+        return $this->data;
+    }
+
+    public function getMode()
+    {
+        return $this->mode;
     }
 }

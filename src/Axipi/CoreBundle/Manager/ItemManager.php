@@ -88,14 +88,17 @@ class ItemManager extends AbstractManager
         }
 
         if($data->getDateCreated() == null) {
+            $mode = 'insert';
             $data->setDateCreated(new \Datetime());
+        } else {
+            $mode = 'update';
         }
         $data->setDateModified(new \Datetime());
 
         $this->em->persist($data);
         $this->em->flush();
 
-        $event = new ItemEvent($data);
+        $event = new ItemEvent($data, $mode);
         $this->eventDispatcher->dispatch('item.after_persist', $event);
 
         $this->removeCache();
@@ -105,7 +108,7 @@ class ItemManager extends AbstractManager
 
     public function remove($data)
     {
-        $event = new ItemEvent($data);
+        $event = new ItemEvent($data, 'delete');
         $this->eventDispatcher->dispatch('item.before_remove', $event);
 
         $attributes = json_decode($data->getComponent()->getAttributesSchema(), true);

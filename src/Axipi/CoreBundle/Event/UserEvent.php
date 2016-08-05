@@ -6,15 +6,23 @@ use Symfony\Component\EventDispatcher\Event;
 
 class UserEvent extends Event
 {
-    protected $user;
+    protected $data;
 
-    public function __construct(User $user)
+    protected $mode;
+
+    public function __construct(User $data, $mode)
     {
-        $this->user = $user;
+        $this->data = $data;
+        $this->mode = $mode;
     }
 
-    public function getUser()
+    public function getData()
     {
-        return $this->user;
+        return $this->data;
+    }
+
+    public function getMode()
+    {
+        return $this->mode;
     }
 }
