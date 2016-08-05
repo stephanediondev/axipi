@@ -52,23 +52,6 @@
             {% endfor %}
         {% endblock %}
     {% endembed %}
-
-    {% embed 'AxipiBackendBundle::card.html.twig' %}
-        {% block card__title %}
-            <span><i class="fa fa-{{ 'icons.search'|trans({}, 'axipi_backend') }}"></i>{{ 'search'|trans({}, 'axipi_backend') }}</span>
-        {% endblock %}
-        {% block card__supporting %}
-            <div class="mdl-cell mdl-cell--4-col">
-                <p>
-                    <label for="term" class="required">{{ 'Term(s)'|trans({}, 'axipi_backend') }}</label>
-                    <input type="text" id="term" name="term" required="required" value="">
-                </p>
-                <p>
-                    <button class="mdl-button mdl-color--pink mdl-color-text--white" type="submit" id="submit" name="submit">{{ 'OK'|trans({}, 'axipi_backend') }}</button>
-                </p>
-            </div>
-        {% endblock %}
-    {% endembed %}
 {% endblock %}
 
 {% block style %}
