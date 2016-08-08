@@ -31,6 +31,7 @@ class DefaultExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
+            new \Twig_SimpleFunction('getWidget', [$this, 'getWidget'], array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('getWidgets', [$this, 'getWidgets'], array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('buildLink', [$this, 'buildLink'], array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('convertText', [$this, 'convertText'], array('is_safe' => array('html'))),
