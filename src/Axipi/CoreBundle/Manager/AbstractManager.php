@@ -15,16 +15,6 @@ abstract class AbstractManager
         $this->em = $em;
     }
 
-    public function getEntityManager()
-    {
-        return $this->em;
-    }
-
-    public function getRepository($entity)
-    {
-        return $this->em->getRepository($entity);
-    }
-
     public function setEventDispatcher(EventDispatcherInterface $eventDispatcher)
     {
         $this->eventDispatcher = $eventDispatcher;
