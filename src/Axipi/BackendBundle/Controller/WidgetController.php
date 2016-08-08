@@ -269,9 +269,7 @@ class WidgetController extends AbstractController
             }
         }
 
-        $response = new JsonResponse();
-        $response->setData($data);
-        return $response;
+        return new JsonResponse($data);
     }
 
     public function moveAction(Request $request, ParameterBag $parameters, $id)
@@ -284,8 +282,6 @@ class WidgetController extends AbstractController
             $this->itemManager->persist($parameters->get('widget'));
         }
 
-        $response = new JsonResponse();
-        $response->setData($data);
-        return $response;
+        return new JsonResponse($data);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace Axipi\BackendBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Controller\AbstractController;
@@ -15,10 +16,10 @@ class LoginController extends AbstractController
         $parameters->set('error', $authenticationUtils->getLastAuthenticationError());
         $parameters->set('lastUsername', $authenticationUtils->getLastUsername());
 
-        $response = $this->render('AxipiBackendBundle::login.html.twig', $parameters->all());
+        $response = new Response();
         if($parameters->get('error')) {
             $response->setStatusCode(401);
         }
-        return $response;
+        return $this->render('AxipiBackendBundle::login.html.twig', $parameters->all(), $response);
     }
 }

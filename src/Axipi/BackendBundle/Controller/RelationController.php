@@ -155,8 +155,6 @@ class RelationController extends AbstractController
             }
         }
 
-        $response = new JsonResponse();
-        $response->setData($data);
-        return $response;
+        return new JsonResponse($data);
     }
 }

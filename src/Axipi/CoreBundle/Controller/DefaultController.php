@@ -69,8 +69,7 @@ class DefaultController extends AbstractController
         $parameters->set('page', $page);
 
         if($this->has($page->getComponent()->getService())) {
-            $response = $this->forward($page->getComponent()->getService().':getPage', ['parameters' => $parameters]);
-            return $response;
+            return $this->forward($page->getComponent()->getService().':getPage', ['parameters' => $parameters]);
         } else {
             throw new NotFoundHttpException();
         }

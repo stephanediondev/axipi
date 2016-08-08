@@ -2,6 +2,7 @@
 namespace Axipi\SitemapBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Controller\AbstractController;
@@ -24,8 +25,8 @@ class XmlController extends AbstractController
         } else {
             $template = $parameters->get('page')->getComponent()->getTemplate();
         }
-        $response = $this->render($template, $parameters->all());
+        $response = new Response();
         $response->headers->set('Content-Type', 'text/xml');
-        return $response;
+        return $this->render($template, $parameters->all(), $response);
     }
 }

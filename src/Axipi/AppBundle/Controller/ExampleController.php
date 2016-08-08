@@ -15,7 +15,6 @@ class ExampleController extends AbstractController
         } else {
             $template = $parameters->get('page')->getComponent()->getTemplate();
         }
-        $response = $this->render($template, $parameters->all());
-        return $response;
+        return $this->render($template, $parameters->all());
     }
 }

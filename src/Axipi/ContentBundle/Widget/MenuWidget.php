@@ -28,6 +28,6 @@ class MenuWidget extends AbstractWidget
         } else {
             $template = $parameters->get('widget')->getComponent()->getTemplate();
         }
-        return $this->renderWidget($template, $parameters->all());
+        return $this->renderView($template, $parameters->all());
     }
 }

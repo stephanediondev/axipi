@@ -2,6 +2,7 @@
 namespace Axipi\ContentBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 use Axipi\CoreBundle\Controller\AbstractController;
@@ -15,8 +16,8 @@ class Error404Controller extends AbstractController
         } else {
             $template = $parameters->get('page')->getComponent()->getTemplate();
         }
-        $response = $this->render($template, $parameters->all());
+        $response = new Response();
         $response->setStatusCode(404);
-        return $response;
+        return $this->render($template, $parameters->all(), $response);
     }
 }
