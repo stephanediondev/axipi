@@ -67,19 +67,12 @@ class DefaultExtension extends \Twig_Extension
     public function getWidgets($code)
     {
         $content = '';
-        $request = $this->container->get('request_stack')->getMasterRequest();
         $page = $this->container->get('axipi_core_manager_default')->getPage();
 
         $widgets = $this->em->getRepository('AxipiCoreBundle:Item')->getList(['category' => 'widget', 'active' => true, 'zone_code' => $code, 'language_code_or_language_null' => $page->getLanguage()->getCode()]);
 
         foreach($widgets as $widget) {
-            if($this->container->has($widget->getComponent()->getService())) {
-                $parameters = new ParameterBag();
-                $parameters->set('request', $request);
-                $parameters->set('widget', $widget);
-                $parameters->set('page', $page);
-                $content .= $this->container->get($widget->getComponent()->getService())->getWidget($parameters);
-            }
+            $content .= $this->getWidget($widget);
         }
         return $content;
     }
