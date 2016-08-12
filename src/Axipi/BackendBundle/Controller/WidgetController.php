@@ -97,7 +97,7 @@ class WidgetController extends AbstractController
         }
 
         $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_components', ['language' => $language]);
+        return $this->redirectToRoute('axipi_backend_widgets', ['language' => $language]);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters, $language)

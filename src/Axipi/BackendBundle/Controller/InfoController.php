@@ -22,7 +22,7 @@ class InfoController extends AbstractController
         }
 
         $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_search', []);
+        return $this->redirectToRoute('axipi_backend_info', []);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters)
