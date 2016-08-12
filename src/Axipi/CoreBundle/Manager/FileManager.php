@@ -135,7 +135,7 @@ class FileManager extends AbstractManager
         if(is_object($data->getFile()) && $data->getFile() instanceof UploadedFile) {
             if($data->getFile()->isValid()) {
                 if(strstr($data->getFile()->getClientOriginalName(), '.php')) {
-                    continue;
+                    return false;
                 }
                 $dir = $data->getDir();
                 $filename = $this->cleanString($data->getFile()->getClientOriginalName());
