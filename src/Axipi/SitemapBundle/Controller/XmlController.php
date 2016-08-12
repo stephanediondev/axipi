@@ -9,7 +9,7 @@ use Axipi\CoreBundle\Controller\AbstractController;
 
 class XmlController extends AbstractController
 {
-    public function getPage($parameters)
+    public function getPage(Request $request, ParameterBag $parameters)
     {
         $filters = [];
         $filters['category'] = 'page';

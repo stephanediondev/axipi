@@ -8,7 +8,7 @@ use Axipi\CoreBundle\Controller\AbstractController;
 
 class FileController extends AbstractController
 {
-    public function getPage($parameters)
+    public function getPage(Request $request, ParameterBag $parameters)
     {
         if($parameters->get('page')->getAttribute('authentication_enabled')) {
             if(

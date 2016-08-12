@@ -8,7 +8,7 @@ use Axipi\CoreBundle\Widget\AbstractWidget;
 
 class MapWidget extends AbstractWidget
 {
-    public function getWidget($parameters)
+    public function getWidget(Request $request, ParameterBag $parameters)
     {
         $parameters->set('markers', $this->get('axipi_core_manager_item')->getList(['parent' => $parameters->get('widget'), 'active' => true]));
 

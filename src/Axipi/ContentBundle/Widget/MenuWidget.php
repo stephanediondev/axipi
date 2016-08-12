@@ -8,7 +8,7 @@ use Axipi\CoreBundle\Widget\AbstractWidget;
 
 class MenuWidget extends AbstractWidget
 {
-    public function getWidget($parameters)
+    public function getWidget(Request $request, ParameterBag $parameters)
     {
         $results = $this->get('axipi_core_manager_relation')->getList(['widget' => $parameters->get('widget'), 'active' => true]);
 

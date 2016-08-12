@@ -8,7 +8,7 @@ use Axipi\CoreBundle\Controller\AbstractController;
 
 class LinkController extends AbstractController
 {
-    public function getPage($parameters)
+    public function getPage(Request $request, ParameterBag $parameters)
     {
         return $this->redirect($parameters->get('page')->getAttribute('url'));
     }

@@ -14,7 +14,7 @@
         <footer>
             <form role="search" method="get"{% if page.attribute('form_class') %} class="{{ page.attribute('form_class') }}"{% endif %}>
                 <p>
-                    <input id="page-input-{{ page.id }}" type="text" name="q" value="{{ request.get('q') }}">
+                    <input id="page-input-{{ page.id }}" type="text" name="q" value="{{ app.request.get('q') }}">
                 </p>
                 <p>
                     <input type="submit" value="{{ page.attribute('submit')|default('page.submit'|trans({}, 'axipi_search')) }}">

@@ -8,7 +8,7 @@ use Axipi\CoreBundle\Controller\AbstractController;
 
 class MediaController extends AbstractController
 {
-    public function getPage($parameters)
+    public function getPage(Request $request, ParameterBag $parameters)
     {
         $parameters->set('albums', $this->get('axipi_core_manager_item')->getList(['component_service' => 'axipi_gallery_controller_album', 'language_code' => $parameters->get('page')->getLanguage()->getCode(), 'active' => true]));
 

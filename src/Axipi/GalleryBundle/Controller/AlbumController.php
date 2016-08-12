@@ -8,7 +8,7 @@ use Axipi\CoreBundle\Controller\AbstractController;
 
 class AlbumController extends AbstractController
 {
-    public function getPage($parameters)
+    public function getPage(Request $request, ParameterBag $parameters)
     {
         $parameters->set('albums', $this->get('axipi_core_manager_item')->getList(['component_service' => 'axipi_gallery_controller_album', 'parent' => $parameters->get('page'), 'active' => true]));
 

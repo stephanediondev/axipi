@@ -17,26 +17,26 @@ class PageController extends AbstractController
         $this->searchManager = $searchManager;
     }
 
-    public function getPage($parameters)
+    public function getPage(Request $request, ParameterBag $parameters)
     {
         $data = [];
         $data['sort_field'] = array('date.sort' => 'Date', '_score' => 'Score', 'title.sort' => 'Title');
         $data['sort_direction'] = array('asc' => 'Asc.', 'desc' => 'Desc.',);
 
-        if($parameters->get('request')->query->get('q')) {
-            if(!array_key_exists($parameters->get('request')->query->get('sort_field'), $data['sort_field'])) {
+        if($request->query->get('q')) {
+            if(!array_key_exists($request->query->get('sort_field'), $data['sort_field'])) {
                 $sort_field = '_score';
             } else {
-                $sort_field = $parameters->get('request')->query->get('sort_field');
+                $sort_field = $request->query->get('sort_field');
             }
-            if(!array_key_exists($parameters->get('request')->query->get('sort_direction'), $data['sort_direction'])) {
+            if(!array_key_exists($request->query->get('sort_direction'), $data['sort_direction'])) {
                 $sort_direction = 'desc';
             } else {
-                $sort_direction = $parameters->get('request')->query->get('sort_direction');
+                $sort_direction = $request->query->get('sort_direction');
             }
 
             $size = 20;
-            $from = $parameters->get('request')->query->get('from', 0);
+            $from = $request->query->get('from', 0);
             $path = '/'.$this->searchManager->getIndex().'/_search?size='.intval($size).'&type=page&from='.intval($from);
 
             $body = array();
@@ -48,7 +48,7 @@ class PageController extends AbstractController
             $body['query'] = array(
                 'query_string' => array(
                     'fields' => array('title', 'description'),
-                    'query' => $parameters->get('request')->query->get('q'),
+                    'query' => $request->query->get('q'),
                 ),
             );
             $body['highlight'] = array(
@@ -75,12 +75,12 @@ class PageController extends AbstractController
                 );
             }
 
-            /*if($parameters->get('request')->query->get('date_from') && $parameters->get('request')->query->get('date_to')) {
+            /*if($request->query->get('date_from') && $request->query->get('date_to')) {
                 $body['filter'] = array(
                     'range' => array(
                         'date.sort' => array(
-                            'gte' => $parameters->get('request')->query->get('date_from'),
-                            'lte' => $parameters->get('request')->query->get('date_to'),
+                            'gte' => $request->query->get('date_from'),
+                            'lte' => $request->query->get('date_to'),
                             'format' => 'YYYY-MM-DD',
                         ),
                     ),

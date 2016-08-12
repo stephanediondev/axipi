@@ -9,10 +9,10 @@ use Axipi\ContactBundle\Form\Type\MessageType;
 
 class FormWidget extends AbstractWidget
 {
-    public function getWidget($parameters)
+    public function getWidget(Request $request, ParameterBag $parameters)
     {
         $form = $this->createForm(MessageType::class, null, []);
-        $form->handleRequest($parameters->get('request'));
+        $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {

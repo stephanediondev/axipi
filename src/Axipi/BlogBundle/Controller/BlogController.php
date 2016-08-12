@@ -8,13 +8,13 @@ use Axipi\CoreBundle\Controller\AbstractController;
 
 class BlogController extends AbstractController
 {
-    public function getPage($parameters)
+    public function getPage(Request $request, ParameterBag $parameters)
     {
         $paginator  = $this->get('knp_paginator');
         $paginator->setDefaultPaginatorOptions(['widgetParameterName' => 'page']);
         $pagination = $paginator->paginate(
             $this->get('axipi_core_manager_item')->getList(['component_service' => 'axipi_blog_controller_post', 'language_code' => $parameters->get('page')->getLanguage()->getCode(), 'active' => true]),
-            $parameters->get('request')->query->getInt('page', 1),
+            $request->query->getInt('page', 1),
             20
         );
         $parameters->set('posts', $pagination);

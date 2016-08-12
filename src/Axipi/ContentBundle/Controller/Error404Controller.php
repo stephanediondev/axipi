@@ -9,7 +9,7 @@ use Axipi\CoreBundle\Controller\AbstractController;
 
 class Error404Controller extends AbstractController
 {
-    public function getPage($parameters)
+    public function getPage(Request $request, ParameterBag $parameters)
     {
         if($parameters->get('page')->getTemplate()) {
             $template = $parameters->get('page')->getTemplate();

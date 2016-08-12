@@ -19,7 +19,7 @@ class PostController extends AbstractController
         $this->commentManager = $commentManager;
     }
 
-    public function getPage($parameters)
+    public function getPage(Request $request, ParameterBag $parameters)
     {
         $parameters->set('blog', $this->get('axipi_core_manager_item')->getOne(['component_service' => 'axipi_blog_controller_blog', 'language_code' => $parameters->get('page')->getLanguage()->getCode(), 'active' => true]));
 
@@ -27,7 +27,7 @@ class PostController extends AbstractController
         $paginator->setDefaultPaginatorOptions(['widgetParameterName' => 'page']);
         $pagination = $paginator->paginate(
             $this->commentManager->getList(['item' => $parameters->get('page'), 'active' => true]),
-            $parameters->get('request')->query->getInt('page', 1),
+            $request->query->getInt('page', 1),
             20
         );
         $parameters->set('comments', $pagination);
@@ -37,7 +37,7 @@ class PostController extends AbstractController
         $comment->setIsActive(true);
 
         $form = $this->createForm(CommentType::class, $comment, []);
-        $form->handleRequest($parameters->get('request'));
+        $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {

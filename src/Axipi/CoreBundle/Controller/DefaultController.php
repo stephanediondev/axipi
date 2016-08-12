@@ -3,7 +3,6 @@ namespace Axipi\CoreBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ParameterBag;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use Axipi\CoreBundle\Controller\AbstractController;
@@ -29,10 +28,9 @@ class DefaultController extends AbstractController
         $this->itemManager = $itemManager;
     }
 
-    public function indexAction(Request $request, $slug, $language = null)
+    public function indexAction(Request $request, $slug)
     {
         $parameters = new ParameterBag();
-        $parameters->set('request', $request);
 
         $languages = $this->languageManager->getList(['active' => true]);
 
@@ -69,7 +67,7 @@ class DefaultController extends AbstractController
         $parameters->set('page', $page);
 
         if($this->has($page->getComponent()->getService())) {
-            return $this->forward($page->getComponent()->getService().':getPage', ['parameters' => $parameters]);
+            return $this->forward($page->getComponent()->getService().':getPage', ['request' => $request, 'parameters' => $parameters]);
         } else {
             throw new NotFoundHttpException();
         }

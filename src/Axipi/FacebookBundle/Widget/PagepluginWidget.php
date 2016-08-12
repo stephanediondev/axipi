@@ -8,7 +8,7 @@ use Axipi\CoreBundle\Widget\AbstractWidget;
 
 class PagepluginWidget extends AbstractWidget
 {
-    public function getWidget($parameters)
+    public function getWidget(Request $request, ParameterBag $parameters)
     {
         if($parameters->get('widget')->getTemplate()) {
             $template = $parameters->get('widget')->getTemplate();

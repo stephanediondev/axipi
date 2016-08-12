@@ -1,6 +1,6 @@
 blog:
     message: "Comment*"
     author: "Name*"
-    email: "Email"
+    email: "Email*"
     website: "Website"
     submit: "Post Comment"
