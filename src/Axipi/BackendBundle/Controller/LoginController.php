@@ -10,6 +10,10 @@ class LoginController extends AbstractController
 {
     public function indexAction()
     {
+        if($this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('axipi_backend_home', []);
+        }
+
         $authenticationUtils = $this->get('security.authentication_utils');
 
         $parameters = new ParameterBag();
