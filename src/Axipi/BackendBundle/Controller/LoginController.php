@@ -24,6 +24,6 @@ class LoginController extends AbstractController
         if($parameters->get('error')) {
             $response->setStatusCode(401);
         }
-        return $this->render('AxipiBackendBundle::login.html.twig', $parameters->all(), $response);
+        return $this->render('AxipiBackendBundle::Login/index.html.twig', $parameters->all(), $response);
     }
 }

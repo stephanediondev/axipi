@@ -50,7 +50,7 @@ class CacheController extends AbstractController
         $parameters->set('apcu', function_exists('apcu_clear_cache'));
         $parameters->set('opcache', function_exists('opcache_reset'));
 
-        return $this->render('AxipiBackendBundle::cache.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle::Cache/index.html.twig', $parameters->all());
     }
 
     public function symfonyAction(Request $request, ParameterBag $parameters)

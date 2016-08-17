@@ -55,6 +55,6 @@ class InfoController extends AbstractController
 
         $parameters->set('info', $info);
 
-        return $this->render('AxipiBackendBundle::info.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle::Info/index.html.twig', $parameters->all());
     }
 }
