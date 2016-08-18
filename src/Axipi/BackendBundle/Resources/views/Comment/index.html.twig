@@ -8,30 +8,21 @@
             <span><i class="fa fa-{{ 'icons.comment'|trans({}, 'axipi_backend') }}"></i>{{ 'comments'|trans({}, 'axipi_backend') }}</span>
         {% endblock %}
         {% block card__supporting %}
-            <table class="mdl-data-table mdl-js-data-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Page</th>
-                    <th>Author</th>
-                    <th>Email</th>
-                    <th>Date created</th>
-                </tr>
-            </thead>
-            <tbody>
             {% for object in comments %}
-                <tr>
-                    <td><a href="{{ path('axipi_backend_comments', {action: 'read', id: object.id}) }}">{{ object.id }}</a></td>
-                    <td>{{ object.item.title }}</td>
-                    <td>{{ object.author }}</td>
-                    <td>{{ object.email }}</td>
-                    <td>{{ object.dateCreated|date('Y-m-d H:i:s') }}</td>
-                </tr>
+                <div class="mdl-cell mdl-cell--2-col">
+                    <a href="{{ path('axipi_backend_comments', {action: 'read', id: object.id}) }}"><i class="fa fa-2x fa-{% if object.isActive %}comment{% else %}comment-o{% endif %}"></i><br>{{ object.email }}<br>{{ object.item.title }}</a>
+                </div>
             {% endfor %}
-            </tbody>
-            </table>
         {% endblock %}
     {% endembed %}
+
+    {% if comments.pageCount > 1 %}
+        {% embed 'AxipiBackendBundle::card.html.twig' %}
+            {% block card__supporting %}
+                {{ knp_pagination_render(comments) }}
+            {% endblock %}
+        {% endembed %}
+    {% endif %}
 {% endblock %}
 
 {% block style %}

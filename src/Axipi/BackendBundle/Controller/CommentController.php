@@ -64,7 +64,15 @@ class CommentController extends AbstractController
 
     public function indexAction(Request $request, ParameterBag $parameters)
     {
-        $parameters->set('comments', $this->commentManager->getList([]));
+        $paginator  = $this->get('knp_paginator');
+        $paginator->setDefaultPaginatorOptions(['widgetParameterName' => 'page']);
+        $pagination = $paginator->paginate(
+            $this->commentManager->getList([]),
+            $request->query->getInt('page', 1),
+            10
+        );
+
+        $parameters->set('comments', $pagination);
 
         return $this->render('AxipiBackendBundle:Comment:index.html.twig', $parameters->all());
     }

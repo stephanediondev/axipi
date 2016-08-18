@@ -25,7 +25,7 @@ class LanguageListener
         $language = $languageEvent->getData();
         $mode = $languageEvent->getMode();
 
-        if( $mode == 'insert') {
+        if($mode == 'insert') {
             $component = $this->componentManager->getOne(['is_home' => true, 'active' => true]);
 
             $page = new Item();
