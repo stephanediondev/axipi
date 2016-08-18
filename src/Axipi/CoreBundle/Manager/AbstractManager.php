@@ -19,4 +19,11 @@ abstract class AbstractManager
     {
         $this->eventDispatcher = $eventDispatcher;
     }
+
+    public function removeCache()
+    {
+        if(function_exists('apcu_clear_cache')) {
+            apcu_clear_cache();
+        }
+    }
 }

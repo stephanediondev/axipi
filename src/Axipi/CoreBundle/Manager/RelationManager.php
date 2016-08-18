@@ -48,11 +48,4 @@ class RelationManager extends AbstractManager
 
         $this->removeCache();
     }
-
-    public function removeCache()
-    {
-        if(function_exists('apcu_clear_cache')) {
-            apcu_clear_cache();
-        }
-    }
 }
