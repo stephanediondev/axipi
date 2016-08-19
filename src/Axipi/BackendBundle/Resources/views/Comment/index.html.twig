@@ -14,15 +14,13 @@
                 </div>
             {% endfor %}
         {% endblock %}
-    {% endembed %}
 
-    {% if comments.pageCount > 1 %}
-        {% embed 'AxipiBackendBundle::card.html.twig' %}
-            {% block card__supporting %}
+        {% block pagination %}
+            {% if comments.pageCount > 1 %}
                 {{ knp_pagination_render(comments) }}
-            {% endblock %}
-        {% endembed %}
-    {% endif %}
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
 
 {% block style %}

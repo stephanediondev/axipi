@@ -145,3 +145,10 @@ em.default {
 .ui-state-hover {
     background-color: #e0e0e0;
 }
+.pagination {
+    clear: both;
+    padding: 8px;
+}
+.pagination .current {
+    font-weight: bold;
+}

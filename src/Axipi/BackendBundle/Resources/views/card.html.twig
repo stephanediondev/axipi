@@ -16,6 +16,7 @@
     <div class="mdl-card__supporting-text mdl-grid{% if dropzone is defined %} dropzone{% endif %}{% if sortzone is defined %} sortzone{% endif %}">
         {% block card__supporting %}{% endblock %}
     </div>
+    {% block pagination %}{% endblock %}
     {% if form is defined %}
         {{ form_end(form) }}
     {% endif %}
