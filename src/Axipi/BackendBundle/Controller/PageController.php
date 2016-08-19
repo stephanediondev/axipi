@@ -40,25 +40,25 @@ class PageController extends AbstractController
         }
 
         if($language == 'xx') {
-            return $this->redirectToRoute('axipi_backend_pages', ['mode' => $mode, 'language' => 'en', 'action' => 'index']);
+            return $this->redirectToRoute('axipi_backend_page', ['mode' => $mode, 'language' => 'en', 'action' => 'index']);
         }
 
-        $parameters = new ParameterBag();
-        $parameters->set('mode', $mode);
-        $parameters->set('languages', $this->languageManager->getList());
-        $parameters->set('language', $this->languageManager->getOne(['code' => $language]));
+        $parameterBag = new ParameterBag();
+        $parameterBag->set('mode', $mode);
+        $parameterBag->set('languages', $this->languageManager->getList());
+        $parameterBag->set('language', $this->languageManager->getOne(['code' => $language]));
 
         if($action == 'create' && null !== $id) {
             $component = $this->componentManager->getOne(['id' => $id]);
             if($component) {
-                $parameters->set('component', $component);
+                $parameterBag->set('component', $component);
             } else {
                 return $this->displayError(404);
             }
         } else if(null !== $id) {
             $page = $this->itemManager->getOne(['id' => $id]);
             if($page) {
-                $parameters->set('page', $page);
+                $parameterBag->set('page', $page);
             } else {
                 return $this->displayError(404);
             }
@@ -66,45 +66,45 @@ class PageController extends AbstractController
 
         switch ($action) {
             case 'index':
-                return $this->indexAction($request, $parameters, $language);
+                return $this->indexAction($request, $parameterBag, $language);
             case 'create':
-                return $this->createAction($request, $parameters);
+                return $this->createAction($request, $parameterBag);
             case 'read':
-                return $this->readAction($request, $parameters, $id);
+                return $this->readAction($request, $parameterBag);
             case 'update':
-                return $this->updateAction($request, $parameters, $id);
+                return $this->updateAction($request, $parameterBag);
             case 'delete':
-                return $this->deleteAction($request, $parameters, $id);
+                return $this->deleteAction($request, $parameterBag);
             case 'upload':
-                return $this->uploadAction($request, $parameters);
+                return $this->uploadAction($request, $parameterBag);
             case 'sort':
-                return $this->sortAction($request, $parameters);
+                return $this->sortAction($request, $parameterBag);
         }
 
         return $this->displayError(404);
     }
 
-    public function indexAction(Request $request, ParameterBag $parameters, $language)
+    public function indexAction(Request $request, ParameterBag $parameterBag, $language)
     {
-        $parameters->set('parent_null', $this->itemManager->getList(['category' => 'page', 'language_code' => $language, 'parent_null' => true]));
-        $parameters->set('components', $this->componentManager->getList(['category' => 'page', 'active' => true]));
+        $parameterBag->set('parent_null', $this->itemManager->getList(['category' => 'page', 'language_code' => $language, 'parent_null' => true]));
+        $parameterBag->set('components', $this->componentManager->getList(['category' => 'page', 'active' => true]));
 
-        return $this->render('AxipiBackendBundle:Page:index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Page:index.html.twig', $parameterBag->all());
     }
 
-    public function createAction(Request $request, ParameterBag $parameters)
+    public function createAction(Request $request, ParameterBag $parameterBag)
     {
         $page = new Item();
         if($request->query->get('parent')) {
             $page_parent = $this->itemManager->getOne(['id' => $request->query->get('parent')]);
             if($page_parent) {
-                $parameters->set('page_parent', $page_parent);
+                $parameterBag->set('page_parent', $page_parent);
                 $page->setParent($page_parent);
             }
         }
-        $page->setLanguage($parameters->get('language'));
-        $page->setComponent($parameters->get('component'));
-        $page->setIsHome($parameters->get('component')->getIshome());
+        $page->setLanguage($parameterBag->get('language'));
+        $page->setComponent($parameterBag->get('component'));
+        $page->setIsHome($parameterBag->get('component')->getIshome());
         $page->setIsActive(true);
 
         $form = $this->createForm(ItemType::class, $page, [
@@ -117,31 +117,31 @@ class PageController extends AbstractController
             if($form->isValid()) {
                 $id = $this->itemManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_page', ['mode' => $parameterBag->get('mode'), 'language' => $parameterBag->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Page:create.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Page:create.html.twig', $parameterBag->all());
     }
 
-    public function readAction(Request $request, ParameterBag $parameters, $id)
+    public function readAction(Request $request, ParameterBag $parameterBag)
     {
-        $parameters->set('components', $this->componentManager->getList(['category' => 'page', 'active' => true]));
+        $parameterBag->set('components', $this->componentManager->getList(['category' => 'page', 'active' => true]));
 
         $languages = $this->languageManager->getList(['active' => true]);
         $this->container->get('axipi_core_manager_default')->setLanguages($languages);
-        $parameters->set('languages', $languages);
+        $parameterBag->set('languages', $languages);
 
-        return $this->render('AxipiBackendBundle:Page:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Page:read.html.twig', $parameterBag->all());
     }
 
-    public function updateAction(Request $request, ParameterBag $parameters, $id)
+    public function updateAction(Request $request, ParameterBag $parameterBag)
     {
-        $form = $this->createForm(ItemType::class, $parameters->get('page'), [
-            'item' => $parameters->get('page'),
-            'items' => $this->itemManager->getList(['component_parent' => $parameters->get('page'), 'category' => 'page']),
+        $form = $this->createForm(ItemType::class, $parameterBag->get('page'), [
+            'item' => $parameterBag->get('page'),
+            'items' => $this->itemManager->getList(['component_parent' => $parameterBag->get('page'), 'category' => 'page']),
         ]);
         $form->handleRequest($request);
 
@@ -149,38 +149,38 @@ class PageController extends AbstractController
             if($form->isValid()) {
                 $this->itemManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_page', ['mode' => $parameterBag->get('mode'), 'language' => $parameterBag->get('language')->getCode(), 'action' => 'read', 'id' => $parameterBag->get('page')->getId()]);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Page:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Page:update.html.twig', $parameterBag->all());
     }
 
-    public function deleteAction(Request $request, ParameterBag $parameters, $id)
+    public function deleteAction(Request $request, ParameterBag $parameterBag)
     {
         $form = $this->createForm(DeleteType::class, null, []);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->itemManager->remove($parameters->get('page'));
+                $this->itemManager->remove($parameterBag->get('page'));
                 $this->addFlash('success', 'deleted');
-                if($parameters->get('page')->getParent()) {
-                    return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $parameters->get('page')->getParent()->getId()]);
+                if($parameterBag->get('page')->getParent()) {
+                    return $this->redirectToRoute('axipi_backend_page', ['mode' => $parameterBag->get('mode'), 'language' => $parameterBag->get('language')->getCode(), 'action' => 'read', 'id' => $parameterBag->get('page')->getParent()->getId()]);
                 } else {
-                    return $this->redirectToRoute('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode()]);
+                    return $this->redirectToRoute('axipi_backend_page', ['mode' => $parameterBag->get('mode'), 'language' => $parameterBag->get('language')->getCode()]);
                 }
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Page:delete.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Page:delete.html.twig', $parameterBag->all());
     }
 
-    public function uploadAction(Request $request, ParameterBag $parameters)
+    public function uploadAction(Request $request, ParameterBag $parameterBag)
     {
         $data = [];
 
@@ -201,7 +201,7 @@ class PageController extends AbstractController
             $page->setTitle($title);
             $page->setAttributesChange(['image' => $uploadedFile]);
 
-            $page->setLanguage($parameters->get('language'));
+            $page->setLanguage($parameterBag->get('language'));
             $page->setComponent($component);
             $page->setIsActive(true);
 
@@ -211,14 +211,14 @@ class PageController extends AbstractController
                 'id' => $id,
                 'title' => $title,
                 'icon' => $component->geticon(),
-                'href' => $this->generateUrl('axipi_backend_pages', ['mode' => $parameters->get('mode'), 'language' => $parameters->get('language')->getCode(), 'action' => 'read', 'id' => $id]),
+                'href' => $this->generateUrl('axipi_backend_page', ['mode' => $parameterBag->get('mode'), 'language' => $parameterBag->get('language')->getCode(), 'action' => 'read', 'id' => $id]),
             ];
         }
 
         return new JsonResponse($data);
     }
 
-    public function sortAction(Request $request, ParameterBag $parameters)
+    public function sortAction(Request $request, ParameterBag $parameterBag)
     {
         $data = json_decode($request->request->get('result'));
         foreach($data as $id => $ordering) {

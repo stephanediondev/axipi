@@ -7,11 +7,11 @@
 {% block body %}
     {% embed 'AxipiBackendBundle::card.html.twig' %}
         {% block card__actions %}
-            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_components', {action: 'update', 'id': component.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
-            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_components', {action: 'delete', 'id': component.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_component', {action: 'update', 'id': component.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_component', {action: 'delete', 'id': component.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
         {% endblock %}
         {% block card__title %}
-            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_components', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.component'|trans({}, 'axipi_backend') }}"></i>{{ 'components'|trans({}, 'axipi_backend') }}</a></span>
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_component', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.component'|trans({}, 'axipi_backend') }}"></i>{{ 'components'|trans({}, 'axipi_backend') }}</a></span>
             {% if component.parent %}
                 {{ helper.path_loop(component.parent) }}
             {% endif %}
@@ -49,7 +49,7 @@
             {% block card__supporting %}
                 {% for object in component.children %}
                     <div class="mdl-cell mdl-cell--2-col">
-                        <a href="{{ path('axipi_backend_components', {action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.icon }}"></i><br>{{ object.title }}</a>
+                        <a href="{{ path('axipi_backend_component', {action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.icon }}"></i><br>{{ object.title }}</a>
                     </div>
                 {% endfor %}
             {% endblock %}

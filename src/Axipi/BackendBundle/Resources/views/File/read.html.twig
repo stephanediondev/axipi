@@ -5,13 +5,13 @@
 {% block body %}
     {% embed 'AxipiBackendBundle::card.html.twig' %}
         {% block card__actions %}
-            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_files', {action: 'update', 'slug': file.slug}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
-            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_files', {action: 'delete', 'slug': file.slug}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_file', {action: 'update', 'slug': file.slug}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_file', {action: 'delete', 'slug': file.slug}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
         {% endblock %}
         {% block card__title %}
             {% for tree in tree %}
                 {% if tree.slug != file.slug %}
-                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_files', {action: 'index', 'slug': tree.slug}) }}"><i class="fa fa-folder"></i>{{ tree.name }}</a></span>
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_file', {action: 'index', 'slug': tree.slug}) }}"><i class="fa fa-folder"></i>{{ tree.name }}</a></span>
                 {% endif %}
             {% endfor %}
             <span><i class="fa fa-{{ file.icon }}"></i>{{ file.name }}</span>

@@ -5,18 +5,18 @@
 {% block body %}
     {% embed 'AxipiBackendBundle::card.html.twig' with {form: form} %}
         {% block card__title %}
-            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></span>
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_page', {mode: mode, language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></span>
             {% if page_parent is defined %}
                 {% if page_parent.parent %}
                     {% if page_parent.parent.parent %}
                         {% if page_parent.parent.parent.parent %}
-                            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.parent.parent.parent.id}) }}">{{ page_parent.parent.parent.parent.title }}</a></span>
+                            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_page', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.parent.parent.parent.id}) }}">{{ page_parent.parent.parent.parent.title }}</a></span>
                         {% endif %}
-                        <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.parent.parent.id}) }}">{{ page_parent.parent.parent.title }}</a></span>
+                        <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_page', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.parent.parent.id}) }}">{{ page_parent.parent.parent.title }}</a></span>
                     {% endif %}
-                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.parent.id}) }}">{{ page_parent.parent.title }}</a></span>
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_page', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.parent.id}) }}">{{ page_parent.parent.title }}</a></span>
                 {% endif %}
-                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.id}) }}">{{ page_parent.title }}</a></span>
+                <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_page', {mode: mode, language: app.request.get('language'), action: 'read', id: page_parent.id}) }}">{{ page_parent.title }}</a></span>
             {% endif %}
         {% endblock %}
         {% block card__supporting %}

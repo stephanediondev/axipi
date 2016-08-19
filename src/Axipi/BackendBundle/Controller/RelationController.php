@@ -35,19 +35,19 @@ class RelationController extends AbstractController
             return $this->displayError(403);
         }
 
-        $parameters = new ParameterBag();
+        $parameterBag = new ParameterBag();
 
         if($action == 'create' && null !== $id) {
             $widget = $this->itemManager->getOne(['id' => $id]);
             if($widget) {
-                $parameters->set('widget', $widget);
+                $parameterBag->set('widget', $widget);
             } else {
                 return $this->displayError(404);
             }
         } else if(null !== $id) {
             $relation = $this->relationManager->getOne(['id' => $id]);
             if($relation) {
-                $parameters->set('relation', $relation);
+                $parameterBag->set('relation', $relation);
             } else {
                 return $this->displayError(404);
             }
@@ -55,29 +55,29 @@ class RelationController extends AbstractController
 
         switch ($action) {
             case 'create':
-                return $this->createAction($request, $parameters, $id, $language);
+                return $this->createAction($request, $parameterBag, $language);
             case 'read':
-                return $this->readAction($request, $parameters, $id);
+                return $this->readAction($request, $parameterBag);
             case 'update':
-                return $this->updateAction($request, $parameters, $id, $language);
+                return $this->updateAction($request, $parameterBag, $language);
             case 'delete':
-                return $this->deleteAction($request, $parameters, $id, $language);
+                return $this->deleteAction($request, $parameterBag, $language);
             case 'sort':
-                return $this->sortAction($request, $parameters);
+                return $this->sortAction($request, $parameterBag);
         }
 
         return $this->displayError(404);
     }
 
-    public function createAction(Request $request, ParameterBag $parameters, $id, $language)
+    public function createAction(Request $request, ParameterBag $parameterBag, $language)
     {
         $relation = new Relation();
-        $relation->setWidget($parameters->get('widget'));
+        $relation->setWidget($parameterBag->get('widget'));
         $relation->setIsActive(true);
 
         $form = $this->createForm(RelationType::class, $relation, [
             'relation' => $relation,
-            'relations' => $this->relationManager->getList(['widget' => $parameters->get('widget')->getId()]),
+            'relations' => $this->relationManager->getList(['widget' => $parameterBag->get('widget')->getId()]),
             'items' => $this->itemManager->getList(['category' => 'page']),
         ]);
         $form->handleRequest($request);
@@ -86,27 +86,27 @@ class RelationController extends AbstractController
             if($form->isValid()) {
                 $this->relationManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_relations', ['language' => $language, 'action' => 'read', 'id' => $relation->getId()]);
+                return $this->redirectToRoute('axipi_backend_relation', ['language' => $language, 'action' => 'read', 'id' => $relation->getId()]);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Relation:create.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Relation:create.html.twig', $parameterBag->all());
     }
 
-    public function readAction(Request $request, ParameterBag $parameters, $id)
+    public function readAction(Request $request, ParameterBag $parameterBag)
     {
-        $parameters->set('relations', $this->relationManager->getList(['widget' => $parameters->get('relation')->getWidget()->getId(), 'parent' => $parameters->get('relation')->getId()]));
+        $parameterBag->set('relations', $this->relationManager->getList(['widget' => $parameterBag->get('relation')->getWidget()->getId(), 'parent' => $parameterBag->get('relation')->getId()]));
 
-        return $this->render('AxipiBackendBundle:Relation:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Relation:read.html.twig', $parameterBag->all());
     }
 
-    public function updateAction(Request $request, ParameterBag $parameters, $id, $language)
+    public function updateAction(Request $request, ParameterBag $parameterBag, $language)
     {
-        $form = $this->createForm(RelationType::class, $parameters->get('relation'), [
-            'relation' => $parameters->get('relation'),
-            'relations' => $this->relationManager->getList(['widget' => $parameters->get('relation')->getWidget()->getId()]),
+        $form = $this->createForm(RelationType::class, $parameterBag->get('relation'), [
+            'relation' => $parameterBag->get('relation'),
+            'relations' => $this->relationManager->getList(['widget' => $parameterBag->get('relation')->getWidget()->getId()]),
             'items' => $this->itemManager->getList(['category' => 'page']),
         ]);
         $form->handleRequest($request);
@@ -115,33 +115,33 @@ class RelationController extends AbstractController
             if($form->isValid()) {
                 $this->relationManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_relations', ['language' => $language, 'action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_relation', ['language' => $language, 'action' => 'read', 'id' => $parameterBag->get('relation')->getid()]);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Relation:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Relation:update.html.twig', $parameterBag->all());
     }
 
-    public function deleteAction(Request $request, ParameterBag $parameters, $id, $language)
+    public function deleteAction(Request $request, ParameterBag $parameterBag, $language)
     {
         $form = $this->createForm(DeleteType::class, null, []);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->relationManager->remove($parameters->get('relation'));
+                $this->relationManager->remove($parameterBag->get('relation'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_widgets', ['language' => $language, 'action' => 'read', 'id' => $parameters->get('relation')->getWidget()->getId()]);
+                return $this->redirectToRoute('axipi_backend_widget', ['language' => $language, 'action' => 'read', 'id' => $parameterBag->get('relation')->getWidget()->getId()]);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Relation:delete.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Relation:delete.html.twig', $parameterBag->all());
     }
-    public function sortAction(Request $request, ParameterBag $parameters)
+    public function sortAction(Request $request, ParameterBag $parameterBag)
     {
         $data = json_decode($request->request->get('result'));
         foreach($data as $id => $ordering) {

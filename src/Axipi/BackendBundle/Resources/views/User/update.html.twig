@@ -5,11 +5,11 @@
 {% block body %}
     {% embed 'AxipiBackendBundle::card.html.twig' with {form: form} %}
         {% block card__actions %}
-            {% if app.user.id != user.id %}<a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_users', {action: 'delete', 'id': user.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>{% endif %}
+            {% if app.user.id != user.id %}<a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_user', {action: 'delete', 'id': user.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>{% endif %}
         {% endblock %}
         {% block card__title %}
-            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_users', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ 'users'|trans({}, 'axipi_backend') }}</a></span>
-            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_users', {action: 'read', 'id': user.id}) }}">{{ user.username }}</a></span>
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_user', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ 'users'|trans({}, 'axipi_backend') }}</a></span>
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_user', {action: 'read', 'id': user.id}) }}">{{ user.username }}</a></span>
         {% endblock %}
         {% block card__supporting %}
             <div class="mdl-cell mdl-cell--4-col">

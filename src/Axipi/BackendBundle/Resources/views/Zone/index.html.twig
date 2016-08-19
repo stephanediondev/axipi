@@ -5,7 +5,7 @@
 {% block body %}
     {% embed 'AxipiBackendBundle::card.html.twig' with {sortzone: true} %}
         {% block card__actions %}
-            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_zones', {action: 'create'}) }}">{{ 'actions.create'|trans({}, 'axipi_backend') }}</a>
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_zone', {action: 'create'}) }}">{{ 'actions.create'|trans({}, 'axipi_backend') }}</a>
         {% endblock %}
         {% block card__title %}
             <span><i class="fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'zones'|trans({}, 'axipi_backend') }}</span>
@@ -13,7 +13,7 @@
         {% block card__supporting %}
             {% for object in objects %}
                 <div class="mdl-cell mdl-cell--2-col sortitem" id="zone-{{ object.id }}">
-                    <a href="{{ path('axipi_backend_zones', {action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i><br>{{ object.code }}</a>
+                    <a href="{{ path('axipi_backend_zone', {action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i><br>{{ object.code }}</a>
                 </div>
             {% endfor %}
         {% endblock %}
@@ -53,7 +53,7 @@
                 success: function (data) {
                 },
                 type: 'POST',
-                url: '{{ path('axipi_backend_zones', {action: 'sort'}) }}'
+                url: '{{ path('axipi_backend_zone', {action: 'sort'}) }}'
             });
         }
     });

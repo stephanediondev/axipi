@@ -33,14 +33,14 @@ class CommentController extends AbstractController
             return $this->displayError(403);
         }
 
-        $parameters = new ParameterBag();
+        $parameterBag = new ParameterBag();
 
         if($action == 'create' && null !== $id) {
-            $parameters->set('category', $id);
+            $parameterBag->set('category', $id);
         } else if(null !== $id) {
             $comment = $this->commentManager->getOne(['id' => $id]);
             if($comment) {
-                $parameters->set('comment', $comment);
+                $parameterBag->set('comment', $comment);
             } else {
                 return $this->displayError(404);
             }
@@ -48,19 +48,19 @@ class CommentController extends AbstractController
 
         switch ($action) {
             case 'index':
-                return $this->indexAction($request, $parameters);
+                return $this->indexAction($request, $parameterBag);
             case 'read':
-                return $this->readAction($request, $parameters, $id);
+                return $this->readAction($request, $parameterBag);
             case 'update':
-                return $this->updateAction($request, $parameters, $id);
+                return $this->updateAction($request, $parameterBag);
             case 'delete':
-                return $this->deleteAction($request, $parameters, $id);
+                return $this->deleteAction($request, $parameterBag);
         }
 
         return $this->displayError(404);
     }
 
-    public function indexAction(Request $request, ParameterBag $parameters)
+    public function indexAction(Request $request, ParameterBag $parameterBag)
     {
         $paginator  = $this->get('knp_paginator');
         $paginator->setDefaultPaginatorOptions(['widgetParameterName' => 'page']);
@@ -70,20 +70,20 @@ class CommentController extends AbstractController
             10
         );
 
-        $parameters->set('comments', $pagination);
+        $parameterBag->set('comments', $pagination);
 
-        return $this->render('AxipiBackendBundle:Comment:index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Comment:index.html.twig', $parameterBag->all());
     }
 
-    public function readAction(Request $request, ParameterBag $parameters, $id)
+    public function readAction(Request $request, ParameterBag $parameterBag)
     {
-        return $this->render('AxipiBackendBundle:Comment:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Comment:read.html.twig', $parameterBag->all());
     }
 
-    public function updateAction(Request $request, ParameterBag $parameters, $id)
+    public function updateAction(Request $request, ParameterBag $parameterBag)
     {
-        $form = $this->createForm(CommentType::class, $parameters->get('comment'), [
-            'comment' => $parameters->get('comment'),
+        $form = $this->createForm(CommentType::class, $parameterBag->get('comment'), [
+            'comment' => $parameterBag->get('comment'),
             'comments' => [
                 'Page' => $this->commentManager->getList(['category' => 'page']),
                 'Widget' => $this->commentManager->getList(['category' => 'widget'])
@@ -96,30 +96,30 @@ class CommentController extends AbstractController
             if($form->isValid()) {
                 $this->commentManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_comments', ['action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_comment', ['action' => 'read', 'id' => $parameterBag->get('comment')->getId()]);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Comment:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Comment:update.html.twig', $parameterBag->all());
     }
 
-    public function deleteAction(Request $request, ParameterBag $parameters, $id)
+    public function deleteAction(Request $request, ParameterBag $parameterBag)
     {
         $form = $this->createForm(DeleteType::class, null, []);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->commentManager->remove($parameters->get('comment'));
+                $this->commentManager->remove($parameterBag->get('comment'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_comments', []);
+                return $this->redirectToRoute('axipi_backend_comment', []);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Comment:delete.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Comment:delete.html.twig', $parameterBag->all());
     }
 }

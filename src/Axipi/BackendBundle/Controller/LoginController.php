@@ -16,14 +16,14 @@ class LoginController extends AbstractController
 
         $authenticationUtils = $this->get('security.authentication_utils');
 
-        $parameters = new ParameterBag();
-        $parameters->set('error', $authenticationUtils->getLastAuthenticationError());
-        $parameters->set('lastUsername', $authenticationUtils->getLastUsername());
+        $parameterBag = new ParameterBag();
+        $parameterBag->set('error', $authenticationUtils->getLastAuthenticationError());
+        $parameterBag->set('lastUsername', $authenticationUtils->getLastUsername());
 
         $response = new Response();
-        if($parameters->get('error')) {
+        if($parameterBag->get('error')) {
             $response->setStatusCode(401);
         }
-        return $this->render('AxipiBackendBundle::Login/index.html.twig', $parameters->all(), $response);
+        return $this->render('AxipiBackendBundle::Login/index.html.twig', $parameterBag->all(), $response);
     }
 }

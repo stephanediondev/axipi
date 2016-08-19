@@ -13,7 +13,7 @@
     <div class="mdl-tabs">
         <div class="mdl-tabs__tab-bar">
             {% for language in languages %}
-                <a href="{{ path('axipi_backend_pages', {mode: mode, language: language.code, action: 'index'}) }}" class="mdl-tabs__tab{% if app.request.get('language') == language.code %} is-active{% endif %}">{{ language.title }}</a>
+                <a href="{{ path('axipi_backend_page', {mode: mode, language: language.code, action: 'index'}) }}" class="mdl-tabs__tab{% if app.request.get('language') == language.code %} is-active{% endif %}">{{ language.title }}</a>
             {% endfor %}
         </div>
     </div>
@@ -25,7 +25,7 @@
         {% block card__supporting %}
             {% for component in components %}
                 <div class="mdl-cell mdl-cell--2-col">
-                    <a href="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'create', id: component.id}) }}"><i class="fa fa-3x fa-{{ component.icon }}"></i><br>{{ component.title }}</a>
+                    <a href="{{ path('axipi_backend_page', {language: app.request.get('language'), action: 'create', id: component.id}) }}"><i class="fa fa-3x fa-{{ component.icon }}"></i><br>{{ component.title }}</a>
                 </div>
             {% endfor %}
         {% endblock %}
@@ -47,7 +47,7 @@
         {% block card__supporting %}
             {% for object in parent_null %}
                 <div class="mdl-cell mdl-cell--2-col">
-                    <a href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
+                    <a href="{{ path('axipi_backend_page', {mode: mode, language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
                 </div>
             {% endfor %}
         {% endblock %}

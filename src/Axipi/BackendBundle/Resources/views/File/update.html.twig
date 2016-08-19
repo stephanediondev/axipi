@@ -8,12 +8,12 @@
         <div class="col-lg-12">
             {% embed 'AxipiBackendBundle:Bootstrap:block_title.html.twig' %}
                 {% block block_title %}
-                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_files', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.file'|trans({}, 'axipi_backend') }}"></i>{{ 'files'|trans({}, 'axipi_backend') }}</a></span>
-                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_files', {action: 'read', 'id': file.id}) }}"><i class="fa fa-{{ 'icons.file'|trans({}, 'axipi_backend') }}"></i>{{ file.code }}</a></span>
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_file', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.file'|trans({}, 'axipi_backend') }}"></i>{{ 'files'|trans({}, 'axipi_backend') }}</a></span>
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_file', {action: 'read', 'id': file.id}) }}"><i class="fa fa-{{ 'icons.file'|trans({}, 'axipi_backend') }}"></i>{{ file.code }}</a></span>
                     <span>{{ 'actions.update'|trans({}, 'axipi_backend') }}</span>
                 {% endblock %}
                 {% block block_title_actions %}
-                    <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_files', {action: 'delete', 'id': file.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
+                    <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_file', {action: 'delete', 'id': file.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
                 {% endblock %}
             {% endembed %}
 

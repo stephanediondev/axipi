@@ -28,12 +28,12 @@ class UserController extends AbstractController
             return $this->displayError(403);
         }
 
-        $parameters = new ParameterBag();
+        $parameterBag = new ParameterBag();
 
         if(null !== $id) {
             $user = $this->userManager->getOne(['id' => $id]);
             if($user) {
-                $parameters->set('user', $user);
+                $parameterBag->set('user', $user);
             } else {
                 return $this->displayError(404);
             }
@@ -41,32 +41,32 @@ class UserController extends AbstractController
 
         switch ($action) {
             case 'index':
-                return $this->indexAction($request, $parameters);
+                return $this->indexAction($request, $parameterBag);
             case 'create':
-                return $this->createAction($request, $parameters, $id);
+                return $this->createAction($request, $parameterBag);
             case 'read':
-                return $this->readAction($request, $parameters, $id);
+                return $this->readAction($request, $parameterBag);
             case 'update':
-                return $this->updateAction($request, $parameters, $id);
+                return $this->updateAction($request, $parameterBag);
             case 'delete':
                 if($this->getUser()->getId() == $user->getId()) {
                     $this->addFlash('danger', 'access denied');
-                    return $this->redirectToRoute('axipi_backend_users', []);
+                    return $this->redirectToRoute('axipi_backend_user', []);
                 }
-                return $this->deleteAction($request, $parameters, $id);
+                return $this->deleteAction($request, $parameterBag);
         }
 
         return $this->displayError(404);
     }
 
-    public function indexAction(Request $request, ParameterBag $parameters)
+    public function indexAction(Request $request, ParameterBag $parameterBag)
     {
-        $parameters->set('objects', $this->userManager->getList());
+        $parameterBag->set('objects', $this->userManager->getList());
 
-        return $this->render('AxipiBackendBundle:User:index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:User:index.html.twig', $parameterBag->all());
     }
 
-    public function createAction(Request $request, ParameterBag $parameters, $id)
+    public function createAction(Request $request, ParameterBag $parameterBag)
     {
         $user = new User();
 
@@ -81,24 +81,24 @@ class UserController extends AbstractController
             if($form->isValid()) {
                 $this->userManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_users', []);
+                return $this->redirectToRoute('axipi_backend_user', []);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:User:create.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:User:create.html.twig', $parameterBag->all());
     }
 
-    public function readAction(Request $request, ParameterBag $parameters, $id)
+    public function readAction(Request $request, ParameterBag $parameterBag)
     {
-        return $this->render('AxipiBackendBundle:User:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:User:read.html.twig', $parameterBag->all());
     }
 
-    public function updateAction(Request $request, ParameterBag $parameters, $id)
+    public function updateAction(Request $request, ParameterBag $parameterBag)
     {
-        $form = $this->createForm(UserType::class, $parameters->get('user'), [
-            'user' => $parameters->get('user'),
+        $form = $this->createForm(UserType::class, $parameterBag->get('user'), [
+            'user' => $parameterBag->get('user'),
             'user_connected' => $this->getUser(),
             'roles' => $this->userManager->getRoles(),
         ]);
@@ -108,30 +108,30 @@ class UserController extends AbstractController
             if($form->isValid()) {
                 $this->userManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_users', ['action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_user', ['action' => 'read', 'id' => $parameterBag->get('user')->getId()]);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:User:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:User:update.html.twig', $parameterBag->all());
     }
 
-    public function deleteAction(Request $request, ParameterBag $parameters, $id)
+    public function deleteAction(Request $request, ParameterBag $parameterBag)
     {
         $form = $this->createForm(DeleteType::class, null, []);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->userManager->remove($parameters->get('user'));
+                $this->userManager->remove($parameterBag->get('user'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_users', []);
+                return $this->redirectToRoute('axipi_backend_user', []);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:User:delete.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:User:delete.html.twig', $parameterBag->all());
     }
 }

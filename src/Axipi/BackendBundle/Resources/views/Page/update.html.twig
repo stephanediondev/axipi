@@ -7,14 +7,14 @@
 {% block body %}
     {% embed 'AxipiBackendBundle::card.html.twig' with {form: form} %}
         {% block card__actions %}
-            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'delete', 'id': page.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_page', {language: app.request.get('language'), action: 'delete', 'id': page.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
         {% endblock %}
         {% block card__title %}
-            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></span>
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_page', {mode: mode, language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></span>
             {% if page.parent %}
                 {{ helper.path_loop(page.parent, mode, app.request.get('language')) }}
             {% endif %}
-            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'read', 'id': page.id}) }}">{{ page.title }}</a></span>
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_page', {language: app.request.get('language'), action: 'read', 'id': page.id}) }}">{{ page.title }}</a></span>
         {% endblock %}
         {% block card__supporting %}
             <div class="mdl-cell mdl-cell--4-col">

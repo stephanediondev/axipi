@@ -8,7 +8,7 @@ class HomeController extends AbstractController
 {
     public function indexAction()
     {
-        $parameters = [];
-        return $this->render('AxipiBackendBundle::Home/index.html.twig', $parameters);
+        $parameterBag = [];
+        return $this->render('AxipiBackendBundle::Home/index.html.twig', $parameterBag);
     }
 }

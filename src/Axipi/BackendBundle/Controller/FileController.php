@@ -29,9 +29,9 @@ class FileController extends AbstractController
             return $this->displayError(403);
         }
 
-        $parameters = new ParameterBag();
-        $parameters->set('mode', $mode);
-        $parameters->set('slug', $slug);
+        $parameterBag = new ParameterBag();
+        $parameterBag->set('mode', $mode);
+        $parameterBag->set('slug', $slug);
 
         $tree = [];
         $tree[] = ['slug' => '', 'name' => 'files', 'icon' => 'folder'];
@@ -46,12 +46,12 @@ class FileController extends AbstractController
                 $u++;
             }
         }
-        $parameters->set('tree', $tree);
+        $parameterBag->set('tree', $tree);
 
         if($action != 'index' && null !== $slug) {
             $file = $this->fileManager->getBySlug($slug);
             if($file) {
-                $parameters->set('file', $file);
+                $parameterBag->set('file', $file);
             } else {
                 return $this->displayError(404);
             }
@@ -59,30 +59,30 @@ class FileController extends AbstractController
 
         switch ($action) {
             case 'index':
-                return $this->indexAction($request, $parameters, $slug);
+                return $this->indexAction($request, $parameterBag, $slug);
             case 'create':
-                return $this->createAction($request, $parameters, $slug);
+                return $this->createAction($request, $parameterBag, $slug);
             case 'read':
-                return $this->readAction($request, $parameters, $slug);
+                return $this->readAction($request, $parameterBag, $slug);
             case 'update':
-                return $this->updateAction($request, $parameters, $slug);
+                return $this->updateAction($request, $parameterBag, $slug);
             case 'delete':
-                return $this->deleteAction($request, $parameters, $slug);
+                return $this->deleteAction($request, $parameterBag, $slug);
             case 'upload':
-                return $this->uploadAction($request, $parameters, $slug);
+                return $this->uploadAction($request, $parameterBag, $slug);
         }
 
         return $this->displayError(404);
     }
 
-    public function indexAction(Request $request, ParameterBag $parameters, $slug)
+    public function indexAction(Request $request, ParameterBag $parameterBag, $slug)
     {
-        $parameters->set('objects', $this->fileManager->getRows($slug));
+        $parameterBag->set('objects', $this->fileManager->getRows($slug));
 
-        return $this->render('AxipiBackendBundle:File:index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:File:index.html.twig', $parameterBag->all());
     }
 
-    public function createAction(Request $request, ParameterBag $parameters, $slug)
+    public function createAction(Request $request, ParameterBag $parameterBag, $slug)
     {
         $file = new FileModel();
 
@@ -93,39 +93,39 @@ class FileController extends AbstractController
             if($form->isValid()) {
                 $this->fileManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_files', []);
+                return $this->redirectToRoute('axipi_backend_file', []);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:File:create.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:File:create.html.twig', $parameterBag->all());
     }
 
-    public function readAction(Request $request, ParameterBag $parameters, $slug)
+    public function readAction(Request $request, ParameterBag $parameterBag, $slug)
     {
-        return $this->render('AxipiBackendBundle:File:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:File:read.html.twig', $parameterBag->all());
     }
 
-    public function updateAction(Request $request, ParameterBag $parameters, $slug)
+    public function updateAction(Request $request, ParameterBag $parameterBag, $slug)
     {
-        $form = $this->createForm(FileType::class, $parameters->get('file'), []);
+        $form = $this->createForm(FileType::class, $parameterBag->get('file'), []);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
                 $this->fileManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_files', ['action' => 'read', 'id' => $slug]);
+                return $this->redirectToRoute('axipi_backend_file', ['action' => 'read', 'id' => $slug]);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:File:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:File:update.html.twig', $parameterBag->all());
     }
 
-    public function deleteAction(Request $request, ParameterBag $parameters, $slug)
+    public function deleteAction(Request $request, ParameterBag $parameterBag, $slug)
     {
         $form = $this->createForm(DeleteType::class, null, []);
         $form->handleRequest($request);
@@ -134,16 +134,16 @@ class FileController extends AbstractController
             if($form->isValid()) {
                 $this->fileManager->remove($slug);
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_files', []);
+                return $this->redirectToRoute('axipi_backend_file', []);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:File:delete.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:File:delete.html.twig', $parameterBag->all());
     }
 
-    public function uploadAction(Request $request, $parameters, $slug)
+    public function uploadAction(Request $request, $parameterBag, $slug)
     {
         $data = [];
 
@@ -158,7 +158,7 @@ class FileController extends AbstractController
                 'id' => $filename,
                 'title' => $filename,
                 'icon' => 'file-o',
-                'href' => $this->generateUrl('axipi_backend_files', ['action' => 'read', 'slug' => $slug.'/'.$filename]),
+                'href' => $this->generateUrl('axipi_backend_file', ['action' => 'read', 'slug' => $slug.'/'.$filename]),
             ];
         }
 

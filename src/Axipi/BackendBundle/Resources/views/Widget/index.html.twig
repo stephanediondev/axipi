@@ -5,9 +5,9 @@
 {% block body %}
     <div class="mdl-tabs">
         <div class="mdl-tabs__tab-bar">
-            <a href="{{ path('axipi_backend_widgets', {language: 'null', action: 'index'}) }}" class="mdl-tabs__tab{% if app.request.get('language') == 'null' %} is-active{% endif %}">{{ 'any_language'|trans({}, 'axipi_backend') }}</a>
+            <a href="{{ path('axipi_backend_widget', {language: 'null', action: 'index'}) }}" class="mdl-tabs__tab{% if app.request.get('language') == 'null' %} is-active{% endif %}">{{ 'any_language'|trans({}, 'axipi_backend') }}</a>
             {% for language in languages %}
-                <a href="{{ path('axipi_backend_widgets', {language: language.code, action: 'index'}) }}" class="mdl-tabs__tab{% if app.request.get('language') == language.code %} is-active{% endif %}">{{ language.title }}</a>
+                <a href="{{ path('axipi_backend_widget', {language: language.code, action: 'index'}) }}" class="mdl-tabs__tab{% if app.request.get('language') == language.code %} is-active{% endif %}">{{ language.title }}</a>
             {% endfor %}
         </div>
     </div>
@@ -19,7 +19,7 @@
         {% block card__supporting %}
             {% for component in components %}
                 <div class="mdl-cell mdl-cell--2-col">
-                    <a href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'create', id: component.id}) }}"><i class="fa fa-3x fa-{{ component.icon }}"></i><br>{{ component.title }}</a>
+                    <a href="{{ path('axipi_backend_widget', {language: app.request.get('language'), action: 'create', id: component.id}) }}"><i class="fa fa-3x fa-{{ component.icon }}"></i><br>{{ component.title }}</a>
                 </div>
             {% endfor %}
         {% endblock %}
@@ -42,13 +42,13 @@
             {% if app.request.get('language') == 'null' %}
                 {% for object in no_zone if object.language is null %}
                     <div class="mdl-cell mdl-cell--2-col sortitem" id="item-{{ object.id }}">
-                        <a href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
+                        <a href="{{ path('axipi_backend_widget', {language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
                     </div>
                 {% endfor %}
             {% else %}
                 {% for object in no_zone if object.language is not null and object.language.code == app.request.get('language') %}
                     <div class="mdl-cell mdl-cell--2-col sortitem" id="item-{{ object.id }}">
-                        <a href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
+                        <a href="{{ path('axipi_backend_widget', {language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
                     </div>
                 {% endfor %}
             {% endif %}
@@ -64,13 +64,13 @@
                 {% if app.request.get('language') == 'null' %}
                     {% for object in zone.widgets if object.language is null %}
                         <div class="mdl-cell mdl-cell--2-col sortitem" id="item-{{ object.id }}">
-                            <a href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
+                            <a href="{{ path('axipi_backend_widget', {language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
                         </div>
                     {% endfor %}
                 {% else %}
                     {% for object in zone.widgets if object.language is not null and object.language.code == app.request.get('language') %}
                         <div class="mdl-cell mdl-cell--2-col sortitem" id="item-{{ object.id }}">
-                            <a href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
+                            <a href="{{ path('axipi_backend_widget', {language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
                         </div>
                     {% endfor %}
                 {% endif %}
@@ -115,7 +115,7 @@
                 success: function (data) {
                 },
                 type: 'POST',
-                url: '{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'sort'}) }}'
+                url: '{{ path('axipi_backend_widget', {language: app.request.get('language'), action: 'sort'}) }}'
             });
         }
     });
@@ -135,7 +135,7 @@
                 success: function (data) {
                 },
                 type: 'POST',
-                url: '{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'move'}) }}/' + id.replace('item-', '')
+                url: '{{ path('axipi_backend_widget', {language: app.request.get('language'), action: 'move'}) }}/' + id.replace('item-', '')
             });
         }
     });

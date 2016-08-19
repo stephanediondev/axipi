@@ -28,12 +28,12 @@ class LanguageController extends AbstractController
             return $this->displayError(403);
         }
 
-        $parameters = new ParameterBag();
+        $parameterBag = new ParameterBag();
 
         if(null !== $id) {
             $language = $this->languageManager->getOne(['id' => $id]);
             if($language) {
-                $parameters->set('language', $language);
+                $parameterBag->set('language', $language);
             } else {
                 return $this->displayError(404);
             }
@@ -41,28 +41,28 @@ class LanguageController extends AbstractController
 
         switch ($action) {
             case 'index':
-                return $this->indexAction($request, $parameters);
+                return $this->indexAction($request, $parameterBag);
             case 'create':
-                return $this->createAction($request, $parameters, $id);
+                return $this->createAction($request, $parameterBag);
             case 'read':
-                return $this->readAction($request, $parameters, $id);
+                return $this->readAction($request, $parameterBag);
             case 'update':
-                return $this->updateAction($request, $parameters, $id);
+                return $this->updateAction($request, $parameterBag);
             case 'delete':
-                return $this->deleteAction($request, $parameters, $id);
+                return $this->deleteAction($request, $parameterBag);
         }
 
         return $this->displayError(404);
     }
 
-    public function indexAction(Request $request, ParameterBag $parameters)
+    public function indexAction(Request $request, ParameterBag $parameterBag)
     {
-        $parameters->set('objects', $this->languageManager->getList());
+        $parameterBag->set('objects', $this->languageManager->getList());
 
-        return $this->render('AxipiBackendBundle:Language:index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Language:index.html.twig', $parameterBag->all());
     }
 
-    public function createAction(Request $request, ParameterBag $parameters, $id)
+    public function createAction(Request $request, ParameterBag $parameterBag)
     {
         $language = new Language();
         $language->setIsActive(true);
@@ -76,24 +76,24 @@ class LanguageController extends AbstractController
             if($form->isValid()) {
                 $this->languageManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_languages', []);
+                return $this->redirectToRoute('axipi_backend_language', []);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Language:create.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Language:create.html.twig', $parameterBag->all());
     }
 
-    public function readAction(Request $request, ParameterBag $parameters, $id)
+    public function readAction(Request $request, ParameterBag $parameterBag)
     {
-        return $this->render('AxipiBackendBundle:Language:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Language:read.html.twig', $parameterBag->all());
     }
 
-    public function updateAction(Request $request, ParameterBag $parameters, $id)
+    public function updateAction(Request $request, ParameterBag $parameterBag)
     {
-        $form = $this->createForm(LanguageType::class, $parameters->get('language'), [
-            'language' => $parameters->get('language'),
+        $form = $this->createForm(LanguageType::class, $parameterBag->get('language'), [
+            'language' => $parameterBag->get('language'),
         ]);
         $form->handleRequest($request);
 
@@ -101,30 +101,30 @@ class LanguageController extends AbstractController
             if($form->isValid()) {
                 $this->languageManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_languages', ['action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_language', ['action' => 'read', 'id' => $parameterBag->get('language')->getId()]);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Language:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Language:update.html.twig', $parameterBag->all());
     }
 
-    public function deleteAction(Request $request, ParameterBag $parameters, $id)
+    public function deleteAction(Request $request, ParameterBag $parameterBag)
     {
         $form = $this->createForm(DeleteType::class, null, []);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->languageManager->remove($parameters->get('language'));
+                $this->languageManager->remove($parameterBag->get('language'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_languages', []);
+                return $this->redirectToRoute('axipi_backend_language', []);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Language:delete.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Language:delete.html.twig', $parameterBag->all());
     }
 }

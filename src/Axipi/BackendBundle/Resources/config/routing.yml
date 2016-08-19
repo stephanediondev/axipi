@@ -14,15 +14,15 @@ axipi_backend_home:
     defaults:
         _controller: "axipi_backend_controller_home:indexAction"
 
-axipi_backend_components:
-    path:  /components/{action}/{id}
+axipi_backend_component:
+    path:  /component/{action}/{id}
     defaults:
         _controller: "axipi_backend_controller_component:dispatchAction"
         action: "index"
         id: null
 
-axipi_backend_pages:
-    path:  /pages/{mode}/{language}/{action}/{id}
+axipi_backend_page:
+    path:  /page/{mode}/{language}/{action}/{id}
     defaults:
         _controller: "axipi_backend_controller_page:dispatchAction"
         mode: "normal"
@@ -30,38 +30,38 @@ axipi_backend_pages:
         action: "index"
         id: null
 
-axipi_backend_widgets:
-    path:  /widgets/{language}/{action}/{id}
+axipi_backend_widget:
+    path:  /widget/{language}/{action}/{id}
     defaults:
         _controller: "axipi_backend_controller_widget:dispatchAction"
         language: "xx"
         action: "index"
         id: null
 
-axipi_backend_relations:
-    path:  /relations/{language}/{action}/{id}
+axipi_backend_relation:
+    path:  /relation/{language}/{action}/{id}
     defaults:
         _controller: "axipi_backend_controller_relation:dispatchAction"
         language: "xx"
         action: "index"
         id: null
 
-axipi_backend_zones:
-    path:  /zones/{action}/{id}
+axipi_backend_zone:
+    path:  /zone/{action}/{id}
     defaults:
         _controller: "axipi_backend_controller_zone:dispatchAction"
         action: "index"
         id: null
 
-axipi_backend_languages:
-    path:  /languages/{action}/{id}
+axipi_backend_language:
+    path:  /language/{action}/{id}
     defaults:
         _controller: "axipi_backend_controller_language:dispatchAction"
         action: "index"
         id: null
 
-axipi_backend_users:
-    path:  /users/{action}/{id}
+axipi_backend_user:
+    path:  /user/{action}/{id}
     defaults:
         _controller: "axipi_backend_controller_user:dispatchAction"
         action: "index"
@@ -73,8 +73,8 @@ axipi_backend_profile:
         _controller: "axipi_backend_controller_profile:dispatchAction"
         action: "read"
 
-axipi_backend_files:
-    path:  /files/{mode}/{action}/{slug}
+axipi_backend_file:
+    path:  /file/{mode}/{action}/{slug}
     defaults:
         _controller: "axipi_backend_controller_file:dispatchAction"
         mode: "normal"
@@ -101,8 +101,8 @@ axipi_backend_info:
         _controller: "axipi_backend_controller_info:dispatchAction"
         action: "index"
 
-axipi_backend_comments:
-    path:  /comments/{action}/{id}
+axipi_backend_comment:
+    path:  /comment/{action}/{id}
     defaults:
         _controller: "axipi_backend_controller_comment:dispatchAction"
         action: "index"

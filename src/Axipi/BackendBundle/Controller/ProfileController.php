@@ -24,29 +24,29 @@ class ProfileController extends AbstractController
 
     public function dispatchAction(Request $request, $action)
     {
-        $parameters = new ParameterBag();
+        $parameterBag = new ParameterBag();
 
         $user = $this->getUser();
-        $parameters->set('user', $user);
+        $parameterBag->set('user', $user);
 
         switch ($action) {
             case 'read':
-                return $this->readAction($request, $parameters);
+                return $this->readAction($request, $parameterBag);
             case 'update':
-                return $this->updateAction($request, $parameters);
+                return $this->updateAction($request, $parameterBag);
         }
 
         return $this->displayError(404);
     }
 
-    public function readAction(Request $request, ParameterBag $parameters)
+    public function readAction(Request $request, ParameterBag $parameterBag)
     {
-        return $this->render('AxipiBackendBundle:Profile:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Profile:read.html.twig', $parameterBag->all());
     }
 
-    public function updateAction(Request $request, ParameterBag $parameters)
+    public function updateAction(Request $request, ParameterBag $parameterBag)
     {
-        $form = $this->createForm(ProfileType::class, $parameters->get('user'), []);
+        $form = $this->createForm(ProfileType::class, $parameterBag->get('user'), []);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
@@ -57,8 +57,8 @@ class ProfileController extends AbstractController
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Profile:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Profile:update.html.twig', $parameterBag->all());
     }
 }

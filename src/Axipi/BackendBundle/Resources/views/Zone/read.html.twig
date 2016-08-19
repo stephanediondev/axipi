@@ -5,11 +5,11 @@
 {% block body %}
     {% embed 'AxipiBackendBundle::card.html.twig' %}
         {% block card__actions %}
-            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_zones', {action: 'update', 'id': zone.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
-            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_zones', {action: 'delete', 'id': zone.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_zone', {action: 'update', 'id': zone.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
+            <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_zone', {action: 'delete', 'id': zone.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
         {% endblock %}
         {% block card__title %}
-            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_zones', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'zones'|trans({}, 'axipi_backend') }}</a></span>
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_zone', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'zones'|trans({}, 'axipi_backend') }}</a></span>
             <span>{{ zone.code }}</span>
         {% endblock %}
         {% block card__supporting %}
@@ -29,9 +29,9 @@
             {% for object in zone.widgets %}
                 <div class="mdl-cell mdl-cell--2-col">
                     {% if object.language %}
-                        <a href="{{ path('axipi_backend_widgets', {language: object.language.code, action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
+                        <a href="{{ path('axipi_backend_widget', {language: object.language.code, action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
                     {% else %}
-                        <a href="{{ path('axipi_backend_widgets', {language: 'null', action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
+                        <a href="{{ path('axipi_backend_widget', {language: 'null', action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
                     {% endif %}
                 </div>
             {% endfor %}
@@ -45,7 +45,7 @@
         {% block card__supporting %}
             {% for object in zone.components %}
                 <div class="mdl-cell mdl-cell--2-col">
-                    <a href="{{ path('axipi_backend_components', {action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.icon }}"></i><br>{{ object.title }}</a>
+                    <a href="{{ path('axipi_backend_component', {action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.icon }}"></i><br>{{ object.title }}</a>
                 </div>
             {% endfor %}
         {% endblock %}

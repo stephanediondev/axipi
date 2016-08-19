@@ -22,12 +22,12 @@
                 {% else %}
                     <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_core_slug', {'slug': page.slug}) }}" target="_blank">{{ 'frontend'|trans({}, 'axipi_backend') }}</a>
                 {% endif %}
-                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'update', 'id': page.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
-                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'delete', 'id': page.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
+                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_page', {mode: mode, language: app.request.get('language'), action: 'update', 'id': page.id}) }}">{{ 'actions.update'|trans({}, 'axipi_backend') }}</a>
+                <a class="mdl-button mdl-color--pink mdl-color-text--white" href="{{ path('axipi_backend_page', {mode: mode, language: app.request.get('language'), action: 'delete', 'id': page.id}) }}">{{ 'actions.delete'|trans({}, 'axipi_backend') }}</a>
             {% endif %}
         {% endblock %}
         {% block card__title %}
-            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></span>
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_page', {mode: mode, language: app.request.get('language'), action: 'index'}) }}"><i class="fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></span>
             {% if page.parent %}
                 {{ helper.path_loop(page.parent, mode, app.request.get('language')) }}
             {% endif %}
@@ -83,7 +83,7 @@
         {% block card__supporting %}
             {% for component in components %}
                 <div class="mdl-cell mdl-cell--2-col">
-                    <a href="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'create', id: component.id, parent: page.id}) }}"><i class="fa fa-3x fa-{{ component.icon }}"></i><br>{{ component.title }}</a>
+                    <a href="{{ path('axipi_backend_page', {language: app.request.get('language'), action: 'create', id: component.id, parent: page.id}) }}"><i class="fa fa-3x fa-{{ component.icon }}"></i><br>{{ component.title }}</a>
                 </div>
             {% endfor %}
         {% endblock %}
@@ -101,9 +101,9 @@
                 {% for object in page.children %}
                     <div class="mdl-cell mdl-cell--2-col sortitem" id="item-{{ object.id }}">
                         {% if object.component.category == 'page' %}
-                            <a href="{{ path('axipi_backend_pages', {mode: mode, language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
+                            <a href="{{ path('axipi_backend_page', {mode: mode, language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
                         {% else %}
-                            <a href="{{ path('axipi_backend_widgets', {language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
+                            <a href="{{ path('axipi_backend_widget', {language: app.request.get('language'), action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.component.icon }}"></i><br>{{ object.title }}</a>
                         {% endif %}
                     </div>
                 {% endfor %}
@@ -117,7 +117,7 @@
         {% endblock %}
         {% block card__supporting %}
             {% if page.component.id == 5 %}
-                <div class="mdl-cell mdl-cell--2-col" data-url="{{ path('axipi_backend_pages', {language: app.request.get('language'), action: 'upload'}) }}" id="ajax-uploader" data-parent="{{ page.id }}" data-component="6">
+                <div class="mdl-cell mdl-cell--2-col" data-url="{{ path('axipi_backend_page', {language: app.request.get('language'), action: 'upload'}) }}" id="ajax-uploader" data-parent="{{ page.id }}" data-component="6">
                     <a class="fileinput-button attachment-upload" href="#"><i class="fa fa-3x fa-picture-o"></i><br>Gallery / Media</a>
                 </div>
             {% endif %}
@@ -158,7 +158,7 @@
                 success: function (data) {
                 },
                 type: 'POST',
-                url: '{{ path('axipi_backend_pages', {mode: 'normal', language: app.request.get('language'), action: 'sort'}) }}'
+                url: '{{ path('axipi_backend_page', {mode: 'normal', language: app.request.get('language'), action: 'sort'}) }}'
             });
         }
     });

@@ -9,10 +9,10 @@
         {% endblock %}
         {% block card__supporting %}
             <div class="mdl-cell mdl-cell--2-col">
-                <a href="{{ path('axipi_backend_components', {action: 'create', id: 'page'}) }}"><i class="fa fa-3x fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i><br>{{ 'category.page'|trans({}, 'axipi_backend') }}</a>
+                <a href="{{ path('axipi_backend_component', {action: 'create', id: 'page'}) }}"><i class="fa fa-3x fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i><br>{{ 'category.page'|trans({}, 'axipi_backend') }}</a>
             </div>
             <div class="mdl-cell mdl-cell--2-col">
-                <a href="{{ path('axipi_backend_components', {action: 'create', id: 'widget'}) }}"><i class="fa fa-3x fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i><br>{{ 'category.widget'|trans({}, 'axipi_backend') }}</a>
+                <a href="{{ path('axipi_backend_component', {action: 'create', id: 'widget'}) }}"><i class="fa fa-3x fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i><br>{{ 'category.widget'|trans({}, 'axipi_backend') }}</a>
             </div>
         {% endblock %}
     {% endembed %}
@@ -33,7 +33,7 @@
         {% block card__supporting %}
             {% for object in pages %}
                 <div class="mdl-cell mdl-cell--2-col">
-                    <a href="{{ path('axipi_backend_components', {action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.icon }}"></i><br>{{ object.title }}</a>
+                    <a href="{{ path('axipi_backend_component', {action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.icon }}"></i><br>{{ object.title }}</a>
                 </div>
             {% endfor %}
         {% endblock %}
@@ -46,7 +46,7 @@
         {% block card__supporting %}
             {% for object in widgets %}
                 <div class="mdl-cell mdl-cell--2-col">
-                    <a href="{{ path('axipi_backend_components', {action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.icon }}"></i><br>{{ object.title }}</a>
+                    <a href="{{ path('axipi_backend_component', {action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ object.icon }}"></i><br>{{ object.title }}</a>
                 </div>
             {% endfor %}
         {% endblock %}

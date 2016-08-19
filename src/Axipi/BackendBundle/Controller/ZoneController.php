@@ -29,12 +29,12 @@ class ZoneController extends AbstractController
             return $this->displayError(403);
         }
 
-        $parameters = new ParameterBag();
+        $parameterBag = new ParameterBag();
 
         if(null !== $id) {
             $zone = $this->zoneManager->getOne(['id' => $id]);
             if($zone) {
-                $parameters->set('zone', $zone);
+                $parameterBag->set('zone', $zone);
             } else {
                 return $this->displayError(404);
             }
@@ -42,30 +42,30 @@ class ZoneController extends AbstractController
 
         switch ($action) {
             case 'index':
-                return $this->indexAction($request, $parameters);
+                return $this->indexAction($request, $parameterBag);
             case 'create':
-                return $this->createAction($request, $parameters, $id);
+                return $this->createAction($request, $parameterBag);
             case 'read':
-                return $this->readAction($request, $parameters, $id);
+                return $this->readAction($request, $parameterBag);
             case 'update':
-                return $this->updateAction($request, $parameters, $id);
+                return $this->updateAction($request, $parameterBag);
             case 'delete':
-                return $this->deleteAction($request, $parameters, $id);
+                return $this->deleteAction($request, $parameterBag);
             case 'sort':
-                return $this->sortAction($request, $parameters);
+                return $this->sortAction($request, $parameterBag);
         }
 
         return $this->displayError(404);
     }
 
-    public function indexAction(Request $request, ParameterBag $parameters)
+    public function indexAction(Request $request, ParameterBag $parameterBag)
     {
-        $parameters->set('objects', $this->zoneManager->getList());
+        $parameterBag->set('objects', $this->zoneManager->getList());
 
-        return $this->render('AxipiBackendBundle:Zone:index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Zone:index.html.twig', $parameterBag->all());
     }
 
-    public function createAction(Request $request, ParameterBag $parameters, $id)
+    public function createAction(Request $request, ParameterBag $parameterBag)
     {
         $zone = new Zone();
         $zone->setIsActive(true);
@@ -79,24 +79,24 @@ class ZoneController extends AbstractController
             if($form->isValid()) {
                 $this->zoneManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_zones', []);
+                return $this->redirectToRoute('axipi_backend_zone', []);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Zone:create.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Zone:create.html.twig', $parameterBag->all());
     }
 
-    public function readAction(Request $request, ParameterBag $parameters, $id)
+    public function readAction(Request $request, ParameterBag $parameterBag)
     {
-        return $this->render('AxipiBackendBundle:Zone:read.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Zone:read.html.twig', $parameterBag->all());
     }
 
-    public function updateAction(Request $request, ParameterBag $parameters, $id)
+    public function updateAction(Request $request, ParameterBag $parameterBag)
     {
-        $form = $this->createForm(ZoneType::class, $parameters->get('zone'), [
-            'zone' => $parameters->get('zone'),
+        $form = $this->createForm(ZoneType::class, $parameterBag->get('zone'), [
+            'zone' => $parameterBag->get('zone'),
         ]);
         $form->handleRequest($request);
 
@@ -104,34 +104,34 @@ class ZoneController extends AbstractController
             if($form->isValid()) {
                 $this->zoneManager->persist($form->getData());
                 $this->addFlash('success', 'updated');
-                return $this->redirectToRoute('axipi_backend_zones', ['action' => 'read', 'id' => $id]);
+                return $this->redirectToRoute('axipi_backend_zone', ['action' => 'read', 'id' => $parameterBag->get('widget')->getId()]);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Zone:update.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Zone:update.html.twig', $parameterBag->all());
     }
 
-    public function deleteAction(Request $request, ParameterBag $parameters, $id)
+    public function deleteAction(Request $request, ParameterBag $parameterBag)
     {
         $form = $this->createForm(DeleteType::class, null, []);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->zoneManager->remove($parameters->get('zone'));
+                $this->zoneManager->remove($parameterBag->get('zone'));
                 $this->addFlash('success', 'deleted');
-                return $this->redirectToRoute('axipi_backend_zones', []);
+                return $this->redirectToRoute('axipi_backend_zone', []);
             }
         }
 
-        $parameters->set('form', $form->createView());
+        $parameterBag->set('form', $form->createView());
 
-        return $this->render('AxipiBackendBundle:Zone:delete.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle:Zone:delete.html.twig', $parameterBag->all());
     }
 
-    public function sortAction(Request $request, ParameterBag $parameters)
+    public function sortAction(Request $request, ParameterBag $parameterBag)
     {
         $data = json_decode($request->request->get('result'));
         foreach($data as $id => $ordering) {

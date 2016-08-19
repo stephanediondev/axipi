@@ -45,26 +45,26 @@
             <ul class="mdl-list">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     {% if is_granted('ROLE_PAGES') %}
-                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_pages', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></li>
+                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_page', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.page'|trans({}, 'axipi_backend') }}"></i>{{ 'pages'|trans({}, 'axipi_backend') }}</a></li>
                     {% endif %}
                     {% if is_granted('ROLE_WIDGETS') %}
-                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_widgets', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></li>
+                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_widget', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.widget'|trans({}, 'axipi_backend') }}"></i>{{ 'widgets'|trans({}, 'axipi_backend') }}</a></li>
                     {% endif %}
                     <li class="mdl-menu__item--full-bleed-divider"></li>
                     {% if is_granted('ROLE_COMMENTS') %}
-                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_comments', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.comment'|trans({}, 'axipi_backend') }}"></i>{{ 'comments'|trans({}, 'axipi_backend') }}</a></li>
+                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_comment', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.comment'|trans({}, 'axipi_backend') }}"></i>{{ 'comments'|trans({}, 'axipi_backend') }}</a></li>
                     {% endif %}
                     {% if is_granted('ROLE_FILES') %}
-                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_files', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.file'|trans({}, 'axipi_backend') }}"></i>{{ 'files'|trans({}, 'axipi_backend') }}</a></li>
+                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_file', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.file'|trans({}, 'axipi_backend') }}"></i>{{ 'files'|trans({}, 'axipi_backend') }}</a></li>
                     {% endif %}
                     {% if is_granted('ROLE_LANGUAGES') %}
-                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_languages', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.language'|trans({}, 'axipi_backend') }}"></i>{{ 'languages'|trans({}, 'axipi_backend') }}</a></li>
+                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_language', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.language'|trans({}, 'axipi_backend') }}"></i>{{ 'languages'|trans({}, 'axipi_backend') }}</a></li>
                     {% endif %}
                     {% if is_granted('ROLE_COMPONENTS') %}
-                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_components', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.component'|trans({}, 'axipi_backend') }}"></i>{{ 'components'|trans({}, 'axipi_backend') }}</a></li>
+                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_component', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.component'|trans({}, 'axipi_backend') }}"></i>{{ 'components'|trans({}, 'axipi_backend') }}</a></li>
                     {% endif %}
                     {% if is_granted('ROLE_ZONES') %}
-                        <li class="mdl-list__item "><a href="{{ path('axipi_backend_zones', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'zones'|trans({}, 'axipi_backend') }}</a></li>
+                        <li class="mdl-list__item "><a href="{{ path('axipi_backend_zone', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'zones'|trans({}, 'axipi_backend') }}</a></li>
                     {% endif %}
                     <li class="mdl-menu__item--full-bleed-divider"></li>
                     {% if is_granted('ROLE_SEARCH') %}
@@ -74,7 +74,7 @@
                         <li class="mdl-list__item"><a href="{{ path('axipi_backend_cache', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.cache'|trans({}, 'axipi_backend') }}"></i>{{ 'cache'|trans({}, 'axipi_backend') }}</a></li>
                     {% endif %}
                     {% if is_granted('ROLE_USERS') %}
-                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_users', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ 'users'|trans({}, 'axipi_backend') }}</a></li>
+                        <li class="mdl-list__item"><a href="{{ path('axipi_backend_user', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.user'|trans({}, 'axipi_backend') }}"></i>{{ 'users'|trans({}, 'axipi_backend') }}</a></li>
                     {% endif %}
                     {% if is_granted('ROLE_INFO') %}
                         <li class="mdl-list__item"><a href="{{ path('axipi_backend_info', {action: 'index'}) }}"><i class="fa-lg fa fa-{{ 'icons.info'|trans({}, 'axipi_backend') }}"></i>{{ 'info'|trans({}, 'axipi_backend') }}</a></li>

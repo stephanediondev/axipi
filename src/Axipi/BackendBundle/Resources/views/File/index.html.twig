@@ -16,10 +16,10 @@
         {% endblock %}
         {% block card__supporting %}
             <div class="mdl-cell mdl-cell--2-col">
-                <a href="{{ path('axipi_backend_files', {mode: mode, action: 'create', id: 'folder'}) }}"><i class="fa fa-3x fa-folder-o"></i><br>{{ 'folder'|trans({}, 'axipi_backend') }}</a>
+                <a href="{{ path('axipi_backend_file', {mode: mode, action: 'create', id: 'folder'}) }}"><i class="fa fa-3x fa-folder-o"></i><br>{{ 'folder'|trans({}, 'axipi_backend') }}</a>
             </div>
             <div class="mdl-cell mdl-cell--2-col">
-                <a href="{{ path('axipi_backend_files', {mode: mode, action: 'create', id: 'file'}) }}"><i class="fa fa-3x fa-file-o"></i><br>{{ 'file'|trans({}, 'axipi_backend') }}</a>
+                <a href="{{ path('axipi_backend_file', {mode: mode, action: 'create', id: 'file'}) }}"><i class="fa fa-3x fa-file-o"></i><br>{{ 'file'|trans({}, 'axipi_backend') }}</a>
             </div>
         {% endblock %}
     {% endembed %}
@@ -31,7 +31,7 @@
         {% block card__title %}
             {% for tree in tree %}
                 {% if tree.slug != slug %}
-                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_files', {mode: mode, action: 'index', 'slug': tree.slug}) }}"><i class="fa fa-{{ tree.icon }}"></i>{{ tree.name }}</a></span>
+                    <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_file', {mode: mode, action: 'index', 'slug': tree.slug}) }}"><i class="fa fa-{{ tree.icon }}"></i>{{ tree.name }}</a></span>
                 {% else %}
                     <span><i class="fa fa-{{ tree.icon }}"></i>{{ tree.name }}</span>
                 {% endif %}
@@ -41,12 +41,12 @@
             {% for object in objects %}
                 <div class="mdl-cell mdl-cell--2-col">
                     {% if object.type == 'folder' %}
-                        <a href="{{ path('axipi_backend_files', {mode: mode, action: 'index', slug: object.slug}) }}"><i class="fa fa-3x fa-{{ object.icon }}"></i><br>{{ object.name }}</a>
+                        <a href="{{ path('axipi_backend_file', {mode: mode, action: 'index', slug: object.slug}) }}"><i class="fa fa-3x fa-{{ object.icon }}"></i><br>{{ object.name }}</a>
                     {% else %}
                         {% if 'image/' in object.mime %}
-                            <a{% if 'wysiwyg' in mode %} class="wysiwyg_image"{% endif %} {% if 'wysiwyg' in mode %}data-field_name="{{ mode|replace({'wysiwyg': ''}) }}" {% endif %}href="{{ path('axipi_backend_files', {mode: mode, action: 'read', slug: object.slug}) }}"><img alt="" src="{{ asset('files/' ~ object.slug) }}"><br>{{ object.name }}</a>
+                            <a{% if 'wysiwyg' in mode %} class="wysiwyg_image"{% endif %} {% if 'wysiwyg' in mode %}data-field_name="{{ mode|replace({'wysiwyg': ''}) }}" {% endif %}href="{{ path('axipi_backend_file', {mode: mode, action: 'read', slug: object.slug}) }}"><img alt="" src="{{ asset('files/' ~ object.slug) }}"><br>{{ object.name }}</a>
                         {% else %}
-                            <a href="{{ path('axipi_backend_files', {mode: mode, action: 'read', slug: object.slug}) }}"><i class="fa fa-3x fa-{{ object.icon }}"></i><br>{{ object.name }}</a>
+                            <a href="{{ path('axipi_backend_file', {mode: mode, action: 'read', slug: object.slug}) }}"><i class="fa fa-3x fa-{{ object.icon }}"></i><br>{{ object.name }}</a>
                         {% endif %}
                     {% endif %}
                 </div>
@@ -59,7 +59,7 @@
             <span><i class="fa fa-download"></i>{{ 'drag_drop'|trans({}, 'axipi_backend') }} <small>Drop file(s) over icon</small></span>
         {% endblock %}
         {% block card__supporting %}
-            <div class="mdl-cell mdl-cell--2-col" data-url="{{ path('axipi_backend_files', {action: 'upload', 'slug': slug}) }}" id="ajax-uploader">
+            <div class="mdl-cell mdl-cell--2-col" data-url="{{ path('axipi_backend_file', {action: 'upload', 'slug': slug}) }}" id="ajax-uploader">
                 <a class="fileinput-button attachment-upload" href="#"><i class="fa fa-3x fa-files-o"></i><br>Files</a>
             </div>
         {% endblock %}

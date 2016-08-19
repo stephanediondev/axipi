@@ -25,49 +25,49 @@ class SearchController extends AbstractController
             return $this->displayError(403);
         }
 
-        $parameters = new ParameterBag();
+        $parameterBag = new ParameterBag();
 
         switch ($action) {
             case 'index':
-                return $this->indexAction($request, $parameters);
+                return $this->indexAction($request, $parameterBag);
             case 'init':
-                return $this->initAction($request, $parameters);
+                return $this->initAction($request, $parameterBag);
             case 'scan':
-                return $this->scanAction($request, $parameters);
+                return $this->scanAction($request, $parameterBag);
         }
 
         return $this->displayError(404);
     }
 
-    public function indexAction(Request $request, ParameterBag $parameters)
+    public function indexAction(Request $request, ParameterBag $parameterBag)
     {
 
-        $parameters->set('enabled', $this->searchManager->getEnabled());
+        $parameterBag->set('enabled', $this->searchManager->getEnabled());
 
         if($this->searchManager->getEnabled()) {
             $path = '/'.$this->searchManager->getIndex().'/_stats';
             $result = $this->searchManager->query('GET', $path);
             if(isset($result->error) == 0) {
-                $parameters->set('stats', $result);
+                $parameterBag->set('stats', $result);
             }
 
             $path = '/_cluster/health';
             $result = $this->searchManager->query('GET', $path);
             if(isset($result->error) == 0) {
-                $parameters->set('health', $result);
+                $parameterBag->set('health', $result);
             }
 
             $path = '/_nodes';
             $result = $this->searchManager->query('GET', $path);
             if(isset($result->error) == 0) {
-                $parameters->set('nodes', $result);
+                $parameterBag->set('nodes', $result);
             }
         }
 
-        return $this->render('AxipiBackendBundle::Search/index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle::Search/index.html.twig', $parameterBag->all());
     }
 
-    public function initAction(Request $request, ParameterBag $parameters)
+    public function initAction(Request $request, ParameterBag $parameterBag)
     {
         $path = '/'.$this->searchManager->getIndex();
         $result = $this->searchManager->query('HEAD', $path);
@@ -133,7 +133,7 @@ class SearchController extends AbstractController
         return $this->redirectToRoute('axipi_backend_search', []);
     }
 
-    public function scanAction(Request $request, ParameterBag $parameters)
+    public function scanAction(Request $request, ParameterBag $parameterBag)
     {
         $this->searchManager->scan();
 

@@ -25,34 +25,34 @@ class CacheController extends AbstractController
             return $this->displayError(403);
         }
 
-        $parameters = new ParameterBag();
+        $parameterBag = new ParameterBag();
 
         switch ($action) {
             case 'index':
-                return $this->indexAction($request, $parameters);
+                return $this->indexAction($request, $parameterBag);
             case 'symfony':
-                return $this->symfonyAction($request, $parameters);
+                return $this->symfonyAction($request, $parameterBag);
             case 'mediacache':
-                return $this->mediacacheAction($request, $parameters);
+                return $this->mediacacheAction($request, $parameterBag);
             case 'apcu':
-                return $this->apcuAction($request, $parameters);
+                return $this->apcuAction($request, $parameterBag);
             case 'opcache':
-                return $this->opcacheAction($request, $parameters);
+                return $this->opcacheAction($request, $parameterBag);
         }
 
         return $this->displayError(404);
     }
 
-    public function indexAction(Request $request, ParameterBag $parameters)
+    public function indexAction(Request $request, ParameterBag $parameterBag)
     {
-        $parameters->set('mediacache', is_dir('media'));
-        $parameters->set('apcu', function_exists('apcu_clear_cache'));
-        $parameters->set('opcache', function_exists('opcache_reset'));
+        $parameterBag->set('mediacache', is_dir('media'));
+        $parameterBag->set('apcu', function_exists('apcu_clear_cache'));
+        $parameterBag->set('opcache', function_exists('opcache_reset'));
 
-        return $this->render('AxipiBackendBundle::Cache/index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle::Cache/index.html.twig', $parameterBag->all());
     }
 
-    public function symfonyAction(Request $request, ParameterBag $parameters)
+    public function symfonyAction(Request $request, ParameterBag $parameterBag)
     {
         $realCacheDir = $this->getParameter('kernel.cache_dir');
         $oldCacheDir = substr($realCacheDir, 0, -1).('~' === substr($realCacheDir, -1) ? '+' : '~');
@@ -78,7 +78,7 @@ class CacheController extends AbstractController
         return $this->redirectToRoute('axipi_backend_cache', []);
     }
 
-    public function mediacacheAction(Request $request, ParameterBag $parameters)
+    public function mediacacheAction(Request $request, ParameterBag $parameterBag)
     {
         $realCacheDir = 'media';
         $oldCacheDir = substr($realCacheDir, 0, -1).('~' === substr($realCacheDir, -1) ? '+' : '~');
@@ -104,7 +104,7 @@ class CacheController extends AbstractController
         return $this->redirectToRoute('axipi_backend_cache', []);
     }
 
-    public function apcuAction(Request $request, ParameterBag $parameters)
+    public function apcuAction(Request $request, ParameterBag $parameterBag)
     {
         if(function_exists('apcu_clear_cache')) {
             apcu_clear_cache();
@@ -114,7 +114,7 @@ class CacheController extends AbstractController
         return $this->redirectToRoute('axipi_backend_cache', []);
     }
 
-    public function opcacheAction(Request $request, ParameterBag $parameters)
+    public function opcacheAction(Request $request, ParameterBag $parameterBag)
     {
         if(function_exists('opcache_reset')) {
             opcache_reset();

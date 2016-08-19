@@ -14,17 +14,17 @@ class InfoController extends AbstractController
             return $this->displayError(403);
         }
 
-        $parameters = new ParameterBag();
+        $parameterBag = new ParameterBag();
 
         switch ($action) {
             case 'index':
-                return $this->indexAction($request, $parameters);
+                return $this->indexAction($request, $parameterBag);
         }
 
         return $this->displayError(404);
     }
 
-    public function indexAction(Request $request, ParameterBag $parameters)
+    public function indexAction(Request $request, ParameterBag $parameterBag)
     {
         $info = [];
         $info['_server'] = $_SERVER;
@@ -52,8 +52,8 @@ class InfoController extends AbstractController
 
         $info['symfony'] = \Symfony\Component\HttpKernel\Kernel::VERSION;
 
-        $parameters->set('info', $info);
+        $parameterBag->set('info', $info);
 
-        return $this->render('AxipiBackendBundle::Info/index.html.twig', $parameters->all());
+        return $this->render('AxipiBackendBundle::Info/index.html.twig', $parameterBag->all());
     }
 }

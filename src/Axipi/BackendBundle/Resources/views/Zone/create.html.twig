@@ -5,7 +5,7 @@
 {% block body %}
     {% embed 'AxipiBackendBundle::card.html.twig' with {form: form} %}
         {% block card__title %}
-            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_zones', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'zones'|trans({}, 'axipi_backend') }}</a></span>
+            <span><a class="mdl-color-text--pink" href="{{ path('axipi_backend_zone', {action: 'index'}) }}"><i class="fa fa-{{ 'icons.zone'|trans({}, 'axipi_backend') }}"></i>{{ 'zones'|trans({}, 'axipi_backend') }}</a></span>
         {% endblock %}
         {% block card__supporting %}
             <div class="mdl-cell mdl-cell--4-col">
