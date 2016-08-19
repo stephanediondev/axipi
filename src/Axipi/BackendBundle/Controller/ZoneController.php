@@ -77,9 +77,9 @@ class ZoneController extends AbstractController
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->zoneManager->persist($form->getData());
+                $id = $this->zoneManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_zone', []);
+                return $this->redirectToRoute('axipi_backend_zone', ['action' => 'read', 'id' => $id]);
             }
         }
 

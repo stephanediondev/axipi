@@ -79,9 +79,9 @@ class UserController extends AbstractController
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->userManager->persist($form->getData());
+                $id = $this->userManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_user', []);
+                return $this->redirectToRoute('axipi_backend_user', ['action' => 'read', 'id' => $id]);
             }
         }
 

@@ -84,9 +84,9 @@ class RelationController extends AbstractController
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->relationManager->persist($form->getData());
+                $id = $this->relationManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_relation', ['language' => $language, 'action' => 'read', 'id' => $relation->getId()]);
+                return $this->redirectToRoute('axipi_backend_relation', ['language' => $language, 'action' => 'read', 'id' => $id]);
             }
         }
 

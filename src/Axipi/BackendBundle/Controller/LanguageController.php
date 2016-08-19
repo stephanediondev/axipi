@@ -74,9 +74,9 @@ class LanguageController extends AbstractController
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->languageManager->persist($form->getData());
+                $id = $this->languageManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_language', []);
+                return $this->redirectToRoute('axipi_backend_language', ['action' => 'read', 'id' => $id]);
             }
         }
 

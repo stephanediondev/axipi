@@ -88,9 +88,9 @@ class ComponentController extends AbstractController
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $this->componentManager->persist($form->getData());
+                $id = $this->componentManager->persist($form->getData());
                 $this->addFlash('success', 'created');
-                return $this->redirectToRoute('axipi_backend_component', []);
+                return $this->redirectToRoute('axipi_backend_component', ['action' => 'read', 'id' => $id]);
             }
         }
 

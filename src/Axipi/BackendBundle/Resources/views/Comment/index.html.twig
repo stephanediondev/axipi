@@ -5,7 +5,7 @@
 {% block body %}
     {% embed 'AxipiBackendBundle::card.html.twig' %}
         {% block card__title %}
-            <span><i class="fa fa-{{ 'icons.comment'|trans({}, 'axipi_backend') }}"></i>{{ 'comments'|trans({}, 'axipi_backend') }}</span>
+            <span><i class="fa fa-{{ 'icons.comment'|trans({}, 'axipi_backend') }}"></i>{{ 'comments'|trans({}, 'axipi_backend') }} ({{ comments.totalItemCount }})</span>
         {% endblock %}
         {% block card__supporting %}
             {% for object in comments %}
