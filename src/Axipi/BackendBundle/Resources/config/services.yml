@@ -3,6 +3,10 @@ services:
         class: Axipi\BackendBundle\Controller\LoginController
         parent: "axipi_core_controller_abstract"
 
+    axipi_backend_controller_error:
+        class: Axipi\BackendBundle\Controller\ErrorController
+        parent: "axipi_core_controller_abstract"
+
     axipi_backend_controller_home:
         class: Axipi\BackendBundle\Controller\HomeController
         parent: "axipi_core_controller_abstract"

@@ -25,7 +25,7 @@ class LanguageController extends AbstractController
     public function dispatchAction(Request $request, $action, $id)
     {
         if(!$this->isGranted('ROLE_LANGUAGES')) {
-            return $this->redirectToRoute('axipi_backend_home', []);
+            return $this->displayError(403);
         }
 
         $parameters = new ParameterBag();
@@ -35,8 +35,7 @@ class LanguageController extends AbstractController
             if($language) {
                 $parameters->set('language', $language);
             } else {
-                $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_languages', []);
+                return $this->displayError(404);
             }
         }
 
@@ -53,8 +52,7 @@ class LanguageController extends AbstractController
                 return $this->deleteAction($request, $parameters, $id);
         }
 
-        $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_languages', []);
+        return $this->displayError(404);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters)

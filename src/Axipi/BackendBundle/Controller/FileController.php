@@ -26,7 +26,7 @@ class FileController extends AbstractController
     public function dispatchAction(Request $request, $mode, $action, $slug)
     {
         if(!$this->isGranted('ROLE_FILES')) {
-            return $this->redirectToRoute('axipi_backend_home', []);
+            return $this->displayError(403);
         }
 
         $parameters = new ParameterBag();
@@ -53,8 +53,7 @@ class FileController extends AbstractController
             if($file) {
                 $parameters->set('file', $file);
             } else {
-                $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_files', []);
+                return $this->displayError(404);
             }
         }
 
@@ -73,8 +72,7 @@ class FileController extends AbstractController
                 return $this->uploadAction($request, $parameters, $slug);
         }
 
-        $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_files', []);
+        return $this->displayError(404);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters, $slug)

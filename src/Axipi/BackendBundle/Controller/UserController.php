@@ -25,7 +25,7 @@ class UserController extends AbstractController
     public function dispatchAction(Request $request, $action, $id)
     {
         if(!$this->isGranted('ROLE_USERS')) {
-            return $this->redirectToRoute('axipi_backend_home', []);
+            return $this->displayError(403);
         }
 
         $parameters = new ParameterBag();
@@ -35,8 +35,7 @@ class UserController extends AbstractController
             if($user) {
                 $parameters->set('user', $user);
             } else {
-                $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_users', []);
+                return $this->displayError(404);
             }
         }
 
@@ -57,8 +56,7 @@ class UserController extends AbstractController
                 return $this->deleteAction($request, $parameters, $id);
         }
 
-        $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_users', []);
+        return $this->displayError(404);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters)

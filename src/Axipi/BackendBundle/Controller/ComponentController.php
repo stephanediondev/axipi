@@ -30,7 +30,7 @@ class ComponentController extends AbstractController
     public function dispatchAction(Request $request, $action, $id)
     {
         if(!$this->isGranted('ROLE_COMPONENTS')) {
-            return $this->redirectToRoute('axipi_backend_home', []);
+            return $this->displayError(403);
         }
 
         $parameters = new ParameterBag();
@@ -42,8 +42,7 @@ class ComponentController extends AbstractController
             if($component) {
                 $parameters->set('component', $component);
             } else {
-                $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_components', []);
+                return $this->displayError(404);
             }
         }
 
@@ -60,8 +59,7 @@ class ComponentController extends AbstractController
                 return $this->deleteAction($request, $parameters, $id);
         }
 
-        $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_components', []);
+        return $this->displayError(404);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters)

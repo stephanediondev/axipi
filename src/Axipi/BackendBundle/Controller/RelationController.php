@@ -32,7 +32,7 @@ class RelationController extends AbstractController
     public function dispatchAction(Request $request, $language, $action, $id)
     {
         if(!$this->isGranted('ROLE_WIDGETS')) {
-            return $this->redirectToRoute('axipi_backend_home', []);
+            return $this->displayError(403);
         }
 
         $parameters = new ParameterBag();
@@ -42,16 +42,14 @@ class RelationController extends AbstractController
             if($widget) {
                 $parameters->set('widget', $widget);
             } else {
-                $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_widgets', []);
+                return $this->displayError(404);
             }
         } else if(null !== $id) {
             $relation = $this->relationManager->getOne(['id' => $id]);
             if($relation) {
                 $parameters->set('relation', $relation);
             } else {
-                $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_widgets', []);
+                return $this->displayError(404);
             }
         }
 
@@ -68,8 +66,7 @@ class RelationController extends AbstractController
                 return $this->sortAction($request, $parameters);
         }
 
-        $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_widgets', []);
+        return $this->displayError(404);
     }
 
     public function createAction(Request $request, ParameterBag $parameters, $id, $language)

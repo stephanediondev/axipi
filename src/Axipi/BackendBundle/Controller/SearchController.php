@@ -22,7 +22,7 @@ class SearchController extends AbstractController
     public function dispatchAction(Request $request, $action)
     {
         if(!$this->isGranted('ROLE_SEARCH')) {
-            return $this->redirectToRoute('axipi_backend_home', []);
+            return $this->displayError(403);
         }
 
         $parameters = new ParameterBag();
@@ -36,8 +36,7 @@ class SearchController extends AbstractController
                 return $this->scanAction($request, $parameters);
         }
 
-        $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_search', []);
+        return $this->displayError(404);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters)

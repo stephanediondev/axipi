@@ -36,8 +36,7 @@ class ProfileController extends AbstractController
                 return $this->updateAction($request, $parameters);
         }
 
-        $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_profile', []);
+        return $this->displayError(404);
     }
 
     public function readAction(Request $request, ParameterBag $parameters)

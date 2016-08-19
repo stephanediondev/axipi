@@ -26,7 +26,7 @@ class ZoneController extends AbstractController
     public function dispatchAction(Request $request, $action, $id)
     {
         if(!$this->isGranted('ROLE_ZONES')) {
-            return $this->redirectToRoute('axipi_backend_home', []);
+            return $this->displayError(403);
         }
 
         $parameters = new ParameterBag();
@@ -36,8 +36,7 @@ class ZoneController extends AbstractController
             if($zone) {
                 $parameters->set('zone', $zone);
             } else {
-                $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_zones', []);
+                return $this->displayError(404);
             }
         }
 
@@ -56,8 +55,7 @@ class ZoneController extends AbstractController
                 return $this->sortAction($request, $parameters);
         }
 
-        $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_zones', []);
+        return $this->displayError(404);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters)

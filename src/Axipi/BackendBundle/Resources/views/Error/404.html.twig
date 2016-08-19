@@ -1,0 +1,21 @@
+{% extends 'AxipiBackendBundle::base.html.twig' %}
+
+{% block title %}{{ 'home'|trans({}, 'axipi_backend') }}{% endblock %}
+
+{% block body %}
+    {% embed 'AxipiBackendBundle::card.html.twig' with {id: 'dynamic-home'} %}
+        {% block card__title %}
+            <span><i class="fa fa-bug"></i>404</span>
+        {% endblock %}
+        {% block card__supporting %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+{% endblock %}
+
+{% block script %}
+    {{ parent() }}
+{% endblock %}

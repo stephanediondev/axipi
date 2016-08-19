@@ -22,7 +22,7 @@ class CacheController extends AbstractController
     public function dispatchAction(Request $request, $action)
     {
         if(!$this->isGranted('ROLE_CACHE')) {
-            return $this->redirectToRoute('axipi_backend_home', []);
+            return $this->displayError(403);
         }
 
         $parameters = new ParameterBag();
@@ -40,8 +40,7 @@ class CacheController extends AbstractController
                 return $this->opcacheAction($request, $parameters);
         }
 
-        $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_cache', []);
+        return $this->displayError(404);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters)

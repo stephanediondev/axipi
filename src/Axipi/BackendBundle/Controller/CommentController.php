@@ -30,7 +30,7 @@ class CommentController extends AbstractController
     public function dispatchAction(Request $request, $action, $id)
     {
         if(!$this->isGranted('ROLE_COMMENTS')) {
-            return $this->redirectToRoute('axipi_backend_home', []);
+            return $this->displayError(403);
         }
 
         $parameters = new ParameterBag();
@@ -42,8 +42,7 @@ class CommentController extends AbstractController
             if($comment) {
                 $parameters->set('comment', $comment);
             } else {
-                $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_comments', []);
+                return $this->displayError(404);
             }
         }
 
@@ -58,8 +57,7 @@ class CommentController extends AbstractController
                 return $this->deleteAction($request, $parameters, $id);
         }
 
-        $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_comments', []);
+        return $this->displayError(404);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters)

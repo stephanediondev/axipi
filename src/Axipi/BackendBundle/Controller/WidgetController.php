@@ -46,7 +46,7 @@ class WidgetController extends AbstractController
     public function dispatchAction(Request $request, $language, $action, $id)
     {
         if(!$this->isGranted('ROLE_WIDGETS')) {
-            return $this->redirectToRoute('axipi_backend_home', []);
+            return $this->displayError(403);
         }
 
         if($language == 'xx') {
@@ -62,16 +62,14 @@ class WidgetController extends AbstractController
             if($component) {
                 $parameters->set('component', $component);
             } else {
-                $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_widgets', ['language' => $language]);
+                return $this->displayError(404);
             }
         } else if(null !== $id) {
             $widget = $this->itemManager->getOne(['id' => $id]);
             if($widget) {
                 $parameters->set('widget', $widget);
             } else {
-                $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_widgets', ['language' => $language]);
+                return $this->displayError(404);
             }
         }
 
@@ -96,8 +94,7 @@ class WidgetController extends AbstractController
                 return $this->moveAction($request, $parameters, $id);
         }
 
-        $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_widgets', ['language' => $language]);
+        return $this->displayError(404);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters, $language)

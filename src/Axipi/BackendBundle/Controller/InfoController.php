@@ -11,7 +11,7 @@ class InfoController extends AbstractController
     public function dispatchAction(Request $request, $action)
     {
         if(!$this->isGranted('ROLE_INFO')) {
-            return $this->redirectToRoute('axipi_backend_home', []);
+            return $this->displayError(403);
         }
 
         $parameters = new ParameterBag();
@@ -21,8 +21,7 @@ class InfoController extends AbstractController
                 return $this->indexAction($request, $parameters);
         }
 
-        $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_info', []);
+        return $this->displayError(404);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters)

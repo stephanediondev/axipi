@@ -36,7 +36,7 @@ class PageController extends AbstractController
     public function dispatchAction(Request $request, $mode, $language, $action, $id)
     {
         if(!$this->isGranted('ROLE_PAGES')) {
-            return $this->redirectToRoute('axipi_backend_home', []);
+            return $this->displayError(403);
         }
 
         if($language == 'xx') {
@@ -53,16 +53,14 @@ class PageController extends AbstractController
             if($component) {
                 $parameters->set('component', $component);
             } else {
-                $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_pages', ['mode' => $mode, 'language' => $language]);
+                return $this->displayError(404);
             }
         } else if(null !== $id) {
             $page = $this->itemManager->getOne(['id' => $id]);
             if($page) {
                 $parameters->set('page', $page);
             } else {
-                $this->addFlash('danger', 'not found');
-                return $this->redirectToRoute('axipi_backend_pages', ['mode' => $mode, 'language' => $language]);
+                return $this->displayError(404);
             }
         }
 
@@ -83,8 +81,7 @@ class PageController extends AbstractController
                 return $this->sortAction($request, $parameters);
         }
 
-        $this->addFlash('danger', 'not found');
-        return $this->redirectToRoute('axipi_backend_pages', ['mode' => $mode, 'language' => $language]);
+        return $this->displayError(404);
     }
 
     public function indexAction(Request $request, ParameterBag $parameters, $language)
