@@ -24,47 +24,61 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('username', EmailType::class, [
-            'required' => true,
-            'constraints' => [
-                new NotBlank(),
-                new Email(),
-            ],
-        ]);
+        $builder->add('username', EmailType::class,
+            [
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(),
+                    new Email(),
+                ],
+            ]
+        );
 
         if($options['user']->getId()) {
             $required = false;
         } else {
             $required = true;
         }
-        $builder->add('passwordChange', RepeatedType::class, [
-            'type' => PasswordType::class,
-            'invalid_message' => 'The password fields must match.',
-            'options' => [
-                'attr' => [
-                    'class' => 'password-field',
+        $builder->add('passwordChange', RepeatedType::class,
+            [
+                'type' => PasswordType::class,
+                'invalid_message' => 'The password fields must match.',
+                'options' => [
+                    'attr' => [
+                        'class' => 'password-field',
+                    ],
                 ],
-            ],
-            'required' => $required,
-            'first_options'  => array('label' => 'Password'),
-            'second_options' => array('label' => 'Repeat Password'),
-        ]);
+                'required' => $required,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+            ]
+        );
 
-        $builder->add('firstname', TextType::class, ['required' => true]);
+        $builder->add('firstname', TextType::class,
+            [
+                'required' => true,
+            ]
+        );
 
-        $builder->add('lastname', TextType::class, ['required' => false]);
+        $builder->add('lastname', TextType::class,
+            [
+                'required' => false,
+            ]
+        );
 
-        $builder->add('rolesChange', ChoiceType::class, array(
-            'choices' => $options['roles'],
-            'choice_label' => function ($value, $key, $index) {
-                return $value;
-            },
-            'multiple' => true,
-            'data' => $options['user']->getRoles(),
-            'attr' => array(
-                'size' => 10,
-            ),
-        ));
+        $builder->add('rolesChange', ChoiceType::class,
+            [
+                'choices' => $options['roles'],
+                'choice_label' => function ($value, $key, $index) {
+                    return $value;
+                },
+                'multiple' => true,
+                'data' => $options['user']->getRoles(),
+                'attr' => array(
+                    'size' => 10,
+                ),
+            ]
+        );
 
         if($options['user_connected']->getid() != $options['user']->getid()) {
             $builder->add('isActive');

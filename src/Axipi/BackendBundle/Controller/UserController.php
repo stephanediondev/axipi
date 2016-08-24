@@ -50,8 +50,7 @@ class UserController extends AbstractController
                 return $this->updateAction($request, $parameterBag);
             case 'delete':
                 if($this->getUser()->getId() == $user->getId()) {
-                    $this->addFlash('danger', 'access denied');
-                    return $this->redirectToRoute('axipi_backend_user', []);
+                    return $this->displayError(403);
                 }
                 return $this->deleteAction($request, $parameterBag);
         }
@@ -61,7 +60,7 @@ class UserController extends AbstractController
 
     public function indexAction(Request $request, ParameterBag $parameterBag)
     {
-        $parameterBag->set('objects', $this->userManager->getList());
+        $parameterBag->set('users', $this->userManager->getList());
 
         return $this->render('AxipiBackendBundle:User:index.html.twig', $parameterBag->all());
     }

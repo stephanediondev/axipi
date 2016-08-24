@@ -32,22 +32,32 @@ class ProfileType extends AbstractType
             ],
         ]);
 
-        $builder->add('passwordChange', RepeatedType::class, [
-            'type' => PasswordType::class,
-            'invalid_message' => 'The password fields must match.',
-            'options' => [
-                'attr' => [
-                    'class' => 'password-field',
+        $builder->add('passwordChange', RepeatedType::class,
+            [
+                'type' => PasswordType::class,
+                'invalid_message' => 'The password fields must match.',
+                'options' => [
+                    'attr' => [
+                        'class' => 'password-field',
+                    ],
                 ],
-            ],
-            'required' => false,
-            'first_options'  => array('label' => 'Password'),
-            'second_options' => array('label' => 'Repeat Password'),
-        ]);
+                'required' => false,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+            ]
+        );
 
-        $builder->add('firstname', TextType::class, ['required' => true]);
+        $builder->add('firstname', TextType::class,
+            [
+                'required' => true,
+            ]
+        );
 
-        $builder->add('lastname', TextType::class, ['required' => false]);
+        $builder->add('lastname', TextType::class,
+            [
+                'required' => false,
+            ]
+        );
 
         $builder->add('submit', SubmitType::class,
             [

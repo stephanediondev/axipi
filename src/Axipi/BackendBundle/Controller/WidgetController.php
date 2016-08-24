@@ -75,7 +75,7 @@ class WidgetController extends AbstractController
 
         switch ($action) {
             case 'index':
-                return $this->indexAction($request, $parameterBag, $language);
+                return $this->indexAction($request, $parameterBag);
             case 'create':
                 return $this->createAction($request, $parameterBag);
             case 'read':
@@ -97,7 +97,7 @@ class WidgetController extends AbstractController
         return $this->displayError(404);
     }
 
-    public function indexAction(Request $request, ParameterBag $parameterBag, $language)
+    public function indexAction(Request $request, ParameterBag $parameterBag)
     {
         $parameterBag->set('components', $this->componentManager->getList(['category' => 'widget', 'active' => true]));
         $parameterBag->set('zones', $this->zoneManager->getList());

@@ -66,7 +66,7 @@ class PageController extends AbstractController
 
         switch ($action) {
             case 'index':
-                return $this->indexAction($request, $parameterBag, $language);
+                return $this->indexAction($request, $parameterBag);
             case 'create':
                 return $this->createAction($request, $parameterBag);
             case 'read':
@@ -84,9 +84,9 @@ class PageController extends AbstractController
         return $this->displayError(404);
     }
 
-    public function indexAction(Request $request, ParameterBag $parameterBag, $language)
+    public function indexAction(Request $request, ParameterBag $parameterBag)
     {
-        $parameterBag->set('parent_null', $this->itemManager->getList(['category' => 'page', 'language_code' => $language, 'parent_null' => true]));
+        $parameterBag->set('parent_null', $this->itemManager->getList(['category' => 'page', 'language_code' => $parameterBag->get('language')->getCode(), 'parent_null' => true]));
         $parameterBag->set('components', $this->componentManager->getList(['category' => 'page', 'active' => true]));
 
         return $this->render('AxipiBackendBundle:Page:index.html.twig', $parameterBag->all());

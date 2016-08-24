@@ -57,7 +57,7 @@ class LanguageController extends AbstractController
 
     public function indexAction(Request $request, ParameterBag $parameterBag)
     {
-        $parameterBag->set('objects', $this->languageManager->getList());
+        $parameterBag->set('languages', $this->languageManager->getList());
 
         return $this->render('AxipiBackendBundle:Language:index.html.twig', $parameterBag->all());
     }

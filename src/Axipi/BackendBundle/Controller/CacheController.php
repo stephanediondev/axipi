@@ -66,7 +66,6 @@ class CacheController extends AbstractController
             $filesystem->remove($oldCacheDir);
         }
 
-        $kernel = $this->get('kernel');
         $this->get('cache_clearer')->clear($realCacheDir);
 
         $filesystem->rename($realCacheDir, $oldCacheDir);
@@ -92,7 +91,6 @@ class CacheController extends AbstractController
             $filesystem->remove($oldCacheDir);
         }
 
-        $kernel = $this->get('kernel');
         $this->get('cache_clearer')->clear($realCacheDir);
 
         $filesystem->rename($realCacheDir, $oldCacheDir);

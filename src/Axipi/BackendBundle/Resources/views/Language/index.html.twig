@@ -11,7 +11,7 @@
             <span><i class="fa fa-{{ 'icons.language'|trans({}, 'axipi_backend') }}"></i>{{ 'languages'|trans({}, 'axipi_backend') }}</span>
         {% endblock %}
         {% block card__supporting %}
-            {% for object in objects %}
+            {% for object in languages %}
                 <div class="mdl-cell mdl-cell--2-col">
                     <a href="{{ path('axipi_backend_language', {action: 'read', id: object.id}) }}"><i class="fa fa-3x fa-{{ 'icons.language'|trans({}, 'axipi_backend') }}"></i><br>{{ object.title }}</a>
                 </div>
