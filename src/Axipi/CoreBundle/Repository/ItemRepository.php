@@ -1,10 +1,10 @@
 <?php
 namespace Axipi\CoreBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Axipi\CoreBundle\Repository\AbstractRepository;
 use Axipi\CoreBundle\Entity\Item;
 
-class ItemRepository extends EntityRepository
+class ItemRepository extends AbstractRepository
 {
     public function getOne($parameters = []) {
         $em = $this->getEntityManager();
@@ -66,7 +66,7 @@ class ItemRepository extends EntityRepository
         $getQuery = $query->getQuery();
         $getQuery->setMaxResults(1);
 
-        if(isset($parameters['active']) == 1 && $parameters['active'] == true && function_exists('apcu_clear_cache')) {
+        if(isset($parameters['active']) == 1 && $parameters['active'] == true && $this->cacheAvailable()) {
             $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
             $cacheDriver->setNamespace('axipi_item_');
             $getQuery->setResultCacheDriver($cacheDriver);
@@ -175,7 +175,7 @@ class ItemRepository extends EntityRepository
 
         $getQuery = $query->getQuery();
 
-        if(isset($parameters['active']) == 1 && $parameters['active'] == true && function_exists('apcu_clear_cache')) {
+        if(isset($parameters['active']) == 1 && $parameters['active'] == true && $this->cacheAvailable()) {
             $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
             $cacheDriver->setNamespace('axipi_item_');
             $getQuery->setResultCacheDriver($cacheDriver);

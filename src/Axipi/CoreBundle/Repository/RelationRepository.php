@@ -1,10 +1,10 @@
 <?php
 namespace Axipi\CoreBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Axipi\CoreBundle\Repository\AbstractRepository;
 use Axipi\CoreBundle\Entity\Relation;
 
-class RelationRepository extends EntityRepository
+class RelationRepository extends AbstractRepository
 {
     public function getOne($parameters = []) {
         $em = $this->getEntityManager();
@@ -61,7 +61,7 @@ class RelationRepository extends EntityRepository
 
         $getQuery = $query->getQuery();
 
-        if(isset($parameters['active']) == 1 && $parameters['active'] == true && function_exists('apcu_clear_cache')) {
+        if(isset($parameters['active']) == 1 && $parameters['active'] == true && $this->cacheAvailable()) {
             $cacheDriver = new \Doctrine\Common\Cache\ApcuCache();
             $cacheDriver->setNamespace('axipi_relation_');
             $getQuery->setResultCacheDriver($cacheDriver);
