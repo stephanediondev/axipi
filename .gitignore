@@ -17,3 +17,4 @@
 /web/media/
 /web/vendor/
 /web/uploads/*.jpg
+/node_modules/
