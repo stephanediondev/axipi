@@ -8,11 +8,11 @@ use Axipi\CoreBundle\Entity\Item;
 
 class SearchManager extends AbstractManager
 {
-    protected $elasticsearchEnabled;
+    protected $enabled;
 
-    protected $elasticsearchIndex;
+    protected $index;
 
-    protected $elasticsearchUrl;
+    protected $url;
 
     public function setElasticSearch($enabled, $index, $url)
     {

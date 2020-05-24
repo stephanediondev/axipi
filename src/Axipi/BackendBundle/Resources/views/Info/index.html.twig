@@ -12,6 +12,7 @@
                 {% if info._server.SERVER_ADDR is defined %}{{ macro.read_field('SERVER_ADDR', info._server.SERVER_ADDR) }}{% endif %}
                 {% if info._server.HTTP_HOST is defined %}{{ macro.read_field('HTTP_HOST', info._server.HTTP_HOST) }}{% endif %}
                 {% if info._server.SERVER_NAME is defined %}{{ macro.read_field('SERVER_NAME', info._server.SERVER_NAME) }}{% endif %}
+                {% if info._server.SERVER_PROTOCOL is defined %}{{ macro.read_field('SERVER_PROTOCOL', info._server.SERVER_PROTOCOL) }}{% endif %}
                 {% if info._server.HTTPS is defined %}{{ macro.read_field('HTTPS', info._server.HTTPS) }}{% endif %}
             </div>
         {% endblock %}
